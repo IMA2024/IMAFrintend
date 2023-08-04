@@ -16,12 +16,10 @@ const useStyles = createStyles((theme) => ({
       marginLeft:'-5px',
       paddingTop: '20px',
       paddingBottom: '20px',
-         //backgroundColor:'pink',
       [theme.fn.smallerThan('sm')]: {
         justifyContent: 'space-between',
         width:'100%',
         marginLeft:'0px',
-        //float:'left',
       },
   
     },
@@ -29,7 +27,6 @@ const useStyles = createStyles((theme) => ({
     responsiveAddUserBtn: {
      
       [theme.fn.smallerThan('sm')]: {
-        //backgroundColor:'pink',
       },
   
     },
@@ -128,6 +125,7 @@ const columns = [
   },
   {
     name: 'Profile Picture',
+    width: '110px',
     selector: (row) => <img width={50} height={50} src={row.flag} />,
   },
     {
@@ -137,11 +135,13 @@ const columns = [
     },
     {
         name: 'First Name',
+        width: '110px',
         selector: (row) => row.name,
         sortable: true,
     },
     {
         name: 'Last Name',
+        width: '110px',
         selector: (row) => row.region,
         sortable: true,
     },
@@ -153,11 +153,12 @@ const columns = [
     {
         name: 'Phone Number',
         selector: (row) => row.capital,
-        width: '120px',
+        width: '130px',
         sortable: true,
     },
     {
       name: 'Status',
+      //width: '150px',
       cell: (row, index) => (
         <Badge   variant='outline'  p={5} onClick={() => toggleStatus(index)}>
           {row.status === 'active' ? 'Block' : 'Active'}
@@ -166,6 +167,7 @@ const columns = [
     },
     {
         name: 'Action',
+        width: '150px',
         cell: (row) => <Box><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' /></Box>
     },
 ]
@@ -208,7 +210,6 @@ useEffect(() => {
     selectableRowsHighlight
     highlightOnHover
     subHeader
-    //key={row.name}
     subHeaderComponent={
       <Box className={classes.responsiveSearchRow}>
         <Box className={classes.responsiveFilterIcon} >
@@ -221,7 +222,6 @@ useEffect(() => {
             <Menu.Dropdown bg={'#FAF9F6'}> 
     <Menu.Item>
     <TextInput
-        
         placeholder='Search'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -229,8 +229,7 @@ useEffect(() => {
          />
          </Menu.Item>
          <Menu.Item>
-         <Select
-        
+         <Select 
         onSearchChange={setRegion}
         searchValue={region}
         searchable
@@ -244,8 +243,7 @@ useEffect(() => {
     />
     </Menu.Item>
     <Menu.Item>
-         <Select
-        
+         <Select    
         onSearchChange={setRegion}
         searchValue={region}
         searchable
@@ -291,8 +289,7 @@ useEffect(() => {
       className={classes.responsiveUserType}
     />
          <Select
-         size='md'
-       
+         size='md' 
         searchable
         placeholder="Active/Block"
         data={[
@@ -310,29 +307,8 @@ useEffect(() => {
         </Box>
     }
     responsive
-  
      />
-      <Modal  p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  //style={{textAlign: "left", display:'flex', justifyContent:'center' }}
-      >
-        {/*
-      <div style={{display: 'flex', justifyContent: 'left', fontFamily: 'serif', fontWeight: 'bold', fontSize: 30}}>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 30}}>
-              Title: <b>{specificRole}</b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Business Name: <b> </b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Description: <b>  </b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Date: <b>  </b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Amount: <b> </b>
-            </div>
-  */}
+      <Modal  p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
     <Box mah={350}><Image  maw={300}radius="md" src={specificPicture} alt="Random image" /></Box>
     <Box  mah={350}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
