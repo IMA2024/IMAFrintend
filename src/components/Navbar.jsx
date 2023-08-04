@@ -190,7 +190,7 @@ const handleMouseLeave = () => {
                   activeStyle={{ fontWeight: 'bold' }}
                 >
                   <IoMdAddCircle style={iconStyles} />
-                  View Subscriptions
+                  View Subscription
                 </NavLink>
               </li>
             </ul>

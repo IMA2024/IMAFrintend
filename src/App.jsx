@@ -3,13 +3,14 @@ import {BrowserRouter as Router, Route, Link, Routes, json} from "react-router-d
 import EmailBanner from './pages/Services';
 import ContactIcons from './pages/ContactUs';
 import GeneralLayout from './SuperAdmin/Layout/GeneralLayout';
-import AuthenticationForm from './pages/form';
-import AddExpense from './pages/test';
-import Datepicker from './components/Date';
-import ViewModal from './components/ViewModal';
+import Testing from './pages/test';
 import ViewTable from './pages/ViewTable';
+import AddExpense from './pages/Accounting/AddExpense';
+import ViewExpense from './pages/Accounting/ViewExpense';
+import AddUser from './pages/User/AddUser';
+import ViewUser from './pages/User/ViewUser';
+import EditUser from './pages/User/EditUser';
 import { useState, useEffect } from 'react';
-import { HeaderSearchBar } from './components/search';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
@@ -47,17 +48,15 @@ export default function Demo() {
     <Router>
      <Routes>
       <Route path="/" element={<GeneralLayout />}>
-        <Route
-          path="EmailBanner"
-          element={<EmailBanner />}
-        />
+        <Route path="EmailBanner" element={<EmailBanner />} />
         <Route path="ContactIcons" element={<ContactIcons />} />
-        <Route path="HeaderSearchBar" element={<HeaderSearchBar />} />
-        <Route path="AuthenticationForm" element={<AuthenticationForm />} />
-        <Route path="AddExpense" element={<AddExpense />} />
-        <Route path="Datepicker" element={<Datepicker />} />
+        <Route path="Testing" element={<Testing />} />
         <Route path="ViewTable" element={<ViewTable />} />
-        <Route path="ViewModal" element={<ViewModal />} />
+        <Route path="AddExpense" element={<AddExpense />} />
+        <Route path="ViewExpense" element={<ViewExpense />} />
+        <Route path="AddUser" element={<AddUser />} />
+        <Route path="ViewUser" element={<ViewUser />} />
+        <Route path="EditUser" element={<EditUser />} />
       </Route>
      </Routes>
     </Router>

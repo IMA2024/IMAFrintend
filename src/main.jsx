@@ -10,7 +10,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
  
   
   <React.StrictMode>
-     <MantineProvider withNormalizeCSS withGlobalStyles>
+     <MantineProvider withNormalizeCSS withGlobalStyles
+       theme={{
+        fontFamily: 'Verdana, sans-serif',
+        fontFamilyMonospace: 'Monaco, Courier, monospace',
+        headings: { fontFamily: 'Greycliff CF, sans-serif' },
+      }}
+     >
      <SpotlightProvider shortcut={['mod + P', 'mod + K', '/']} actions={[]}>
       <Notifications />
     <App />

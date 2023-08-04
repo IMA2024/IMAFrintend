@@ -1,8 +1,8 @@
 import { Box, Button, Group, createStyles, Text, Menu } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconUser, IconBell, IconPhone, IconEdit, IconLogout } from '@tabler/icons-react';
-import ActionToggle from "../components/ColorMode";
-import { HeaderSearchBar } from "../components/search";
+import ActionToggle from "./ColorMode";
+import { HeaderSearchBar } from "./search";
 import { notifications } from '@mantine/notifications';
 import React from "react";
 

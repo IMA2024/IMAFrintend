@@ -13,8 +13,8 @@ import {
   ScrollArea,
 } from '@mantine/core';
 import { Navigate, Outlet } from "react-router-dom";
-import LeftNavbar from '../../pages/Navbar';
-import HeaderTop from '../../pages/Header';
+import LeftNavbar from '../../components/Navbar';
+import HeaderTop from '../../components/Header';
 
 export default function GeneralLayout() {
   const theme = useMantineTheme();
