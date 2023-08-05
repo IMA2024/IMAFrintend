@@ -17,10 +17,12 @@ import LeftNavbar from '../../components/Navbar';
 import HeaderTop from '../../components/Header';
 
 export default function GeneralLayout() {
+  let auth = {'token':true}
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   
   return (
+    auth.token ? (
     <AppShell
       styles={{
         main: {
@@ -58,6 +60,6 @@ export default function GeneralLayout() {
       <Box>
       <Outlet />
       </Box>
-    </AppShell>
+    </AppShell> ) : <Navigate to='/HeaderMegaMenu'/>
   );
 }

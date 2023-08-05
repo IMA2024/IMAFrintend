@@ -11,6 +11,8 @@ import AddUser from './SuperAdmin/pages/User/AddUser';
 import ViewUser from './SuperAdmin/pages/User/ViewUser';
 import EditUser from './SuperAdmin/pages/User/EditUser';
 import HeaderMegaMenu from './Profiling/Layout/ProfilingLayout';
+import SignIn from './pages/ProfilingPages/SignIn';
+import SignUp from './pages/ProfilingPages/SignUp';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -49,7 +51,8 @@ export default function Demo() {
     <Router>
      <Routes>
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
-    
+      <Route path="SignIn" element={<SignIn />} />
+      <Route path="SignUp" element={<SignUp />} />
       </Route>
       <Route path="/" element={<GeneralLayout />}>
         <Route path="EmailBanner" element={<EmailBanner />} />
