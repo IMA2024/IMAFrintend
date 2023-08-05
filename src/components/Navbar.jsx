@@ -137,20 +137,12 @@ const handleMouseLeave = () => {
               </li>
               <li>
                 <NavLink
-                  to="/Users"
+                  to="/ViewUser"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
                   <IoMdAddCircle style={iconStyles} />
                   View User
-                </NavLink>
-                <NavLink
-                  to="/EditUser"
-                  style={navLinkStyles}
-                  activeStyle={{ fontWeight: 'bold' }}
-                >
-                  <RiTeamLine style={iconStyles} />
-                  Edit User
                 </NavLink>
               </li>
             </ul>
