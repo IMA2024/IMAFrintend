@@ -1,8 +1,28 @@
 import { useForm } from '@mantine/form';
-import { FileInput, TextInput, Button, Box , createStyles, Paper, PasswordInput, Title, Divider, Select } from '@mantine/core';
+import { FileInput, TextInput, Button, Box , createStyles, Paper, PasswordInput, Title, Divider, Select, Image, rem } from '@mantine/core';
 import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
+
+  wrapper: {
+    minHeight: rem(900),
+    backgroundSize: 'cover',
+    backgroundImage:
+      'url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&q=80)',
+  },
+
+  form: {
+    borderRight: `${rem(1)} solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
+    }`,
+    minHeight: rem(900),
+    maxWidth: rem(650),
+    paddingTop: rem(80),
+
+    [theme.fn.smallerThan('sm')]: {
+      maxWidth: '100%',
+    },
+  },
 
   responsiveContainer: {
    width: '100%',
@@ -27,7 +47,6 @@ const useStyles = createStyles((theme) => ({
  }));
 
 export default function SignUp() {
-  const [selectedFile, setSelectedFile] = useState(null);
   const {classes} = useStyles()
   const form = useForm({
     initialValues: { firstName:'', lastName:'', role:'',  email: '',phoneNumber:'', password:'', confirmPassword:'' },
@@ -47,7 +66,8 @@ export default function SignUp() {
 
 
   return (
-    <Paper withBorder shadow="md" p={35}  radius="md">
+    <Box className={classes.wrapper}>
+    <Paper className={classes.form}  withBorder shadow="md" radius={0} p={30}>
        <Title
           mb={20}
           align="center"
@@ -87,5 +107,6 @@ export default function SignUp() {
         </Box>
       </form>
     </Paper>
+    </Box>
   );
 }
