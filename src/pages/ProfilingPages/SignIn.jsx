@@ -9,8 +9,10 @@ import {
     Text,
     Anchor,
     rem,
+    Box,
   } from '@mantine/core';
   import { useForm } from '@mantine/form';
+  import { notifications } from '@mantine/notifications';
   
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -43,6 +45,14 @@ import {
   
   export default function SignIn() {
     const { classes } = useStyles();
+
+    const handleSubmit = () => {   
+        notifications.show({ message: 'Form submitted successfully', color: 'green' });
+    };
+
+    const handleError = () => {
+      notifications.show({ message: 'Please enter valid values', color: 'red' });
+  };
     const form = useForm({
         initialValues: {  email: '', password:''},
     
@@ -59,13 +69,14 @@ import {
           <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
             Welcome to IMA!
           </Title>
-          <form onSubmit={form.onSubmit(console.log)} >
+          <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
           <TextInput label="Email address" placeholder="hello@gmail.com" size="md" {...form.getInputProps('email')}  />
           <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" {...form.getInputProps('password')} />
-          <Button fullWidth mt="xl" size="md" type='submit'>
+          <Box>
+          <Button  fullWidth mt="xl" size="md" type='submit' >
             Login
           </Button>
-  
+          </Box>
           <Text ta="center" mt="md">
            
           </Text>

@@ -1,6 +1,7 @@
 import { useForm } from '@mantine/form';
 import { FileInput, TextInput, Button, Box , createStyles, Paper, PasswordInput, Title, Divider, Select, Image, rem } from '@mantine/core';
 import { useState } from 'react';
+import { notifications } from '@mantine/notifications';
 
 const useStyles = createStyles((theme) => ({
 
@@ -47,7 +48,14 @@ const useStyles = createStyles((theme) => ({
  }));
 
 export default function SignUp() {
-  const {classes} = useStyles()
+  const {classes} = useStyles();
+  const handleSubmit = () => {   
+    notifications.show({ message: 'Form submitted successfully', color: 'green' });
+};
+
+const handleError = () => {
+  notifications.show({ message: 'Please enter valid values', color: 'red' });
+};
   const form = useForm({
     initialValues: { firstName:'', lastName:'', role:'',  email: '',phoneNumber:'', password:'', confirmPassword:'' },
 
@@ -76,7 +84,7 @@ export default function SignUp() {
           Sign Up
         </Title>
         <Divider mb={20} />
-      <form onSubmit={form.onSubmit(console.log)} >
+        <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
         <Box>
         <Select withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
         data={[
@@ -85,25 +93,28 @@ export default function SignUp() {
           ]}
          />
         </Box>
-      <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='md' className={classes.inputField} label="First Name" placeholder="Enter First Name: John" {...form.getInputProps('firstName')} />
-        <TextInput withAsterisk size='md' className={classes.inputField} label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
+      <Box mt="md" >
+        <TextInput withAsterisk size='md' label="First Name" placeholder="Enter First Name: John" {...form.getInputProps('firstName')} />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
-        <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+        <Box mt="md" >
+        <TextInput withAsterisk size='md'  label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
         </Box>
-        <Box className={classes.responsiveContainer} mt="md" >
-        <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
-        <PasswordInput size='md' withAsterisk label="Confirm Password" placeholder="Confirm Password"  className={classes.inputField} {...form.getInputProps('confirmPassword')} />
+        <Box mt="md" >
+        <TextInput withAsterisk size='md' label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+        </Box>
+        <Box mt="md" >
+        <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  {...form.getInputProps('phoneNumber')} />
+        </Box>
+        <Box mt="md" >
+        <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password"  {...form.getInputProps('password')} />
+        </Box>
+        <Box mt="md" >
+        <PasswordInput size='md' withAsterisk label="Confirm Password" placeholder="Confirm Password"  {...form.getInputProps('confirmPassword')} />
          </Box>
-         <Box mt={'md'} style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button size='md' color='red.8' >
-          Cancel
-        </Button>
-        <Button type="submit" size='md' color='green.9' >
-          Submit
-        </Button>
+         <Box mt={'md'} >
+         <Button fullWidth mt="xl" size="md" type='submit'>
+            Sign Up
+          </Button>
         </Box>
       </form>
     </Paper>
