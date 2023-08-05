@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveContainerChild1: {
-    width: '300px',
+    width: '299px',
     backgroundColor: '#770737',
     boxSizing: 'border-box',
     fontWeight: 'bold',

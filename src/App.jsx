@@ -5,11 +5,12 @@ import ContactIcons from './pages/ContactUs';
 import GeneralLayout from './SuperAdmin/Layout/GeneralLayout';
 import Testing from './pages/test';
 import ViewTable from './pages/ViewTable';
-import AddExpense from './pages/Accounting/AddExpense';
-import ViewExpense from './pages/Accounting/ViewExpense';
-import AddUser from './pages/User/AddUser';
-import ViewUser from './pages/User/ViewUser';
-import EditUser from './pages/User/EditUser';
+import AddExpense from './SuperAdmin/pages/Accounting/AddExpense';
+import ViewExpense from './SuperAdmin/pages/Accounting/ViewExpense';
+import AddUser from './SuperAdmin/pages/User/AddUser';
+import ViewUser from './SuperAdmin/pages/User/ViewUser';
+import EditUser from './SuperAdmin/pages/User/EditUser';
+import HeaderMegaMenu from './Profiling/Layout/ProfilingLayout';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -47,6 +48,9 @@ export default function Demo() {
      
     <Router>
      <Routes>
+      <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
+    
+      </Route>
       <Route path="/" element={<GeneralLayout />}>
         <Route path="EmailBanner" element={<EmailBanner />} />
         <Route path="ContactIcons" element={<ContactIcons />} />

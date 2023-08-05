@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
 import { NumberInput, TextInput, Button, Box , createStyles, Paper, Textarea, Title, Divider, Select } from '@mantine/core';
-import Datepicker from '../../components/Date';
+import Datepicker from '../../../components/Date';
 
 const useStyles = createStyles((theme) => ({
 
