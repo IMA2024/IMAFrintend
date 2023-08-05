@@ -30,7 +30,7 @@ export default function SignUp() {
   const [selectedFile, setSelectedFile] = useState(null);
   const {classes} = useStyles()
   const form = useForm({
-    initialValues: { firstName:'', lastName:'', role:'',  email: '', password:'', confirmPassword:'' },
+    initialValues: { firstName:'', lastName:'', role:'',  email: '',phoneNumber:'', password:'', confirmPassword:'' },
 
     // functions will be used to validate values at corresponding key
     validate: {
@@ -38,6 +38,7 @@ export default function SignUp() {
       lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name Should Contain Atleast 3 Alphabets'),
       role: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Please Select Role'),
       email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Valid Enter Email'),
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Please Enter 11 Digit Phone Number'),
       password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
       confirmPassword: (value, {password}) => (value === password ? null : 'Please Confirm Your Password'),
 
@@ -68,8 +69,9 @@ export default function SignUp() {
         <TextInput withAsterisk size='md' className={classes.inputField} label="First Name" placeholder="Enter First Name: John" {...form.getInputProps('firstName')} />
         <TextInput withAsterisk size='md' className={classes.inputField} label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
         </Box>
-        <Box mt="md" >
-        <TextInput withAsterisk size='md' label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+        <Box mt="md" className={classes.responsiveContainer}>
+        <TextInput className={classes.inputField} withAsterisk size='md' label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+        <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box className={classes.responsiveContainer} mt="md" >
         <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
