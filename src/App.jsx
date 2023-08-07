@@ -16,6 +16,9 @@ import SignUp from './pages/ProfilingPages/SignUp';
 import AddRevenue from './SuperAdmin/pages/Accounting/AddRevenue';
 import ViewRevenue from './SuperAdmin/pages/Accounting/ViewRevenue';
 import ViewPayment from './SuperAdmin/pages/Payment/ViewPayment';
+import AddBusiness from './SuperAdmin/pages/Business/AddBusiness';
+import ViewBusiness from './SuperAdmin/pages/Business/ViewBusiness';
+import EditBusiness from './SuperAdmin/pages/Business/EditBusiness';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -70,6 +73,9 @@ export default function Demo() {
         <Route path="AddRevenue" element={<AddRevenue />} />
         <Route path="ViewRevenue" element={<ViewRevenue />} />
         <Route path="ViewPayment" element={<ViewPayment />} />
+        <Route path="AddBusiness" element={<AddBusiness />} />
+        <Route path="ViewBusiness" element={<ViewBusiness />} />
+        <Route path="EditBusiness" element={<EditBusiness />} />
       </Route>
      </Routes>
     </Router>
