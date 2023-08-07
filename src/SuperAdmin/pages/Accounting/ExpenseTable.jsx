@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge } from '@mantine/core';
+import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconFilter, IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
+import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -14,12 +15,10 @@ const useStyles = createStyles((theme) => ({
       marginLeft:'-5px',
       paddingTop: '20px',
       paddingBottom: '20px',
-         //backgroundColor:'pink',
       [theme.fn.smallerThan('sm')]: {
         justifyContent: 'space-between',
         width:'100%',
         marginLeft:'0px',
-        //float:'left',
       },
   
     },
@@ -27,7 +26,6 @@ const useStyles = createStyles((theme) => ({
     responsiveAddUserBtn: {
      
       [theme.fn.smallerThan('sm')]: {
-        //backgroundColor:'pink',
       },
   
     },
@@ -75,24 +73,19 @@ const useStyles = createStyles((theme) => ({
 const ExpenseTable = () => {
 
 const { classes } = useStyles();
-
 const [countries, setCountries] =  useState([]);
 const [search, setSearch] =  useState('');
 const [region, setRegion] =  useState('');
 const [filteredCountries, setFilteredCountries] =  useState([]);
-//const [filteredStatus, setFiltered] =  useState([]);
-const [opened, { open, close }] = useDisclosure(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10; // You can adjust the number of rows per page as needed
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const calculateSerialNumber = (index) => {
-    return (currentPage - 1) * rowsPerPage + index + 1;
-  };
-
+const [opened, { open, close }] = useDisclosure(false); 
+const [specificPicture, setSpecificPicture] =  useState('');
+const [specificRole, setSpecificRole] =  useState('');
+const [specificFirstName, setSpecificFirstName] =  useState('');
+const [specificLastName, setSpecificLastName] =  useState('');
+const [specificEmail, setSpecificEmail] =  useState('');
+const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
+const [specificAddress, setSpecificAddress] =  useState('');
+const navigate = useNavigate();
 
 const getCountries = async () => {
 try {
@@ -104,15 +97,12 @@ console.log(error);
 }
 }
 
-const toggleStatus = (index) => {
-  const updatedCountries = [...countries];
-  const currentStatus = updatedCountries[index].status;
-  updatedCountries[index].status = currentStatus === 'active' ? 'block' : 'active';
-  setCountries(updatedCountries);
+
+const handleViewSpecific = (row) => {
+  open();
+  setSpecificRole(row.name);
+  setSpecificPicture(row.flag);
 };
-
-
-//const exportCsv = React.useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
 
 const columns = [
   {
@@ -121,42 +111,39 @@ const columns = [
     sortable: true,
     width: '60px', // Set the width of the serial number column
   },
+  {
+    name: 'Title',
+    selector: (row) => row.capital,
+    width: '130px',
+    sortable: true,
+  },
     {
-        name: 'Title',
+        name: 'Business Name',
         selector: (row) => row.name,
         sortable: true,
     },
     {
-        name: 'Business Name',
-        selector: (row) => row.nativeName,
-    },
-    {
         name: 'Business Details',
-        selector: (row) => row.capital,
-        width: '120px',
+        width: '140px',
+        selector: (row) => row.name,
+        sortable: true,
     },
     {
         name: 'Date',
-        selector: (row) => <img width={50} height={50} src={row.flag} />,
+        width: '110px',
+        selector: (row) => row.region,
+        sortable: true,
     },
     {
         name: 'Amount',
-        selector: (row) => row.region,
+        selector: (row) => row.nativeName,
+        sortable: true,
     },
     {
         name: 'Action',
-        cell: (row) => <Box><IconEye color='gray' onClick={() => {open()}} /><IconTrash color='gray' /></Box>
+        width: '150px',
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' /></Box>
     },
-    {
-      name: 'Status',
-      cell: (row, index) => (
-        <Badge   variant='outline'  p={5} onClick={() => toggleStatus(index)}>
-          {row.status === 'active' ? 'Block' : 'Active'}
-        </Badge>
-      ),
-    },
-   
-
 ]
 
 useEffect(() => {
@@ -209,7 +196,6 @@ useEffect(() => {
             <Menu.Dropdown bg={'#FAF9F6'}> 
     <Menu.Item>
     <TextInput
-        
         placeholder='Search'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -217,8 +203,7 @@ useEffect(() => {
          />
          </Menu.Item>
          <Menu.Item>
-         <Select
-        
+         <Select 
         onSearchChange={setRegion}
         searchValue={region}
         searchable
@@ -232,8 +217,7 @@ useEffect(() => {
     />
     </Menu.Item>
     <Menu.Item>
-         <Select
-        
+         <Select    
         onSearchChange={setRegion}
         searchValue={region}
         searchable
@@ -279,8 +263,7 @@ useEffect(() => {
       className={classes.responsiveUserType}
     />
          <Select
-         size='md'
-       
+         size='md' 
         searchable
         placeholder="Active/Block"
         data={[
@@ -292,33 +275,25 @@ useEffect(() => {
     <Button 
     size='md'
     className={classes.responsiveAddUserBtn}
+    onClick={() => navigate('/AddExpense')}
     >
-    Add User
+    Add Expense
     </Button>
         </Box>
     }
     responsive
-  
      />
-      <Modal  opened={opened} onClose={close}  size="lg"  style={{textAlign: "left", display:'flex', justifyContent:'center' }}>
-      <div style={{display: 'flex', justifyContent: 'left', fontFamily: 'serif', fontWeight: 'bold', fontSize: 30}}>
-            Expense Details
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 30}}>
-              Title: <b>  </b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Business Name: <b> </b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Description: <b>  </b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Date: <b>  </b>
-            </div>
-            <div style={{fontFamily: 'serif', fontSize: 20, marginTop: 10}}>
-              Amount: <b> </b>
-            </div>
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Expense Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+  <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
+    <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
+    <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" >Car Business</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificRole}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Details:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10th August, 2023</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>10,000 PKR</Text></Box>
+    </Box>
+  </Box>
       </Modal>
      </Box>
   )

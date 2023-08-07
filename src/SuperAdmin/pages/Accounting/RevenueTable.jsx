@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
+import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
-//import { NavLink, Navigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -71,7 +70,7 @@ const useStyles = createStyles((theme) => ({
   }))
   
 
-const UserTable = () => {
+const RevenueTable = () => {
 
 const { classes } = useStyles();
 const [countries, setCountries] =  useState([]);
@@ -88,11 +87,6 @@ const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
 const [specificAddress, setSpecificAddress] =  useState('');
 const navigate = useNavigate();
 
-const handleEdit = (row) => {
-  navigate('/EditUser', { state: { rowData: row } });
-  //console.log(row.name);
-};
-
 const getCountries = async () => {
 try {
 const response = await axios.get('https://restcountries.com/v2/all');
@@ -103,12 +97,6 @@ console.log(error);
 }
 }
 
-const toggleStatus = (index) => {
-  const updatedCountries = [...countries];
-  const currentStatus = updatedCountries[index].status;
-  updatedCountries[index].status = currentStatus === 'active' ? 'block' : 'active';
-  setCountries(updatedCountries);
-};
 
 const handleViewSpecific = (row) => {
   open();
@@ -124,51 +112,37 @@ const columns = [
     width: '60px', // Set the width of the serial number column
   },
   {
-    name: 'Profile Picture',
-    width: '110px',
-    selector: (row) => <img width={50} height={50} src={row.flag} />,
+    name: 'Title',
+    selector: (row) => row.capital,
+    width: '130px',
+    sortable: true,
   },
     {
-        name: 'Role',
+        name: 'Business Name',
         selector: (row) => row.name,
         sortable: true,
     },
     {
-        name: 'First Name',
-        width: '110px',
+        name: 'Business Details',
+        width: '140px',
         selector: (row) => row.name,
         sortable: true,
     },
     {
-        name: 'Last Name',
+        name: 'Date',
         width: '110px',
         selector: (row) => row.region,
         sortable: true,
     },
     {
-        name: 'Email',
+        name: 'Amount',
         selector: (row) => row.nativeName,
         sortable: true,
     },
     {
-        name: 'Phone Number',
-        selector: (row) => row.capital,
-        width: '130px',
-        sortable: true,
-    },
-    {
-      name: 'Status',
-      //width: '150px',
-      cell: (row, index) => (
-        <Badge   variant='outline'  p={5} onClick={() => toggleStatus(index)}>
-          {row.status === 'active' ? 'Block' : 'Active'}
-        </Badge>
-      ),
-    },
-    {
         name: 'Action',
         width: '150px',
-        cell: (row) => <Box><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' /></Box>
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' /></Box>
     },
 ]
 
@@ -301,27 +275,27 @@ useEffect(() => {
     <Button 
     size='md'
     className={classes.responsiveAddUserBtn}
-    onClick={() => navigate('/AddUser')}
+    onClick={() => navigate('/AddRevenue')}
     >
-    Add User
+    Add Revenue
     </Button>
         </Box>
     }
     responsive
      />
-      <Modal  p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  >
-  <Box mb={30}  style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-    <Box mah={350}><Image  maw={300}radius="md" src={specificPicture} alt="Random image" /></Box>
-    <Box  mah={350}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" fullWidth>Business Owner</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text ml={5}>Laraib Saghir</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconMail size={20} color="green" /><Text ml={5}>saghirlaraib08@gmail.com</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconPhone size={20} color="green" /><Text ml={5}>0333 0958111</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconHome size={20} color="green" /><Text ml={5}>H#8,Street#1,Askari 14</Text></Box>
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Expense Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+  <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
+    <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
+    <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" >Car Business</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificRole}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Details:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10th August, 2023</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>10,000 PKR</Text></Box>
     </Box>
   </Box>
       </Modal>
      </Box>
   )
 }
-export default UserTable
+export default RevenueTable

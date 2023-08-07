@@ -13,6 +13,9 @@ import EditUser from './SuperAdmin/pages/User/EditUser';
 import HeaderMegaMenu from './Profiling/Layout/ProfilingLayout';
 import SignIn from './pages/ProfilingPages/SignIn';
 import SignUp from './pages/ProfilingPages/SignUp';
+import AddRevenue from './SuperAdmin/pages/Accounting/AddRevenue';
+import ViewRevenue from './SuperAdmin/pages/Accounting/ViewRevenue';
+import ViewPayment from './SuperAdmin/pages/Payment/ViewPayment';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -64,6 +67,9 @@ export default function Demo() {
         <Route path="AddUser" element={<AddUser />} />
         <Route path="ViewUser" element={<ViewUser />} />
         <Route path="EditUser" element={<EditUser />} />
+        <Route path="AddRevenue" element={<AddRevenue />} />
+        <Route path="ViewRevenue" element={<ViewRevenue />} />
+        <Route path="ViewPayment" element={<ViewPayment />} />
       </Route>
      </Routes>
     </Router>
