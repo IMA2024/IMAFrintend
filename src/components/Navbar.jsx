@@ -172,17 +172,17 @@ const handleMouseLeave = () => {
             <ul style={ulStyles}>
               <li>
                 <NavLink
-                  to="/Subscribe"
+                  to="/AddSubscription"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
                   <RiTeamLine style={iconStyles} />
-                  Edit Subscription
+                  Add Subscription
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/ViewSubscription"
+                  to="/AddSubscription"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
@@ -211,7 +211,7 @@ const handleMouseLeave = () => {
             <ul style={ulStyles}>
               <li>
                 <NavLink
-                  to="/RegisterBusiness"
+                  to="/AddBusiness"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
@@ -221,7 +221,7 @@ const handleMouseLeave = () => {
               </li>
               <li>
                 <NavLink
-                  to="/RegisteredBusinesses"
+                  to="/ViewBusiness"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
@@ -328,7 +328,7 @@ const handleMouseLeave = () => {
           </li>
           <li>
             <NavLink
-              to="/FaqWithBg"
+              to="/EmailBanner"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >
@@ -339,7 +339,7 @@ const handleMouseLeave = () => {
           <li>
             <NavLink
               
-              to="/Faq"
+              to="/EmailBanner"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >

@@ -19,6 +19,7 @@ import ViewPayment from './SuperAdmin/pages/Payment/ViewPayment';
 import AddBusiness from './SuperAdmin/pages/Business/AddBusiness';
 import ViewBusiness from './SuperAdmin/pages/Business/ViewBusiness';
 import EditBusiness from './SuperAdmin/pages/Business/EditBusiness';
+import AddSubscription from './SuperAdmin/pages/Subscription/AddSubscription';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -26,6 +27,7 @@ import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 
 
 export default function Demo() {
+  //const [colorScheme, toggleColorScheme] = useState('light');
   /*
     // State variable to hold the value from local storage
     const [storedValue, setStoredValue] = useState('');
@@ -76,6 +78,7 @@ export default function Demo() {
         <Route path="AddBusiness" element={<AddBusiness />} />
         <Route path="ViewBusiness" element={<ViewBusiness />} />
         <Route path="EditBusiness" element={<EditBusiness />} />
+        <Route path="AddSubscription" element={<AddSubscription />} />
       </Route>
      </Routes>
     </Router>

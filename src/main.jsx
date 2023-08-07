@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         fontFamily: 'Verdana, sans-serif',
         fontFamilyMonospace: 'Monaco, Courier, monospace',
         headings: { fontFamily: 'Greycliff CF, sans-serif' },
+        //colorScheme: 'dark',
       }}
      >
      <SpotlightProvider shortcut={['mod + P', 'mod + K', '/']} actions={[]}>

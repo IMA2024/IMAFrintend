@@ -15,7 +15,10 @@ export default function ActionToggle() {
     else {
       toggleColorScheme('dark');
     }
+    
   }
+
+
 
   return (
     <MantineProvider theme={{colorScheme: colorScheme }} withGlobalStyles withNormalizeCSS >
