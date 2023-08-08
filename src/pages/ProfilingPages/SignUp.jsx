@@ -1,7 +1,7 @@
-import { useForm } from '@mantine/form';
-import { FileInput, TextInput, Button, Box , createStyles, Paper, PasswordInput, Title, Divider, Select, Image, rem } from '@mantine/core';
-import { useState } from 'react';
-import { notifications } from '@mantine/notifications';
+import { isNotEmpty, useForm } from '@mantine/form';
+import { TextInput, Button, Box, createStyles, Paper, PasswordInput, Title, Divider, Select, Image, rem } from '@mantine/core';
+import { Signup } from '../../api/profiling/Signup';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -49,29 +49,41 @@ const useStyles = createStyles((theme) => ({
 
 export default function SignUp() {
   const {classes} = useStyles();
-  const handleSubmit = () => {   
-    notifications.show({ message: 'Form submitted successfully', color: 'green' });
-};
+  const navigate  = useNavigate();
+//   const handleSubmit = () => {   
+//     notifications.show({ message: 'Form submitted successfully', color: 'green' });
+// };
 
-const handleError = () => {
-  notifications.show({ message: 'Please enter valid values', color: 'red' });
-};
+// const handleError = () => {
+//   notifications.show({ message: 'Please enter valid values', color: 'red' });
+// };
+
   const form = useForm({
     initialValues: { firstName:'', lastName:'', role:'',  email: '',phoneNumber:'', password:'', confirmPassword:'' },
-
+    validateInputOnChange: true,
     // functions will be used to validate values at corresponding key
     validate: {
+      role: isNotEmpty('Please Select A Role'),
       firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Should Contain Atleast 3 Alphabets'),
       lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name Should Contain Atleast 3 Alphabets'),
-      role: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Please Select Role'),
       email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Valid Enter Email'),
       phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Please Enter 11 Digit Phone Number'),
       password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
       confirmPassword: (value, {password}) => (value === password ? null : 'Please Confirm Your Password'),
-
     },
   });
 
+  const handleSubmit = async (values) => {
+    const { role, firstName, lastName, email, phoneNumber, password } = values;
+
+  const response = await Signup(role, firstName, lastName, email, phoneNumber, password);
+
+   if (response.status === 201) {
+    form.reset();
+    navigate('/HeaderMegaMenu/SignIn')
+
+   }
+  }
 
   return (
     <Box className={classes.wrapper}>
@@ -84,12 +96,14 @@ const handleError = () => {
           Sign Up
         </Title>
         <Divider mb={20} />
-        <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
+        <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <Box>
         <Select withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
         data={[
-            { value: 'businessowner', label: 'Business Owner' },
-            { value: 'marketingagent', label: 'Marketing Agent' },
+                { value: 'Super Admin', label: 'Super Admin' },
+                { value: 'Marketing Agent', label: 'Marketing Agent' },
+                { value: 'Business Owner', label: 'Business Owner' },
+                { value: 'Customer', label: 'Customer' },
           ]}
          />
         </Box>

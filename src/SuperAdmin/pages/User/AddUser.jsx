@@ -1,6 +1,7 @@
-import { useForm } from '@mantine/form';
+import { isNotEmpty, useForm } from '@mantine/form';
 import { FileInput, TextInput, Button, Box , createStyles, Paper, PasswordInput, Title, Divider, Select } from '@mantine/core';
 import { useState } from 'react';
+import { addUser } from '../../../api/admin/users';
 
 const useStyles = createStyles((theme) => ({
 
@@ -31,18 +32,17 @@ export default function AddUser() {
   const {classes} = useStyles()
   const form = useForm({
     initialValues: { firstName:'', lastName:'', role:'', phoneNumber:'', address:'', email: '', password:'', confirmPassword:'' },
-
+    validateInputOnChange: true,
     // functions will be used to validate values at corresponding key
     validate: {
+      role: isNotEmpty('Please Select A Role'),
       firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Should Contain Atleast 3 Alphabets'),
       lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name Should Contain Atleast 3 Alphabets'),
-      role: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Please Select Role'),
       phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Please Enter 11 Digit Phone Number'),
-      //address: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Please Enter Address'),
+      address: (value) => (/^[a-zA-Z\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 20 and 100 characters with spaces and allowed special characters'),
       email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Valid Enter Email'),
       password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
-      confirmPassword: (value, {password}) => (value === password ? null : 'Please Confirm Your Password'),
-
+      confirmPassword: (value, { password }) => (value === password ? null : 'Please Confirm Your Password'),
     },
   });
 
@@ -74,6 +74,19 @@ export default function AddUser() {
     }
   };
 
+  const handleSubmit = async (values) => {
+    const { role, firstName, lastName, email, phoneNumber, address, password } = values;
+
+    const response = await addUser(role, firstName, lastName, email, phoneNumber, address, password);
+    if (response.status === 201) {
+      console.log(response.data);
+      form.reset();
+    }
+    else{
+      return response;
+    }
+  }
+
   return (
     <Paper withBorder shadow="md" p={35}  radius="md">
        <Title
@@ -84,12 +97,13 @@ export default function AddUser() {
           Add User
         </Title>
         <Divider mb={20} />
-      <form onSubmit={form.onSubmit(console.log)} >
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
         <Select withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
         data={[
-            { value: 'businessowner', label: 'Business Owner' },
-            { value: 'marketingagent', label: 'Marketing Agent' },
+              { value: 'Marketing Agent', label: 'Marketing Agent' },
+              { value: 'Business Owner', label: 'Business Owner' },
+              { value: 'Customer', label: 'Customer' },
           ]}
          />
         </Box>
@@ -102,7 +116,7 @@ export default function AddUser() {
          <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box mt="md" >
-        <TextInput size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad."  />
+        <TextInput {...form.getInputProps("address")} size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." />
         </Box>
         <Box className={classes.responsiveContainer} mt="md" >
         <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
