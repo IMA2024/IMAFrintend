@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
-import axios from 'axios';
+import Axios from 'axios';
 import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
-//import { NavLink, Navigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -69,7 +68,6 @@ const useStyles = createStyles((theme) => ({
        },
   
   }))
-  
 
 const UserTable = () => {
 
@@ -86,21 +84,22 @@ const [specificLastName, setSpecificLastName] =  useState('');
 const [specificEmail, setSpecificEmail] =  useState('');
 const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
 const [specificAddress, setSpecificAddress] =  useState('');
-const navigate = useNavigate();
 
+const navigate = useNavigate();
+  
 const handleEdit = (row) => {
   navigate('/EditUser', { state: { rowData: row } });
   //console.log(row.name);
 };
 
 const getCountries = async () => {
-try {
-const response = await axios.get('https://restcountries.com/v2/all');
-setCountries(response.data);
-setFilteredCountries(response.data);
-} catch (error) {
-console.log(error);
-}
+  try {
+    const response = await Axios.get('http://localhost:5000/admin/viewAllUsers');
+    setCountries(response.data.users);
+    setFilteredCountries(response.data.users);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const toggleStatus = (index) => {
@@ -173,32 +172,32 @@ const columns = [
 ]
 
 useEffect(() => {
-getCountries();
+  getCountries();
 }, []);
 
 useEffect(() => {
-const result = countries.filter(country => {
+  const result = countries.filter(country => {
     return country.name.toLowerCase().match(search.toLowerCase());
-});
+  });
 
-setFilteredCountries(result);
+  setFilteredCountries(result);
 }, [search]);
 
 useEffect(() => {
-    const resultSelect = countries.filter(country => {
-        return country.region.toLowerCase().match(region.toLowerCase());
-    });
-    
-    setFilteredCountries(resultSelect);
-    }, [region]);
+  const resultSelect = countries.filter(country => {
+    return country.region.toLowerCase().match(region.toLowerCase());
+  });
 
-    useEffect(() => {
-      getCountries().then((data) => {
-        const countriesData = data.map((country) => ({ ...country, status: 'active' }));
-        setCountries(countriesData);
-        setFilteredCountries(countriesData);
-      });
-    }, []);
+  setFilteredCountries(resultSelect);
+}, [region]);
+
+useEffect(() => {
+  getCountries().then((data) => {
+    const countriesData = data.map((country) => ({ ...country, status: 'active' }));
+    setCountries(countriesData);
+    setFilteredCountries(countriesData);
+  });
+}, []);
 
   return (
     <Box >
