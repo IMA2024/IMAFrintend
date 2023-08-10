@@ -20,6 +20,7 @@ import AddBusiness from './SuperAdmin/pages/Business/AddBusiness';
 import ViewBusiness from './SuperAdmin/pages/Business/ViewBusiness';
 import EditBusiness from './SuperAdmin/pages/Business/EditBusiness';
 import AddSubscription from './SuperAdmin/pages/Subscription/AddSubscription';
+import ViewSubscription from './SuperAdmin/pages/Subscription/ViewSubscription';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -79,6 +80,7 @@ export default function Demo() {
         <Route path="ViewBusiness" element={<ViewBusiness />} />
         <Route path="EditBusiness" element={<EditBusiness />} />
         <Route path="AddSubscription" element={<AddSubscription />} />
+        <Route path="ViewSubscription" element={<ViewSubscription />} />
       </Route>
      </Routes>
     </Router>
