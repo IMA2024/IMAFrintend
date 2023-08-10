@@ -3,11 +3,13 @@ import {
   createStyles,
   TextInput,
   PasswordInput,
+  Checkbox,
   Button,
   Title,
   Text,
+  Anchor,
   rem,
-  Box
+  Box,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Signin } from '../../api/profiling/Signin';
@@ -94,7 +96,13 @@ import { useNavigate } from 'react-router-dom';
           console.log('Sign-in failed');
         }
         console.log(response);
-      }
+      };
+
+      
+    const GoToSignUp = () => {
+      navigate('/HeaderMegaMenu/SignUp' );
+
+    };
 
     return (
       <div className={classes.wrapper}>
@@ -111,7 +119,10 @@ import { useNavigate } from 'react-router-dom';
           </Button>
           </Box>
           <Text ta="center" mt="md">
-           
+          Don't Have An Account? 
+          <Anchor mt={'md'} color='dark.1' component="button" size="xl" onClick={() => GoToSignUp()}>
+           Sign Up
+          </Anchor>
           </Text>
           </form>
         </Paper>

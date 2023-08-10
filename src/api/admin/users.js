@@ -22,3 +22,26 @@ export const addUser = async (role, firstName, lastName, email, phoneNumber, add
     } 
    
 }
+
+export const updateUser = async (userId, role, firstName, lastName, phoneNumber, address) => {
+   try{ 
+   const response = await Axios.put('admin/updateUser', 
+     {
+      userId, role, firstName, lastName, phoneNumber, address
+      })
+      return response;
+   }
+      catch (error) {
+         console.log(error.response.data.message);
+         throw error;
+    } 
+   
+}
+
+export const deleteUser = async (userId) => {
+   try {
+      await Axios.delete('admin/deleteUser', {params: {userId}})
+   } catch (error) {
+      console.log(error)
+   }
+ }
