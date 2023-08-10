@@ -13,6 +13,7 @@ const [isVisible1, setIsVisible1] = useState(false);
 const [isVisible2, setIsVisible2] = useState(false);
 const [isVisible3, setIsVisible3] = useState(false);
 const [isVisible4, setIsVisible4] = useState(false);
+const [isVisible5, setIsVisible5] = useState(false);
 const [isHovered, setIsHovered] = useState(false);
 
 const handleToggleVisibility1 = () => {
@@ -30,6 +31,10 @@ const handleToggleVisibility4 = () => {
         setIsVisible4(!isVisible4);
     };
 
+    const handleToggleVisibility5 = () => {
+      setIsVisible5(!isVisible5);
+  };
+
 const handleMouseEnter = () => {
       setIsHovered(true);
     };
@@ -41,7 +46,7 @@ const handleMouseLeave = () => {
 
   const sidebarStyles = {
     width: '300px',
-    //height: '1100px',
+    //height: '900px',
     backgroundColor: '#770737',
     padding: '1px',
     //boxSizing: 'border-box',
@@ -167,12 +172,12 @@ const handleMouseLeave = () => {
             <ul style={ulStyles}>
               <li>
                 <NavLink
-                  to="/Subscribe"
+                  to="/AddSubscription"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
                   <RiTeamLine style={iconStyles} />
-                  Edit Subscription
+                  Add Subscription
                 </NavLink>
               </li>
               <li>
@@ -206,32 +211,22 @@ const handleMouseLeave = () => {
             <ul style={ulStyles}>
               <li>
                 <NavLink
-                  to="/RegisterBusiness"
+                  to="/AddBusiness"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
                   <RiTeamLine style={iconStyles} />
-                  Register Business
+                  Add Business
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/RegisteredBusinesses"
+                  to="/ViewBusiness"
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
                   <IoMdAddCircle style={iconStyles} />
                   View Business
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/EditBusiness"
-                  style={navLinkStyles}
-                  activeStyle={{ fontWeight: 'bold' }}
-                >
-                  <IoMdAddCircle style={iconStyles} />
-                  Edit Business
                 </NavLink>
               </li>
             </ul>
@@ -294,23 +289,32 @@ const handleMouseLeave = () => {
           </li>
           <li>
             <NavLink
-              to="/UpdateAgent"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
+              onClick={handleToggleVisibility5}
             >
-              <AiOutlineSetting style={iconStyles} />
-              6- Configuration
+              <AiOutlineShop style={iconStyles} />
+              <Text style={headingStyles}>6- Payment</Text>
+              {isVisible5 ? (
+              <AiFillCaretDown  style={pointerStyles}/>
+            ) : (
+              <AiFillCaretUp  style={pointerStyles}/>
+            )}
             </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/Agents"
-              style={navLinkStyles}
-              activeStyle={{ fontWeight: 'bold' }}
-            >
-              <BiUser style={iconStyles} />
-              7- Agents
-            </NavLink>
+            {isVisible5 ? (
+            <ul style={ulStyles}>
+              <li>
+                <NavLink
+                  to="/ViewPayment"
+                  style={navLinkStyles}
+                  activeStyle={{ fontWeight: 'bold' }}
+                >
+                  <IoMdAddCircle style={iconStyles} />
+                  View Payment
+                </NavLink>
+              </li>
+            </ul>
+            ) : null}
           </li>
           <li>
             <NavLink
@@ -319,27 +323,28 @@ const handleMouseLeave = () => {
               activeStyle={{ fontWeight: 'bold' }}
             >
               <BiChat style={iconStyles} />
-              8- Services
+              7- Services
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/FaqWithBg"
+              to="/EmailBanner"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >
               <AiOutlineSetting style={iconStyles} />
-              9 -About Us
+              8- About Us
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/Faq"
+              
+              to="/EmailBanner"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >
               <BiHelpCircle style={iconStyles} />
-              10 -FAQs
+              9- FAQs
             </NavLink>
           </li>
         </ul>
