@@ -37,7 +37,6 @@ export default function EditUser() {
   const form = useForm({
     initialValues: { userId : rowData._id, firstName: rowData.firstName, lastName:rowData.lastName, role: rowData.role , phoneNumber:rowData.phoneNumber, address: rowData.address, email: rowData.email , password:'', confirmPassword:'' },
     validateInputOnChange: true,
-    // functions will be used to validate values at corresponding key
     validate: {
       role: isNotEmpty('Please Select A Role'),
       firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Should Contain Atleast 3 Alphabets'),
@@ -104,7 +103,7 @@ export default function EditUser() {
         <Divider mb={20} />
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
-        <TextInput withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
+        <TextInput disabled withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
          />
         </Box>
       <Box mt="md" className={classes.responsiveContainer}>
@@ -112,7 +111,7 @@ export default function EditUser() {
         <TextInput withAsterisk size='md' className={classes.inputField} label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
         </Box>
         <Box mt="md"  className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='md' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+        <TextInput disabled withAsterisk size='md' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
          <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box mt="md" >

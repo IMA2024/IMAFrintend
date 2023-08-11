@@ -2,6 +2,7 @@ import { isNotEmpty, useForm } from '@mantine/form';
 import { FileInput, TextInput, Button, Box, createStyles, Paper, PasswordInput, Title, Divider, Select, Image, rem, Anchor, Text } from '@mantine/core';
 import { Signup } from '../../api/profiling/Signup';
 import { useNavigate } from 'react-router-dom';
+import { notifications } from '@mantine/notifications';
 
 const useStyles = createStyles((theme) => ({
 
@@ -61,7 +62,6 @@ export default function SignUp() {
   const form = useForm({
     initialValues: { firstName: '', lastName: '', role: '', email: '', phoneNumber: '', password: '', confirmPassword: '' },
     validateInputOnChange: true,
-    // functions will be used to validate values at corresponding key
     validate: {
       role: isNotEmpty('Please Select A Role'),
       firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Should Contain Atleast 3 Alphabets'),
@@ -75,14 +75,18 @@ export default function SignUp() {
 
   const handleSubmit = async (values) => {
     const { role, firstName, lastName, email, phoneNumber, password } = values;
+    try {
+      const response = await Signup(role, firstName, lastName, email, phoneNumber, password);
 
-    const response = await Signup(role, firstName, lastName, email, phoneNumber, password);
-
-    if (response.status === 201) {
-      form.reset();
-      navigate('/HeaderMegaMenu/SignIn')
-    }
+      if (response.status === 201) {
+        form.reset();
+        notifications.show({ message: `Signup Successfull `, color: 'green' });
+        navigate('/HeaderMegaMenu/SignIn')
+      }
+} catch (error) {
+        notifications.show({ message: error.response.data.message, color: 'red', height: 100 });
   }
+}
 
   const GoToSignIn = () => {
     navigate('/HeaderMegaMenu/SignIn');
