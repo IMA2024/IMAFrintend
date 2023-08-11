@@ -171,8 +171,8 @@ useEffect(() => {
     setFilteredCountries(resultSelect);
     }, [region]);
 
-    useEffect(() => {
-      getCountries().then((data) => {
+useEffect(() => {
+    getCountries().then((data) => {
         const countriesData = data.map((country) => ({ ...country, status: 'active' }));
         setCountries(countriesData);
         setFilteredCountries(countriesData);

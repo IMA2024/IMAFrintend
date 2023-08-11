@@ -1,6 +1,7 @@
 import { useForm } from '@mantine/form';
 import { FileInput, TextInput, Button, Box , createStyles, Paper, Title, Divider, Select, Textarea } from '@mantine/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const useStyles = createStyles((theme) => ({
 
@@ -28,6 +29,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function AddBusiness() {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [countries, setCountries] =  useState([]);
   const {classes} = useStyles()
   const form = useForm({
     initialValues: { businessName:'', businessOwnerName:'', businessType:'', phoneNumber:'', address:'', email: '', businessDescription:'' },
@@ -43,6 +45,21 @@ export default function AddBusiness() {
       businessDescription: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Business Description Must Not Be Empty'),
     },
   });
+
+  const getCountries = async () => {
+    try {
+    const response = await axios.get('https://restcountries.com/v2/all');
+    setCountries(response.data);
+    console.log(response.data);
+    } catch (error) {
+    console.log(error);
+    }
+    }
+
+  useEffect(() => {
+    getCountries();
+  }, []);
+    
 
   const handleFileChange = (files) => {
     setSelectedFile(files[0]);
@@ -94,10 +111,10 @@ export default function AddBusiness() {
       <Box mt="md" className={classes.responsiveContainer}>
         <TextInput withAsterisk size='md' className={classes.inputField} label="Business Name" placeholder="Enter Business Name: Jinnah Heights" {...form.getInputProps('businessName')} />
         <Select withAsterisk size='md' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwnerName')}
-        data={[
-            { value: 'nefes', label: 'Nefes Kaleli' },
-            { value: 'tahir', label: 'Tahir Kaleli' },
-          ]}
+          data={countries.map((country) => ({
+            value: country.name, // Use the country name as the value
+            label: country.name,
+          }))}
          />
         </Box>
         <Box mt="md"  className={classes.responsiveContainer}>
