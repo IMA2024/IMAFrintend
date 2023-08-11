@@ -6,6 +6,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser } from '../../../api/admin/users';
+import { notifications } from '@mantine/notifications';
 
 
 const useStyles = createStyles((theme) => ({
@@ -107,6 +108,7 @@ const handleDelete = async (id) => {
     const updatedUsers = users.filter(user => user._id !== id);
     setUsers(updatedUsers);
     setFilteredUsers(updatedUsers);
+    notifications.show({ message: "User Deleted Successfully", color: 'red' });
   } catch (error) {
     console.log(error);
   }
@@ -134,6 +136,7 @@ const toggleStatus = (index) => {
 
 const handleViewSpecific = (row) => {
   open();
+  setSpecificPicture(row.profilePic);
   setSpecificRole(row.role);
   setSpecificFirstName(row.firstName);
   setSpecificLastName(row.lastName);
@@ -153,7 +156,7 @@ const columns = [
   {
     name: 'Profile Picture',
     width: '110px',
-    selector: (row) => <img width={50} height={50} src={row.flag} />,
+    selector: (row) => <img width={50} height={50} src={row.profilePic} />,
   },
     {
         name: 'Role',
@@ -354,7 +357,7 @@ useEffect(() => {
      />
       <Modal  p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-    <Box mah={350}><Image  maw={300}radius="md" src={specificPicture} alt="Random image" /></Box>
+    <Box mah={350}><Image  maw={300} radius="lg" sx={{resize:'contain'}} src={specificPicture} alt="Random image" /></Box>
     <Box  mah={350}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
     <Box ><Badge variant="filled" fullWidth>{specificRole}</Badge></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text ml={5}>{specificFirstName}</Text><Text ml={5}>{specificLastName}</Text></Box>

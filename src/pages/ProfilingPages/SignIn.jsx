@@ -14,6 +14,7 @@ import {
 import { useForm } from '@mantine/form';
 import { Signin } from '../../api/profiling/Signin';
 import { useNavigate } from 'react-router-dom';
+import { notifications } from '@mantine/notifications';
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -46,14 +47,6 @@ import { useNavigate } from 'react-router-dom';
     const { classes } = useStyles();
     const navigate = useNavigate();
 
-  //   const handleSubmit = () => {   
-  //       notifications.show({ message: 'Form submitted successfully', color: 'green' });
-  //   };
-
-  //   const handleError = () => {
-  //     notifications.show({ message: 'Please enter valid values', color: 'red' });
-  // };
-
     const form = useForm({
         initialValues: {  email: '', password:''},
         validateInputOnChange: true,
@@ -65,39 +58,39 @@ import { useNavigate } from 'react-router-dom';
 
       const handleSubmit = async (values) => {
         const { email, password } = values;
-    
-        const response = await Signin(email, password);
-    
-        if (response.status === 200) {
-    
-          switch (response?.data?.role) {
-            case 'Super Admin':
-              localStorage.setItem('token', response?.data?.token);
-              navigate('/ViewUser');
-              break;
-            case 'Marketing Agent':
-              localStorage.setItem('token', response?.data?.token);
-              navigate('/HeaderMegaMenu/SignUp');
-              break;
-            case 'Business Owner':
-              localStorage.setItem('token', response?.data?.token);
-              navigate('/HeaderMegaMenu/SignUp');
-              break;
-            case 'Customer':
-              localStorage.setItem('token', response?.data?.token);
-              navigate('/ViewUser');
-              break;
-            default:
-              console.log('Invalid role');
-              break;
-          }
-        }
-        else {
-          console.log('Sign-in failed');
-        }
-        console.log(response);
-      };
 
+    try {
+      const response = await Signin(email, password);
+    
+      if (response.status === 200) {
+
+        notifications.show({ message: `Signin Successfull `, color: 'green' });
+
+        switch (response?.data?.role) {
+          case 'Super Admin':
+            localStorage.setItem('token', response?.data?.token);
+            navigate('/ViewUser');
+            break;
+          case 'Marketing Agent':
+            localStorage.setItem('token', response?.data?.token);
+            navigate('/ViewUser');
+            break;
+          case 'Business Owner':
+            localStorage.setItem('token', response?.data?.token);
+            navigate('/ViewUser');
+            break;
+          case 'Customer':
+            localStorage.setItem('token', response?.data?.token);
+            navigate('/ViewUser');
+            break;
+          default:
+            console.log('Invalid role');
+            break;
+        }  }
+    } catch (error) {
+      notifications.show({ message: error.response.data.message , color: 'red' , height: 100  });
+    }
+};
       
     const GoToSignUp = () => {
       navigate('/HeaderMegaMenu/SignUp' );
