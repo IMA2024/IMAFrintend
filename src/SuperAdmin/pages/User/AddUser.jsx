@@ -42,13 +42,13 @@ export default function AddUser() {
     validateInputOnChange: true,
     validate: {
       role: isNotEmpty('Please Select A Role'),
-      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Should Contain Atleast 3 Alphabets'),
-      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name Should Contain Atleast 3 Alphabets'),
-      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Please Enter 11 Digit Phone Number'),
-      address: (value) => (/^[a-zA-Z\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 20 and 100 characters with spaces and allowed special characters'),
-      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Valid Enter Email'),
-      password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
-      confirmPassword: (value, { password }) => (value === password ? null : 'Please Confirm Your Password'),
+      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name should be between 3 to 20 Alphabets'),
+      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name should be between 3 to 20 Alphabets'),
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
+      address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 10 and 150 Characters'),
+      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e user@gmail.com'),
+      password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
+      confirmPassword: (value, { password }) => (value === password ? null : 'Incorrect ! Please Recheck & Confirm Your Password'),
     },
   });
 
@@ -79,8 +79,7 @@ export default function AddUser() {
     }
 
     } catch (error) {
-      // notifications.show({ message: error.response.data.message , color: 'red' , });
-      console.log(error);
+      notifications.show({ message: error.response.data.message , color: 'red' , });
     }
 };
 
@@ -113,7 +112,7 @@ export default function AddUser() {
           <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box mt="md" >
-          <TextInput  size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." className={classes.inputField} {...form.getInputProps("address")} />
+          <TextInput  size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps("address")} />
         </Box>
         <Box className={classes.responsiveContainer} mt="md" >
           <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
@@ -135,8 +134,7 @@ export default function AddUser() {
           <Image
           height={169}
           width={169}
-          
-          sx={{resize:'stretch',  marginTop: -15, marginLeft: -15 }}
+          sx={{resize:'contain',  marginTop: -15, marginLeft: -15 }}
           src={profilePics || (imageUpload ? URL.createObjectURL(imageUpload[0]) : '')}
         />
           </Dropzone>
