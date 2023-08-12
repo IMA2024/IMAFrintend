@@ -228,8 +228,12 @@ useEffect(() => {
 useEffect(() => {
   const result = users.filter(user => {
     // Apply all filters including search, role, and status
-    const matchesSearch = user.firstName.toLowerCase().includes(search.toLowerCase());
-    const matchesRole = role === '' || user.role.toLowerCase().includes(role.toLowerCase());
+    const matchesSearch = (
+      user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      user.lastName.toLowerCase().includes(search.toLowerCase()) ||
+      user.phoneNumber.toLowerCase().includes(search.toLowerCase())
+    );
+     const matchesRole = role === '' || user.role.toLowerCase().includes(role.toLowerCase());
     const matchesStatus = status === '' || user.status.toLowerCase().includes(status.toLowerCase());
 
     return matchesSearch && matchesRole && matchesStatus;
@@ -268,7 +272,7 @@ useEffect(() => {
             <Menu.Dropdown bg={'#FAF9F6'}> 
     <Menu.Item>
     <TextInput
-        placeholder='Search By Name'
+        placeholder='Search'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
        
@@ -313,7 +317,7 @@ useEffect(() => {
         </Button>
         <TextInput
         size='md'
-        placeholder='Search By Name'
+        placeholder='Search'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className={classes.responsiveSearch}
