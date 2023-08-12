@@ -21,6 +21,11 @@ import ViewBusiness from './SuperAdmin/pages/Business/ViewBusiness';
 import EditBusiness from './SuperAdmin/pages/Business/EditBusiness';
 import AddSubscription from './SuperAdmin/pages/Subscription/AddSubscription';
 import ViewSubscription from './SuperAdmin/pages/Subscription/ViewSubscription';
+import SplineAreaCharts from './SuperAdmin/pages/Charts/SplineAreaCharts';
+import StatsGroup from './SuperAdmin/pages/Charts/GroupedStats';
+import GroupedStackedColumns from './SuperAdmin/pages/Charts/GroupedStackedColumns';
+import ColumnRotatedLabelChart from './SuperAdmin/pages/Charts/ColumnRotatedLabelChart';
+import SimpleDonut from './SuperAdmin/pages/Charts/SimpleDonut';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -81,6 +86,12 @@ export default function Demo() {
         <Route path="EditBusiness" element={<EditBusiness />} />
         <Route path="AddSubscription" element={<AddSubscription />} />
         <Route path="ViewSubscription" element={<ViewSubscription />} />
+        <Route path="SplineAreaCharts" element={<SplineAreaCharts />} />
+        <Route path="StatsGroup" element={<StatsGroup />} />
+        <Route path="ColumnRotatedLabelChart" element={<ColumnRotatedLabelChart />} />
+        <Route path="GroupedStackedColumns" element={<GroupedStackedColumns />} />
+        <Route path="SimpleDonut" element={<SimpleDonut />} />
+        
       </Route>
      </Routes>
     </Router>
