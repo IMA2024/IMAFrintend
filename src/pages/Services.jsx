@@ -1,92 +1,109 @@
-import { createStyles, Text, Title, TextInput, Button, Image, rem } from '@mantine/core';
+import {
+  createStyles,
+  Title,
+  SimpleGrid,
+  Text,
+  Button,
+  ThemeIcon,
+  Grid,
+  Col,
+  rem, 
+  Paper
+} from '@mantine/core';
+import {  IconFlame, IconBrandInstagram, IconMagnet, IconPhoneCall, IconDialpad } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: `calc(${theme.spacing.xl} * 2)`,
-    borderRadius: theme.radius.md,
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-    border: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[3]
-      }`,
-
-    [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column-reverse',
-      padding: theme.spacing.xl,
-    },
-  },
-
-
-
-  body: {
-    paddingRight: `calc(${theme.spacing.xl} * 4)`,
-
-    [theme.fn.smallerThan('sm')]: {
-      paddingRight: 0,
-      marginTop: theme.spacing.xl,
-    },
+    padding: `calc(${theme.spacing.xl} * 2) ${theme.spacing.xl}`,
   },
 
   title: {
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    lineHeight: 1,
+    //fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    fontSize: rem(36),
+    fontWeight: 900,
+    lineHeight: 1.1,
     marginBottom: theme.spacing.md,
-  },
-
-  controls: {
-    display: 'flex',
-    marginTop: theme.spacing.xl,
-  },
-
-  inputWrapper: {
-    width: '100%',
-    flex: '1',
-  },
-
-  input: {
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
-    borderRight: 0,
-  },
-
-  control: {
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
+    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
   },
 }));
 
-export default function EmailBanner() {
+const features = [
+  {
+    icon: IconBrandInstagram,
+    title: 'Social Media Marketing',
+    description: 'Expand your reach and engage your customers through social media marketing',
+  },
+  {
+    icon: IconMagnet,
+    title: 'Lead Generation',
+    description: 'Dont miss out on valuable leads; Let us help you capture and convert into customers.',
+  },
+  {
+    icon: IconPhoneCall,
+    title: 'Customer Service',
+    description:
+      'We value are customers and are committed to providing exceptional service.',
+  },
+  {
+    icon: IconDialpad,
+    title: 'Auto Dialer',
+    description:
+      'Simplify your sales process and achieve more with our automatic dialer.',
+  },
+];
+
+export default  function Services() {
   const { classes } = useStyles();
+
+  const items = features.map((feature) => (
+    <div key={feature.title}>
+      <ThemeIcon
+        size={44}
+        radius="md"
+        variant="gradient"
+        gradient={{ deg: 100, from: 'teal.9', to: 'lime.7' }}
+      >
+        <feature.icon size={rem(26)} stroke={1.5} />
+      </ThemeIcon>
+      <Text fz="lg" mt="sm" fw={500}>
+        {feature.title}
+      </Text>
+      <Text c="dimmed" fz="sm">
+        {feature.description}
+      </Text>
+    </div>
+  ));
+
   return (
-    
-    
-      <div className={classes.wrapper}>
-        <div className={classes.body}>
-          <Title className={classes.title}>Wait a minute...</Title>
-          <Text fw={500} fz="lg" mb={5}>
-            Subscribe to our newsletter!
-          </Text>
-          <Text fz="sm" c="dimmed">
-            You will never miss important product updates, latest news and community QA sessions. Our
-            newsletter is once a week, every Sunday.
-          </Text>
-
-          <div className={classes.controls}>
-            <TextInput
-              placeholder="Your email"
-              classNames={{ input: classes.input, root: classes.inputWrapper }}
-            />
-            <Button className={classes.control} style={{ backgroundColor: '#4E8480' }}>Subscribe</Button>
-          </div>
-        </div>
-        <Image
-          radius="md"
-          src="https://ui.mantine.dev/_next/static/media/image.969ed1dc.svg"
-          alt="Random unsplash image"
-
-        />
-      </div>
    
+    <div className={classes.wrapper}>
+      <Grid gutter={80}>
+        <Col span={12} md={5}>
+          <Title className={classes.title} order={2}>
+            Some of the services we offer
+          </Title>
+          <Text c="dimmed">
+            From social media marketing to email marketing, IMA is all in one marketing product – It provides
+            a comprehensive solution for all your marketing needs.
+          </Text>
+
+          <Button
+            variant="gradient"
+            gradient={{ deg: 100, from: 'teal.9', to: 'lime.7' }}
+            size="lg"
+            radius="md"
+            mt="xl"
+          >
+            View More
+          </Button>
+        </Col>
+        <Col span={12} md={7}>
+          <SimpleGrid cols={2} spacing={30} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
+            {items}
+          </SimpleGrid>
+        </Col>
+      </Grid>
+    </div>
+
   );
 }

@@ -318,7 +318,7 @@ const handleMouseLeave = () => {
           </li>
           <li>
             <NavLink
-              to="/EmailBanner"
+              to="/Services"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >
@@ -328,18 +328,18 @@ const handleMouseLeave = () => {
           </li>
           <li>
             <NavLink
-              to="/EmailBanner"
+              to="/ContactUs"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >
               <AiOutlineSetting style={iconStyles} />
-              8- About Us
+              8- Contac tUs
             </NavLink>
           </li>
           <li>
             <NavLink
               
-              to="/EmailBanner"
+              to="/Faq"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >

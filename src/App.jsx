@@ -1,9 +1,7 @@
 import { Center } from '@mantine/core';
 import {BrowserRouter as Router, Route, Link, Routes, json} from "react-router-dom"
 import EmailBanner from './pages/Services';
-import ContactIcons from './pages/ContactUs';
 import GeneralLayout from './SuperAdmin/Layout/GeneralLayout';
-import Testing from './pages/test';
 import ViewTable from './pages/ViewTable';
 import AddExpense from './SuperAdmin/pages/Accounting/AddExpense';
 import ViewExpense from './SuperAdmin/pages/Accounting/ViewExpense';
@@ -26,6 +24,10 @@ import StatsGroup from './SuperAdmin/pages/Charts/GroupedStats';
 import GroupedStackedColumns from './SuperAdmin/pages/Charts/GroupedStackedColumns';
 import ColumnRotatedLabelChart from './SuperAdmin/pages/Charts/ColumnRotatedLabelChart';
 import SimpleDonut from './SuperAdmin/pages/Charts/SimpleDonut';
+import Services from './pages/Services';
+import Reviews from './pages/Reviews';
+import Faq from './pages/Faq';
+import ContactUs from './pages/ContactUs';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -70,8 +72,6 @@ export default function Demo() {
       </Route>
       <Route path="/" element={<GeneralLayout />}>
         <Route path="EmailBanner" element={<EmailBanner />} />
-        <Route path="ContactIcons" element={<ContactIcons />} />
-        <Route path="Testing" element={<Testing />} />
         <Route path="ViewTable" element={<ViewTable />} />
         <Route path="AddExpense" element={<AddExpense />} />
         <Route path="ViewExpense" element={<ViewExpense />} />
@@ -91,7 +91,10 @@ export default function Demo() {
         <Route path="ColumnRotatedLabelChart" element={<ColumnRotatedLabelChart />} />
         <Route path="GroupedStackedColumns" element={<GroupedStackedColumns />} />
         <Route path="SimpleDonut" element={<SimpleDonut />} />
-        
+        <Route path="Services" element={<Services />} />
+        <Route path="Reviews" element={<Reviews />} />
+        <Route path="Faq" element={<Faq />} />
+        <Route path="ContactUs" element={<ContactUs />} />
       </Route>
      </Routes>
     </Router>
