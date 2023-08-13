@@ -1,8 +1,40 @@
-import { createStyles, ThemeIcon, Text, SimpleGrid, Box, Stack } from '@mantine/core';
-import { IconSun, IconPhone, IconMapPin, IconAt } from '@tabler/icons-react';
+import {
+  createStyles,
+  Text,
+  Title,
+  SimpleGrid,
+  TextInput,
+  Textarea,
+  Button,
+  Group,
+  ActionIcon,
+  rem,
+  Stack,
+  Box,
+  ThemeIcon
+  
+} from '@mantine/core';
+import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram, IconAt, IconPhone, IconMapPin, IconSun } from '@tabler/icons-react';
 
-const useStyles = createStyles((theme, { variant }) => ({
+
+const useStyles = createStyles((theme) => ({
   wrapper: {
+    minHeight: 400,
+    boxSizing: 'border-box',
+    /*
+    backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
+      theme.colors[theme.primaryColor][7]
+    } 100%)`,
+    */
+    backgroundImage: theme.fn.gradient({ from: 'teal.9', to: 'lime.7', deg: 100 }),
+    borderRadius: theme.radius.md,
+    padding: `calc(${theme.spacing.xl} * 2.5)`,
+
+    [theme.fn.smallerThan('sm')]: {
+      padding: `calc(${theme.spacing.xl} * 1.5)`,
+    },
+  },
+  wrapperContactIcon:{
     display: 'flex',
     alignItems: 'center',
     color: theme.white,
@@ -10,19 +42,61 @@ const useStyles = createStyles((theme, { variant }) => ({
 
   icon: {
     marginRight: theme.spacing.md,
-    
+    //backgroundImage : `linear-gradient(135deg, ${theme.colors[theme.primaryColor][4]} 0%, ${theme.colors[theme.primaryColor][6]} 100%)`,
+    backgroundImage: theme.fn.gradient({ from: 'lime.7', to: 'lime.7', deg: 100 }),
+    //backgroundColor: 'lime',
   },
 
   title: {
-    color: variant === 'gradient' ? theme.colors.gray[6] : theme.colors[theme.primaryColor][0],
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    color: theme.white,
+    lineHeight: 1,
   },
 
   description: {
-    color: variant === 'gradient' ? theme.black : theme.white,
+    color: theme.colors[theme.primaryColor][0],
+    maxWidth: rem(300),
+
+    [theme.fn.smallerThan('sm')]: {
+      maxWidth: '100%',
+    },
+  },
+
+  form: {
+    backgroundColor: theme.white,
+    padding: theme.spacing.xl,
+    borderRadius: theme.radius.md,
+    boxShadow: theme.shadows.lg,
+  },
+
+  social: {
+    color: theme.white,
+
+    '&:hover': {
+      color: theme.colors[theme.primaryColor][1],
+    },
+  },
+
+  input: {
+    backgroundColor: theme.white,
+    borderColor: theme.colors.gray[4],
+    color: theme.black,
+
+    '&::placeholder': {
+      color: theme.colors.gray[5],
+    },
+  },
+
+  inputLabel: {
+    color: theme.black,
+  },
+
+  control: {
+    backgroundColor: 'teal',
   },
 }));
 
-
+const social = [IconBrandTwitter, IconBrandYoutube, IconBrandInstagram];
 
 function ContactIcon({
   icon: Icon,
@@ -34,19 +108,16 @@ function ContactIcon({
 }) {
   const { classes, cx } = useStyles({ variant });
   return (
-    <div className={cx(classes.wrapper, className)} {...others}>
-      {variant === 'gradient' ? (
-        <ThemeIcon size={40}  style={{backgroundColor: '#4E8480'}} radius="md" className={classes.icon}>
+    <div 
+    className={classes.wrapperContactIcon}
+    >
+        <ThemeIcon size={40} radius="md" className={classes.icon}>
           <Icon size="1.5rem" />
         </ThemeIcon>
-      ) : (
-        <Box mr="md" >
-          <Icon  style={{backgroundColor: '#4E8480'}}  size="1.5rem" />
-        </Box>
-      )}
 
-      <div >
-        <Text size="xs" className={classes.title} >
+
+      <div>
+        <Text size="xs" className={classes.title}>
           {title}
         </Text>
         <Text className={classes.description}>{description}</Text>
@@ -55,8 +126,6 @@ function ContactIcon({
   );
 }
 
-
-
 const MOCKDATA = [
   { title: 'Email', description: 'hello@mantine.dev', icon: IconAt },
   { title: 'Phone', description: '+49 (800) 335 35 35', icon: IconPhone },
@@ -64,33 +133,60 @@ const MOCKDATA = [
   { title: 'Working hours', description: '8 a.m. – 11 p.m.', icon: IconSun },
 ];
 
-export  function ContactIconsList({ data = MOCKDATA, variant }) {
-  const items = data.map((item, index) => <ContactIcon  key={index} variant={variant} {...item} />);
+export function ContactIconsList({ data = MOCKDATA, variant }) {
+  const items = data.map((item, index) => <ContactIcon key={index} variant={variant} {...item} />);
   return <Stack >{items}</Stack>;
 }
 
-export default function ContactIcons() {
-  return (
-    <SimpleGrid cols={2} mt={100} ml={50} mr={50} breakpoints={[{ maxWidth: 755, cols: 1 }]} >
-      <Box
-        sx={(theme) => ({
-          padding: theme.spacing.xl,
-          borderRadius: theme.radius.md,
-          backgroundColor: theme.white,
-        })}
-      >
-        <ContactIconsList />
-      </Box>
+export default function ContactUs() {
+  const { classes } = useStyles();
 
-      <Box
-        sx={(theme) => ({
-          padding: theme.spacing.xl,
-          borderRadius: theme.radius.md,
-        })}
-        style={{backgroundColor: '#4E8480'}}
-      >
-        <ContactIconsList variant="white" />
-      </Box>
-    </SimpleGrid>
+  const icons = social.map((Icon, index) => (
+    <ActionIcon key={index} size={28} className={classes.social} variant="transparent">
+      <Icon size="1.4rem" stroke={1.5} />
+    </ActionIcon>
+  ));
+
+  return (
+    <div className={classes.wrapper}>
+      <SimpleGrid cols={2} spacing={50} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+        <div>
+          <Title className={classes.title}>Contact us</Title>
+          <Text className={classes.description} mt="sm" mb={30}>
+            Leave your email and we will get back to you within 24 hours
+          </Text>
+
+          <ContactIconsList variant="white" />
+
+          <Group mt="xl">{icons}</Group>
+        </div>
+        <div className={classes.form}>
+          <TextInput
+            label="Email"
+            placeholder="your@email.com"
+            required
+            classNames={{ input: classes.input, label: classes.inputLabel }}
+          />
+          <TextInput
+            label="Name"
+            placeholder="John Doe"
+            mt="md"
+            classNames={{ input: classes.input, label: classes.inputLabel }}
+          />
+          <Textarea
+            required
+            label="Your message"
+            placeholder="I want to order your goods"
+            minRows={4}
+            mt="md"
+            classNames={{ input: classes.input, label: classes.inputLabel }}
+          />
+
+          <Group position="right" mt="md">
+            <Button className={classes.control}>Send message</Button>
+          </Group>
+        </div>
+      </SimpleGrid>
+    </div>
   );
 }

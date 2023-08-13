@@ -11,7 +11,6 @@ const useStyles = createStyles((theme) => ({
    display: 'flex',
    flexDirection: 'row',
    gap: '16px',
-   //backgroundColor:'pink',
  
    [theme.fn.smallerThan('sm')]: {
      flexDirection: 'column'
@@ -107,16 +106,6 @@ export default function AddSubscription() {
           setSubscriptionPrice(country.area);
           setSubscriptionLimit(country.area);
           setSubscriptionDescription(country.area);
-          //console.log(subscriptionPrice);
-          /*
-          form.setValues({
-            title: subscriptionTitle,
-            type: subscriptionType,
-            price: `${setSubscriptionPrice(country.area)}`,
-            limit: subscriptionLimit,
-            description: subscriptionDescription,
-          })
-          */
          
          }}
           >
@@ -126,58 +115,6 @@ export default function AddSubscription() {
       </Card>
         </Grid.Col>
          ))}
-        {/*
-        <Grid.Col xs={4} radius="md" >
-        <Card >
-        <Paper radius="md" mih={300} >
-   <Center mx="auto" mih={40}><Text fw={'bold'} size={30}>Gold Plan</Text></Center>
-    <Center mx="auto" mih={40} ><Text size={25} fs={'italic'} color='red.9'>Monthly</Text></Center> 
-    <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
-      <Image
-        radius="md"
-        src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
-        alt="Random unsplash image"
-      />
-    </Box></Center>   
-    <Center mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>97 PKR</Text></Center>
-        <Divider />
-        <Center mih={40} mx="auto"> <Text>Takes 1 day time for calls</Text></Center>
-          <Button mih={40} mx="auto" fullWidth color='green.9'
-         // onClick={() => {
-          //  open();
-         // }}
-          >
-              Edit
-          </Button>
-      </Paper>
-      </Card>
-        </Grid.Col>
-        <Grid.Col xs={4} radius="md" >
-        <Card >
-        <Paper radius="md" mih={300} >
-   <Center mx="auto" mih={40}><Text fw={'bold'} size={30}>Platinum Plan</Text></Center>
-    <Center mx="auto" mih={40}><Text size={25} fs={'italic'} color='red.9'>Yearly</Text></Center> 
-    <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
-      <Image
-        radius="md"
-        src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
-        alt="Random unsplash image"
-      />
-    </Box></Center>   
-    <Center mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>97 PKR</Text></Center>
-        <Divider />
-        <Center mih={40} mx="auto"> <Text>Takes 1 day time for calls</Text></Center>
-          <Button mih={40} mx="auto" fullWidth color='green.9'
-         // onClick={() => {
-          //  open();
-         // }}
-          >
-              Edit
-          </Button>
-      </Paper>
-      </Card>
-        </Grid.Col>
-  */}
       </Grid>
       <Box>
       <Modal opened={opened} onClose={close}  title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Subscription Details</Text>}>
