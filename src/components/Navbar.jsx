@@ -46,10 +46,8 @@ const handleMouseLeave = () => {
 
   const sidebarStyles = {
     width: '300px',
-    //height: '900px',
-    backgroundColor: '#770737',
+    //backgroundColor: '#770737',
     padding: '1px',
-    //boxSizing: 'border-box',
     
   };
 
@@ -61,7 +59,9 @@ const handleMouseLeave = () => {
     textDecoration: 'none',
     color: 'white',
     fontSize: '20px',
-    borderRadius: '4px'
+    borderRadius: '4px',
+   
+    
     
   };
 
@@ -333,7 +333,7 @@ const handleMouseLeave = () => {
               activeStyle={{ fontWeight: 'bold' }}
             >
               <AiOutlineSetting style={iconStyles} />
-              8- Contac tUs
+              8- Contact Us
             </NavLink>
           </li>
           <li>

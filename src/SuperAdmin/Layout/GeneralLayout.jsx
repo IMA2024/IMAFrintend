@@ -33,8 +33,8 @@ export default function GeneralLayout() {
       navbarOffsetBreakpoint="md"
       
       navbar={
-      <Navbar hiddenBreakpoint="md" hidden={!opened} width={{ sm: 300,  lg: 300 }} mt={-1} >
-        <ScrollArea type='never'>
+      <Navbar bg={'#770737'} hiddenBreakpoint="md" hidden={!opened}  width={{ sm: 300,  lg: 300 }} mt={-1} >
+        <ScrollArea type='never' >
           <LeftNavbar />
           </ScrollArea>
         </Navbar>
