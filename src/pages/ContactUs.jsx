@@ -128,9 +128,9 @@ function ContactIcon({
 }
 
 const MOCKDATA = [
-  { title: 'Email', description: 'hello@mantine.dev', icon: IconAt },
-  { title: 'Phone', description: '+49 (800) 335 35 35', icon: IconPhone },
-  { title: 'Address', description: '844 Morris Park avenue', icon: IconMapPin },
+  { title: 'Email', description: 'alamb2331@gmail.com', icon: IconAt },
+  { title: 'Phone', description: '+923455893337', icon: IconPhone },
+  { title: 'Address', description: 'Zaki Centre, I-8 Markaz Islamabad', icon: IconMapPin },
   { title: 'Working hours', description: '8 a.m. – 11 p.m.', icon: IconSun },
 ];
 
