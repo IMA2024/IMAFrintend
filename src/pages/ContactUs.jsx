@@ -1,3 +1,4 @@
+import { isNotEmpty, useForm } from '@mantine/form';
 import {
   createStyles,
   Text,
@@ -11,7 +12,7 @@ import {
   rem,
   Stack,
   Box,
-  ThemeIcon
+  ThemeIcon,
   
 } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram, IconAt, IconPhone, IconMapPin, IconSun } from '@tabler/icons-react';
@@ -147,7 +148,18 @@ export default function ContactUs() {
     </ActionIcon>
   ));
 
+  const form = useForm({
+    initialValues: {  fullName: '', message: '', email: ''},
+    validateInputOnChange: true,
+    validate: {
+      fullName: (value) => (/^[A-Za-z]+(?:\s[A-Za-z]+)+$/i.test(value) ? null : 'Full Name Should Contain Alphabets Only'),
+      message: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Message Should Contain 10 and 150 Characters'),
+      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e user@gmail.com'),
+    },
+  });
+
   return (
+    
     <div className={classes.wrapper}>
       <SimpleGrid cols={2} spacing={50} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <div>
@@ -160,18 +172,21 @@ export default function ContactUs() {
 
           <Group mt="xl">{icons}</Group>
         </div>
+        <form onSubmit={form.onSubmit((values) => console.log(values))} >
         <div className={classes.form}>
           <TextInput
             label="Email"
             placeholder="your@email.com"
             required
             classNames={{ input: classes.input, label: classes.inputLabel }}
+            {...form.getInputProps("email")}
           />
           <TextInput
             label="Name"
             placeholder="John Doe"
             mt="md"
             classNames={{ input: classes.input, label: classes.inputLabel }}
+            {...form.getInputProps("fullName")}
           />
           <Textarea
             required
@@ -180,12 +195,14 @@ export default function ContactUs() {
             minRows={4}
             mt="md"
             classNames={{ input: classes.input, label: classes.inputLabel }}
+            {...form.getInputProps("message")}
           />
 
           <Group position="right" mt="md">
-            <Button className={classes.control}>Send message</Button>
+            <Button type='submit' className={classes.control}>Send message</Button>
           </Group>
         </div>
+        </form>
       </SimpleGrid>
     </div>
   );
