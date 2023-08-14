@@ -54,16 +54,21 @@ export default function AddUser() {
 
   const handleUploadImage = async () => {
     if (imageUpload === null) return;
+  
     const imageRef = ref(storage, `images/ ${imageUpload[0].name + v4()}`);
-    uploadBytes(imageRef, imageUpload[0]).then(() => {
-
-      getDownloadURL(imageRef).then((url)=>{
-        console.log(url);
-        setProfilePics(url);
-        
-      })
-      notifications.show({ message: "Picture Uploaded Sucessfully.", color: 'green' });
-    })
+    
+    try {
+      await uploadBytes(imageRef, imageUpload[0]);
+      
+      const url = await getDownloadURL(imageRef);
+      console.log(url);
+      setProfilePics(url);
+      
+      notifications.show({ message: "Picture Uploaded Successfully.", color: 'green' });
+    } catch (error) {
+      console.error(error);
+      notifications.show({ message: "Error uploading picture.", color: 'red' });
+    }
   };
 
   const handleSubmit = async (values) => {

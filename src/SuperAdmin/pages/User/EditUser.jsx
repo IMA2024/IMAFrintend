@@ -1,7 +1,7 @@
 import { isNotEmpty, useForm } from '@mantine/form';
 import { TextInput, Image, Button, Box, createStyles, Paper, PasswordInput, Title, Divider, Select, Text } from '@mantine/core';
 import { useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { updateUser } from '../../../api/admin/users';
 import { storage } from '../../../firebase';
 import { v4 } from "uuid";
@@ -59,16 +59,21 @@ export default function EditUser() {
 
   const handleUploadImage = async () => {
     if (imageUpload === null) return;
+  
     const imageRef = ref(storage, `images/ ${imageUpload[0].name + v4()}`);
-    uploadBytes(imageRef, imageUpload[0]).then(() => {
-
-      getDownloadURL(imageRef).then((url) => {
-        console.log(url);
-        setProfilePics(url);
-
-      })
-      notifications.show({ message: "Picture Uploaded Sucessfully.", color: 'green' });
-    })
+    
+    try {
+      await uploadBytes(imageRef, imageUpload[0]);
+      
+      const url = await getDownloadURL(imageRef);
+      console.log(url);
+      setProfilePics(url);
+      
+      notifications.show({ message: "Picture Uploaded Successfully.", color: 'green' });
+    } catch (error) {
+      console.error(error);
+      notifications.show({ message: "Error uploading picture.", color: 'red' });
+    }
   };
 
   const handleSubmit = async (values) => {
