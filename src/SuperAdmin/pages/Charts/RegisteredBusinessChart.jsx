@@ -1,9 +1,35 @@
 import React, { useState } from 'react'
 import ReactApexChart from "react-apexcharts";
-import { Box } from '@mantine/core';
+import { Box, Title, Paper, createStyles, Select  } from '@mantine/core';
 
+const useStyles = createStyles((theme) => ({
 
-const SplineAreaCharts = () => {
+  responsiveContainer: {
+   width: '100%',
+   display: 'flex',
+   flexDirection: 'row',
+   gap: '50%',
+   marginBottom: '2%',
+   //backgroundColor:'green',
+   
+   [theme.fn.smallerThan('sm')]: {
+     flexDirection: 'column'
+   },
+ 
+  },
+ 
+  inputField: {
+   width: '50%',
+   [theme.fn.smallerThan('sm')]: {
+     width: '40%'
+   },
+  }
+   
+ }));
+
+ //SplineAreaCharts
+const RegisteredBusinessChart = () => {
+  const {classes} = useStyles()
     const [state, setState] =  useState({
         series: [{
             name: 'series1',
@@ -37,12 +63,24 @@ const SplineAreaCharts = () => {
 
   
   return (
-    <Box>
+    <Paper mt={20} shadow="xs" p="md">
+      <Box className={classes.responsiveContainer}>
+    <Title className={classes.inputField} order={4}>Businesses Registered</Title>
+      <Select
+      className={classes.inputField}
+      defaultValue={'Weekly'}
+      searchable
+      data={['Weekly', 'Monthly', 'Yearly']}
+    />
+    </Box>
+    <Box p={20} style={{ border: '1px dotted gray' }}>
     <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
     </Box>
+    </Paper>
+ 
 
   )
 }
 
-export default SplineAreaCharts
+export default RegisteredBusinessChart
 

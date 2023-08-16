@@ -106,7 +106,7 @@ const handleMouseLeave = () => {
           <li>
             <NavLink
               exact
-              to="/Users"
+              to="/Dashboard"
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
             >

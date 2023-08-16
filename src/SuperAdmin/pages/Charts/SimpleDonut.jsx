@@ -26,7 +26,7 @@ const SimpleDonut = () => {
   });
 
   return (
-    <Box maw={500}>
+    <Box mt={20} maw={500}>
       <div id="chart">
         <ReactApexChart options={state.options} series={state.series} type="donut" />
       </div>

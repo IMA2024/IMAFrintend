@@ -19,15 +19,25 @@ import ViewBusiness from './SuperAdmin/pages/Business/ViewBusiness';
 import EditBusiness from './SuperAdmin/pages/Business/EditBusiness';
 import AddSubscription from './SuperAdmin/pages/Subscription/AddSubscription';
 import ViewSubscription from './SuperAdmin/pages/Subscription/ViewSubscription';
-import SplineAreaCharts from './SuperAdmin/pages/Charts/SplineAreaCharts';
+import SubscriptionPaymentChart from './SuperAdmin/pages/Charts/SubscriptionPaymentChart';
+import RevenueChart from './SuperAdmin/pages/Charts/RevenueChart';
+import SubscriptionChart from './SuperAdmin/pages/Charts/SubscriptionChart';
+import RegisteredBusinessChart from './SuperAdmin/pages/Charts/RegisteredBusinessChart';
 import StatsGroup from './SuperAdmin/pages/Charts/GroupedStats';
+import TotalRevenueBlocks from './SuperAdmin/pages/Charts/TotalRevenueBlocks';
 import GroupedStackedColumns from './SuperAdmin/pages/Charts/GroupedStackedColumns';
 import ColumnRotatedLabelChart from './SuperAdmin/pages/Charts/ColumnRotatedLabelChart';
 import SimpleDonut from './SuperAdmin/pages/Charts/SimpleDonut';
+import Dashboard from './SuperAdmin/pages/Charts/Dashboard';
 import Services from './pages/Services';
 import Reviews from './pages/Reviews';
 import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
+ {/* These are the routes for Business Panel */}
+import BusinessAdd from './BusinessOwner/pages/AddBusiness';
+import BusinessView from './BusinessOwner/pages/ViewBusiness';
+ {/* The routes for Business Panel end here*/}
+
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -86,15 +96,24 @@ export default function Demo() {
         <Route path="EditBusiness" element={<EditBusiness />} />
         <Route path="AddSubscription" element={<AddSubscription />} />
         <Route path="ViewSubscription" element={<ViewSubscription />} />
-        <Route path="SplineAreaCharts" element={<SplineAreaCharts />} />
+        <Route path="SubscriptionPaymentChart" element={<SubscriptionPaymentChart />} />
+        <Route path="RevenueChart" element={<RevenueChart />} />
+        <Route path="SubscriptionChart" element={<SubscriptionChart />} />
+        <Route path="RegisteredBusinessChart" element={<RegisteredBusinessChart />} />
         <Route path="StatsGroup" element={<StatsGroup />} />
         <Route path="ColumnRotatedLabelChart" element={<ColumnRotatedLabelChart />} />
         <Route path="GroupedStackedColumns" element={<GroupedStackedColumns />} />
+        <Route path="TotalRevenueBlocks" element={<TotalRevenueBlocks />} />
         <Route path="SimpleDonut" element={<SimpleDonut />} />
+        <Route path="Dashboard" element={<Dashboard />} />
         <Route path="Services" element={<Services />} />
         <Route path="Reviews" element={<Reviews />} />
         <Route path="Faq" element={<Faq />} />
         <Route path="ContactUs" element={<ContactUs />} />
+        {/* These are the routes for Business Panel */}
+        <Route path="BusinessAdd" element={<BusinessAdd />} />
+        <Route path="BusinessView" element={<BusinessView />} />
+        {/* The routes for Business Panel end here*/}
       </Route>
      </Routes>
     </Router>
