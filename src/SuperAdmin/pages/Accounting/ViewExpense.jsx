@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ExpenseTable from './ExpenseTable';
 import { Title, Box } from '@mantine/core';
-import axios from 'axios';
 
 
 const ViewExpense = () => {

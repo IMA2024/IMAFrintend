@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import Axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
+import { ScrollArea ,  Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
@@ -359,9 +359,9 @@ useEffect(() => {
     }
     responsive
      />
-      <Modal  p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  >
+      <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-    <Box mah={350}><Image  maw={300} radius="lg" sx={{resize:'contain'}} src={specificPicture} alt="Random image" /></Box>
+    <Box mah={350}><Image  width={'400'} height={'230'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
     <Box  mah={350}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
     <Box ><Badge variant="filled" fullWidth>{specificRole}</Badge></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text ml={5}>{specificFirstName}</Text><Text ml={5}>{specificLastName}</Text></Box>
