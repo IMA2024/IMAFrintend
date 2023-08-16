@@ -115,7 +115,7 @@ const BusinessTable = () => {
   const getBusinesses = async () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewAllBusinesses');
-      console.log(businesses);
+      console.log(response.data);
       setBusinesses(response.data.businesses);
       setFilteredBusinesses(response.data.businesses);
     } catch (error) {
