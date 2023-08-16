@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 //import { NavLink, Navigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 //import { deleteBusiness } from '../../../api/admin/businesses';
-import { deleteBusiness } from '../../api/admin/businesses';
 
 const useStyles = createStyles((theme) => ({
 
@@ -100,7 +99,7 @@ const TableBusiness = () => {
     setType('');
     setStatus('');
     };
-    
+    /*
     const handleDelete = async (id) => {
       try {
         await deleteBusiness(id);
@@ -112,13 +111,15 @@ const TableBusiness = () => {
         console.log(error);
       }
     };
+    */
 
   const getBusinesses = async () => {
     try {
       const response = await axios.get('https://restcountries.com/v2/all');
       console.log(response);
-      setBusinesses(response.data.businesses);
-      setFilteredBusinesses(response.data.businesses);
+      setBusinesses(response.data);
+      setFilteredBusinesses(response.data);
+      console.log(businesses);
     } catch (error) {
       console.log(error);
     }
@@ -150,16 +151,14 @@ const TableBusiness = () => {
       sortable: true,
       width: '60px', // Set the width of the serial number column
     },
-    /*
     {
       name: 'Profile Picture',
       width: '110px',
-      selector: (row) => <img width={50} height={50} src={row.profilePic} />,
+      selector: (row) => <img width={50} height={50} src={row.flag} />,
     },
-    */
     {
       name: 'Business Type',
-      selector: (row) => row.name,
+      selector: (row) => row.region,
       sortable: true,
     },
     {
@@ -181,11 +180,10 @@ const TableBusiness = () => {
     },
     {
       name: 'Phone Number',
-      selector: (row) => row.name,
+      selector: (row) => row.area,
       width: '130px',
       sortable: true,
     },
-    /*
     {
       name: 'Status',
       cell: (row, index) => (
@@ -214,7 +212,6 @@ const TableBusiness = () => {
       width: '130px',
       sortable: true,
     },
-    */
     {
       name: 'Action',
       width: '150px',
@@ -225,14 +222,15 @@ const TableBusiness = () => {
   useEffect(() => {
     getBusinesses();
   }, []);
-/*
+
   useEffect(() => {
     const result = businesses.filter(business => {
       const matchesSearch = (
         business.name.toLowerCase().includes(search.toLowerCase()) ||
         business.name.toLowerCase().includes(search.toLowerCase()) ||
-        business.phoneNumber.toLowerCase().includes(search.toLowerCase())
+        business.name.toLowerCase().includes(search.toLowerCase())
       );
+      //previously it was business.phoneNumber
        const matchesType = type === '' || business.type.toLowerCase().includes(type.toLowerCase());
       const matchesStatus = status === '' || business.status.toLowerCase().includes(status.toLowerCase());
   
@@ -241,8 +239,7 @@ const TableBusiness = () => {
   
     setFilteredBusinesses(result);
   }, [search, type, status, businesses]);
-  */
-/*
+
   useEffect(() => {
     getBusinesses().then((data) => {
       const businessesData = data.map((business) => ({ ...business, status: 'Active' }));
@@ -250,11 +247,10 @@ const TableBusiness = () => {
       setFilteredBusinesses(businessesData);
     });
   }, []);
-  */
 
   return (
     <Box >
-      <DataTable columns={columns} data={businesses}
+      <DataTable columns={columns} data={filteredBusinesses}
         pagination
         fixedHeader
         fixedHeaderScrollHeight='650px'

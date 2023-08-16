@@ -1,9 +1,10 @@
 import React from 'react';
-import { createStyles, Text, rem } from '@mantine/core';
+import { createStyles, Text, rem, Box } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   root: {
     display: 'flex',
+    marginTop: 20,
     /*
     backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
       theme.colors[theme.primaryColor][7]

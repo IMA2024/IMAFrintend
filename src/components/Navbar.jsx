@@ -155,52 +155,12 @@ const handleMouseLeave = () => {
           </li>
           <li>
             <NavLink
-              //to="/Subscribe"
-              style={navLinkStyles}
-              activeStyle={{ fontWeight: 'bold' }}
-              onClick={handleToggleVisibility2}
-            >
-              <AiOutlineShop style={iconStyles} />
-            <Text style={headingStyles}>3- Subscription</Text>
-            {isVisible2 ? (
-              <AiFillCaretDown  style={pointerStyles}/>
-            ) : (
-              <AiFillCaretUp  style={pointerStyles}/>
-            )}
-            </NavLink>
-            {isVisible2 ? (
-            <ul style={ulStyles}>
-              <li>
-                <NavLink
-                  to="/AddSubscription"
-                  style={navLinkStyles}
-                  activeStyle={{ fontWeight: 'bold' }}
-                >
-                  <RiTeamLine style={iconStyles} />
-                  Add Subscription
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/ViewSubscription"
-                  style={navLinkStyles}
-                  activeStyle={{ fontWeight: 'bold' }}
-                >
-                  <IoMdAddCircle style={iconStyles} />
-                  View Subscription
-                </NavLink>
-              </li>
-            </ul>
-            ) : null}
-          </li>
-          <li>
-            <NavLink
               style={navLinkStyles}
               activeStyle={{ fontWeight: 'bold' }}
               onClick={handleToggleVisibility3}
             >
               <AiOutlineShop style={iconStyles} />
-             <Text style={headingStyles}>4- Business</Text>
+             <Text style={headingStyles}>3- Business</Text>
              {isVisible3 ? (
               <AiFillCaretDown  style={pointerStyles}/>
             ) : (
@@ -227,6 +187,46 @@ const handleMouseLeave = () => {
                 >
                   <IoMdAddCircle style={iconStyles} />
                   View Business
+                </NavLink>
+              </li>
+            </ul>
+            ) : null}
+          </li>
+          <li>
+            <NavLink
+              //to="/Subscribe"
+              style={navLinkStyles}
+              activeStyle={{ fontWeight: 'bold' }}
+              onClick={handleToggleVisibility2}
+            >
+              <AiOutlineShop style={iconStyles} />
+            <Text style={headingStyles}>4- Subscription</Text>
+            {isVisible2 ? (
+              <AiFillCaretDown  style={pointerStyles}/>
+            ) : (
+              <AiFillCaretUp  style={pointerStyles}/>
+            )}
+            </NavLink>
+            {isVisible2 ? (
+            <ul style={ulStyles}>
+              <li>
+                <NavLink
+                  to="/AddSubscription"
+                  style={navLinkStyles}
+                  activeStyle={{ fontWeight: 'bold' }}
+                >
+                  <RiTeamLine style={iconStyles} />
+                  Add Subscription
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/ViewSubscription"
+                  style={navLinkStyles}
+                  activeStyle={{ fontWeight: 'bold' }}
+                >
+                  <IoMdAddCircle style={iconStyles} />
+                  View Subscription
                 </NavLink>
               </li>
             </ul>
