@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import SubscriptionTable from './SubscriptionTable';
+import TableBusiness from './BusinessTable';
 import { Title, Box } from '@mantine/core';
-import axios from 'axios';
 
-
-const ViewSubscription = () => {
+const BusinessView = () => {
 
   return (
     <Box>
@@ -13,11 +11,11 @@ const ViewSubscription = () => {
           align="center"
           sx={{ fontWeight: 650 }}
         >
-          View Subscription Details
+          View Business
         </Title>
-        <SubscriptionTable />
+        <TableBusiness />
     </Box>
   )
 }
 
-export default ViewSubscription
+export default BusinessView

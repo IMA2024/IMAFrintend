@@ -62,20 +62,26 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
     {
-      "title": "Business Registered",
-      "stats": "400",
+      "title": "Subscriptions",
+      "stats": "40",
       "description": "24% more than in the same month last year, 33% more than two years ago"
     },
     {
-      "title": "New Business",
+      "title": "Payments",
       "stats": "13",
       "description": "13% less compared to last month, new user engagement up by 6%"
     },
     {
-      "title": "Completed orders",
-      "stats": "300",
+      "title": "Total Revenue",
+      "stats": "30",
       "description": "1994 orders were completed this month, 97% satisfaction rate"
-    }
+    },
+    {
+      "title": "Businesses Registered",
+      "stats": "10",
+      "description": "1994 orders were completed this month, 97% satisfaction rate"
+    },
+
   ];
 
 

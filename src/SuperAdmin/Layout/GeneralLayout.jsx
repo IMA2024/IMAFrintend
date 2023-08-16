@@ -42,7 +42,7 @@ export default function GeneralLayout() {
       header={
         <Header height={{ base:70, md: 70 }}  >
           <div style={{ display: 'flex', height: '100%' }}>
-            <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+            <MediaQuery largerThan="md" styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}
