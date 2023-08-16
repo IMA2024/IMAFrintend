@@ -34,6 +34,7 @@ import Reviews from './pages/Reviews';
 import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
  {/* These are the routes for Business Panel */}
+ import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
 import BusinessAdd from './BusinessOwner/pages/AddBusiness';
 import BusinessView from './BusinessOwner/pages/ViewBusiness';
  {/* The routes for Business Panel end here*/}
@@ -110,11 +111,14 @@ export default function Demo() {
         <Route path="Reviews" element={<Reviews />} />
         <Route path="Faq" element={<Faq />} />
         <Route path="ContactUs" element={<ContactUs />} />
-        {/* These are the routes for Business Panel */}
-        <Route path="BusinessAdd" element={<BusinessAdd />} />
-        <Route path="BusinessView" element={<BusinessView />} />
-        {/* The routes for Business Panel end here*/}
+        
       </Route>
+      {/* These are the routes for Business Panel */}
+      <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
+      <Route path="BusinessAdd" element={<BusinessAdd />} />
+      <Route path="BusinessView" element={<BusinessView />} />
+      </Route>
+      {/* The routes for Business Panel end here*/}
      </Routes>
     </Router>
  

@@ -5,17 +5,19 @@ import SubscriptionPaymentChart from './SubscriptionPaymentChart'
 import SubscriptionChart from './SubscriptionChart'
 import RevenueChart from './RevenueChart'
 import RegisteredBusinessChart from './RegisteredBusinessChart'
+import UserChart from './UserCharts'
 import SimpleDonut from './SimpleDonut'
 
 const Dashboard = () => {
   return (
     <div>
-        <StatsGroup />
-        <SubscriptionPaymentChart />
-        <SubscriptionChart />
         <TotalRevenueBlocks />
-        <RevenueChart />
+        <UserChart />
         <RegisteredBusinessChart />
+        <SubscriptionChart />
+        <StatsGroup />
+        <RevenueChart />
+        <SubscriptionPaymentChart />
         <SimpleDonut />
     </div>
   )
