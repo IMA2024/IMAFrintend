@@ -91,7 +91,7 @@ const TableBusiness = () => {
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
-    navigate('/EditBusiness', { state: { rowData: row } });
+    navigate('/BusinessPanel/BusinessEdit', { state: { rowData: row } });
   };
 
   const handleClear = () => {
@@ -186,6 +186,19 @@ const TableBusiness = () => {
     },
     {
       name: 'Status',
+      selector: (row) => <Badge variant='outline' p={5} >{row.name}</Badge>,
+      width: '130px',
+      sortable: true,
+    },
+    {
+      name: 'Subscription Status',
+      selector: (row) => <Badge variant='outline' p={5} >{row.name}</Badge>,
+      width: '160px',
+      sortable: true,
+    },
+    /*
+    {
+      name: 'Status',
       cell: (row, index) => (
         selectedUserIndex === index ? (
           <Select
@@ -212,6 +225,7 @@ const TableBusiness = () => {
       width: '130px',
       sortable: true,
     },
+    */
     {
       name: 'Action',
       width: '150px',
@@ -228,9 +242,10 @@ const TableBusiness = () => {
       const matchesSearch = (
         business.name.toLowerCase().includes(search.toLowerCase()) ||
         business.name.toLowerCase().includes(search.toLowerCase()) ||
-        business.name.toLowerCase().includes(search.toLowerCase())
+        business.phoneNumber.toLowerCase().includes(search.toLowerCase())
       );
-      //previously it was business.phoneNumber
+      //previously it was......
+      
        const matchesType = type === '' || business.type.toLowerCase().includes(type.toLowerCase());
       const matchesStatus = status === '' || business.status.toLowerCase().includes(status.toLowerCase());
   
@@ -239,7 +254,7 @@ const TableBusiness = () => {
   
     setFilteredBusinesses(result);
   }, [search, type, status, businesses]);
-
+/*
   useEffect(() => {
     getBusinesses().then((data) => {
       const businessesData = data.map((business) => ({ ...business, status: 'Active' }));
@@ -247,6 +262,7 @@ const TableBusiness = () => {
       setFilteredBusinesses(businessesData);
     });
   }, []);
+  */
 
   return (
     <Box >
@@ -345,7 +361,7 @@ const TableBusiness = () => {
             <Button
               size='md'
               className={classes.responsiveAddUserBtn}
-              onClick={() => navigate('/AddBusiness')}
+              onClick={() => navigate('/BusinessPanel/BusinessAdd')}
             >
               Add Business
             </Button>

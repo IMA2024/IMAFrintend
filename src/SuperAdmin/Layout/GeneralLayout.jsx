@@ -13,8 +13,8 @@ import {
   ScrollArea,
 } from '@mantine/core';
 import { Navigate, Outlet } from "react-router-dom";
-import LeftNavbar from '../../components/Navbar';
-import HeaderTop from '../../components/Header';
+import LeftNavbar from './Navbar';
+import HeaderTop from './Header';
 
 export default function GeneralLayout() {
   let auth = {'token':true}

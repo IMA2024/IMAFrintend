@@ -13,8 +13,8 @@ import {
   ScrollArea,
 } from '@mantine/core';
 import { Navigate, Outlet } from "react-router-dom";
-import LeftNavbar from '../../components/Navbar';
-import HeaderTop from '../../components/Header';
+import BusinessPanelLeftNavbar from './Navbar';
+import BusinessPanelHeaderTop from './Header';
 
 export default function BusinessPanelGeneralLayout() {
   let auth = {'token':true}
@@ -33,9 +33,9 @@ export default function BusinessPanelGeneralLayout() {
       navbarOffsetBreakpoint="md"
       
       navbar={
-      <Navbar bg={'#770737'} hiddenBreakpoint="md" hidden={!opened}  width={{ sm: 300,  lg: 300 }} mt={-1} >
+      <Navbar bg={'#5F3DC4'} hiddenBreakpoint="md" hidden={!opened}  width={{ sm: 300,  lg: 300 }} mt={-1} >
         <ScrollArea type='never' >
-          <LeftNavbar />
+          <BusinessPanelLeftNavbar />
           </ScrollArea>
         </Navbar>
       }
@@ -51,7 +51,7 @@ export default function BusinessPanelGeneralLayout() {
                 mr="xl"
               />
             </MediaQuery>
-            <HeaderTop />
+            <BusinessPanelHeaderTop />
           </div>
         </Header>
       }

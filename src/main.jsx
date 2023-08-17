@@ -13,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
      <MantineProvider withNormalizeCSS withGlobalStyles
        theme={{
         fontFamily: 'Verdana, sans-serif',
+        //fontFamily: 'Greycliff CF, sans-serif',
         fontFamilyMonospace: 'Monaco, Courier, monospace',
         headings: { fontFamily: 'Greycliff CF, sans-serif' },
         //colorScheme: 'dark',

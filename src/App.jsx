@@ -35,8 +35,11 @@ import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
-import BusinessAdd from './BusinessOwner/pages/AddBusiness';
-import BusinessView from './BusinessOwner/pages/ViewBusiness';
+import BusinessAdd from './BusinessOwner/pages/Business/AddBusiness';
+import BusinessView from './BusinessOwner/pages/Business/ViewBusiness';
+import BusinessEdit from './BusinessOwner/pages/Business/EditBusiness';
+import AddBusinessOwner from './BusinessOwner/pages/BusinessOwner/AddBusinessOwner';
+import ViewBusinessOwner from './BusinessOwner/pages/BusinessOwner/ViewBusinessOwner';
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -117,6 +120,9 @@ export default function Demo() {
       <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
       <Route path="BusinessAdd" element={<BusinessAdd />} />
       <Route path="BusinessView" element={<BusinessView />} />
+      <Route path="BusinessEdit" element={<BusinessEdit />} />
+      <Route path="AddBusinessOwner" element={<AddBusinessOwner />} />
+      <Route path="ViewBusinessOwner" element={<ViewBusinessOwner />} />
       </Route>
       {/* The routes for Business Panel end here*/}
      </Routes>
