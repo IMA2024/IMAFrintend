@@ -136,7 +136,7 @@ const BusinessTable = () => {
     setSpecificPicture(row.profilePic);
     setSpecificType(row.type);
     setSpecificName(row.name);
-    setSpecificOwner(row.name);
+    setSpecificOwner(row.businessOwner.firstName + row.businessOwner.lastName);
     setSpecificEmail(row.email);
     setSpecificPhoneNumber(row.phoneNumber);
     setSpecificAddress(row.address);
@@ -168,7 +168,7 @@ const BusinessTable = () => {
     {
       name: 'Business Owner Name',
       width: '170px',
-      selector: (row) => row.name,
+      selector: (row) => `${row.businessOwner.firstName} ${row.businessOwner.lastName}`,
       sortable: true,
     },
     {
@@ -225,7 +225,8 @@ const BusinessTable = () => {
     const result = businesses.filter(business => {
       const matchesSearch = (
         business.name.toLowerCase().includes(search.toLowerCase()) ||
-        business.name.toLowerCase().includes(search.toLowerCase()) ||
+        business.businessOwner.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        business.businessOwner.lastName.toLowerCase().includes(search.toLowerCase()) ||
         business.phoneNumber.toLowerCase().includes(search.toLowerCase())
       );
        const matchesType = type === '' || business.type.toLowerCase().includes(type.toLowerCase());

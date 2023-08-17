@@ -118,7 +118,7 @@ const ExpenseTable = () => {
 
   const handleViewSpecific = (row) => {
     open();
-    setSpecificBusiness(row.business);
+    setSpecificBusiness(row.business.name);
     setSpecificDescription(row.description);
     setSpecificDate(row.date);
     setSpecificAmount(row.amount);
@@ -139,29 +139,31 @@ const ExpenseTable = () => {
     },
     {
       name: 'Business Name',
-      selector: (row) => row.business,
+      selector: (row) => row.business.name,
+      width: '160px',
       sortable: true,
     },
     {
       name: 'Business Details',
-      width: '140px',
+      width: '180px',
       selector: (row) => row.description,
       sortable: true,
     },
     {
       name: 'Date',
-      width: '110px',
+      width: '180px',
       selector: (row) => row.date,
       sortable: true,
     },
     {
       name: 'Amount',
       selector: (row) => row.amount,
+      width: '150px',
       sortable: true,
     },
     {
       name: 'Action',
-      width: '150px',
+      width: '120px',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => handleDelete(row._id)} /></Box>
     },
   ]
