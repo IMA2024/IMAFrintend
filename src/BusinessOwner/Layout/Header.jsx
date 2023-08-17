@@ -1,8 +1,8 @@
 import { Box, Button, Group, createStyles, Text, Menu } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconUser, IconBell, IconPhone, IconEdit, IconLogout } from '@tabler/icons-react';
-import ActionToggle from "./ColorMode";
-import { HeaderSearchBar } from "./search";
+import ActionToggle from "../../components/ColorMode";
+import { HeaderSearchBar } from "../../components/search";
 import { notifications } from '@mantine/notifications';
 import React from "react";
 
@@ -25,7 +25,7 @@ const useStyles = createStyles((theme) => ({
 
   responsiveContainerChild1: {
     width: '299px',
-    backgroundColor: '#770737',
+    backgroundColor: '#5F3DC4',
     boxSizing: 'border-box',
     fontWeight: 'bold',
     color: 'white',
@@ -85,7 +85,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 
-const HeaderTop = () => {
+const BusinessPanelHeaderTop = () => {
 
   const { classes } = useStyles()
 
@@ -145,4 +145,4 @@ const HeaderTop = () => {
   )
 }
 
-export default HeaderTop
+export default BusinessPanelHeaderTop
