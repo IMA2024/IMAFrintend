@@ -77,7 +77,6 @@ const ExpenseTable = () => {
   const { classes } = useStyles();
   const [expenses, setExpenses] = useState([]);
   const [search, setSearch] = useState('');
-  const [region, setRegion] = useState('');
   const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [specificBusiness, setSpecificBusiness] = useState('');
@@ -87,11 +86,9 @@ const ExpenseTable = () => {
 
   const navigate = useNavigate();
 
-  // const handleClear = () => {
-  //   setSearch('');
-  //   setType('');
-  //   setStatus('');
-  //   };
+  const handleClear = () => {
+    setSearch('');
+    };
 
   const handleDelete = async (id) => {
     try {
@@ -169,24 +166,17 @@ const ExpenseTable = () => {
   ]
 
   useEffect(() => {
-    getExpenses();
-  }, []);
-
-  useEffect(() => {
     const result = expenses.filter(expense => {
-      return expense.name.toLowerCase().match(search.toLowerCase());
+      const matchesSearch = (
+        expense.title.toLowerCase().includes(search.toLowerCase()) ||
+        expense.business.name.toLowerCase().includes(search.toLowerCase())
+      );
+  
+      return matchesSearch;
     });
-
+  
     setFilteredExpenses(result);
-  }, [search]);
-
-  useEffect(() => {
-    const resultSelect = expenses.filter(expense => {
-      return expense.region.toLowerCase().match(region.toLowerCase());
-    });
-
-    setFilteredExpenses(resultSelect);
-  }, [region]);
+  }, [search, expenses]);
 
   useEffect(() => {
     getExpenses().then((data) => {
@@ -225,42 +215,14 @@ const ExpenseTable = () => {
                     />
                   </Menu.Item>
                   <Menu.Item>
-                    <Select
-                      onSearchChange={setRegion}
-                      searchValue={region}
-                      searchable
-                      placeholder="Select User Type"
-                      data={[
-                        { value: 'americas', label: 'americas' },
-                        { value: 'africa', label: 'africa' },
-                        { value: 'europe', label: 'europe' },
-                        { value: 'asia', label: 'asia' },
-                      ]}
-                    />
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Select
-                      onSearchChange={setRegion}
-                      searchValue={region}
-                      searchable
-                      placeholder="Active/Block"
-                      data={[
-                        { value: 'americas', label: 'americas' },
-                        { value: 'africa', label: 'africa' },
-                        { value: 'europe', label: 'europe' },
-                        { value: 'asia', label: 'asia' },
-                      ]}
-                    />
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Button variant="outline" miw={165}>
+                    <Button variant="outline" miw={165} onClick ={() => {handleClear()}} > 
                       Clear
                     </Button>
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>
             </Box>
-            <Button variant="outline" size='md' className={classes.responsiveClear}>
+            <Button variant="outline" size='md' className={classes.responsiveClear} onClick ={() => {handleClear()}}>  
               Clear
             </Button>
             <TextInput
@@ -269,30 +231,6 @@ const ExpenseTable = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className={classes.responsiveSearch}
-            />
-            <Select
-              size='md'
-              onSearchChange={setRegion}
-              searchValue={region}
-              searchable
-              placeholder="Select User Type"
-              data={[
-                { value: 'americas', label: 'americas' },
-                { value: 'africa', label: 'africa' },
-                { value: 'europe', label: 'europe' },
-                { value: 'asia', label: 'asia' },
-              ]}
-              className={classes.responsiveUserType}
-            />
-            <Select
-              size='md'
-              searchable
-              placeholder="Active/Block"
-              data={[
-                { value: 'Active', label: 'Active' },
-                { value: 'Block', label: 'Block' },
-              ]}
-              className={classes.responsiveActiveBlock}
             />
             <Button
               size='md'

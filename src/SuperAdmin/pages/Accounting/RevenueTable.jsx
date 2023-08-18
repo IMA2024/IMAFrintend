@@ -76,8 +76,7 @@ const RevenueTable = () => {
   const { classes } = useStyles();
   const [revenues, setRevenues] = useState([]);
   const [search, setSearch] = useState('');
-  const [region, setRegion] = useState('');
-  const [filteredrevenues, setFilteredRevenues] = useState([]);
+  const [filteredRevenues, setfilteredRevenues] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [specificBusiness, setSpecificBusiness] = useState('');
   const [specificDescription, setSpecificDescription] = useState('');
@@ -86,18 +85,16 @@ const RevenueTable = () => {
 
   const navigate = useNavigate();
 
-  // const handleClear = () => {
-  //   setSearch('');
-  //   setType('');
-  //   setStatus('');
-  //   };
+  const handleClear = () => {
+    setSearch('');
+    };
 
   const handleDelete = async (id) => {
     try {
       await deleteRevenue(id);
       const updatedRevenues = revenues.filter(revenue => revenue._id !== id);
       setRevenues(updatedRevenues);
-      setFilteredRevenues(updatedRevenues);
+      setfilteredRevenues(updatedRevenues);
       notifications.show({ message: "Revenue Deleted Successfully", color: 'red' });
     } catch (error) {
       console.log(error);
@@ -108,7 +105,7 @@ const RevenueTable = () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewAllRevenues');
       setRevenues(response.data.revenues);
-      setFilteredRevenues(response.data.revenues);
+      setfilteredRevenues(response.data.revenues);
     } catch (error) {
       console.log(error);
     }
@@ -173,32 +170,29 @@ const RevenueTable = () => {
   }, []);
 
   useEffect(() => {
-    const result = revenues.filter(country => {
-      return country.name.toLowerCase().match(search.toLowerCase());
+    const result = revenues.filter(revenue => {
+      const matchesSearch = (
+        revenue.title.toLowerCase().includes(search.toLowerCase()) ||
+        revenue.business.name.toLowerCase().includes(search.toLowerCase())
+      );
+  
+      return matchesSearch;
     });
-
-    setFilteredRevenues(result);
-  }, [search]);
-
-  useEffect(() => {
-    const resultSelect = revenues.filter(country => {
-      return country.region.toLowerCase().match(region.toLowerCase());
-    });
-
-    setFilteredRevenues(resultSelect);
-  }, [region]);
+  
+    setfilteredRevenues(result);
+  }, [search, revenues]);
 
   useEffect(() => {
     getRevenues().then((data) => {
       const revenuesData = data.map((country) => ({ ...country, status: 'active' }));
       setRevenues(revenuesData);
-      setFilteredRevenues(revenuesData);
+      setfilteredRevenues(revenuesData);
     });
   }, []);
 
   return (
     <Box >
-      <DataTable columns={columns} data={filteredrevenues}
+      <DataTable columns={columns} data={filteredRevenues}
         pagination
         fixedHeader
         fixedHeaderScrollHeight='650px'
@@ -225,42 +219,14 @@ const RevenueTable = () => {
                     />
                   </Menu.Item>
                   <Menu.Item>
-                    <Select
-                      onSearchChange={setRegion}
-                      searchValue={region}
-                      searchable
-                      placeholder="Select User Type"
-                      data={[
-                        { value: 'americas', label: 'americas' },
-                        { value: 'africa', label: 'africa' },
-                        { value: 'europe', label: 'europe' },
-                        { value: 'asia', label: 'asia' },
-                      ]}
-                    />
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Select
-                      onSearchChange={setRegion}
-                      searchValue={region}
-                      searchable
-                      placeholder="Active/Block"
-                      data={[
-                        { value: 'americas', label: 'americas' },
-                        { value: 'africa', label: 'africa' },
-                        { value: 'europe', label: 'europe' },
-                        { value: 'asia', label: 'asia' },
-                      ]}
-                    />
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Button variant="outline" miw={165}>
+                    <Button variant="outline" miw={165} onClick={() => {handleClear()}}>
                       Clear
                     </Button>
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>
             </Box>
-            <Button variant="outline" size='md' className={classes.responsiveClear}>
+            <Button variant="outline" size='md' className={classes.responsiveClear} onClick={() => {handleClear()}}>
               Clear
             </Button>
             <TextInput
@@ -269,30 +235,6 @@ const RevenueTable = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className={classes.responsiveSearch}
-            />
-            <Select
-              size='md'
-              onSearchChange={setRegion}
-              searchValue={region}
-              searchable
-              placeholder="Select User Type"
-              data={[
-                { value: 'americas', label: 'americas' },
-                { value: 'africa', label: 'africa' },
-                { value: 'europe', label: 'europe' },
-                { value: 'asia', label: 'asia' },
-              ]}
-              className={classes.responsiveUserType}
-            />
-            <Select
-              size='md'
-              searchable
-              placeholder="Active/Block"
-              data={[
-                { value: 'Active', label: 'Active' },
-                { value: 'Block', label: 'Block' },
-              ]}
-              className={classes.responsiveActiveBlock}
             />
             <Button
               size='md'
