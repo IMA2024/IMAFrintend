@@ -4,7 +4,10 @@ import App from './App.jsx'
 import './index.css'
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import { SpotlightProvider } from '@mantine/spotlight';
+import { SpotlightProvider, spotlight } from '@mantine/spotlight';
+import { IconHome, IconDashboard, IconFileText, IconSearch } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
  
@@ -19,7 +22,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         //colorScheme: 'dark',
       }}
      >
-     <SpotlightProvider shortcut={['mod + P', 'mod + K', '/']} actions={[]}>
+     <SpotlightProvider shortcut={['mod + P', 'mod + K', '/']} actions={[ {
+    title: 'Home',
+    description: 'Get to home page',
+    onTrigger: () => console.log('Home'),
+    icon: <IconHome size="1.2rem" />,
+  },
+  ]}>
       <Notifications />
     <App />
     </SpotlightProvider>

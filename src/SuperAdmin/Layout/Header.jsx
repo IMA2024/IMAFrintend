@@ -53,6 +53,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: '45px',
     marginTop: '15px',
     marginLeft: '30px',
+    //backgroundColor:'pink',
 
     [theme.fn.smallerThan('lg')]: {
       width: '500px',
@@ -72,6 +73,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    //backgroundColor:'pink',
 
   },
 
@@ -94,6 +96,7 @@ const HeaderTop = () => {
       <Box className={classes.responsiveContainerChild1}>
         <Text className={classes.responsiveTitle}>IMA</Text>
       </Box>
+
       <Box className={classes.responsiveContainerChild2}>
         <HeaderSearchBar />
       </Box>
@@ -140,6 +143,7 @@ const HeaderTop = () => {
           </Menu>
         </Box>
       </Box>
+     
     </Box>
 
   )
