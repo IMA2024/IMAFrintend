@@ -8,6 +8,14 @@ import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
+
+    responsiveSearchContainer: {
+      width:'100%',
+      display: 'flex',
+      flexDirection:'row-reverse',
+      justifyContent:'space-between',
+    },
+
     responsiveSearchRow: {
       display:'flex',
       flexDirection: 'row-reverse',
@@ -24,12 +32,14 @@ const useStyles = createStyles((theme) => ({
     },
   
     responsiveAddUserBtn: {
+      marginTop:'20px',
      
       [theme.fn.smallerThan('sm')]: {
-        display: 'none'
+        //display: 'none'
       },
   
     },
+  
   
     responsiveActiveBlock: {
   
@@ -187,6 +197,7 @@ useEffect(() => {
     highlightOnHover
     subHeader
     subHeaderComponent={
+      <Box className={classes.responsiveSearchContainer}>
       <Box className={classes.responsiveSearchRow}>
         <Box className={classes.responsiveFilterIcon} >
           <Menu shadow="" width={200} closeOnItemClick={false} >
@@ -204,13 +215,6 @@ useEffect(() => {
        
          />
          </Menu.Item>
-         <Menu.Item>
-         <Button 
-        onClick={() => navigate('/AddSubscription')}
-        >
-        Add Subscription
-       </Button>
-         </Menu.Item>
     <Menu.Item>
     <Button variant="outline" miw={165}>
             Clear
@@ -219,10 +223,13 @@ useEffect(() => {
             </Menu.Dropdown>
           </Menu>
         </Box>
+      
         <Button variant="outline" size='md' className={classes.responsiveClear}>
             Clear
         </Button>
-        <Box style={{display:'flex', flexDirection:'row-reverse', width:'800px', justifyContent:'space-between'}}>
+      {/*
+        <Box style={{display:'flex', flexDirection:'row-reverse', width:'800px', justifyContent:'space-between'}}></Box>
+    */}
         <TextInput
         size='md'
         placeholder='Search'
@@ -230,14 +237,7 @@ useEffect(() => {
         onChange={(e) => setSearch(e.target.value)}
         className={classes.responsiveSearch}
          />
-         <Button 
-        size='md'
-        className={classes.responsiveAddUserBtn}
-        onClick={() => navigate('/AddSubscription')}
-        >
-        Add Subscription
-       </Button>
-       </Box>
+       
          {/*
         <Select
          size='md'
@@ -271,6 +271,14 @@ useEffect(() => {
     Add Expense
     </Button>
     */}
+        </Box>
+        <Button 
+        size='md'
+        className={classes.responsiveAddUserBtn}
+        onClick={() => navigate('/AddSubscription')}
+        >
+        Add Subscription
+       </Button>
         </Box>
         
     }

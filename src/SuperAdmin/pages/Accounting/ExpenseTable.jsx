@@ -10,6 +10,13 @@ import { deleteExpense } from '../../../api/admin/accounting';
 
 const useStyles = createStyles((theme) => ({
 
+  responsiveSearchContainer: {
+    width:'100%',
+    display: 'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+  },
+
   responsiveSearchRow: {
     display: 'flex',
     flexDirection: 'row-reverse',
@@ -26,6 +33,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveAddUserBtn: {
+    marginTop:'20px',
 
     [theme.fn.smallerThan('sm')]: {
     },
@@ -197,6 +205,7 @@ const ExpenseTable = () => {
         highlightOnHover
         subHeader
         subHeaderComponent={
+          <Box className={classes.responsiveSearchContainer}>
           <Box className={classes.responsiveSearchRow}>
             <Box className={classes.responsiveFilterIcon} >
               <Menu shadow="" width={200} closeOnItemClick={false} >
@@ -232,7 +241,8 @@ const ExpenseTable = () => {
               onChange={(e) => setSearch(e.target.value)}
               className={classes.responsiveSearch}
             />
-            <Button
+          </Box>
+          <Button
               size='md'
               className={classes.responsiveAddUserBtn}
               onClick={() => navigate('/AddExpense')}

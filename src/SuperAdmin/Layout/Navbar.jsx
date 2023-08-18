@@ -1,8 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { AiOutlineDashboard, AiOutlineShop, AiOutlineSetting, AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
-import { BiUser, BiChat, BiHelpCircle } from 'react-icons/bi';
+import { AiOutlineDashboard, AiOutlineShop, AiOutlineSetting, AiFillCaretDown, AiFillCaretUp, AiOutlineUserAdd, AiOutlineEye, AiOutlineShoppingCart  } from 'react-icons/ai';
+import { BiUser, BiChat, BiHelpCircle,BiUserCircle, BiSolidBusiness, BiCartAdd} from 'react-icons/bi';
 import { RiTeamLine } from 'react-icons/ri';
+import { IoMdAddCircleOutline } from 'react-icons/io';
+import { MdOutlinePayments } from 'react-icons/md';
+import { FiUsers } from 'react-icons/fi';
+
 import { IoMdAddCircle } from 'react-icons/io';
 import { useState } from 'react';
 import { Text } from '@mantine/core';
@@ -121,8 +125,8 @@ const handleMouseLeave = () => {
               activeStyle={{ fontWeight: 'bold' }}
               onClick={handleToggleVisibility1}
             >
-              <AiOutlineShop style={iconStyles} />
-              <Text style={headingStyles}>2- User</Text>
+              <BiUserCircle style={iconStyles} />
+              <Text style={headingStyles}>2- Users</Text>
               {isVisible1 ? (
               <AiFillCaretDown  style={pointerStyles}/>
             ) : (
@@ -137,7 +141,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <RiTeamLine style={iconStyles} />
+                  <AiOutlineUserAdd style={iconStyles} />
                   Add User
                 </NavLink>
               </li>
@@ -147,8 +151,8 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <IoMdAddCircle style={iconStyles} />
-                  View User
+                  <FiUsers style={iconStyles} />
+                  View All Users
                 </NavLink>
               </li>
             </ul>
@@ -161,8 +165,8 @@ const handleMouseLeave = () => {
               activeStyle={{ fontWeight: 'bold' }}
               onClick={handleToggleVisibility3}
             >
-              <AiOutlineShop style={iconStyles} />
-             <Text style={headingStyles}>3- Business</Text>
+              <BiSolidBusiness style={iconStyles} />
+             <Text style={headingStyles}>3- Businesses</Text>
              {isVisible3 ? (
               <AiFillCaretDown  style={pointerStyles}/>
             ) : (
@@ -177,7 +181,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <RiTeamLine style={iconStyles} />
+                  <IoMdAddCircleOutline style={iconStyles} />
                   Add Business
                 </NavLink>
               </li>
@@ -187,7 +191,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <IoMdAddCircle style={iconStyles} />
+                  <AiOutlineEye style={iconStyles} />
                   View Business
                 </NavLink>
               </li>
@@ -201,7 +205,7 @@ const handleMouseLeave = () => {
               activeStyle={{ fontWeight: 'bold' }}
               onClick={handleToggleVisibility2}
             >
-              <AiOutlineShop style={iconStyles} />
+              <AiOutlineShoppingCart style={iconStyles} />
             <Text style={headingStyles}>4- Subscription</Text>
             {isVisible2 ? (
               <AiFillCaretDown  style={pointerStyles}/>
@@ -217,7 +221,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <RiTeamLine style={iconStyles} />
+                  <BiCartAdd style={iconStyles} />
                   Add Subscription
                 </NavLink>
               </li>
@@ -227,7 +231,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <IoMdAddCircle style={iconStyles} />
+                  <AiOutlineEye style={iconStyles} />
                   View Subscription
                 </NavLink>
               </li>
@@ -256,7 +260,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <RiTeamLine style={iconStyles} />
+                  <IoMdAddCircleOutline style={iconStyles} />
                   Add Expense
                 </NavLink>
               </li>
@@ -266,7 +270,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <IoMdAddCircle style={iconStyles} />
+                  <AiOutlineEye style={iconStyles} />
                   View Expense
                 </NavLink>
                 <NavLink
@@ -274,7 +278,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <RiTeamLine style={iconStyles} />
+                  <IoMdAddCircleOutline style={iconStyles} />
                   Add Revenue
                 </NavLink>
                 <NavLink
@@ -282,7 +286,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <RiTeamLine style={iconStyles} />
+                  <AiOutlineEye style={iconStyles} />
                   View Revenue
                 </NavLink>
               </li>
@@ -295,7 +299,7 @@ const handleMouseLeave = () => {
               activeStyle={{ fontWeight: 'bold' }}
               onClick={handleToggleVisibility5}
             >
-              <AiOutlineShop style={iconStyles} />
+              <MdOutlinePayments style={iconStyles} />
               <Text style={headingStyles}>6- Payment</Text>
               {isVisible5 ? (
               <AiFillCaretDown  style={pointerStyles}/>
@@ -311,7 +315,7 @@ const handleMouseLeave = () => {
                   style={navLinkStyles}
                   activeStyle={{ fontWeight: 'bold' }}
                 >
-                  <IoMdAddCircle style={iconStyles} />
+                  <AiOutlineEye style={iconStyles} />
                   View Payment
                 </NavLink>
               </li>

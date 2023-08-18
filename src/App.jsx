@@ -1,4 +1,5 @@
 import { Center } from '@mantine/core';
+import { SpotlightProvider } from '@mantine/spotlight';
 import {BrowserRouter as Router, Route, Link, Routes, json} from "react-router-dom"
 import EmailBanner from './pages/Services';
 import GeneralLayout from './SuperAdmin/Layout/GeneralLayout';
