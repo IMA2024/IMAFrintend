@@ -36,9 +36,9 @@ const useStyles = createStyles((theme) => ({
 
 export default function BusinessAdd() {
   const [imageUpload, setImageUpload] = useState(null);
-  const [profilePics, setProfilePics] = useState('')
+  const [profilePics, setProfilePics] = useState('');
   const [countries, setCountries] = useState([]);
-  const { classes } = useStyles()
+  const { classes } = useStyles();
 
   const form = useForm({
     initialValues: { name: '', businessOwner: '', type: '', phoneNumber: '', address: '', email: '', description: '' },

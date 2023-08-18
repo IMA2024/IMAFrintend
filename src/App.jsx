@@ -40,6 +40,8 @@ import BusinessView from './BusinessOwner/pages/Business/ViewBusiness';
 import BusinessEdit from './BusinessOwner/pages/Business/EditBusiness';
 import AddBusinessOwner from './BusinessOwner/pages/BusinessOwner/AddBusinessOwner';
 import ViewBusinessOwner from './BusinessOwner/pages/BusinessOwner/ViewBusinessOwner';
+import BuySubscription from './BusinessOwner/pages/Subscription/BuySubscription';
+import ViewBusinessSubscription from './BusinessOwner/pages/Subscription/ViewSubscription';
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -123,6 +125,8 @@ export default function Demo() {
       <Route path="BusinessEdit" element={<BusinessEdit />} />
       <Route path="AddBusinessOwner" element={<AddBusinessOwner />} />
       <Route path="ViewBusinessOwner" element={<ViewBusinessOwner />} />
+      <Route path="BuySubscription" element={<BuySubscription />} />
+      <Route path="ViewBusinessSubscription" element={<ViewBusinessSubscription />} />
       </Route>
       {/* The routes for Business Panel end here*/}
      </Routes>

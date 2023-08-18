@@ -26,7 +26,6 @@ const useStyles = createStyles((theme) => ({
     responsiveAddUserBtn: {
      
       [theme.fn.smallerThan('sm')]: {
-        display: 'none'
       },
   
     },
@@ -71,7 +70,7 @@ const useStyles = createStyles((theme) => ({
   }))
   
 
-const SubscriptionTable = () => {
+const BusinessSubscriptionTable = () => {
 
 const { classes } = useStyles();
 const [countries, setCountries] =  useState([]);
@@ -114,15 +113,10 @@ const columns = [
   },
     {
         name: 'Business Name',
+        width: '150px',
         selector: (row) => row.name,
         sortable: true,
     },
-    {
-        name: 'Business Owner Name',
-        selector: (row) => row.capital,
-        width: '170px',
-        sortable: true,
-      },
     {
         name: 'Subscription Title',
         width: '150px',
@@ -137,9 +131,16 @@ const columns = [
     },
     {
         name: 'Payment Method',
+        width: '150px',
         selector: (row) => row.nativeName,
         sortable: true,
     },
+    {
+      name: 'Status',
+      width: '150px',
+      selector: (row) => row.nativeName,
+      sortable: true,
+  },
  
     {
         name: 'Action',
@@ -204,13 +205,6 @@ useEffect(() => {
        
          />
          </Menu.Item>
-         <Menu.Item>
-         <Button 
-        onClick={() => navigate('/AddSubscription')}
-        >
-        Add Subscription
-       </Button>
-         </Menu.Item>
     <Menu.Item>
     <Button variant="outline" miw={165}>
             Clear
@@ -222,7 +216,6 @@ useEffect(() => {
         <Button variant="outline" size='md' className={classes.responsiveClear}>
             Clear
         </Button>
-        <Box style={{display:'flex', flexDirection:'row-reverse', width:'800px', justifyContent:'space-between'}}>
         <TextInput
         size='md'
         placeholder='Search'
@@ -230,14 +223,6 @@ useEffect(() => {
         onChange={(e) => setSearch(e.target.value)}
         className={classes.responsiveSearch}
          />
-         <Button 
-        size='md'
-        className={classes.responsiveAddUserBtn}
-        onClick={() => navigate('/AddSubscription')}
-        >
-        Add Subscription
-       </Button>
-       </Box>
          {/*
         <Select
          size='md'
@@ -291,4 +276,4 @@ useEffect(() => {
      </Box>
   )
 }
-export default SubscriptionTable
+export default BusinessSubscriptionTable
