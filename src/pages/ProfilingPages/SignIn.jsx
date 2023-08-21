@@ -65,22 +65,28 @@ import { notifications } from '@mantine/notifications';
       if (response.status === 200) {
 
         notifications.show({ message: `Signin Successfull `, color: 'green' });
+        console.log(response.data);
 
         switch (response?.data?.role) {
           case 'Super Admin':
             localStorage.setItem('token', response?.data?.token);
+            localStorage.setItem('role', response?.data?.role);
+
             navigate('/ViewUser');
             break;
           case 'Marketing Agent':
             localStorage.setItem('token', response?.data?.token);
+            localStorage.setItem('role', response?.data?.role);
             navigate('/ViewUser');
             break;
           case 'Business Owner':
             localStorage.setItem('token', response?.data?.token);
+            localStorage.setItem('role', response?.data?.role);
             navigate('/ViewUser');
             break;
           case 'Customer':
             localStorage.setItem('token', response?.data?.token);
+            localStorage.setItem('role', response?.data?.role);            
             navigate('/ViewUser');
             break;
           default:
