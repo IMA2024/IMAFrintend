@@ -43,6 +43,11 @@ import AddBusinessOwner from './BusinessOwner/pages/BusinessOwner/AddBusinessOwn
 import ViewBusinessOwner from './BusinessOwner/pages/BusinessOwner/ViewBusinessOwner';
 import BuySubscription from './BusinessOwner/pages/Subscription/BuySubscription';
 import ViewBusinessSubscription from './BusinessOwner/pages/Subscription/ViewSubscription';
+import ConfigureAgents from './BusinessOwner/pages/Agents/ConfigureAgents';
+import AddQuestionnaire from './BusinessOwner/pages/Questionnaire/AddQuestionnaire';
+import ViewQuestionnaire from './BusinessOwner/pages/Questionnaire/ViewQuestionnaire';
+import EditQuestionnaire from './BusinessOwner/pages/Questionnaire/EditQuestionnaire';
+import BusinessPanelAddRevenue from './BusinessOwner/pages/Accounting/AddRevenue';
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -128,6 +133,11 @@ export default function Demo() {
       <Route path="ViewBusinessOwner" element={<ViewBusinessOwner />} />
       <Route path="BuySubscription" element={<BuySubscription />} />
       <Route path="ViewBusinessSubscription" element={<ViewBusinessSubscription />} />
+      <Route path="ConfigureAgents" element={<ConfigureAgents />} />
+      <Route path="AddQuestionnaire" element={<AddQuestionnaire />} />
+      <Route path="ViewQuestionnaire" element={<ViewQuestionnaire />} />
+      <Route path="EditQuestionnaire" element={<EditQuestionnaire />} />
+      <Route path="BusinessPanelAddRevenue" element={<BusinessPanelAddRevenue />} />
       </Route>
       {/* The routes for Business Panel end here*/}
      </Routes>

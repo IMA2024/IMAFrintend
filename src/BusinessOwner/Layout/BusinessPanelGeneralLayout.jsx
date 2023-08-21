@@ -15,12 +15,27 @@ import {
 import { Navigate, Outlet } from "react-router-dom";
 import BusinessPanelLeftNavbar from "./Navbar";
 import BusinessPanelHeaderTop from "./Header";
-import { sideBarData } from "./sideBarData1";
+import { BusinessSideBarData } from "./BusinessSideBarData";
 export default function BusinessPanelGeneralLayout() {
   let auth = { token: true };
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   let role = "admin";
+/*
+  sideBarLinks={
+    user.role === "Social Worker"
+      ? socialSideBarData
+      : user.role === "Psychologist"
+      ? psychSideBarData
+      : user.role === "Lawyer"
+      ? LawyerSidebarData
+      : user.role === "Admin"
+      ? ngoAdminSideBarData
+      : user.role === "User"
+      ? UserSidebarData
+      : []
+  }
+  */
 
   return auth.token ? (
     <AppShell
@@ -43,7 +58,8 @@ export default function BusinessPanelGeneralLayout() {
         >
           <ScrollArea type="never">
             <BusinessPanelLeftNavbar
-              sideBarData={role === "admin" ? sideBarData : []}
+              BusinessSideBarData={role === "admin" ? BusinessSideBarData : []}
+              
             />
           </ScrollArea>
         </Navbar>
