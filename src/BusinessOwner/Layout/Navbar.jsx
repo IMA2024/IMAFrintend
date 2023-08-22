@@ -19,9 +19,8 @@ const BusinessPanelLeftNavbar = ({BusinessSideBarData}) => {
 
   const sidebarStyles = {
     width: '300px',
-    //backgroundColor: '#770737',
+    backgroundColor: "#5F3DC4",
     padding: '1px',
-
   };
 
   const navLinkStyles = {
@@ -33,8 +32,7 @@ const BusinessPanelLeftNavbar = ({BusinessSideBarData}) => {
     color: 'white',
     fontSize: '20px',
     borderRadius: '4px',
-    //justifyContent: 'space-between',
-    //backgroundColor: '#770737',
+    justifyContent: 'space-between',
 
   };
 
@@ -51,20 +49,15 @@ const BusinessPanelLeftNavbar = ({BusinessSideBarData}) => {
 
   const pointerStyles = {
     marginLeft: '10px',
-    
   };
 
   const iconStyles = {
     marginRight: '5%',
-    
-
   };
 
   const ulStyles = {
     listStyleType: 'none', // Remove bullets
-    //marginRight: '10px',
     marginLeft: '-30px',
-    //backgroundColor: 'white',
   };
 
 
@@ -81,9 +74,10 @@ const BusinessPanelLeftNavbar = ({BusinessSideBarData}) => {
                 activeStyle={{ fontWeight: 'bold' }}
                 onClick={() => handleToggleVisibility1(obj.name)}
               >
+              <span style={{width:'100%'}}>
                 {obj.Icon && <obj.Icon style={iconStyles} />}
                 {ind + 1 + "- " + obj.name}
-                
+                </span>
                 {obj.subLink && (
                   <span style={pointerStyles}>
                   {opened === obj.name ? <AiFillCaretUp /> : <AiFillCaretDown />}

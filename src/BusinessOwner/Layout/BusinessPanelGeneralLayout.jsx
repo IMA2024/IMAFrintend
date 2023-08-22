@@ -50,17 +50,17 @@ export default function BusinessPanelGeneralLayout() {
       navbarOffsetBreakpoint="md"
       navbar={
         <Navbar
-          bg={"#5F3DC4"}
+         bg={"#5F3DC4"}
+         style={{display: 'flex', flexDirection: 'column' }}
           hiddenBreakpoint="md"
           hidden={!opened}
           width={{ sm: 300, lg: 300 }}
           mt={-1}
+       
         >
-          <ScrollArea type="never">
+        <ScrollArea type="never">
             <BusinessPanelLeftNavbar
-              BusinessSideBarData={role === "admin" ? BusinessSideBarData : []}
-              
-            />
+              BusinessSideBarData={role === "admin" ? BusinessSideBarData : []} />
           </ScrollArea>
         </Navbar>
       }

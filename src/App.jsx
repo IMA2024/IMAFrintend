@@ -48,6 +48,9 @@ import AddQuestionnaire from './BusinessOwner/pages/Questionnaire/AddQuestionnai
 import ViewQuestionnaire from './BusinessOwner/pages/Questionnaire/ViewQuestionnaire';
 import EditQuestionnaire from './BusinessOwner/pages/Questionnaire/EditQuestionnaire';
 import BusinessPanelAddRevenue from './BusinessOwner/pages/Accounting/AddRevenue';
+import BusinessPanelViewRevenue from './BusinessOwner/pages/Accounting/ViewRevenue';
+import BusinessPanelAddExpense from './BusinessOwner/pages/Accounting/AddExpense';
+import BusinessPanelViewExpense from './BusinessOwner/pages/Accounting/ViewExpense';
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -121,8 +124,7 @@ export default function Demo() {
         <Route path="Services" element={<Services />} />
         <Route path="Reviews" element={<Reviews />} />
         <Route path="Faq" element={<Faq />} />
-        <Route path="ContactUs" element={<ContactUs />} />
-        
+        <Route path="ContactUs" element={<ContactUs />} />  
       </Route>
       {/* These are the routes for Business Panel */}
       <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
@@ -138,6 +140,9 @@ export default function Demo() {
       <Route path="ViewQuestionnaire" element={<ViewQuestionnaire />} />
       <Route path="EditQuestionnaire" element={<EditQuestionnaire />} />
       <Route path="BusinessPanelAddRevenue" element={<BusinessPanelAddRevenue />} />
+      <Route path="BusinessPanelViewRevenue" element={<BusinessPanelViewRevenue />} />
+      <Route path="BusinessPanelAddExpense" element={<BusinessPanelAddExpense />} />
+      <Route path="BusinessPanelViewExpense" element={<BusinessPanelViewExpense />} />
       </Route>
       {/* The routes for Business Panel end here*/}
      </Routes>

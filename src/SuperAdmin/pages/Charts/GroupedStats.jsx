@@ -61,39 +61,69 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const data = [
+const SubscriptionData = [
     {
-      "title": "Subscriptions",
       "stats": "40",
-      "description": "24% more than in the same month last year, 33% more than two years ago"
     },
+
+  ];
+
+  const PaymentData = [
+  
     {
-      "title": "Payments",
       "stats": "13",
-      "description": "13% less compared to last month, new user engagement up by 6%"
     },
+
+  ];
+
+  const RevenueData = [
     {
-      "title": "Total Revenue",
       "stats": "30",
-      "description": "1994 orders were completed this month, 97% satisfaction rate"
     },
+  
+  ];
+
+  const BusinessData = [
     {
-      "title": "Businesses Registered",
       "stats": "10",
-      "description": "1994 orders were completed this month, 97% satisfaction rate"
     },
 
   ];
 
 
+
 export default function StatsGroup() {
   const { classes } = useStyles();
-  const stats = data.map((stat) => (
+ 
+  const subsData = SubscriptionData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
       <Text className={classes.count}>{stat.stats}</Text>
-      <Text className={classes.title}>{stat.title}</Text>
-      <Text className={classes.description}>{stat.description}</Text>
+      <Text className={classes.title}>Subscriptions</Text>
+      <Text className={classes.description}>24% more than in the same month last year, 33% more than two years ago</Text>
     </div>
   ));
-  return <div className={classes.root}>{stats}</div>;
+  const payData = PaymentData.map((stat) => (
+    <div key={stat.title} className={classes.stat}>
+      <Text className={classes.count}>{stat.stats}</Text>
+      <Text className={classes.title}>Payments</Text>
+      <Text className={classes.description}>13% less compared to last month, new user engagement up by 6%</Text>
+    </div>
+  ));
+  const revenueData = RevenueData.map((stat) => (
+    <div key={stat.title} className={classes.stat}>
+      <Text className={classes.count}>{stat.stats}</Text>
+      <Text className={classes.title}>Total Revenue</Text>
+      <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
+    </div>
+  ));
+  const businessData = BusinessData.map((stat) => (
+    <div key={stat.title} className={classes.stat}>
+      <Text className={classes.count}>{stat.stats}</Text>
+      <Text className={classes.title}>Businesses Registered</Text>
+      <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
+    </div>
+  ));
+  return ( 
+<div className={classes.root}>{subsData} {payData} {revenueData} {businessData}</div>
+  ) 
 }
