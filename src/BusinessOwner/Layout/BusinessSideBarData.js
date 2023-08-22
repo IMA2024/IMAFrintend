@@ -10,6 +10,7 @@ export const BusinessSideBarData = [
   {
     name: "Business", Icon: BiSolidBusiness,
     subLink: [
+      { name: "My Business", link: "/BusinessPanel/BusinessAdd", Icon: BiSolidBusiness },
       { name: "Add Business", link: "/BusinessPanel/BusinessAdd", Icon: AiOutlineUserAdd },
       { name: "View Business", link: "/BusinessPanel/BusinessView", Icon: AiOutlineEye  },    
     ],
@@ -24,14 +25,14 @@ export const BusinessSideBarData = [
   {
     name: "Accounting", Icon: AiOutlineShop,
     subLink: [
-      { name: "Add Revenue", link: "/AddBusiness", Icon: AiOutlineUserAdd },
+      { name: "Add Revenue", link: "/BusinessPanel/BusinessPanelAddRevenue", Icon: AiOutlineUserAdd },
       { name: "View Revenue", link: "/ViewBusiness", Icon: AiOutlineEye },
       { name: "Add Expense", link: "/ViewBusiness", Icon: AiOutlineUserAdd },
       { name: "View Expense", link: "/ViewBusiness", Icon: AiOutlineEye },
     ],
   },
   {
-    name: "Payment",
+    name: "Payment", Icon: MdOutlinePayments,
     subLink: [
       { name: "Add Payment", link: "/AddBusiness", Icon: AiOutlineUserAdd },
       { name: "View Payment", link: "/ViewBusiness", Icon: AiOutlineEye },
