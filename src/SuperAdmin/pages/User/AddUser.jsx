@@ -38,14 +38,13 @@ export default function AddUser() {
   const { classes } = useStyles();
 
   const form = useForm({
-    initialValues: {  firstName: '', lastName: '', role: '', phoneNumber: '', address: '', email: '', password: '', confirmPassword: '' },
+    initialValues: {  firstName: '', lastName: '', role: '', phoneNumber: '',  email: '', password: '', confirmPassword: '' },
     validateInputOnChange: true,
     validate: {
       role: isNotEmpty('Please Select A Role'),
       firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name should be between 3 to 20 Alphabets'),
       lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name should be between 3 to 20 Alphabets'),
       phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
-      address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 10 and 150 Characters'),
       email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e user@gmail.com'),
       password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
       confirmPassword: (value, { password }) => (value === password ? null : 'Incorrect ! Please Recheck & Confirm Your Password'),
@@ -89,18 +88,20 @@ export default function AddUser() {
 };
 
   return (
-    <Paper withBorder shadow="md" p={35} radius="md">
+    <Paper withBorder shadow="md" pt={10} pb={10} pl={35} pr={35} radius="md">
       <Title
-        mb={20}
         align="center"
-        sx={{ fontWeight: 650 }}
+        order={2}
+        sx={{ fontWeight: 550 }}
       >
         Add User
       </Title>
+      {/*
       <Divider mb={20} />
+  */}
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
-          <Select withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
+          <Select withAsterisk size='sm' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
             data={[
               { value: 'Marketing Agent', label: 'Marketing Agent' },
               { value: 'Business Owner', label: 'Business Owner' },
@@ -108,26 +109,23 @@ export default function AddUser() {
             ]}
           />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='md' className={classes.inputField} label="First Name" placeholder="Enter First Name: John" {...form.getInputProps('firstName')} />
-          <TextInput withAsterisk size='md' className={classes.inputField} label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+          <TextInput withAsterisk size='sm' className={classes.inputField} label="First Name" placeholder="Enter First Name: John" {...form.getInputProps('firstName')} />
+          <TextInput withAsterisk size='sm' className={classes.inputField} label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='md' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
-          <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+          <TextInput withAsterisk size='sm' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+          <TextInput withAsterisk size='sm' label="Phone Number" placeholder="Enter Phone Number: 03001234567" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
-        <Box mt="md" >
-          <TextInput  size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps("address")} />
+        <Box className={classes.responsiveContainer} mt="sm" >
+          <PasswordInput size='sm' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
+          <PasswordInput size='sm' withAsterisk label="Confirm Password" placeholder="Confirm Password" className={classes.inputField} {...form.getInputProps('confirmPassword')} />
         </Box>
-        <Box className={classes.responsiveContainer} mt="md" >
-          <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
-          <PasswordInput size='md' withAsterisk label="Confirm Password" placeholder="Confirm Password" className={classes.inputField} {...form.getInputProps('confirmPassword')} />
-        </Box>
-        <Box mt="md" >
+        <Box mt="sm" >
           <Dropzone
             sx={{
-              height: 175,
-              width: 175,
+              height: 145,
+              width: 145,
             }}
             onDrop={(files) => setImageUpload(files)}
             multiple= {false}
@@ -137,21 +135,21 @@ export default function AddUser() {
             value={imageUpload ? imageUpload.name : ''}
           >
           <Image
-          height={169}
-          width={169}
+          height={139}
+          width={139}
           sx={{resize:'contain',  marginTop: -15, marginLeft: -15 }}
           src={profilePics || (imageUpload ? URL.createObjectURL(imageUpload[0]) : '')}
         />
           </Dropzone>
-          <Button disabled={!imageUpload} onClick={()=>{handleUploadImage()}} style={{ marginTop: 15, marginLeft: 12 }}>
+          <Button disabled={!imageUpload} onClick={()=>{handleUploadImage()}} style={{ marginTop: 15  }}>
             Upload Image
           </Button>
         </Box>
         <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-          <Button size='md' color='red.8' >
+          <Button size='sm' color='red.8' >
             Cancel
           </Button>
-          <Button type="submit" size='md' color='green.9' >
+          <Button type="submit" size='sm' color='green.9' >
             Submit
           </Button>
         </Box>

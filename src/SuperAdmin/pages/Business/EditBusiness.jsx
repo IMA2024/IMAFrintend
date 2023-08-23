@@ -105,48 +105,47 @@ export default function EditBusiness() {
   };
 
   return (
-    <Paper withBorder shadow="md" p={35}  radius="md">
+    <Paper withBorder shadow="md" pt={10} pb={10} pl={35} pr={35} radius="md">
        <Title
-          mb={20}
-          align="center"
-          sx={{ fontWeight: 650 }}
+           order={2}
+           align="center"
+           sx={{ fontWeight: 550 }}
         >
           Update Business
         </Title>
-        <Divider mb={20} />
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
-        <Select withAsterisk size='md' label="Business Type" placeholder="Select Business Type" {...form.getInputProps('type')}
+        <Select withAsterisk size='sm' label="Business Type" placeholder="Select Business Type" {...form.getInputProps('type')}
         data={[
             { value: 'Commercial', label: 'Commercial' },
             { value: 'Industrial', label: 'Industrial' },
           ]}
          />
         </Box>
-      <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='md' className={classes.inputField} label="Business Name" placeholder="Enter Business Name: Jinnah Heights" {...form.getInputProps('name')} />
-        <Select withAsterisk size='md' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
+      <Box mt="sm" className={classes.responsiveContainer}>
+        <TextInput withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Enter Business Name: Jinnah Heights" {...form.getInputProps('name')} />
+        <Select withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
         data={countries.map((country) => ({
           value: `${country._id}`,
           label: `${country.firstName} ${country.lastName}`,
         }))}
          />
         </Box>
-        <Box mt="md"  className={classes.responsiveContainer}>
-        <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='md' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
-         <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+        <Box mt="sm"  className={classes.responsiveContainer}>
+        <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='sm' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+         <TextInput withAsterisk size='sm' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
-        <Box mt="md" >
-        <TextInput withAsterisk size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps('address')} />
+        <Box mt="sm" >
+        <TextInput withAsterisk size='sm' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps('address')} />
         </Box>
-        <Box mt="md" >
-        <Textarea withAsterisk size='md' label="Business Description" placeholder="Enter Business Description: Car Business." {...form.getInputProps('description')}  />
+        <Box mt="sm" >
+        <Textarea withAsterisk size='sm' label="Business Description" placeholder="Enter Business Description: Car Business." {...form.getInputProps('description')}  />
         </Box>
-        <Box mt="md" >
+        <Box mt="sm" >
           <Dropzone
             sx={{
-              height: 175,
-              width: 175,
+              height: 145,
+              width: 145,
             }}
             onDrop={(files) => setImageUpload(files)}
             multiple={false}
@@ -156,21 +155,21 @@ export default function EditBusiness() {
             value={imageUpload ? imageUpload.name : ''}
           >
             <Image
-              height={169}
-              width={169}
+              height={139}
+              width={139}
               sx={{ resize: 'contain', marginTop: -15, marginLeft: -15 }}
               src={imageUpload ? URL.createObjectURL(imageUpload[0]) : rowData.profilePic}
             />
           </Dropzone>
-          <Button disabled={!imageUpload} onClick={() => { handleUploadImage() }} style={{ marginTop: 15, marginLeft: 12 }}>
+          <Button disabled={!imageUpload} onClick={() => { handleUploadImage() }} style={{ marginTop: 15}}>
             Upload Image
           </Button>
         </Box>
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button size='md' color='red.8' >
+         <Button size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button type="submit" size='md' color='green.9' >
+        <Button type="submit" size='sm' color='green.9' >
           Submit
         </Button>
         </Box>

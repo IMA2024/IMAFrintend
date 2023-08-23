@@ -18,7 +18,7 @@ const Datepicker = ({
   icon,
   label,
   borderWhite,
-  size = "md",
+  size = "sm",
   withAsterisk,
   form,
   dropdownType = "popover",

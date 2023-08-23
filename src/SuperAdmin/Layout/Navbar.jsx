@@ -254,6 +254,22 @@ const handleMouseLeave = () => {
             </NavLink>
             {isVisible4 ? (
             <ul style={ulStyles}>
+              <NavLink
+                  to="/AddRevenue"
+                  style={navLinkStyles}
+                  activeStyle={{ fontWeight: 'bold' }}
+                >
+                  <IoMdAddCircleOutline style={iconStyles} />
+                  Add Revenue
+                </NavLink>
+                <NavLink
+                  to="/ViewRevenue"
+                  style={navLinkStyles}
+                  activeStyle={{ fontWeight: 'bold' }}
+                >
+                  <AiOutlineEye style={iconStyles} />
+                  View Revenue
+                </NavLink>
               <li>
                 <NavLink
                   to="/AddExpense"
@@ -272,22 +288,6 @@ const handleMouseLeave = () => {
                 >
                   <AiOutlineEye style={iconStyles} />
                   View Expense
-                </NavLink>
-                <NavLink
-                  to="/AddRevenue"
-                  style={navLinkStyles}
-                  activeStyle={{ fontWeight: 'bold' }}
-                >
-                  <IoMdAddCircleOutline style={iconStyles} />
-                  Add Revenue
-                </NavLink>
-                <NavLink
-                  to="/ViewRevenue"
-                  style={navLinkStyles}
-                  activeStyle={{ fontWeight: 'bold' }}
-                >
-                  <AiOutlineEye style={iconStyles} />
-                  View Revenue
                 </NavLink>
               </li>
             </ul>

@@ -15,6 +15,7 @@ const useStyles = createStyles((theme) => ({
       display:'flex',
       flexDirection: 'row-reverse',
       gap:'20px',
+      //justifyContent:'space-between',
       marginLeft:'-5px',
       paddingTop: '20px',
       paddingBottom: '20px',
@@ -23,7 +24,14 @@ const useStyles = createStyles((theme) => ({
         width:'100%',
         marginLeft:'0px',
       },
-  
+
+      [theme.fn.smallerThan('lg')]: {
+        //justifyContent: 'space-between',
+        //gap:'40px',
+        //width:'100%',
+        //marginLeft:'0px',
+      },
+
     },
   
     responsiveAddUserBtn: {
