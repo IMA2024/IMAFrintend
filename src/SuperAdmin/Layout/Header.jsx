@@ -3,6 +3,7 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconUser, IconBell, IconPhone, IconEdit, IconLogout } from '@tabler/icons-react';
 import ActionToggle from "../../components/ColorMode";
 import { HeaderSearchBar } from "../../components/search";
+import HeaderSearch from "../../components/HeaderSearch";
 import { notifications } from '@mantine/notifications';
 import React from "react";
 
@@ -10,9 +11,10 @@ const useStyles = createStyles((theme) => ({
 
   responsiveTitle: {
     marginLeft: '10%',
+    width:'299px',
 
-    [theme.fn.largerThan('xl')]: {
-      color:'black',
+    [theme.fn.smallerThan('md')]: {
+      width:'99px',
     },
   },
 
@@ -28,8 +30,6 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveContainerChild1: {
-    //width: '299px',
-    width:'23.7%',
     backgroundColor: '#770737',
     boxSizing: 'border-box',
     fontWeight: 'bold',
@@ -38,26 +38,14 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'left',
 
-    [theme.fn.smallerThan('lg')]: {
+    [theme.fn.smallerThan('md')] :{
       backgroundColor: 'white',
-      color: 'black',
-      width:'28.7%',
-      //width: '300px',
+      color:'black',
     },
-
-    [theme.fn.largerThan('xl')]: {
-      backgroundColor: 'white',
-      //color: 'black',
-      //width:'28.7%',
-      //width: '300px',
-    },
-
-
 
     [theme.fn.smallerThan('sm')]: {
       justifyContent: 'right',
       paddingLeft: '0%',
-      //width: '100px',
     },
 
   },
@@ -70,21 +58,20 @@ const useStyles = createStyles((theme) => ({
 
     [theme.fn.smallerThan('sm')]: {
       justifyContent:'right',
-      //width: '100px',
+    },
+
+    [theme.fn.smallerThan('lg')]: {
     },
 
   },
 
   responsiveContainerChild2: {
-    //width: '750px',
     fontWeight: 'bold',
     fontSize: '45px',
     marginTop: '15px',
     marginLeft: '30px',
-    //backgroundColor:'pink',
 
     [theme.fn.smallerThan('lg')]: {
-      //width: '500px',
     },
 
     [theme.fn.smallerThan('sm')]: {
@@ -95,25 +82,21 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveContainerChild3: {
-    //width: '150px',
     width:'15%',
     fontWeight: 'bold',
     fontSize: '45px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //backgroundColor:'pink',
 
     [theme.fn.smallerThan('lg')]: {
-      //width: '500px',
       width:'20%',
     },
 
     [theme.fn.smallerThan('sm')]: {
-      //width: '500px',
       width:'35%',
     },
-
+    
   },
 
   inputField: {
@@ -128,7 +111,15 @@ const useStyles = createStyles((theme) => ({
 
 const HeaderTop = () => {
 
-  const { classes } = useStyles()
+  const { classes } = useStyles();
+
+  const handleLogout = () => {
+    // Clear the local storage here
+    localStorage.clear();
+
+    // You can also redirect the user to the login page or perform any other necessary actions
+    // window.location.href = "/login"; // Example redirect
+  };
 
   return (
     <Box className={classes.responsiveContainer}>
@@ -137,7 +128,7 @@ const HeaderTop = () => {
       </Box>
     <Box className={classes.responsiveContainerChild2and3}>
       <Box className={classes.responsiveContainerChild2}>
-        <HeaderSearchBar />
+        <HeaderSearch />
       </Box>
       <Box className={classes.responsiveContainerChild3}>
         <Box
@@ -177,7 +168,7 @@ const HeaderTop = () => {
               <Menu.Divider />
 
               <Menu.Label>Danger zone</Menu.Label>
-              <Menu.Item icon={<IconLogout size={25} color="green" />}>Logout</Menu.Item>
+              <Menu.Item icon={<IconLogout size={25} color="green" />} onClick={handleLogout} >Logout</Menu.Item>
             </Menu.Dropdown>
           </Menu>
         </Box>
