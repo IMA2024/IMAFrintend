@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState , useEffect} from 'react';
 import { createStyles, Text, rem, Box } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
@@ -92,14 +92,66 @@ const SubscriptionData = [
 
 
 
+
+
+
 export default function StatsGroup() {
+
+  const [totalSubscriptions, setTotalSubscriptions] = useState(); 
+  const [totalRevenue, setTotalRevenue] = useState(); 
+  const [totalBusinesses, setTotalBusinesses] = useState(); 
   const { classes } = useStyles();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/admin/totalSubscriptions');
+        const newData = await response.json();
+        console.log(response);
+        setTotalSubscriptions(newData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/admin/totalRevenue');
+        const newData = await response.json();
+        console.log(response);
+        setTotalRevenue(newData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/admin/totalBusinesses');
+        const newData = await response.json();
+        console.log(response);
+        setTotalBusinesses(newData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
  
   const subsData = SubscriptionData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{stat.stats}</Text>
+      <Text className={classes.count}>{totalSubscriptions}</Text>
       <Text className={classes.title}>Subscriptions</Text>
-      <Text className={classes.description}>24% more than in the same month last year, 33% more than two years ago</Text>
+      <Text className={classes.description}>24% more than in the same month last year, 33% more than two yuserBears ago</Text>
     </div>
   ));
   const payData = PaymentData.map((stat) => (
@@ -111,15 +163,15 @@ export default function StatsGroup() {
   ));
   const revenueData = RevenueData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{stat.stats}</Text>
-      <Text className={classes.title}>Total Revenue</Text>
+      <Text className={classes.count}>{totalRevenue}</Text>
+      <Text className={classes.title}>Revenue</Text>
       <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
     </div>
   ));
   const businessData = BusinessData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{stat.stats}</Text>
-      <Text className={classes.title}>Businesses Registered</Text>
+      <Text className={classes.count}>{totalBusinesses}</Text>
+      <Text className={classes.title}>Businesses</Text>
       <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
     </div>
   ));

@@ -18,7 +18,6 @@ const Dashboard = () => {
         <StatsGroup />
         <RevenueChart />
         <SubscriptionPaymentChart />
-        <SimpleDonut />
     </div>
   )
 }

@@ -5,7 +5,9 @@ import ActionToggle from "../../components/ColorMode";
 import { HeaderSearchBar } from "../../components/search";
 import HeaderSearch from "../../components/HeaderSearch";
 import { notifications } from '@mantine/notifications';
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../../context/users/userContext";
 
 const useStyles = createStyles((theme) => ({
 
@@ -96,7 +98,7 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('sm')]: {
       width:'35%',
     },
-    
+  
   },
 
   inputField: {
@@ -112,13 +114,14 @@ const useStyles = createStyles((theme) => ({
 const HeaderTop = () => {
 
   const { classes } = useStyles();
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // Clear the local storage here
     localStorage.clear();
-
-    // You can also redirect the user to the login page or perform any other necessary actions
-    // window.location.href = "/login"; // Example redirect
+    setUser(null)
+    navigate("/HeaderMegaMenu/SignIn");
   };
 
   return (
@@ -126,53 +129,53 @@ const HeaderTop = () => {
       <Box className={classes.responsiveContainerChild1}>
         <Text className={classes.responsiveTitle}>IMA</Text>
       </Box>
-    <Box className={classes.responsiveContainerChild2and3}>
-      <Box className={classes.responsiveContainerChild2}>
-        <HeaderSearch />
-      </Box>
-      <Box className={classes.responsiveContainerChild3}>
-        <Box
-          onClick={() => {
-            Array(5).fill(0).forEach((_, index) => {
-              setTimeout(() => {
-                notifications.show({
-                  title: `Notification ${index + 1}`,
-                  message: 'Most notifications are added to queue',
-                });
-              }, 200 * index);
-            });
-          }}
-        >
-          <IconBell color="gray" />
+      <Box className={classes.responsiveContainerChild2and3}>
+        <Box className={classes.responsiveContainerChild2}>
+          <HeaderSearch />
         </Box>
-        <Box>
-          <ActionToggle />
-        </Box>
-        <Box>
-          <Menu shadow="" width={300}>
-            <Menu.Target>
-              <IconUser color="gray" />
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item>
-                <Text style={{ fontSize: '15px' }}>IMA SUPER ADMIN</Text>
-                <Text style={{ color: '#A9A9A9' }}>IntelligentMarketingAgent@gmail.com</Text>
-              </Menu.Item>
-              <Menu.Divider />
-              <Menu.Label >Verification Status</Menu.Label>
-              <Menu.Item icon={<IconUser size={25} color="green" />}>User is verified</Menu.Item>
-              <Menu.Item icon={<IconPhone size={25} color="green" />}>Phone is verified</Menu.Item>
-              <Menu.Divider />
-              <Menu.Label>Settings</Menu.Label>
-              <Menu.Item icon={<IconEdit size={25} color="green" />}>Edit Profile</Menu.Item>
-              <Menu.Divider />
+        <Box className={classes.responsiveContainerChild3}>
+          <Box
+            onClick={() => {
+              Array(5).fill(0).forEach((_, index) => {
+                setTimeout(() => {
+                  notifications.show({
+                    title: `Notification ${index + 1}`,
+                    message: 'Most notifications are added to queue',
+                  });
+                }, 200 * index);
+              });
+            }}
+          >
+            <IconBell color="gray" />
+          </Box>
+          <Box>
+            <ActionToggle />
+          </Box>
+          <Box>
+            <Menu shadow="" width={300}>
+              <Menu.Target>
+                <IconUser color="gray" />
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item>
+                  <Text style={{ fontSize: '15px' }}>IMA SUPER ADMIN</Text>
+                  <Text style={{ color: '#A9A9A9' }}>IntelligentMarketingAgent@gmail.com</Text>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Label >Verification Status</Menu.Label>
+                <Menu.Item icon={<IconUser size={25} color="green" />}>User is verified</Menu.Item>
+                <Menu.Item icon={<IconPhone size={25} color="green" />}>Phone is verified</Menu.Item>
+                <Menu.Divider />
+                <Menu.Label>Settings</Menu.Label>
+                <Menu.Item icon={<IconEdit size={25} color="green" />}>Edit Profile</Menu.Item>
+                <Menu.Divider />
 
-              <Menu.Label>Danger zone</Menu.Label>
-              <Menu.Item icon={<IconLogout size={25} color="green" />} onClick={handleLogout} >Logout</Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
+                <Menu.Label>Danger zone</Menu.Label>
+                <Menu.Item icon={<IconLogout size={25} color="green" />} onClick={handleLogout} >Logout</Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Box>
         </Box>
-      </Box>
       </Box>
     </Box>
 
