@@ -9,7 +9,11 @@ import React from "react";
 const useStyles = createStyles((theme) => ({
 
   responsiveTitle: {
-    marginLeft: '10%'
+    marginLeft: '10%',
+
+    [theme.fn.largerThan('xl')]: {
+      color:'black',
+    },
   },
 
   responsiveContainer: {
@@ -24,7 +28,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveContainerChild1: {
-    width: '299px',
+    //width: '299px',
+    width:'23.7%',
     backgroundColor: '#770737',
     boxSizing: 'border-box',
     fontWeight: 'bold',
@@ -36,19 +41,42 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('lg')]: {
       backgroundColor: 'white',
       color: 'black',
-      width: '300px',
+      width:'28.7%',
+      //width: '300px',
     },
+
+    [theme.fn.largerThan('xl')]: {
+      backgroundColor: 'white',
+      //color: 'black',
+      //width:'28.7%',
+      //width: '300px',
+    },
+
+
 
     [theme.fn.smallerThan('sm')]: {
       justifyContent: 'right',
       paddingLeft: '0%',
-      width: '100px',
+      //width: '100px',
+    },
+
+  },
+
+  responsiveContainerChild2and3: {
+    width:'74%',
+    display: 'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+
+    [theme.fn.smallerThan('sm')]: {
+      justifyContent:'right',
+      //width: '100px',
     },
 
   },
 
   responsiveContainerChild2: {
-    width: '750px',
+    //width: '750px',
     fontWeight: 'bold',
     fontSize: '45px',
     marginTop: '15px',
@@ -56,7 +84,7 @@ const useStyles = createStyles((theme) => ({
     //backgroundColor:'pink',
 
     [theme.fn.smallerThan('lg')]: {
-      width: '500px',
+      //width: '500px',
     },
 
     [theme.fn.smallerThan('sm')]: {
@@ -67,13 +95,24 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveContainerChild3: {
-    width: '150px',
+    //width: '150px',
+    width:'15%',
     fontWeight: 'bold',
     fontSize: '45px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     //backgroundColor:'pink',
+
+    [theme.fn.smallerThan('lg')]: {
+      //width: '500px',
+      width:'20%',
+    },
+
+    [theme.fn.smallerThan('sm')]: {
+      //width: '500px',
+      width:'35%',
+    },
 
   },
 
@@ -96,7 +135,7 @@ const HeaderTop = () => {
       <Box className={classes.responsiveContainerChild1}>
         <Text className={classes.responsiveTitle}>IMA</Text>
       </Box>
-
+    <Box className={classes.responsiveContainerChild2and3}>
       <Box className={classes.responsiveContainerChild2}>
         <HeaderSearchBar />
       </Box>
@@ -143,7 +182,7 @@ const HeaderTop = () => {
           </Menu>
         </Box>
       </Box>
-     
+      </Box>
     </Box>
 
   )
