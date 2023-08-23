@@ -19,7 +19,7 @@ const BusinessPanelLeftNavbar = ({BusinessSideBarData}) => {
 
   const sidebarStyles = {
     width: '300px',
-    backgroundColor: "#5F3DC4",
+    //backgroundColor: "#5F3DC4",
     padding: '1px',
   };
 

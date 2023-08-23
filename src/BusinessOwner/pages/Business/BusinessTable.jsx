@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
+import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, Tabs, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome, IconBuilding } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
@@ -135,7 +135,7 @@ const TableBusiness = () => {
 
   const handleViewSpecific = (row) => {
     open();
-    setSpecificPicture(row.profilePic);
+    setSpecificPicture(row.flag);
     setSpecificType(row.type);
     setSpecificName(row.name);
     setSpecificOwner(row.name);
@@ -370,9 +370,34 @@ const TableBusiness = () => {
         responsive
       />
       <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close} size={800}  >
+      <Tabs variant="pills" defaultValue="Business Details">
+      <Tabs.List position="center" grow mb={'xl'}>
+        <Tabs.Tab value="Business Details" >Business Details</Tabs.Tab>
+        <Tabs.Tab value="Questionnaire Details">Questionnaire Details</Tabs.Tab>
+      </Tabs.List>
+
+      <Tabs.Panel value="Questionnaire Details"pt="xs">
+      <Box h={200} mb={30} style={{ display: 'flex', flexDirection: 'row', justifyContent:'space-evenly' }}>
+        <Box>
+          <Title order={4}>Question/Answers</Title>
+          <Box><Text>1- Are you ineterested in commercial plots? Yes.</Text></Box>
+          <Box><Text>2- What is the range of money which you can afford? 50 lacs.</Text></Box>
+          <Box><Text>3- Which city do you prefer for commercial buying plots? Lahore.</Text></Box>
+          <Box><Text>4- Which city do you prefer for residential buying plots? Lahore.</Text></Box>
+          <Box><Text>5- Have you ever invested in industrial sector? Yes.</Text></Box>
+          </Box>
+          <Box>
+          <Title order={4}>Marketing Agent Details</Title>
+          <Box style={{display:'flex', flexDirection:'row'}}><Text>Agent Name: </Text><Text color='green.9'>Amna</Text></Box>
+          <Box style={{display:'flex', flexDirection:'row'}}><Text>Agent Voice: </Text><Text color='green.9'>Female</Text></Box>
+          </Box>
+          </Box>
+      </Tabs.Panel>
+      
+      <Tabs.Panel value="Business Details" pt="xs">
         <Box mb={30} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Box mah={350}><Image maw={300} radius="md" src={specificPicture} alt="Random image" /></Box>
-          <Box mah={350} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+          <Box ><Image width={300} height={200} radius="md" src={specificPicture} alt="Random image" /></Box>
+          <Box  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
             <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
@@ -381,6 +406,8 @@ const TableBusiness = () => {
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
           </Box>
         </Box>
+        </Tabs.Panel>
+        </Tabs>
       </Modal>
     </Box>
   )

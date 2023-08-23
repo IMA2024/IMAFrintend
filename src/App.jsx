@@ -34,6 +34,7 @@ import Services from './pages/Services';
 import Reviews from './pages/Reviews';
 import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
+import StatsGrid from './SuperAdmin/pages/Charts/UserBlocks';
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
 import BusinessAdd from './BusinessOwner/pages/Business/AddBusiness';
@@ -51,12 +52,14 @@ import BusinessPanelAddRevenue from './BusinessOwner/pages/Accounting/AddRevenue
 import BusinessPanelViewRevenue from './BusinessOwner/pages/Accounting/ViewRevenue';
 import BusinessPanelAddExpense from './BusinessOwner/pages/Accounting/AddExpense';
 import BusinessPanelViewExpense from './BusinessOwner/pages/Accounting/ViewExpense';
+import UpdateConfigureAgents from './BusinessOwner/pages/Agents/UpdateConfigureAgents';
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
+
 
 
 export default function Demo() {
@@ -124,7 +127,8 @@ export default function Demo() {
         <Route path="Services" element={<Services />} />
         <Route path="Reviews" element={<Reviews />} />
         <Route path="Faq" element={<Faq />} />
-        <Route path="ContactUs" element={<ContactUs />} />  
+        <Route path="ContactUs" element={<ContactUs />} /> 
+        <Route path="StatsGrid" element={<StatsGrid />} /> 
       </Route>
       {/* These are the routes for Business Panel */}
       <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
@@ -143,6 +147,7 @@ export default function Demo() {
       <Route path="BusinessPanelViewRevenue" element={<BusinessPanelViewRevenue />} />
       <Route path="BusinessPanelAddExpense" element={<BusinessPanelAddExpense />} />
       <Route path="BusinessPanelViewExpense" element={<BusinessPanelViewExpense />} />
+      <Route path="UpdateConfigureAgents" element={<UpdateConfigureAgents />} />
       </Route>
       {/* The routes for Business Panel end here*/}
      </Routes>
