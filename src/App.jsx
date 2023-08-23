@@ -59,7 +59,7 @@ import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
-
+import { UserProvider } from './context/users/userContext';
 
 
 export default function Demo() {
@@ -92,7 +92,7 @@ export default function Demo() {
   return (
       <>
      
-    <Router>
+    <Router><UserProvider>
      <Routes>
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
       <Route path="SignIn" element={<SignIn />} />
@@ -150,7 +150,7 @@ export default function Demo() {
       <Route path="UpdateConfigureAgents" element={<UpdateConfigureAgents />} />
       </Route>
       {/* The routes for Business Panel end here*/}
-     </Routes>
+     </Routes></UserProvider>
     </Router>
  
       </>
