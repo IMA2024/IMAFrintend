@@ -96,40 +96,36 @@ export default function EditUser() {
   };
 
   return (
-    <Paper withBorder shadow="md" p={35} radius="md">
+    <Paper withBorder shadow="md" pt={10} pb={10} pl={35} pr={35}radius="md">
       <Title
-        mb={20}
         align="center"
-        sx={{ fontWeight: 650 }}
+        order={2}
+        sx={{ fontWeight: 550 }}
       >
         Update User
       </Title>
-      <Divider mb={20} />
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
           <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
           />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='md' className={classes.inputField} label="First Name" placeholder="Enter First Name: Harry" {...form.getInputProps('firstName')} />
-          <TextInput withAsterisk size='md' className={classes.inputField} label="Last Name" placeholder="Enter Last Name: Edward " {...form.getInputProps('lastName')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+          <TextInput withAsterisk size='sm' className={classes.inputField} label="First Name" placeholder="Enter First Name: Harry" {...form.getInputProps('firstName')} />
+          <TextInput withAsterisk size='sm' className={classes.inputField} label="Last Name" placeholder="Enter Last Name: Edward " {...form.getInputProps('lastName')} />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-          <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='md' className={classes.inputField} label="Email" placeholder="Enter Email: user@gmail.com"{...form.getInputProps('email')} />
-          <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03214455112" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
-        </Box>
-        <Box mt="md" >
-          <TextInput size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps('address')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+          <TextInput disabled size='sm' sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk className={classes.inputField} label="Email" placeholder="Enter Email: user@gmail.com"{...form.getInputProps('email')} />
+          <TextInput withAsterisk size='sm' label="Phone Number" placeholder="Enter Phone Number: 03214455112" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         {/* <Box className={classes.responsiveContainer} mt="md" >
         <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
         <PasswordInput size='md' withAsterisk label="Confirm Password" placeholder="Confirm Password"  className={classes.inputField} {...form.getInputProps('confirmPassword')} />
          </Box> */}
-        <Box mt="md" >
+        <Box mt="sm" >
           <Dropzone
             sx={{
-              height: 175,
-              width: 175,
+              height: 145,
+              width: 145,
             }}
             onDrop={(files) => setImageUpload(files)}
             multiple={false}
@@ -139,21 +135,21 @@ export default function EditUser() {
             value={imageUpload ? imageUpload.name : ''}
           >
             <Image
-              height={169}
-              width={169}
+              height={139}
+              width={139}
               sx={{ resize: 'contain', marginTop: -15, marginLeft: -15 }}
               src={imageUpload ? URL.createObjectURL(imageUpload[0]) : rowData.profilePic}
             />
           </Dropzone>
-          <Button disabled={!imageUpload} onClick={() => { handleUploadImage() }} style={{ marginTop: 15, marginLeft: 12 }}>
+          <Button disabled={!imageUpload} onClick={() => { handleUploadImage() }} style={{ marginTop: 15}}>
             Upload Image
           </Button>
         </Box>
         <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-          <Button size='md' color='red.8' >
+          <Button size='sm' color='red.8' >
             Cancel
           </Button>
-          <Button type="submit" size='md' color='green.9' >
+          <Button type="submit" size='sm' color='green.9' >
             Submit
           </Button>
         </Box>
