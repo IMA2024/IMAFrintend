@@ -15,6 +15,8 @@ import { useForm } from '@mantine/form';
 import { Signin } from '../../api/profiling/Signin';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
+import { UserContext } from '../../context/users/userContext';
+import { useContext } from 'react';
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -46,6 +48,7 @@ import { notifications } from '@mantine/notifications';
   export default function SignIn() {
     const { classes } = useStyles();
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext)
 
     const form = useForm({
         initialValues: {  email: '', password:''},
@@ -66,6 +69,7 @@ import { notifications } from '@mantine/notifications';
 
         notifications.show({ message: `Signin Successfull `, color: 'green' });
         console.log(response.data);
+        setUser(response.data);
 
         switch (response?.data?.role) {
           case 'Super Admin':
@@ -95,6 +99,7 @@ import { notifications } from '@mantine/notifications';
         }  }
     } catch (error) {
       notifications.show({ message: error.response.data.message , color: 'red' , height: 100  });
+      console.log(error);
     }
 };
       

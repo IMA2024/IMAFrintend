@@ -1,6 +1,6 @@
 import { Center } from '@mantine/core';
 import { SpotlightProvider } from '@mantine/spotlight';
-import {BrowserRouter as Router, Route, Link, Routes, json} from "react-router-dom"
+import {BrowserRouter as Router, Route, Link, Routes, json } from "react-router-dom"
 import EmailBanner from './pages/Services';
 import GeneralLayout from './SuperAdmin/Layout/GeneralLayout';
 import ViewTable from './pages/ViewTable';
@@ -49,6 +49,7 @@ import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
+import { UserProvider } from './context/users/userContext';
 
 
 export default function Demo() {
@@ -79,60 +80,60 @@ export default function Demo() {
     //console.log(storedValue);
   
   return (
-      <>
-     
-    <Router>
-     <Routes>
-      <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
-      <Route path="SignIn" element={<SignIn />} />
-      <Route path="SignUp" element={<SignUp />} />
-      </Route>
-      <Route path="/" element={<GeneralLayout />}>
-        <Route path="EmailBanner" element={<EmailBanner />} />
-        <Route path="ViewTable" element={<ViewTable />} />
-        <Route path="AddExpense" element={<AddExpense />} />
-        <Route path="ViewExpense" element={<ViewExpense />} />
-        <Route path="AddUser" element={<AddUser />} />
-        <Route path="ViewUser" element={<ViewUser />} />
-        <Route path="EditUser" element={<EditUser />} />
-        <Route path="AddRevenue" element={<AddRevenue />} />
-        <Route path="ViewRevenue" element={<ViewRevenue />} />
-        <Route path="ViewPayment" element={<ViewPayment />} />
-        <Route path="AddBusiness" element={<AddBusiness />} />
-        <Route path="ViewBusiness" element={<ViewBusiness />} />
-        <Route path="EditBusiness" element={<EditBusiness />} />
-        <Route path="AddSubscription" element={<AddSubscription />} />
-        <Route path="ViewSubscription" element={<ViewSubscription />} />
-        <Route path="SubscriptionPaymentChart" element={<SubscriptionPaymentChart />} />
-        <Route path="RevenueChart" element={<RevenueChart />} />
-        <Route path="SubscriptionChart" element={<SubscriptionChart />} />
-        <Route path="RegisteredBusinessChart" element={<RegisteredBusinessChart />} />
-        <Route path="StatsGroup" element={<StatsGroup />} />
-        <Route path="ColumnRotatedLabelChart" element={<ColumnRotatedLabelChart />} />
-        <Route path="GroupedStackedColumns" element={<GroupedStackedColumns />} />
-        <Route path="TotalRevenueBlocks" element={<TotalRevenueBlocks />} />
-        <Route path="SimpleDonut" element={<SimpleDonut />} />
-        <Route path="Dashboard" element={<Dashboard />} />
-        <Route path="Services" element={<Services />} />
-        <Route path="Reviews" element={<Reviews />} />
-        <Route path="Faq" element={<Faq />} />
-        <Route path="ContactUs" element={<ContactUs />} />
+    <>
+
+      <Router><UserProvider>
+        <Routes>
+          <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
+            <Route path="SignIn" element={<SignIn />} />
+            <Route path="SignUp" element={<SignUp />} />
+          </Route>
+          <Route path="/" element={<GeneralLayout />}>
+            <Route path="EmailBanner" element={<EmailBanner />} />
+            <Route path="ViewTable" element={<ViewTable />} />
+            <Route path="AddExpense" element={<AddExpense />} />
+            <Route path="ViewExpense" element={<ViewExpense />} />
+            <Route path="AddUser" element={<AddUser />} />
+            <Route path="ViewUser" element={<ViewUser />} />
+            <Route path="EditUser" element={<EditUser />} />
+            <Route path="AddRevenue" element={<AddRevenue />} />
+            <Route path="ViewRevenue" element={<ViewRevenue />} />
+            <Route path="ViewPayment" element={<ViewPayment />} />
+            <Route path="AddBusiness" element={<AddBusiness />} />
+            <Route path="ViewBusiness" element={<ViewBusiness />} />
+            <Route path="EditBusiness" element={<EditBusiness />} />
+            <Route path="AddSubscription" element={<AddSubscription />} />
+            <Route path="ViewSubscription" element={<ViewSubscription />} />
+            <Route path="SubscriptionPaymentChart" element={<SubscriptionPaymentChart />} />
+            <Route path="RevenueChart" element={<RevenueChart />} />
+            <Route path="SubscriptionChart" element={<SubscriptionChart />} />
+            <Route path="RegisteredBusinessChart" element={<RegisteredBusinessChart />} />
+            <Route path="StatsGroup" element={<StatsGroup />} />
+            <Route path="ColumnRotatedLabelChart" element={<ColumnRotatedLabelChart />} />
+            <Route path="GroupedStackedColumns" element={<GroupedStackedColumns />} />
+            <Route path="TotalRevenueBlocks" element={<TotalRevenueBlocks />} />
+            <Route path="SimpleDonut" element={<SimpleDonut />} />
+            <Route path="Dashboard" element={<Dashboard />} />
+            <Route path="Services" element={<Services />} />
+            <Route path="Reviews" element={<Reviews />} />
+            <Route path="Faq" element={<Faq />} />
+            <Route path="ContactUs" element={<ContactUs />} />
         
-      </Route>
-      {/* These are the routes for Business Panel */}
-      <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
-      <Route path="BusinessAdd" element={<BusinessAdd />} />
-      <Route path="BusinessView" element={<BusinessView />} />
-      <Route path="BusinessEdit" element={<BusinessEdit />} />
-      <Route path="AddBusinessOwner" element={<AddBusinessOwner />} />
-      <Route path="ViewBusinessOwner" element={<ViewBusinessOwner />} />
-      <Route path="BuySubscription" element={<BuySubscription />} />
-      <Route path="ViewBusinessSubscription" element={<ViewBusinessSubscription />} />
-      </Route>
-      {/* The routes for Business Panel end here*/}
-     </Routes>
-    </Router>
- 
-      </>
+          </Route>
+          {/* These are the routes for Business Panel */}
+          <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
+            <Route path="BusinessAdd" element={<BusinessAdd />} />
+            <Route path="BusinessView" element={<BusinessView />} />
+            <Route path="BusinessEdit" element={<BusinessEdit />} />
+            <Route path="AddBusinessOwner" element={<AddBusinessOwner />} />
+            <Route path="ViewBusinessOwner" element={<ViewBusinessOwner />} />
+            <Route path="BuySubscription" element={<BuySubscription />} />
+            <Route path="ViewBusinessSubscription" element={<ViewBusinessSubscription />} />
+          </Route>
+          {/* The routes for Business Panel end here*/}
+        </Routes></UserProvider>
+      </Router>
+
+    </>
   );
 }
