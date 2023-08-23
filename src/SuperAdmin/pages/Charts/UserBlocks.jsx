@@ -1,4 +1,5 @@
 import { createStyles, Group, Paper, SimpleGrid, Text, rem } from '@mantine/core';
+import React, { useState , useEffect} from 'react';
 import {
   IconUser,
   IconDiscount2,
@@ -47,52 +48,109 @@ const icons = {
 
 const UserData = [
     {
-      "title": "Total Users",
       "icon": "user",
-      "value": "13,456",
       "diff": 7
     },
   ]
 
   const MarketingData = [
     {
-      "title": "Marketing Agents",
      "icon": "user",
-      "value": "4,145",
       "diff": 3
     },
   ] 
 
   const BusinessOwnerData = [ 
     {
-      "title": "Business Owners",
      "icon": "user",
-      "value": "745",
       "diff": 2
     },
   ] 
 
   const CustomerData = [
     {
-      "title": "Customers",
       "icon": "user",
-      "value": "188",
       "diff": 1
     },
   ] 
 
 
 export default function StatsGrid() {
+  const [users, setUsers] = useState();
+  const [marketingAgents, setMarketingAgents] = useState(); 
+  const [owners, setOwners] = useState(); 
+  const [customers, setCustomers] = useState(); 
   const { classes } = useStyles();
+
   const statsUser = UserData.map((stat) => {
     const Icon = icons[stat.icon];
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/admin/totalUsers');
+          const newData = await response.json();
+          console.log(response);
+          setUsers(newData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/admin/totalMarketingAgents');
+          const newData = await response.json();
+          console.log(response);
+          setMarketingAgents(newData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+      fetchData();
+    }, []);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/admin/totalBusinessOwners');
+          const newData = await response.json();
+          console.log(response);
+          setOwners(newData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/admin/totalCustomers');
+          const newData = await response.json();
+          console.log(response);
+          setCustomers(newData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);
 
     return (
       <Paper withBorder p="md" radius="md" key={stat.title} >
         <Group position="apart">
           <Text size="xs" color="dimmed" className={classes.title}>
-            {stat.title}
+            TOTAL USERS
           </Text>
         
           <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
@@ -100,7 +158,7 @@ export default function StatsGrid() {
         </Group>
 
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{stat.value}</Text>
+          <Text className={classes.value}>{users}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -121,14 +179,14 @@ export default function StatsGrid() {
       <Paper withBorder p="md" radius="md" key={stat.title} >
         <Group position="apart">
           <Text size="xs" color="dimmed" className={classes.title}>
-            {stat.title}
+          MARKETING AGENTS
           </Text>
         
           <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{stat.value}</Text>
+          <Text className={classes.value}>{marketingAgents}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -149,14 +207,14 @@ export default function StatsGrid() {
       <Paper withBorder p="md" radius="md" key={stat.title} >
         <Group position="apart">
           <Text size="xs" color="dimmed" className={classes.title}>
-            {stat.title}
-          </Text>
+          BUSINESS OWNERS
+                    </Text>
         
           <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{stat.value}</Text>
+          <Text className={classes.value}>{owners}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -177,14 +235,14 @@ export default function StatsGrid() {
       <Paper withBorder p="md" radius="md" key={stat.title} >
         <Group position="apart">
           <Text size="xs" color="dimmed" className={classes.title}>
-            {stat.title}
+          CUSTOMERS          
           </Text>
         
           <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{stat.value}</Text>
+          <Text className={classes.value}>{customers}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
