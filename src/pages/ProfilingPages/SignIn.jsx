@@ -1,16 +1,4 @@
-import {
-  Paper,
-  createStyles,
-  TextInput,
-  PasswordInput,
-  Checkbox,
-  Button,
-  Title,
-  Text,
-  Anchor,
-  rem,
-  Box,
-} from '@mantine/core';
+import { Paper, createStyles, TextInput, PasswordInput, Button, Title, Text, Anchor, rem, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Signin } from '../../api/profiling/Signin';
 import { useNavigate } from 'react-router-dom';
@@ -54,9 +42,15 @@ import { useContext } from 'react';
         initialValues: {  email: '', password:''},
         validateInputOnChange: true,
         validate: {
-          email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e user@gmail.com'),
-          password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
-        },
+          email: (value) => { const isValidFormat = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) || /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value);
+          if (!isValidFormat) {
+            return 'Please Enter a Valid Email i.e. user@gmail.com or user1223@gmail.com';
+          }
+          if (value.length > 25) {
+            return 'Email Length Must Not Exceed 25 Characters';
+          }
+          return null;},              
+          password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),        },
       });
 
       const handleSubmit = async (values) => {
@@ -75,23 +69,22 @@ import { useContext } from 'react';
           case 'Super Admin':
             localStorage.setItem('token', response?.data?.token);
             localStorage.setItem('role', response?.data?.role);
-
-            navigate('/ViewUser');
+            navigate('/Dashboard');
             break;
           case 'Marketing Agent':
             localStorage.setItem('token', response?.data?.token);
             localStorage.setItem('role', response?.data?.role);
-            navigate('/ViewUser');
+            navigate('/Dashboard');
             break;
           case 'Business Owner':
             localStorage.setItem('token', response?.data?.token);
             localStorage.setItem('role', response?.data?.role);
-            navigate('/ViewUser');
+            navigate('/Dashboard');
             break;
           case 'Customer':
             localStorage.setItem('token', response?.data?.token);
             localStorage.setItem('role', response?.data?.role);            
-            navigate('/ViewUser');
+            navigate('/Dashboard');
             break;
           default:
             console.log('Invalid role');
@@ -115,8 +108,8 @@ import { useContext } from 'react';
             Welcome to IMA!
           </Title>
           <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-          <TextInput label="Email address" placeholder="hello@gmail.com" size="md" {...form.getInputProps('email')}  />
-          <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" {...form.getInputProps('password')} />
+          <TextInput maxLength={25} label="Email address" placeholder="user@gmail.com" size="md" {...form.getInputProps('email')}  />
+          <PasswordInput maxLength={20} label="Password" placeholder="Your Password" mt="md" size="md" {...form.getInputProps('password')} />
           <Box>
           <Button  fullWidth mt="xl" size="md" type='submit' >
             Login
@@ -125,7 +118,7 @@ import { useContext } from 'react';
           <Text ta="center" mt="md">
           Don't Have An Account? 
           <Anchor mt={'md'} color='dark.1' component="button" size="xl" onClick={() => GoToSignUp()}>
-           Sign Up
+           SignUp
           </Anchor>
           </Text>
           </form>

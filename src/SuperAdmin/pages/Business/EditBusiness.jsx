@@ -48,11 +48,18 @@ export default function EditBusiness() {
     validateInputOnChange: true,
     validate: {
       type: isNotEmpty('Please Select Business Type'),
-      name: (value) => (/^[A-Za-z ]{3,30}$/.test(value) ? null : 'Business Name Should be between 3 and 30 Characters'),
+      name: (value) => (/^[A-Za-z ]{3,30}$/.test(value) ? null : 'Business Name Must Contain 3 to 30 Characters'),
       businessOwner: isNotEmpty('Please Select Business Owner'),
-      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e business@gmail.com'),
-      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
-      address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 10 and 150 Characters'),
+      email: (value) => { const isValidFormat = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) || /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value);
+      if (!isValidFormat) {
+        return 'Please Enter a Valid Email i.e. business@gmail.com or business123@gmail.com';
+      }
+      if (value.length > 25) {
+        return 'Email Length Must Not Exceed 25 Characters';
+      }
+      return null;},       
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number Must Be 11 Digits'),
+      address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Must Contain 10 to 150 Characters'),
       description: (value) => (/^(?!\s*$).*/.test(value) ? null : 'Business Description Must Not Be Empty')
     },
   });
@@ -123,7 +130,7 @@ export default function EditBusiness() {
          />
         </Box>
       <Box mt="sm" className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Enter Business Name: Jinnah Heights" {...form.getInputProps('name')} />
+        <TextInput maxLength={30} withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Edit Business Name" {...form.getInputProps('name')} />
         <Select withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
         data={countries.map((country) => ({
           value: `${country._id}`,
@@ -132,14 +139,14 @@ export default function EditBusiness() {
          />
         </Box>
         <Box mt="sm"  className={classes.responsiveContainer}>
-        <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='sm' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
-         <TextInput withAsterisk size='sm' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+        <TextInput maxLength={25} disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='sm' className={classes.inputField} label="Email" placeholder="Edit Business Email" {...form.getInputProps('email')} />
+         <TextInput maxLength={11} withAsterisk size='sm' label="Phone Number" placeholder="Edit Business Phone Number"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box mt="sm" >
-        <TextInput withAsterisk size='sm' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps('address')} />
+        <TextInput maxLength={150} withAsterisk size='sm' label="Address" placeholder="Edit Business Address" {...form.getInputProps('address')} />
         </Box>
         <Box mt="sm" >
-        <Textarea withAsterisk size='sm' label="Business Description" placeholder="Enter Business Description: Car Business." {...form.getInputProps('description')}  />
+        <Textarea maxLength={500} withAsterisk size='sm' label="Business Description" placeholder="Edit Business Description" {...form.getInputProps('description')}  />
         </Box>
         <Box mt="sm" >
           <Dropzone

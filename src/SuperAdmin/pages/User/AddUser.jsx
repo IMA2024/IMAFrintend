@@ -42,12 +42,19 @@ export default function AddUser() {
     validateInputOnChange: true,
     validate: {
       role: isNotEmpty('Please Select A Role'),
-      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name should be between 3 to 20 Alphabets'),
-      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name should be between 3 to 20 Alphabets'),
-      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
-      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e user@gmail.com'),
+      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Must Contain 3 to 20 Alphabets'),
+      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name Must Contain 3 to 20 Alphabets'),
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number Must Be 11 Digits'),
+      email: (value) => { const isValidFormat = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) || /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value);
+      if (!isValidFormat) {
+        return 'Please Enter a Valid Email i.e. user@gmail.com or user1223@gmail.com';
+      }
+      if (value.length > 25) {
+        return 'Email Length Must Not Exceed 25 Characters';
+      }
+      return null;},        
       password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
-      confirmPassword: (value, { password }) => (value === password ? null : 'Incorrect ! Please Recheck & Confirm Your Password'),
+      confirmPassword: (value, { password }) => { if (!value) return 'Please Confirm Your Password'; return value === password ? null : 'Passwords Do Not Match';},
     },
   });
 
@@ -66,15 +73,15 @@ export default function AddUser() {
       notifications.show({ message: "Picture Uploaded Successfully.", color: 'green' });
     } catch (error) {
       console.error(error);
-      notifications.show({ message: "Error uploading picture.", color: 'red' });
+      notifications.show({ message: "Error Uploading picture.", color: 'red' });
     }
   };
 
   const handleSubmit = async (values) => {
-    const { role, firstName, lastName, email, phoneNumber, address, password } = values;
+    const { role, firstName, lastName, email, phoneNumber, password } = values;
 
     try {
-      const response = await addUser( profilePics , role, firstName, lastName, email, phoneNumber, address, password);
+      const response = await addUser( profilePics , role, firstName, lastName, email, phoneNumber, password);
       if (response.status === 201 || response.status === 200) {
         form.reset();
         setProfilePics('');
@@ -101,7 +108,7 @@ export default function AddUser() {
   */}
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
-          <Select withAsterisk size='sm' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
+          <Select withAsterisk size='sm' label="Role" placeholder="Select A Role" {...form.getInputProps('role')}
             data={[
               { value: 'Marketing Agent', label: 'Marketing Agent' },
               { value: 'Business Owner', label: 'Business Owner' },
@@ -110,16 +117,16 @@ export default function AddUser() {
           />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="First Name" placeholder="Enter First Name: John" {...form.getInputProps('firstName')} />
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
+          <TextInput maxLength={20} withAsterisk size='sm' className={classes.inputField} label="First Name" placeholder="Enter User First Name" {...form.getInputProps('firstName')} />
+          <TextInput maxLength={20} withAsterisk size='sm' className={classes.inputField} label="Last Name" placeholder="Enter User Last Name" {...form.getInputProps('lastName')} />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
-          <TextInput withAsterisk size='sm' label="Phone Number" placeholder="Enter Phone Number: 03001234567" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+          <TextInput maxLength={25} withAsterisk size='sm' className={classes.inputField} label="Email" placeholder="Enter User Email" {...form.getInputProps('email')} />
+          <TextInput maxLength={11} withAsterisk size='sm' label="Phone Number" placeholder="Enter User Phone Number" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box className={classes.responsiveContainer} mt="sm" >
-          <PasswordInput size='sm' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
-          <PasswordInput size='sm' withAsterisk label="Confirm Password" placeholder="Confirm Password" className={classes.inputField} {...form.getInputProps('confirmPassword')} />
+          <PasswordInput maxLength={20} size='sm' withAsterisk label="Password" placeholder="Enter User Password" className={classes.inputField}  {...form.getInputProps('password')} />
+          <PasswordInput maxLength={20} size='sm' withAsterisk label="Confirm Password" placeholder="Confirm Password" className={classes.inputField} {...form.getInputProps('confirmPassword')} />
         </Box>
         <Box mt="sm" >
           <Dropzone

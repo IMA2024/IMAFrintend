@@ -13,9 +13,6 @@ export function UserProvider({ children }) {
   
       if (token) {
         fetchMyProfile(token);
-      } else {
-        console.log('No Token');
-        navigate('/HeaderMegaMenu/SignIn');
       }
     }, [navigate]);
   

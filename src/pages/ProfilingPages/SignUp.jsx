@@ -1,5 +1,5 @@
 import { isNotEmpty, useForm } from '@mantine/form';
-import { FileInput, TextInput, Button, Box, createStyles, Paper, PasswordInput, Title, Divider, Select, Image, rem, Anchor, Text } from '@mantine/core';
+import { TextInput, Button, Box, createStyles, Paper, PasswordInput, Title, Divider, Select, rem, Anchor, Text } from '@mantine/core';
 import { Signup } from '../../api/profiling/Signup';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
@@ -51,27 +51,26 @@ export default function SignUp() {
   const { classes } = useStyles();
   const navigate = useNavigate();
 
-  //   const handleSubmit = () => {   
-  //     notifications.show({ message: 'Form submitted successfully', color: 'green' });
-  // };
-
-  // const handleError = () => {
-  //   notifications.show({ message: 'Please enter valid values', color: 'red' });
-  // };
-
   const form = useForm({
     initialValues: { firstName: '', lastName: '', role: '', email: '', phoneNumber: '', password: '', confirmPassword: '' },
     validateInputOnChange: true,
     validate: {
       role: isNotEmpty('Please Select A Role'),
-      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name should be between 3 to 20 Alphabets'),
-      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name should be between 3 to 20 Alphabets'),
-      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
-      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e user@gmail.com'),
+      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Must Contain 3 to 20 Alphabets'),
+      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name Must Contain 3 to 20 Alphabets'),
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number Must Be 11 Digits'),
+      email: (value) => { const isValidFormat = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) || /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value);
+      if (!isValidFormat) {
+        return 'Please Enter a Valid Email i.e. user@gmail.com or user1223@gmail.com';
+      }
+      if (value.length > 25) {
+        return 'Email Length Must Not Exceed 25 Characters';
+      }
+      return null;},         
       password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
-      confirmPassword: (value, { password }) => (value === password ? null : 'Incorrect ! Please Recheck & Confirm Your Password'),
-    },
-  });
+      confirmPassword: (value, { password }) => { if (!value) return 'Please Confirm Your Password'; return value === password ? null : 'Passwords Do Not Match';},
+      }
+        });
 
   const handleSubmit = async (values) => {
     const { role, firstName, lastName, email, phoneNumber, password } = values;
@@ -105,7 +104,7 @@ export default function SignUp() {
         <Divider mb={20} />
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
           <Box>
-            <Select withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
+            <Select withAsterisk size='md' label="Role" placeholder="Select Your Role" {...form.getInputProps('role')}
               data={[
                 { value: 'Marketing Agent', label: 'Marketing Agent' },
                 { value: 'Business Owner', label: 'Business Owner' },
@@ -114,22 +113,22 @@ export default function SignUp() {
             />
           </Box>
           <Box mt="md" >
-            <TextInput withAsterisk size='md' label="First Name" placeholder="Enter First Name: John" {...form.getInputProps('firstName')} />
+            <TextInput maxLength={20} withAsterisk size='md' label="First Name" placeholder="Enter Your First Name" {...form.getInputProps('firstName')} />
           </Box>
           <Box mt="md" >
-            <TextInput withAsterisk size='md' label="Last Name" placeholder="Enter First Name: Cena" {...form.getInputProps('lastName')} />
+            <TextInput maxLength={20} withAsterisk size='md' label="Last Name" placeholder="Enter Your Last Name" {...form.getInputProps('lastName')} />
           </Box>
           <Box mt="md" >
-            <TextInput withAsterisk size='md' label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+            <TextInput maxLength={25} withAsterisk size='md' label="Email" placeholder="Enter Your Email" {...form.getInputProps('email')} />
           </Box>
           <Box mt="md" >
-            <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  {...form.getInputProps('phoneNumber')} />
+            <TextInput maxLength={11} withAsterisk size='md' label="Phone Number" placeholder="Enter Your Phone Number"  {...form.getInputProps('phoneNumber')} />
           </Box>
           <Box mt="md" >
-            <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password"  {...form.getInputProps('password')} />
+            <PasswordInput maxLength={20}size='md' withAsterisk label="Password" placeholder="Enter Your Password"  {...form.getInputProps('password')} />
           </Box>
           <Box mt="md" >
-            <PasswordInput size='md' withAsterisk label="Confirm Password" placeholder="Confirm Password"  {...form.getInputProps('confirmPassword')} />
+            <PasswordInput maxLength={20} size='md' withAsterisk label="Confirm Password" placeholder="Confirm Your Password"  {...form.getInputProps('confirmPassword')} />
           </Box>
           <Box mt={'md'} >
             <Button fullWidth mt="xl" size="md" type='submit'>
@@ -138,7 +137,7 @@ export default function SignUp() {
             <Text ta="center" mt="md">
               Already Have An Account?
               <Anchor mt={'md'} color='dark.1' component="button" size="xl" onClick={() => GoToSignIn()}>
-                Sign In
+                SignIn
               </Anchor>
             </Text>
           </Box>

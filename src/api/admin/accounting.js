@@ -1,8 +1,8 @@
 import { Axios } from "../connection";
 
-export const addExpense = async (  title, business, description,  date, amount ) => {
+export const addExpense = async (  title, business, description,  date, amount , profilePic ) => {
    const response = await Axios.post('admin/addExpense',
-      {  title, business, description,  date, amount  })
+      {  title, business, description,  date, amount , profilePic })
    return response;
 }
 
@@ -11,9 +11,9 @@ export const deleteExpense = async (expenseId) => {
    return response;
 };
 
-export const addRevenue = async (  title, business, description,  date, amount ) => {
+export const addRevenue = async (  title, business, description,  date, amount , profilePic ) => {
    const response = await Axios.post('admin/addRevenue',
-      {  title, business, description,  date, amount  })
+      {  title, business, description,  date, amount , profilePic })
    return response;
 }
 

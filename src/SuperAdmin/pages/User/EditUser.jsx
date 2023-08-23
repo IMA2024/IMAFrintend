@@ -43,19 +43,21 @@ export default function EditUser() {
   const [profilePics, setProfilePics] = useState('')
 
   const form = useForm({
-    initialValues: { userId: rowData._id , profilePics : rowData.profilePic ,firstName: rowData.firstName, lastName: rowData.lastName, role: rowData.role, phoneNumber: rowData.phoneNumber, address: rowData.address, email: rowData.email, password: '', confirmPassword: '' },
+    initialValues: { userId: rowData._id , profilePics : rowData.profilePic ,firstName: rowData.firstName, lastName: rowData.lastName, role: rowData.role, phoneNumber: rowData.phoneNumber,email: rowData.email},
     validateInputOnChange: true,
     validate: {
       role: isNotEmpty('Please Select A Role'),
-      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name should be between 3 to 20 Alphabets'),
-      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name should be between 3 to 20 Alphabets'),
-      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
-      address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 10 and 150 Characters'),
-      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e user@gmail.com'),
-      // password: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
-      // confirmPassword: (value, { password }) => (value === password ? null : 'Incorrect ! Please Recheck & Confirm Your Password'),
-    },
-  });
+      firstName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'First Name Must Contain 3 to 20 Alphabets'),
+      lastName: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Last Name Must Contain 3 to 20 Alphabets'),
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number Must Be 11 Digits'),
+      email: (value) => { const isValidFormat = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) || /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value);
+      if (!isValidFormat) {
+        return 'Please Enter a Valid Email i.e. user@gmail.com or user1223@gmail.com';
+      }
+      if (value.length > 25) {
+        return 'Email Length Must Not Exceed 25 Characters';
+      }
+      return null;},   } });
 
   const handleUploadImage = async () => {
     if (imageUpload === null) return;
@@ -77,10 +79,10 @@ export default function EditUser() {
   };
 
   const handleSubmit = async (values) => {
-    const { userId, role, firstName, lastName, phoneNumber, address } = values;
+    const { userId, role, firstName, lastName, phoneNumber } = values;
 
     try {
-      const response = await updateUser( userId, profilePics, role,  firstName, lastName, phoneNumber, address );
+      const response = await updateUser( userId, profilePics, role,  firstName, lastName, phoneNumber );
       console.log(response);
       if (response.status === 200) {
         form.reset();
@@ -110,17 +112,13 @@ export default function EditUser() {
           />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="First Name" placeholder="Enter First Name: Harry" {...form.getInputProps('firstName')} />
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="Last Name" placeholder="Enter Last Name: Edward " {...form.getInputProps('lastName')} />
+          <TextInput maxLength={20} withAsterisk size='sm' className={classes.inputField} label="First Name" placeholder="Edit First Name" {...form.getInputProps('firstName')} />
+          <TextInput maxLength={20} withAsterisk size='sm' className={classes.inputField} label="Last Name" placeholder="Edit Last Name" {...form.getInputProps('lastName')} />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
-          <TextInput disabled size='sm' sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk className={classes.inputField} label="Email" placeholder="Enter Email: user@gmail.com"{...form.getInputProps('email')} />
-          <TextInput withAsterisk size='sm' label="Phone Number" placeholder="Enter Phone Number: 03214455112" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+          <TextInput maxLength={25} disabled size='sm' sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk className={classes.inputField} label="Email" placeholder="Enter Email: user@gmail.com"{...form.getInputProps('email')} />
+          <TextInput  maxLength={11} withAsterisk size='sm' label="Phone Number" placeholder="Edit Phone Number" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
-        {/* <Box className={classes.responsiveContainer} mt="md" >
-        <PasswordInput size='md' withAsterisk label="Password" placeholder="Enter Password" className={classes.inputField}  {...form.getInputProps('password')} />
-        <PasswordInput size='md' withAsterisk label="Confirm Password" placeholder="Confirm Password"  className={classes.inputField} {...form.getInputProps('confirmPassword')} />
-         </Box> */}
         <Box mt="sm" >
           <Dropzone
             sx={{
