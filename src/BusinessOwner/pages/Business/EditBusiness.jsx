@@ -1,55 +1,52 @@
-import { isNotEmpty , useForm } from '@mantine/form';
-import { Image , TextInput, Button, Box , createStyles, Paper, Title, Divider, Select, Textarea } from '@mantine/core';
-import { useState , useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
-import { updateBusiness } from '../../../api/admin/businesses';
+import { isNotEmpty, useForm } from '@mantine/form';
+import { Image, TextInput, Button, Box, createStyles, Paper, Title, Divider, Select, Textarea } from '@mantine/core';
+import { useState, useEffect } from 'react';
+//import { addBusiness } from '../../../api/admin/businesses';
+import { addBusiness } from '../../../api/admin/businesses';
+//import { storage } from '../../../firebase';
 import { storage } from '../../../firebase';
 import { v4 } from "uuid";
-import { getDownloadURL, ref, uploadBytes } from '@firebase/storage';
+import { getDownloadURL, ref , uploadBytes } from '@firebase/storage';
 import { Dropzone } from '@mantine/dropzone';
 import { notifications } from '@mantine/notifications';
-import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
   responsiveContainer: {
-   width: '100%',
-   display: 'flex',
-   flexDirection: 'row',
-   gap: '16px',
-   //backgroundColor:'pink',
- 
-   [theme.fn.smallerThan('sm')]: {
-     flexDirection: 'column'
-   },
- 
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '16px',
+    //backgroundColor:'pink',
+
+    [theme.fn.smallerThan('sm')]: {
+      flexDirection: 'column'
+    },
+
   },
- 
+
   inputField: {
-   width: '50%',
-   [theme.fn.smallerThan('sm')]: {
-     width: '100%'
-   },
+    width: '50%',
+    [theme.fn.smallerThan('sm')]: {
+      width: '100%'
+    },
   }
-   
- }));
+
+}));
 
 export default function BusinessEdit() {
-  const location = useLocation();
-  const rowData = location.state.rowData;
-  const { classes } = useStyles();
-  const navigate = useNavigate();
-  const [countries, setCountries] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
-  const [profilePics, setProfilePics] = useState('')
+  const [profilePics, setProfilePics] = useState('');
+  const [countries, setCountries] = useState([]);
+  const { classes } = useStyles();
 
   const form = useForm({
-    initialValues: {businessId: rowData._id , name: rowData.name , businessOwner: rowData.businessOwner, type: rowData.type, phoneNumber: rowData.phoneNumber, address: rowData.address, email: rowData.email , description: rowData.description },
+    initialValues: { name: '', businessOwner: '', type: '', phoneNumber: '', address: '', email: '', description: '' },
     validateInputOnChange: true,
     validate: {
       type: isNotEmpty('Please Select Business Type'),
       name: (value) => (/^[A-Za-z ]{3,30}$/.test(value) ? null : 'Business Name Should be between 3 and 30 Characters'),
-      businessOwner: isNotEmpty('Please Select Business Owner'),
+      businessOwner: (value) => (/^[A-Za-z ]{3,30}$/.test(value) ? null : 'Business Owner Name Should be between 3 and 30 Characters'),
       email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e business@gmail.com'),
       phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
       address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 10 and 150 Characters'),
@@ -87,16 +84,15 @@ export default function BusinessEdit() {
   };
 
   const handleSubmit = async (values) => {
-    const { businessId, type, name, businessOwner, address, phoneNumber, description } = values;
+    const { type , name , businessOwner, email, address, phoneNumber, description } = values;
 
     try {
-      const response = await updateBusiness(businessId, profilePics, type, name, businessOwner, address, phoneNumber, description );
+      const response = await addBusiness(profilePics, type , name , businessOwner, email, address, phoneNumber, description);
       if (response.status === 201 || response.status === 200 ) {
         form.reset();
         setProfilePics('');
         setImageUpload(null);
-        navigate('/ViewBusiness');
-        notifications.show({ message: `Business Updated Successfully`, color: 'green' });
+        notifications.show({ message: `Business Added Successfully`, color: 'green' });
       }
 
     } catch (error) {
@@ -105,46 +101,41 @@ export default function BusinessEdit() {
   };
 
   return (
-    <Paper withBorder shadow="md" p={35}  radius="md">
-       <Title
-          mb={20}
-          align="center"
-          sx={{ fontWeight: 650 }}
-        >
-          Update Business
-        </Title>
-        <Divider mb={20} />
+    <Paper withBorder shadow="md" p={35} radius="md">
+      <Title
+        mb={20}
+        align="center"
+        sx={{ fontWeight: 650 }}
+      >
+        Edit Business
+      </Title>
+      <Divider mb={20} />
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
-        <Select withAsterisk size='md' label="Business Type" placeholder="Select Business Type" {...form.getInputProps('type')}
-        data={[
-            { value: 'Commercial', label: 'Commercial' },
-            { value: 'Industrial', label: 'Industrial' },
-          ]}
-         />
+          <Select withAsterisk size='md' label="Business Type" placeholder="Select Business Type" {...form.getInputProps('type')}
+            data={[
+              { value: 'Commercial', label: 'Commercial' },
+              { value: 'Industrial', label: 'Industrial' },
+            ]}
+          />
         </Box>
-      <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='md' className={classes.inputField} label="Business Name" placeholder="Enter Business Name: Jinnah Heights" {...form.getInputProps('name')} />
-        <TextInput withAsterisk size='md' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
-        /*
-        data={countries.map((country) => ({
-          value: `${country._id}`,
-          label: `${country.firstName} ${country.lastName}`,
-        }))}
-        */
-         />
+        <Box mt="md" className={classes.responsiveContainer}>
+          <TextInput withAsterisk size='md' className={classes.inputField} label="Business Name" placeholder="Enter Business Name: Jinnah Heights" {...form.getInputProps('name')} />
+          <TextInput withAsterisk size='md' className={classes.inputField} label="Business Owner Name" placeholder="Enter Business Owner Name: John Lee" {...form.getInputProps('businessOwner')} />
         </Box>
-        <Box mt="md"  className={classes.responsiveContainer}>
-        <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='md' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
-         <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567"  className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+        <Box mt="md" className={classes.responsiveContainer}>
+          <TextInput withAsterisk size='md' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
+          <TextInput withAsterisk size='md' label="Phone Number" placeholder="Enter Phone Number: 03001234567" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box mt="md" >
-        <TextInput withAsterisk size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps('address')} />
+          <TextInput withAsterisk size='md' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps('address')} />
         </Box>
         <Box mt="md" >
-        <Textarea withAsterisk size='md' label="Business Description" placeholder="Enter Business Description: Car Business." {...form.getInputProps('description')}  />
+          <Textarea withAsterisk size='md' label="Business Description" placeholder="Enter Business Description: Car Business." {...form.getInputProps('description')} />
         </Box>
-        <Box mt="md" >
+        
+        <Box mt="md"  style={{display:'flex', flexDirection:'row' ,justifyContent:'space-between'}}>
+          <Box>
           <Dropzone
             sx={{
               height: 175,
@@ -161,20 +152,30 @@ export default function BusinessEdit() {
               height={169}
               width={169}
               sx={{ resize: 'contain', marginTop: -15, marginLeft: -15 }}
-              src={imageUpload ? URL.createObjectURL(imageUpload[0]) : rowData.profilePic}
+              src={profilePics || (imageUpload ? URL.createObjectURL(imageUpload[0]) : '')}
             />
           </Dropzone>
           <Button disabled={!imageUpload} onClick={() => { handleUploadImage() }} style={{ marginTop: 15, marginLeft: 12 }}>
             Upload Image
           </Button>
-        </Box>
-         <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button size='md' color='red.8' >
-          Cancel
-        </Button>
-        <Button type="submit" size='md' color='green.9' >
-          Submit
-        </Button>
+          </Box>
+          <Box style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+          <Button size='md' variant='outline'  >
+            Update Questionnaire
+          </Button>
+          <Button ml={20} size='md' variant='outline' >
+            Update Agent Configuration
+          </Button>
+          </Box>
+          </Box>
+       
+        <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+          <Button size='md' color='red.8' >
+            Cancel
+          </Button>
+          <Button type="submit" size='md' color='green.9' >
+            Submit
+          </Button>
         </Box>
       </form>
     </Paper>

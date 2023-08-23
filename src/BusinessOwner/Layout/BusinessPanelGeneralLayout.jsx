@@ -56,7 +56,7 @@ export default function BusinessPanelGeneralLayout() {
           hidden={!opened}
           width={{ sm: 300, lg: 300 }}
           mt={-1}
-       
+
         >
         <ScrollArea type="never">
             <BusinessPanelLeftNavbar
@@ -67,7 +67,7 @@ export default function BusinessPanelGeneralLayout() {
       header={
         <Header height={{ base: 70, md: 70 }}>
           <div style={{ display: "flex", height: "100%" }}>
-            <MediaQuery largerThan="md" styles={{ display: "none" }}>
+            <MediaQuery largerThan="md" styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}

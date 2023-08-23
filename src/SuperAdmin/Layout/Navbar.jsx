@@ -76,7 +76,7 @@ const handleMouseLeave = () => {
     textDecoration: 'none',
     color: 'white',
     fontWeight: 'bold',
-    fontSize: '25px',
+    fontSize: '20px',
    
   };
 
