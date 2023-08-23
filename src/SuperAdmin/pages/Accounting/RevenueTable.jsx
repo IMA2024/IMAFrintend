@@ -86,6 +86,7 @@ const RevenueTable = () => {
   const [search, setSearch] = useState('');
   const [filteredRevenues, setfilteredRevenues] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
+  const [specificPicture, setSpecificPicture] = useState('');
   const [specificBusiness, setSpecificBusiness] = useState('');
   const [specificDescription, setSpecificDescription] = useState('');
   const [specificDate, setSpecificDate] = useState('');
@@ -126,7 +127,7 @@ const RevenueTable = () => {
     setSpecificDescription(row.description);
     setSpecificDate(row.date);
     setSpecificAmount(row.amount);
-
+    setSpecificPicture(row.profilePic);
   };
 
   const columns = [
@@ -260,7 +261,7 @@ const RevenueTable = () => {
       />
       <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Expense Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
-          <Box mah={800}><Image maw={800} radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
+          <Box mah={800}><Image maw={800} radius="md" src={specificPicture} alt="Random image" /></Box>
           <Box mah={380} miw={250} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
             <Box ><Badge variant="filled" >Car Business</Badge></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>

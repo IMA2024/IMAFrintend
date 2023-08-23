@@ -96,8 +96,6 @@ const [specificFirstName, setSpecificFirstName] =  useState('');
 const [specificLastName, setSpecificLastName] =  useState('');
 const [specificEmail, setSpecificEmail] =  useState('');
 const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
-const [specificAddress, setSpecificAddress] =  useState('');
-
 const navigate = useNavigate();
   
 const handleEdit = (row) => {
@@ -150,8 +148,6 @@ const handleViewSpecific = (row) => {
   setSpecificLastName(row.lastName);
   setSpecificEmail(row.email);
   setSpecificPhoneNumber(row.phoneNumber);
-  setSpecificAddress(row.address);
-
 };
 
 const columns = [
@@ -375,7 +371,6 @@ useEffect(() => {
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text ml={5}>{specificFirstName}</Text><Text ml={5}>{specificLastName}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
     </Box>
   </Box>
       </Modal>

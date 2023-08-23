@@ -42,14 +42,24 @@ export default function AddExpense() {
   const form = useForm({
     initialValues: { title: '', business: '', description: '', date: '', amount: '' },
     validateInputOnChange: true,
-    // functions will be used to validate values at corresponding key
     validate: {
-      title: (value) => (/^[a-zA-Z\s]{3,20}$/.test(value) ? null : 'Title Should Contain Atleast 3 Alphabets'),
+      title: (value) => (/^[a-zA-Z\s]{3,20}$/.test(value) ? null : 'Title Must Contain Atleast 3 to 20 Alphabets'),
       business: isNotEmpty('Please Select Business'),
-      description: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Business Details Must Not Be Empty'),
-      date: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Date Must Not Be Empty '),
-      amount: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Business Amount Must Not Be Empty '),
-    },
+      description: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Business Expense Details Must Not Be Empty'),
+      date: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Please Select A Date'),
+      amount: (value) => {
+        if (!/^(?!\s*$).+/.test(value)) {
+          return 'Business Expense Amount Must Not Be Empty';
+        }
+        const numericValue = parseFloat(value);
+        if (isNaN(numericValue)) {
+          return 'Business Expense Amount Must Be a Numeric Value';
+        }
+        if (numericValue > 10000000) {
+          return 'Business Expense Amount Must Not Exceed 1 Crore';
+        }
+        return null;
+      },    },
   });
 
   useEffect(() =>{
@@ -77,7 +87,7 @@ export default function AddExpense() {
       notifications.show({ message: "Picture Uploaded Successfully.", color: 'green' });
     } catch (error) {
       console.error(error);
-      notifications.show({ message: "Error uploading picture.", color: 'red' });
+      notifications.show({ message: "Error Uploading Picture.", color: 'red' });
     }
   };
 
@@ -86,9 +96,11 @@ export default function AddExpense() {
     const { title , business , description , date , amount } = values;
 
     try {
-      const response = await addExpense( title , business , description , date , amount );
+      const response = await addExpense( title , business , description , date , amount, profilePics);
       if (response.status === 201) {
         form.reset();
+        setProfilePics('');
+        setImageUpload(null);
         notifications.show({ message: `Expense Added Successfully`, color: 'green' });
       }
 
@@ -109,7 +121,7 @@ export default function AddExpense() {
         </Title>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='sm' className={classes.inputField} label="Title" placeholder="Enter Title: Car Business" {...form.getInputProps('title')} />
+        <TextInput maxLength={20} withAsterisk size='sm' className={classes.inputField} label="Title" placeholder="Enter Expense Title" {...form.getInputProps('title')} />
         <Select withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Select Business Name" {...form.getInputProps('business')}
              data={countries.map((country) => ({
               value: `${country._id}`,
@@ -119,9 +131,9 @@ export default function AddExpense() {
         </Box>
         <Box className={classes.responsiveContainer} mt="sm" >
         <Datepicker withAsterisk label="Date" placeholder="Select Date" className={classes.inputField}  {...form.getInputProps('date')} />
-        <NumberInput withAsterisk size='sm' label="Business Amount" placeholder="Enter Business Amount: 121"  className={classes.inputField} {...form.getInputProps('amount')}   />
+        <NumberInput maxLength={10000000} withAsterisk size='sm' label="Business Expense Amount" placeholder="Enter Business Expense Amount"  className={classes.inputField} {...form.getInputProps('amount')}   />
          </Box>
-         <Textarea withAsterisk size='sm' mt="sm" label="Revenue Details" placeholder="Enter Revenue Details: This Revenue Is Related To Cars." {...form.getInputProps('description')} />
+         <Textarea maxLength={500} withAsterisk size='sm' mt="sm" label="Business Expense Details" placeholder="Enter Business Expense Details" {...form.getInputProps('description')} />
          <Box mt="sm" >
           <Dropzone
             sx={{
@@ -143,7 +155,7 @@ export default function AddExpense() {
             />
           </Dropzone>
           <Button disabled={!imageUpload} onClick={() => { handleUploadImage() }} style={{ marginTop: 15}}>
-            Upload Image
+            Upload Receipt
           </Button>
         </Box>
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>

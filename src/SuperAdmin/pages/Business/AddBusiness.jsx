@@ -43,11 +43,18 @@ export default function AddBusiness() {
     validateInputOnChange: true,
     validate: {
       type: isNotEmpty('Please Select Business Type'),
-      name: (value) => (/^[A-Za-z ]{3,30}$/.test(value) ? null : 'Business Name Should be between 3 and 30 Characters'),
+      name: (value) => (/^[A-Za-z ]{3,30}$/.test(value) ? null : 'Business Name Must Contain 3 to 30 Characters'),
       businessOwner: isNotEmpty('Please Select Business Owner'),
-      email: (value) => (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? null : 'Please Enter Valid Email i.e business@gmail.com'),
-      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number should be 11 Digit'),
-      address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Should be between 10 and 150 Characters'),
+      email: (value) => { const isValidFormat = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) || /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value);
+      if (!isValidFormat) {
+        return 'Please Enter a Valid Email i.e. business@gmail.com or business123@gmail.com';
+      }
+      if (value.length > 25) {
+        return 'Email Length Must Not Exceed 25 Characters';
+      }
+      return null;},       
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number Must Be 11 Digits'),
+      address: (value) => (/^[a-zA-Z0-9\s,.\-!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\|`~]{20,100}$/.test(value) ? null : 'Address Must Contain 10 to 150 Characters'),
       description: (value) => (/^(?!\s*$).*/.test(value) ? null : 'Business Description Must Not Be Empty')
     },
   });
@@ -111,13 +118,28 @@ export default function AddBusiness() {
         <Box>
           <Select withAsterisk size='sm' label="Business Type" placeholder="Select Business Type" {...form.getInputProps('type')}
             data={[
-              { value: 'Commercial', label: 'Commercial' },
-              { value: 'Industrial', label: 'Industrial' },
+              { value: 'Advertising and Marketing Agencies', label: 'Advertising and Marketing Agencies' },
+              { value: 'Agriculture and Farming', label: 'Agriculture and Farming' },
+              { value: 'Automotive Industry', label: 'Automotive Industry' },
+              { value: 'Cosmetics and Beauty Products', label: 'Cosmetics and Beauty Products' },
+              { value: 'E-commerce and Online Retail', label: 'E-commerce and Online Retail' },
+              { value: 'Export and Import Businesses', label: 'Export and Import Businesses' },
+              { value: 'Financial Services and Banking', label: 'Financial Services and Banking' },
+              { value: 'Food and Beverage Industry', label: 'Food and Beverage Industry' },
+              { value: 'Healthcare and Medical Services', label: 'Healthcare and Medical Services' },
+              { value: 'Information Technology (IT) Services', label: 'Information Technology (IT) Services' },
+              { value: 'Logistics and Transportation', label: 'Logistics and Transportation' },
+              { value: 'Media and Entertainment', label: 'Media and Entertainment' },
+              { value: 'Pharmaceutical Industry', label: 'Pharmaceutical Industry' },
+              { value: 'Real Estate and Construction', label: 'Real Estate and Construction' },
+              { value: 'Telecommunications', label: 'Telecommunications' },
+              { value: 'Textile and Garment Manufacturing', label: 'Textile and Garment Manufacturing' },
+              { value: 'Tourism and Travel Agencies', label: 'Tourism and Travel Agencies' },
             ]}
           />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Enter Business Name: Jinnah Heights" {...form.getInputProps('name')} />
+          <TextInput maxLength={30} withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Enter Business Name" {...form.getInputProps('name')} />
           <Select withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
             data={countries.map((country) => ({
               value: `${country._id}`,
@@ -126,14 +148,14 @@ export default function AddBusiness() {
           />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="Email" placeholder="Enter Email: JohnCena@gmail.com" {...form.getInputProps('email')} />
-          <TextInput withAsterisk size='sm' label="Phone Number" placeholder="Enter Phone Number: 03001234567" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+          <TextInput maxLength={25} withAsterisk size='sm' className={classes.inputField} label="Business Email" placeholder="Enter Business Email" {...form.getInputProps('email')} />
+          <TextInput maxLength={11} withAsterisk size='sm' label="Phone Number" placeholder="Enter Business Phone Number" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
         </Box>
         <Box mt="sm" >
-          <TextInput withAsterisk size='sm' label="Address" placeholder="Enter Address: Street 21, F7, Islamabad." {...form.getInputProps('address')} />
+          <TextInput maxLength={150}withAsterisk size='sm' label="Address" placeholder="Enter Business Address" {...form.getInputProps('address')} />
         </Box>
         <Box mt="sm" >
-          <Textarea withAsterisk size='sm' label="Business Description" placeholder="Enter Business Description: Car Business." {...form.getInputProps('description')} />
+          <Textarea maxLength={500} withAsterisk size='sm' label="Business Description" placeholder="Enter Your Business Description" {...form.getInputProps('description')} />
         </Box>
         <Box mt="sm" >
           <Dropzone
