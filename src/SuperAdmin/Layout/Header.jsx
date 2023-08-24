@@ -94,6 +94,10 @@ const HeaderTop = () => {
   //   }
   // }, []);
 
+  const handleEdit = () => {
+    navigate("/Settings");
+  }
+
   const handleLogout = () => {
     // Clear the local storage here
     localStorage.clear();
@@ -142,7 +146,7 @@ const HeaderTop = () => {
                 <Menu.Divider />
   */}
                 <Menu.Label>Settings</Menu.Label>
-                <Menu.Item icon={<IconEdit size={25} color="green" />}>Edit Profile</Menu.Item>
+                <Menu.Item icon={<IconEdit size={25} color="green" />} onClick={handleEdit}>Edit Profile</Menu.Item>
                 <Menu.Divider />
 
                 <Menu.Label>Danger zone</Menu.Label>
