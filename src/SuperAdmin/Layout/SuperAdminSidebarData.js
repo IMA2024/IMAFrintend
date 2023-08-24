@@ -1,4 +1,4 @@
-import { AiOutlineDashboard, AiOutlineShop, AiOutlineSetting, AiFillCaretDown, AiFillCaretUp, AiOutlineUserAdd, AiOutlineEye, AiOutlineShoppingCart  } from 'react-icons/ai';
+import { AiOutlineDashboard, AiOutlineShop, AiOutlineSetting, AiFillCaretDown, AiFillCaretUp, AiOutlineUserAdd, AiOutlineEye, AiOutlineShoppingCart, AiFillWechat  } from 'react-icons/ai';
 import { BiUser, BiChat, BiHelpCircle,BiUserCircle, BiSolidBusiness, BiCartAdd} from 'react-icons/bi';
 import { RiTeamLine } from 'react-icons/ri';
 import { IoMdAddCircleOutline } from 'react-icons/io';
@@ -35,6 +35,7 @@ export const SuperAdminSideBarData = [
       { name: "View Revenue", link: "/ViewRevenue", Icon: AiOutlineEye },
       { name: "Add Expense", link: "/AddExpense", Icon: AiOutlineUserAdd },
       { name: "View Expense", link: "/ViewExpense", Icon: AiOutlineEye },
+      { name: "View Profit", link: "/ViewProfit", Icon: AiOutlineEye },
     ],
   },
   {
@@ -43,6 +44,19 @@ export const SuperAdminSideBarData = [
       { name: "View Payment", link: "/ViewPayment", Icon: AiOutlineEye },
     ],
   },
+  {
+    name: "Chat", Icon: AiFillWechat,
+    subLink: [
+      { name: "View Chats", link: "/Chat", Icon: AiOutlineEye },
+    ],
+  },
+  {
+    name: "Settings", Icon: AiOutlineSetting,
+    subLink: [
+      { name: "Settings", link: "/settings", Icon: AiOutlineEye },
+    ],
+  },
+  
   { name: "Services", link: "/Services", Icon: BiChat },
   { name: "Contact Us", link: "/ContactUs", Icon: AiOutlineSetting },
   { name: "FAQs", link: "/Faq", Icon: BiHelpCircle },
