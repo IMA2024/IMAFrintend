@@ -13,8 +13,9 @@ import {
   ScrollArea,
 } from '@mantine/core';
 import { Navigate, Outlet } from "react-router-dom";
-import LeftNavbar from './Navbar';
 import HeaderTop from './Header';
+import SuperAdminNavbar from './SuperAdminNavbar';
+import { SuperAdminSideBarData } from './SuperAdminSidebarData';
 
 export default function GeneralLayout() {
   let auth = { token: true }
@@ -31,19 +32,24 @@ export default function GeneralLayout() {
           },
         }}
         navbarOffsetBreakpoint="md"
-
         navbar={
-          <Navbar bg={'#770737'} hiddenBreakpoint="md" hidden={!opened} width={{ sm: 300, lg: 300 }} mt={-1} >
+          <Navbar
+          // bg={'#770737'} 
+          bg={'#66A80F'}
+          hiddenBreakpoint="md"
+           hidden={!opened} width={{ sm: 300, lg: 300 }} mt={-1} >
             <ScrollArea type='never' >
-              <LeftNavbar />
+            <SuperAdminNavbar
+              SuperAdminSideBarData={SuperAdminSideBarData} />
             </ScrollArea>
           </Navbar>
         }
         header={
-          <Header height={{ base: 70, md: 70 }}  >
+          <Header bg={'#E9ECEF'} height={{ base: 70, md: 70 }}  >
             <div style={{ display: 'flex', height: '100%' }}>
               <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                 <Burger
+                  mt={'lg'}
                   opened={opened}
                   onClick={() => setOpened((o) => !o)}
                   size="sm"

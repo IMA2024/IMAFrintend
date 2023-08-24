@@ -13,7 +13,7 @@ import {
   ScrollArea,
 } from '@mantine/core';
 import { Navigate, Outlet } from "react-router-dom";
-import BusinessPanelLeftNavbar from "./Navbar";
+import BusinessPanelLeftNavbar from "./BusinessPanelNavbar";
 import BusinessPanelHeaderTop from "./Header";
 import { BusinessSideBarData } from "./BusinessSideBarData";
 

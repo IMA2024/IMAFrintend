@@ -1,6 +1,6 @@
-import { Box, Button, Group, createStyles, Text, Menu } from "@mantine/core";
+import { Title, Image, Box, Button, Group, createStyles, Text, Menu } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconUser, IconBell, IconPhone, IconEdit, IconLogout } from '@tabler/icons-react';
+import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconUser, IconBell, IconPhone, IconEdit, IconLogout, IconUserCircle } from '@tabler/icons-react';
 import ActionToggle from "../../components/ColorMode";
 import { HeaderSearchBar } from "../../components/search";
 import HeaderSearch from "../../components/HeaderSearch";
@@ -8,22 +8,20 @@ import { notifications } from '@mantine/notifications';
 import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../context/users/userContext";
+import Logo from '../../assets/Images/IMALogo.jpg';
 
 const useStyles = createStyles((theme) => ({
 
-  responsiveTitle: {
-    marginLeft: '10%',
-    width:'299px',
-
-    [theme.fn.smallerThan('md')]: {
-      width:'99px',
-    },
-  },
-
+ 
   responsiveContainer: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor:'#E9ECEF',
+    justifyContent:'space-between',
+    paddingTop:'0.5rem',
+    paddingBottom:'0.5rem',
+  
 
     [theme.fn.smallerThan('sm')]: {
       justifyContent: 'space-between'
@@ -32,81 +30,63 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveContainerChild1: {
-    backgroundColor: '#770737',
-    boxSizing: 'border-box',
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: '45px',
-    display: 'flex',
-    justifyContent: 'left',
-
-    [theme.fn.smallerThan('md')] :{
-      backgroundColor: 'white',
-      color:'black',
-    },
-
-    [theme.fn.smallerThan('sm')]: {
-      justifyContent: 'right',
-      paddingLeft: '0%',
-    },
-
-  },
-
-  responsiveContainerChild2and3: {
-    width:'74%',
-    display: 'flex',
+    display:'flex',
     flexDirection:'row',
-    justifyContent:'space-between',
-
-    [theme.fn.smallerThan('sm')]: {
-      justifyContent:'right',
-    },
-
-    [theme.fn.smallerThan('lg')]: {
-    },
-
   },
 
   responsiveContainerChild2: {
-    fontWeight: 'bold',
-    fontSize: '45px',
-    marginTop: '15px',
-    marginLeft: '30px',
-
-    [theme.fn.smallerThan('lg')]: {
-    },
-
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none'
-    },
-
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    //alignItems: 'baseline', 
 
   },
 
   responsiveContainerChild3: {
-    width:'15%',
-    fontWeight: 'bold',
-    fontSize: '45px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-
-    [theme.fn.smallerThan('lg')]: {
-      width:'20%',
-    },
-
-    [theme.fn.smallerThan('sm')]: {
-      width:'35%',
-    },
-  
+    //backgroundColor:'yellow',
+    justifyContent:'space-between',
+    alignItems: 'center', 
   },
 
-  inputField: {
-    width: '50%',
-    [theme.fn.smallerThan('sm')]: {
-      width: '100%'
-    },
+  searchWithLogo :  {
+
+    [theme.fn.largerThan('md')]: {
+        display:'none',
+      },
+
+    lineHeight:'4',
+    paddingLeft:'10',
+  },
+
+  searchWithToggle : {
+    [theme.fn.smallerThan('md')]: {
+        display:'none',
+      },
+  },
+  
+  dashboardHeading : {
+    [theme.fn.smallerThan('md')]: {
+        display:'none',
+      },
+  },
+
+  centerLogo : {
+    [theme.fn.largerThan('md')]: {
+        display:'none',
+      },
+  },
+
+  LogoWithSearch : {
+    [theme.fn.smallerThan('md')]: {
+        display:'none',
+      },
   }
+
+
+
+
 
 }))
 
@@ -126,35 +106,26 @@ const HeaderTop = () => {
 
   return (
     <Box className={classes.responsiveContainer}>
-      <Box className={classes.responsiveContainerChild1}>
-        <Text className={classes.responsiveTitle}>IMA</Text>
-      </Box>
-      <Box className={classes.responsiveContainerChild2and3}>
-        <Box className={classes.responsiveContainerChild2}>
-          <HeaderSearch />
-        </Box>
-        <Box className={classes.responsiveContainerChild3}>
-          <Box
-            onClick={() => {
-              Array(5).fill(0).forEach((_, index) => {
-                setTimeout(() => {
-                  notifications.show({
-                    title: `Notification ${index + 1}`,
-                    message: 'Most notifications are added to queue',
-                  });
-                }, 200 * index);
-              });
-            }}
-          >
-            <IconBell color="gray" />
-          </Box>
-          <Box>
-            <ActionToggle />
-          </Box>
-          <Box>
-            <Menu shadow="" width={300}>
+    <Box  className={classes.responsiveContainerChild1} >
+    <Box className={classes.LogoWithSearch}><Image width={150} height={55} fit="contain" src={Logo} /></Box>
+    <Box className={classes.searchWithLogo}><IconSearch color="gray" /></Box>
+    </Box>
+    <Box className={classes.responsiveContainerChild2} >
+    <Box className={classes.dashboardHeading}>
+    <Title order={3} >ADMIN DASHBOARD</Title>
+    <Text align="center">Welcome Back Admin</Text>
+    </Box>
+    <Box className={classes.centerLogo}>
+    <Image width={150} height={55} fit="contain" src={Logo} />
+    </Box>
+    </Box>
+    <Box className={classes.responsiveContainerChild3}>
+    <Box className={classes.searchWithToggle}><IconSearch color="gray" /></Box>
+    <Box ml={'2rem'}><ActionToggle /></Box>
+    <Box ml={'2rem'} mr={'1rem'}>
+    <Menu shadow="" width={300}>
               <Menu.Target>
-                <IconUser color="gray" />
+                <IconUserCircle size={'25px'}  color="gray" />
               </Menu.Target>
               <Menu.Dropdown>
                 <Menu.Item>
@@ -174,9 +145,8 @@ const HeaderTop = () => {
                 <Menu.Item icon={<IconLogout size={25} color="green" />} onClick={handleLogout} >Logout</Menu.Item>
               </Menu.Dropdown>
             </Menu>
-          </Box>
-        </Box>
-      </Box>
+            </Box>
+    </Box>
     </Box>
 
   )
