@@ -88,6 +88,8 @@ const BusinessTable = () => {
   const [specificEmail, setSpecificEmail] = useState('');
   const [specificPhoneNumber, setSpecificPhoneNumber] = useState('');
   const [specificAddress, setSpecificAddress] = useState('');
+  const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
+  const [modalDeletion, SetModalDeletion] = useState('');
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
@@ -107,9 +109,15 @@ const BusinessTable = () => {
         setBusinesses(updatedBusinesses);
         setFilteredBusinesses(updatedBusinesses);
         notifications.show({ message: "Business Deleted Successfully", color: 'red' });
+        setSlowTransitionOpened(false);
       } catch (error) {
         console.log(error);
       }
+    };
+
+    const deletionConfirmation = (id) => {
+      setSlowTransitionOpened(true);
+      SetModalDeletion(id);
     };
 
   const getBusinesses = async () => {
@@ -213,7 +221,10 @@ const BusinessTable = () => {
     {
       name: 'Action',
       width: '150px',
-      cell: (row) => <Box><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => handleDelete(row._id)}/></Box>
+      cell: (row) => <Box><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconEye color='gray' onClick={() => handleViewSpecific(row)} />
+      {/*<IconTrash color='gray' onClick={() => handleDelete(row._id)}/>*/}
+      <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/>
+      </Box>
     },
   ]
 
@@ -364,6 +375,13 @@ const BusinessTable = () => {
           </Box>
         </Box>
       </Modal>
+      <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
+            <Text>Are you sure you want to delete?</Text>
+            <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+            <Button size='sm' color='green.9' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
+            <Button type="submit" size='sm' color='red.8' onClick={() => handleDelete(modalDeletion)} >Delete</Button>
+            </Box>
+        </Modal>
     </Box>
   )
 }

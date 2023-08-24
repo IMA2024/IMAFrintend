@@ -35,6 +35,9 @@ import Reviews from './pages/Reviews';
 import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
 import StatsGrid from './SuperAdmin/pages/Charts/UserBlocks';
+import Chat from './SuperAdmin/pages/Chat/Chat';
+import Settings from './SuperAdmin/pages/Settings/settings';
+import ViewProfit from './SuperAdmin/pages/Accounting/ViewProfit';
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
 import BusinessAdd from './BusinessOwner/pages/Business/AddBusiness';
@@ -53,6 +56,7 @@ import BusinessPanelViewRevenue from './BusinessOwner/pages/Accounting/ViewReven
 import BusinessPanelAddExpense from './BusinessOwner/pages/Accounting/AddExpense';
 import BusinessPanelViewExpense from './BusinessOwner/pages/Accounting/ViewExpense';
 import UpdateConfigureAgents from './BusinessOwner/pages/Agents/UpdateConfigureAgents';
+
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -129,6 +133,9 @@ export default function Demo() {
         <Route path="Faq" element={<Faq />} />
         <Route path="ContactUs" element={<ContactUs />} /> 
         <Route path="StatsGrid" element={<StatsGrid />} /> 
+        <Route path="Chat" element={<Chat />} /> 
+        <Route path="Settings" element={<Settings />} /> 
+        <Route path="ViewProfit" element={<ViewProfit />} />
       </Route>
       {/* These are the routes for Business Panel */}
       <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
@@ -148,6 +155,7 @@ export default function Demo() {
       <Route path="BusinessPanelAddExpense" element={<BusinessPanelAddExpense />} />
       <Route path="BusinessPanelViewExpense" element={<BusinessPanelViewExpense />} />
       <Route path="UpdateConfigureAgents" element={<UpdateConfigureAgents />} />
+
       </Route>
       {/* The routes for Business Panel end here*/}
      </Routes></UserProvider>
