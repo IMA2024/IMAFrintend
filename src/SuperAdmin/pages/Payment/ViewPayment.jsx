@@ -9,9 +9,10 @@ const ViewPayment = () => {
   return (
     <Box>
         <Title
-          mb={20}
           align="center"
-          sx={{ fontWeight: 650 }}
+          order={2}
+          sx={{ fontWeight: 550 }}
+          mb={5}
         >
           View Payment Details
         </Title>

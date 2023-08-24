@@ -128,15 +128,22 @@ const HeaderTop = () => {
                 <IconUserCircle size={'25px'}  color="gray" />
               </Menu.Target>
               <Menu.Dropdown>
+                <Menu.Item icon={<Image  maw={50} mx="auto" radius="xl" src="https://testing-buck-22.s3.amazonaws.com/NoTitle_NoType_686291_Screenshot%202023-02-18%20234131.png" alt="Random image" />}>
+                
+                <Text style={{ fontSize: '15px' }}>IMA SUPER ADMIN</Text>
+                </Menu.Item>
+                <Menu.Divider />
                 <Menu.Item>
-                  <Text style={{ fontSize: '15px' }}>IMA SUPER ADMIN</Text>
+                <Text  style={{ fontSize: '15px', color: 'gray' }}>Abdullah</Text>
                   <Text style={{ color: '#A9A9A9' }}>IntelligentMarketingAgent@gmail.com</Text>
                 </Menu.Item>
                 <Menu.Divider />
+                {/*
                 <Menu.Label >Verification Status</Menu.Label>
                 <Menu.Item icon={<IconUser size={25} color="green" />}>User is verified</Menu.Item>
                 <Menu.Item icon={<IconPhone size={25} color="green" />}>Phone is verified</Menu.Item>
                 <Menu.Divider />
+  */}
                 <Menu.Label>Settings</Menu.Label>
                 <Menu.Item icon={<IconEdit size={25} color="green" />}>Edit Profile</Menu.Item>
                 <Menu.Divider />
