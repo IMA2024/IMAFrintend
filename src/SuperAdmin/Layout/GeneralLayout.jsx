@@ -35,7 +35,8 @@ export default function GeneralLayout() {
         navbar={
           <Navbar
           // bg={'#770737'} 
-          bg={'#66A80F'}
+          //bg={'#66A80F'}
+          bg={'#5C940D'}
           hiddenBreakpoint="md"
            hidden={!opened} width={{ sm: 300, lg: 300 }} mt={-1} >
             <ScrollArea type='never' >
