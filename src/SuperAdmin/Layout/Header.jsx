@@ -1,17 +1,12 @@
 import { Title, Image, Box, Button, Group, createStyles, Text, Menu } from "@mantine/core";
-import { isNotEmpty, useForm } from "@mantine/form";
-import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconUser, IconBell, IconPhone, IconEdit, IconLogout, IconUserCircle } from '@tabler/icons-react';
+import {  IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconUser, IconBell, IconPhone, IconEdit, IconLogout, IconUserCircle } from '@tabler/icons-react';
 import ActionToggle from "../../components/ColorMode";
-import { HeaderSearchBar } from "../../components/search";
-import HeaderSearch from "../../components/HeaderSearch";
-import { notifications } from '@mantine/notifications';
 import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from "../../context/users/userContext";
 import Logo from '../../assets/Images/IMALogo.jpg';
+import { UserContext } from '../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
-
  
   responsiveContainer: {
     width: '100%',
@@ -83,19 +78,21 @@ const useStyles = createStyles((theme) => ({
         display:'none',
       },
   }
-
-
-
-
-
 }))
 
 
 const HeaderTop = () => {
 
   const { classes } = useStyles();
-  const { setUser } = useContext(UserContext);
+  const { user , setUser } = useContext(UserContext)
   const navigate = useNavigate();
+
+  //   useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     navigate("/HeaderMegaMenu/SignIn");
+  //   }
+  // }, []);
 
   const handleLogout = () => {
     // Clear the local storage here
@@ -112,8 +109,8 @@ const HeaderTop = () => {
     </Box>
     <Box className={classes.responsiveContainerChild2} >
     <Box className={classes.dashboardHeading}>
-    <Title order={3} >ADMIN DASHBOARD</Title>
-    <Text align="center">Welcome Back Admin</Text>
+    <Title align="center" order={3} >ADMIN DASHBOARD</Title>
+    <Text align="center">Welcome Back {user.firstName} {user.lastName}</Text>
     </Box>
     <Box className={classes.centerLogo}>
     <Image width={150} height={55} fit="contain" src={Logo} />
@@ -121,21 +118,21 @@ const HeaderTop = () => {
     </Box>
     <Box className={classes.responsiveContainerChild3}>
     <Box className={classes.searchWithToggle}><IconSearch color="gray" /></Box>
-    <Box ml={'2rem'}><ActionToggle /></Box>
-    <Box ml={'2rem'} mr={'1rem'}>
+    <Box ml={'1rem'}><ActionToggle /></Box>
+    <Box ml={'1rem'} mr={'1rem'}>
     <Menu shadow="" width={300}>
               <Menu.Target>
-                <IconUserCircle size={'25px'}  color="gray" />
+                <IconUserCircle size={'30px'}  color="gray" />
               </Menu.Target>
               <Menu.Dropdown>
-                <Menu.Item icon={<Image  maw={50} mx="auto" radius="xl" src="https://testing-buck-22.s3.amazonaws.com/NoTitle_NoType_686291_Screenshot%202023-02-18%20234131.png" alt="Random image" />}>
+                <Menu.Item icon={<Image width={50} height={50} radius="50%" mx="auto" src={user.profilePic} />}>
                 
-                <Text style={{ fontSize: '15px' }}>IMA SUPER ADMIN</Text>
+                <Text style={{ fontSize: '15px' }}>{user.role}</Text>
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item>
-                <Text  style={{ fontSize: '15px', color: 'gray' }}>Abdullah</Text>
-                  <Text style={{ color: '#A9A9A9' }}>IntelligentMarketingAgent@gmail.com</Text>
+                <Text  style={{ fontSize: '15px', color: 'gray' }}>{user.firstName} {user.lastName}</Text>
+                  <Text style={{ color: '#A9A9A9' }}>{user.email}</Text>
                 </Menu.Item>
                 <Menu.Divider />
                 {/*
