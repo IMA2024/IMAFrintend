@@ -36,7 +36,7 @@ import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
 import StatsGrid from './SuperAdmin/pages/Charts/UserBlocks';
 import Chat from './SuperAdmin/pages/Chat/Chat';
-import Settings from './SuperAdmin/pages/Settings/settings';
+import Settings from './SuperAdmin/pages/Settings/Settings';
 import ViewProfit from './SuperAdmin/pages/Accounting/ViewProfit';
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
