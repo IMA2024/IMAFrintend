@@ -86,35 +86,39 @@ const useStyles = createStyles((theme) => ({
 const SubscriptionTable = () => {
 
 const { classes } = useStyles();
-const [countries, setCountries] =  useState([]);
+const [subscriptions, setSubscriptions] =  useState([]);
 const [search, setSearch] =  useState('');
-const [region, setRegion] =  useState('');
-const [filteredCountries, setFilteredCountries] =  useState([]);
+const [filteredSubscriptions, setFilteredSubscriptions] =  useState([]);
 const [opened, { open, close }] = useDisclosure(false); 
-const [specificPicture, setSpecificPicture] =  useState('');
-const [specificRole, setSpecificRole] =  useState('');
-const [specificFirstName, setSpecificFirstName] =  useState('');
-const [specificLastName, setSpecificLastName] =  useState('');
-const [specificEmail, setSpecificEmail] =  useState('');
-const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
-const [specificAddress, setSpecificAddress] =  useState('');
+const [specificTitle, setSpecificTitle] =  useState('');
+const [specificType, setSpecificType] =  useState('');
+const [specificPrice, setSpecificPrice] =  useState('');
+const [specificLimit, setSpecificLimit] =  useState('');
+const [specificDescription, setSpecificDescription] =  useState('');
 const navigate = useNavigate();
 
-const getCountries = async () => {
+const handleClear = () => {
+  setSearch('');
+  };
+
+const getSubscriptions = async () => {
 try {
-const response = await axios.get('https://restcountries.com/v2/all');
-setCountries(response.data);
-setFilteredCountries(response.data);
+const response = await axios.get('http://localhost:5000/admin/viewSubscriptions');
+setSubscriptions(response.data.subscriptions);
+console.log(response.data.subscriptions);
+setFilteredSubscriptions(response.data.subscriptions);
 } catch (error) {
 console.log(error);
 }
 }
 
-
 const handleViewSpecific = (row) => {
   open();
-  setSpecificRole(row.name);
-  setSpecificPicture(row.flag);
+  setSpecificTitle(row.title);
+  setSpecificType(row.type);
+  setSpecificPrice(row.price);
+  setSpecificLimit(row.limit);
+  setSpecificDescription(row.description);
 };
 
 
@@ -172,30 +176,30 @@ const columnsSuperAdminSubscriptions = [
   },
     {
         name: 'Subscription Title',
-        selector: (row) => row.name,
+        selector: (row) => row.title,
         sortable: true,
     },
     {
         name: 'Subscription Type',
-        selector: (row) => row.capital,
+        selector: (row) => row.type,
         width: '170px',
         sortable: true,
       },
     {
         name: 'Subscription Price',
         width: '150px',
-        selector: (row) => row.name,
+        selector: (row) => row.price,
         sortable: true,
     },
     {
         name: 'Subscription Limit',
         width: '150px',
-        selector: (row) => row.region,
+        selector: (row) => row.limit,
         sortable: true,
     },
     {
         name: 'Description',
-        selector: (row) => row.nativeName,
+        selector: (row) => row.description,
         sortable: true,
     },
  
@@ -207,30 +211,28 @@ const columnsSuperAdminSubscriptions = [
 ]
 
 useEffect(() => {
-getCountries();
+getSubscriptions();
 }, []);
 
 useEffect(() => {
-const result = countries.filter(country => {
-    return country.name.toLowerCase().match(search.toLowerCase());
-});
+  const result = subscriptions.filter(subscription => {
+    const matchesSearch = (
+      subscription.title.toLowerCase().includes(search.toLowerCase()) ||
+      subscription.type.toLowerCase().includes(search.toLowerCase())
+    );
 
-setFilteredCountries(result);
-}, [search]);
+    return matchesSearch;
+  });
 
-useEffect(() => {
-    const resultSelect = countries.filter(country => {
-        return country.region.toLowerCase().match(region.toLowerCase());
-    });
-    
-    setFilteredCountries(resultSelect);
-    }, [region]);
+  setFilteredSubscriptions(result);
+}, [search, subscriptions]);
+
 
 useEffect(() => {
-    getCountries().then((data) => {
-        const countriesData = data.map((country) => ({ ...country, status: 'active' }));
-        setCountries(countriesData);
-        setFilteredCountries(countriesData);
+    getSubscriptions().then((data) => {
+        const subscriptionsData = data.map((subscription) => ({ ...subscription, status: 'active' }));
+        setSubscriptions(subscriptionsData);
+        setFilteredSubscriptions(subscriptionsData);
       });
     }, []);
 
@@ -242,7 +244,7 @@ useEffect(() => {
         <Tabs.Tab value="Subscriptions" icon={<AiOutlineShoppingCart size="0.8rem" />}>Subscriptions</Tabs.Tab>
       </Tabs.List>
       <Tabs.Panel value="businessOwnerSubscriptions" pt="xs">
-    <DataTable columns={columns} data={filteredCountries}
+    <DataTable columns={columns} data={filteredSubscriptions}
     pagination
     fixedHeader
     fixedHeaderScrollHeight='650px'
@@ -270,7 +272,7 @@ useEffect(() => {
          />
          </Menu.Item>
     <Menu.Item>
-    <Button variant="outline" miw={165}>
+    <Button variant="outline" miw={165} onClick={() => {handleClear()}}>
             Clear
         </Button>
     </Menu.Item>
@@ -278,7 +280,7 @@ useEffect(() => {
           </Menu>
         </Box>
       
-        <Button variant="outline" size='md' className={classes.responsiveClear}>
+        <Button variant="outline" size='md' className={classes.responsiveClear} onClick={() => {handleClear()}}>
             Clear
         </Button>
       {/*
@@ -298,21 +300,21 @@ useEffect(() => {
     }
     responsive
      />
-    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Payment Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>SubscriptioN Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
-    <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
+  <Box  mah={800}><Image maw={800}radius="md" src={`https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2FDon't%20Be%20Late.jpg?alt=media&token=484d01be-6f5d-40cd-906c-6e6e2e762d27`} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" >Silver Subscription</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificRole}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10th August, 2023</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>10,000 PKR</Text></Box>
+    <Box ><Badge variant="filled" >{specificTitle}</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Type:</Text><Text fw={'bold'} ml={5}>{specificType}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Price:</Text><Text fw={'bold'} ml={5}>{specificPrice}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Limit:</Text><Text fw={'bold'} ml={5}>{specificLimit}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
     </Box>
   </Box>
       </Modal>
       </Tabs.Panel>
       <Tabs.Panel value="Subscriptions" pt="xs">
-      <DataTable columns={columnsSuperAdminSubscriptions} data={filteredCountries}
+      <DataTable columns={columnsSuperAdminSubscriptions} data={filteredSubscriptions}
     pagination
     fixedHeader
     fixedHeaderScrollHeight='650px'
@@ -374,15 +376,15 @@ useEffect(() => {
     }
     responsive
      />
-    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Payment Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Subscription</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
-    <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
+    <Box  mah={800}><Image maw={800}radius="md" src={`https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2FDon't%20Be%20Late.jpg?alt=media&token=484d01be-6f5d-40cd-906c-6e6e2e762d27`} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" >Silver Subscription</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificRole}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10th August, 2023</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>10,000 PKR</Text></Box>
+    <Box ><Badge variant="filled" >{specificTitle}</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Type:</Text><Text fw={'bold'} ml={5}>{specificType}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Price:</Text><Text fw={'bold'} ml={5}>{specificPrice}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Limit:</Text><Text fw={'bold'} ml={5}>{specificLimit}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
     </Box>
   </Box>
       </Modal>
