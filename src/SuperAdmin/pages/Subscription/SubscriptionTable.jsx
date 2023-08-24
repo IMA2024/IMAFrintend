@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
+import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea, Tabs } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { modals } from '@mantine/modals';
 
 const useStyles = createStyles((theme) => ({
 
@@ -115,6 +117,8 @@ const handleViewSpecific = (row) => {
   setSpecificPicture(row.flag);
 };
 
+
+
 const columns = [
   {
     name: '#',
@@ -125,6 +129,7 @@ const columns = [
     {
         name: 'Business Name',
         selector: (row) => row.name,
+        width: '130px',
         sortable: true,
     },
     {
@@ -158,6 +163,49 @@ const columns = [
     },
 ]
 
+const columnsSuperAdminSubscriptions = [
+  {
+    name: '#',
+    selector: (row, index) => index + 1, // Generate serial numbers dynamically
+    sortable: true,
+    width: '60px', // Set the width of the serial number column
+  },
+    {
+        name: 'Subscription Title',
+        selector: (row) => row.name,
+        sortable: true,
+    },
+    {
+        name: 'Subscription Type',
+        selector: (row) => row.capital,
+        width: '170px',
+        sortable: true,
+      },
+    {
+        name: 'Subscription Price',
+        width: '150px',
+        selector: (row) => row.name,
+        sortable: true,
+    },
+    {
+        name: 'Subscription Limit',
+        width: '150px',
+        selector: (row) => row.region,
+        sortable: true,
+    },
+    {
+        name: 'Description',
+        selector: (row) => row.nativeName,
+        sortable: true,
+    },
+ 
+    {
+        name: 'Action',
+        width: '150px',
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/AddSubscription')} /><IconTrash color='gray' /></Box>
+    },
+]
+
 useEffect(() => {
 getCountries();
 }, []);
@@ -188,6 +236,12 @@ useEffect(() => {
 
   return (
     <Box >
+      <Tabs defaultValue="businessOwnerSubscriptions">
+      <Tabs.List>
+        <Tabs.Tab value="businessOwnerSubscriptions" icon={<AiOutlineShoppingCart size="0.8rem" />}>Business Owner Subscriptions</Tabs.Tab>
+        <Tabs.Tab value="Subscriptions" icon={<AiOutlineShoppingCart size="0.8rem" />}>Subscriptions</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel value="businessOwnerSubscriptions" pt="xs">
     <DataTable columns={columns} data={filteredCountries}
     pagination
     fixedHeader
@@ -237,40 +291,76 @@ useEffect(() => {
         onChange={(e) => setSearch(e.target.value)}
         className={classes.responsiveSearch}
          />
+        </Box>
        
-         {/*
-        <Select
-         size='md'
-        onSearchChange={setRegion}
-        searchValue={region}
-        searchable
-        placeholder="Select User Type"
-        data={[
-        { value: 'americas', label: 'americas' },
-        { value: 'africa', label: 'africa' },
-        { value: 'europe', label: 'europe' },
-        { value: 'asia', label: 'asia' },
-      ]}
-      className={classes.responsiveUserType}
-    />
-         <Select
-         size='md' 
-        searchable
-        placeholder="Active/Block"
-        data={[
-        { value: 'Active', label: 'Active' },
-        { value: 'Block', label: 'Block' },
-      ]}
-      className={classes.responsiveActiveBlock}
-    />
-    <Button 
-    size='md'
-    className={classes.responsiveAddUserBtn}
-    onClick={() => navigate('/AddExpense')}
-    >
-    Add Expense
-    </Button>
+        </Box>
+        
+    }
+    responsive
+     />
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Payment Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+  <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
+    <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
+    <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" >Silver Subscription</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificRole}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10th August, 2023</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>10,000 PKR</Text></Box>
+    </Box>
+  </Box>
+      </Modal>
+      </Tabs.Panel>
+      <Tabs.Panel value="Subscriptions" pt="xs">
+      <DataTable columns={columnsSuperAdminSubscriptions} data={filteredCountries}
+    pagination
+    fixedHeader
+    fixedHeaderScrollHeight='650px'
+    selectableRows
+    selectableRowsHighlight
+    highlightOnHover
+    subHeader
+    subHeaderComponent={
+      <Box className={classes.responsiveSearchContainer}>
+      <Box className={classes.responsiveSearchRow}>
+        <Box className={classes.responsiveFilterIcon} >
+          <Menu shadow="" width={200} closeOnItemClick={false} >
+            <Menu.Target>
+            <Button size='md'>
+        <IconFilter />
+        </Button >
+            </Menu.Target>
+            <Menu.Dropdown bg={'#FAF9F6'}> 
+    <Menu.Item>
+    <TextInput
+        placeholder='Search'
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+       
+         />
+         </Menu.Item>
+    <Menu.Item>
+    <Button variant="outline" miw={165}>
+            Clear
+        </Button>
+    </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </Box>
+      
+        <Button variant="outline" size='md' className={classes.responsiveClear}>
+            Clear
+        </Button>
+      {/*
+        <Box style={{display:'flex', flexDirection:'row-reverse', width:'800px', justifyContent:'space-between'}}></Box>
     */}
+        <TextInput
+        size='md'
+        placeholder='Search'
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className={classes.responsiveSearch}
+         />
         </Box>
         <Button 
         size='md'
@@ -296,6 +386,8 @@ useEffect(() => {
     </Box>
   </Box>
       </Modal>
+      </Tabs.Panel>
+      </Tabs>
      </Box>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Skeleton, Container, Card, Paper, Center, Image, Box, Button, Text, Divider, Group, createStyles, Modal, Select, TextInput, Textarea } from '@mantine/core';
+import { Grid, Skeleton, Container, Card, Paper, Center, Image, Box, Button, Text, Divider, Group, createStyles, Modal, Select, TextInput, Textarea, useMantineTheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { isNotEmpty, useForm } from '@mantine/form';
 import axios from 'axios';
@@ -34,6 +34,7 @@ const child = <Skeleton height={140} radius="md" animate={false} />;
 
 export default function AddSubscription() {
   const { classes } = useStyles();
+  const theme = useMantineTheme();
 
   const [countries, setCountries] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
@@ -131,21 +132,23 @@ export default function AddSubscription() {
       <Grid gutter={'xs'}>
         {countries.map((country, index) => (
           <Grid.Col xs={6} sm={4} md={4} radius="md" >
-            <Card >
-              <Paper radius="md" mih={300} >
-                <Center mx="auto" mih={40}><Text fw={'bold'} size={30} h={100}>{country.title}</Text></Center>
-                <Center mx="auto" mih={40}><Text size={25} fs={'italic'} color='red.9'>{country.type}</Text></Center>
+            <Card radius="md">
+              <Paper radius="md" mih={300} 
+              //bg={theme.fn.linearGradient(45, '#FFF3BF', '#B197FC')}
+              >
+                <Center mx="auto" mih={40}><Text  size={30} h={100}>{country.title}</Text></Center>
+                <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{country.type}</Text></Center>
                 <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
                   <Image
                     radius="md"
                     src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
                     alt="Random unsplash image"
                   />
-                </Box></Center>
-                <Center mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{country.price}</Text></Center>
+        </Box></Center>
+                <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{country.price}</Text></Center>
                 <Divider />
                 <Center mih={40} mx="auto"> <Text>{country.description}</Text></Center>
-                <Button mih={40} mx="auto" fullWidth color='green.9'
+                <Button mih={40} mx="auto" fullWidth color='lime.8'
                   onClick={() => {
                     open();
                     setSubscriptionTitle(country.title);
