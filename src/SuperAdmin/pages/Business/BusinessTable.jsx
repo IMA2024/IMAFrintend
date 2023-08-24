@@ -221,7 +221,7 @@ const BusinessTable = () => {
     {
       name: 'Action',
       width: '150px',
-      cell: (row) => <Box><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconEye color='gray' onClick={() => handleViewSpecific(row)} />
+      cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} />
       {/*<IconTrash color='gray' onClick={() => handleDelete(row._id)}/>*/}
       <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/>
       </Box>
