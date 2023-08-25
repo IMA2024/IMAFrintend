@@ -77,6 +77,44 @@ const useStyles = createStyles((theme) => ({
          },
      
        },
+
+
+       modalContainer: {
+        display:'flex',
+        flexDirection:'row',
+        maxWidth:'700px',
+        backgroundColor:'#E9ECEF',
+        borderRadius:'10px',
+
+        [theme.fn.smallerThan('md')]: {
+          flexDirection:'column',
+          maxWidth:'700px',
+        },
+       },
+
+       modalImage : {
+        width:'50%',
+        display:'flex',
+        justifyContent:'center',
+
+        [theme.fn.smallerThan('md')]: {
+          width:'100%',
+          marginBottom:'50px',
+        },
+       },
+
+       modalDetails: {
+        width:'50%',
+
+        [theme.fn.smallerThan('md')]: {
+          width:'100%',
+          maxHeight:'200px',
+          justifyContent:'space-evenly',
+        },
+       },
+
+       
+
   
   }))
 
@@ -96,7 +134,10 @@ const [specificFirstName, setSpecificFirstName] =  useState('');
 const [specificLastName, setSpecificLastName] =  useState('');
 const [specificEmail, setSpecificEmail] =  useState('');
 const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
+const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
+  const [modalDeletion, SetModalDeletion] = useState('');
 const navigate = useNavigate();
+
   
 const handleEdit = (row) => {
   navigate('/EditUser', { state: { rowData: row } });
@@ -115,9 +156,15 @@ const handleDelete = async (id) => {
     setUsers(updatedUsers);
     setFilteredUsers(updatedUsers);
     notifications.show({ message: "User Deleted Successfully", color: 'red' });
+    setSlowTransitionOpened(false);
   } catch (error) {
     console.log(error);
   }
+};
+
+const deletionConfirmation = (id) => {
+  setSlowTransitionOpened(true);
+  SetModalDeletion(id);
 };
 
 const getUsers = async () => {
@@ -160,7 +207,7 @@ const columns = [
   {
     name: 'Profile Picture',
     width: '110px',
-    selector: (row) => <img width={50} height={50} src={row.profilePic} />,
+    selector: (row) => <img   width={50} height={50} src={row.profilePic}  />,
   },
     {
         name: 'Role',
@@ -221,7 +268,7 @@ const columns = [
     {
         name: 'Action',
         width: '150px',
-        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconTrash color='gray' onClick={() => handleDelete(row._id)}/></Box>
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/></Box>
     },
 ]
 
@@ -363,9 +410,10 @@ useEffect(() => {
     }
     responsive
      />
+     {/*
       <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-    <Box mah={350}><Image  width={'400'} height={'230'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
+    <Box mah={350}><Image  width={'200'} height={'200'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
     <Box  mah={350}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
     <Box ><Badge variant="filled" fullWidth>{specificRole}</Badge></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text ml={5}>{specificFirstName}</Text><Text ml={5}>{specificLastName}</Text></Box>
@@ -374,6 +422,25 @@ useEffect(() => {
     </Box>
   </Box>
       </Modal>
+  */}
+   <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
+  <Box className={classes.modalContainer} mb={30}  p={10}  style={{}}>
+    <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="50%"  src={specificPicture} alt="Random image" /></Box>
+    <Box className={classes.modalDetails} style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" fullWidth>{specificRole}</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text >{specificFirstName}</Text><Text ml={5}>{specificLastName}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconMail size={20} color="green" /><Text >{specificEmail}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconPhone size={20} color="green" /><Text >{specificPhoneNumber}</Text></Box>
+    </Box>
+  </Box>
+      </Modal>
+      <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
+            <Text>Are you sure you want to delete?</Text>
+            <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+            <Button size='sm' color='green.9' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
+            <Button type="submit" size='sm' color='red.8' onClick={() => handleDelete(modalDeletion)} >Delete</Button>
+            </Box>
+        </Modal>
      </Box>
   )
 }

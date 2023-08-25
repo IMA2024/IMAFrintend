@@ -68,6 +68,42 @@ const useStyles = createStyles((theme) => ({
 
   },
 
+  modalContainer: {
+    display:'flex',
+    flexDirection:'column',
+    maxWidth:'700px',
+    backgroundColor:'#E9ECEF',
+    borderRadius:'10px',
+
+    [theme.fn.smallerThan('md')]: {
+      //flexDirection:'column',
+      maxWidth:'700px',
+    },
+   },
+
+   modalImage : {
+    width:'100%',
+    display:'flex',
+    justifyContent:'center',
+    marginBottom:'20px',
+
+    [theme.fn.smallerThan('md')]: {
+      //width:'100%',
+      //marginBottom:'50px',
+    },
+   },
+
+   modalDetails: {
+    width:'100%',
+
+    [theme.fn.smallerThan('md')]: {
+      //width:'100%',
+      maxHeight:'200px',
+      justifyContent:'space-evenly',
+    },
+   },
+
+
 }))
 
 
@@ -362,6 +398,7 @@ const BusinessTable = () => {
         }
         responsive
       />
+      {/*
       <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close} size={800}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
           <Box mah={350}><Image maw={300} radius="md" src={specificPicture} alt="Random image" /></Box>
@@ -374,6 +411,20 @@ const BusinessTable = () => {
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
           </Box>
         </Box>
+      </Modal>
+      */}
+      <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
+  <Box className={classes.modalContainer} mb={30}  p={20}  style={{}}>
+    <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
+    <Box className={classes.modalDetails} style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
+    </Box>
+  </Box>
       </Modal>
       <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
             <Text>Are you sure you want to delete?</Text>
