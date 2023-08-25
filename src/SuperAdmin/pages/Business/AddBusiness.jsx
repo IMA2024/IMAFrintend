@@ -7,6 +7,7 @@ import { v4 } from "uuid";
 import { getDownloadURL, ref , uploadBytes } from '@firebase/storage';
 import { Dropzone } from '@mantine/dropzone';
 import { notifications } from '@mantine/notifications';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 

@@ -207,7 +207,25 @@ const columns = [
   {
     name: 'Profile Picture',
     width: '110px',
-    selector: (row) => <img   width={50} height={50} src={row.profilePic}  />,
+    selector: (row) => <img
+       //width={50} height={50} 
+       src={row.profilePic}
+    style={{
+      transition: 'transform 0.3s ease-in-out',
+      width: '50px', // Initial width
+      height: '50px', // Initial height
+    }}
+    onMouseEnter={(event) => {
+      event.currentTarget.style.transform = 'scale(1.1)';
+      event.currentTarget.style.width = '110px'; // Increase width on hover
+      event.currentTarget.style.height = '110px'; // Increase height on hover
+    }}
+    onMouseLeave={(event) => {
+      event.currentTarget.style.transform = 'scale(1)';
+          event.currentTarget.style.width = '50px'; // Reset width
+          event.currentTarget.style.height = '50px'; // Reset height
+    }}
+      />,
   },
     {
         name: 'Role',

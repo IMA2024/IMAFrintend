@@ -43,7 +43,7 @@ export default function Settings() {
   const [profilePics, setProfilePics] = useState('')
 
   const form = useForm({
-    initialValues: { userId: user._id , profilePics : user.profilePic ,firstName: user.firstName, lastName: user.lastName, role: user.role , phoneNumber: user.phoneNumber ,email: user.email},
+    initialValues: { userId: user?._id , profilePics : user?.profilePic ,firstName: user?.firstName, lastName: user?.lastName, role: user?.role , phoneNumber: user?.phoneNumber ,email: user?.email},
     validateInputOnChange: true,
     validate: {
       role: isNotEmpty('Please Select A Role'),
@@ -97,6 +97,10 @@ export default function Settings() {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/Dashboard');
+  };
+
   return (
     <Paper withBorder shadow="md" pt={10} pb={10} pl={35} pr={35}radius="md">
       <Title
@@ -144,7 +148,7 @@ export default function Settings() {
           </Button>
         </Box>
         <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-          <Button size='sm' color='red.8' >
+          <Button size='sm' color='red.8' onClick={() => handleCancel()}>
             Cancel
           </Button>
           <Button type="submit" size='sm' color='green.9' >

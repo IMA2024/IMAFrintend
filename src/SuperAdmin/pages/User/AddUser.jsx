@@ -7,6 +7,8 @@ import { v4 } from "uuid";
 import { getDownloadURL, ref , uploadBytes } from '@firebase/storage';
 import { Dropzone } from '@mantine/dropzone';
 import { notifications } from '@mantine/notifications';
+import { useNavigate } from 'react-router-dom';
+
 
 const useStyles = createStyles((theme) => ({
 
@@ -36,6 +38,7 @@ export default function AddUser() {
   const [imageUpload, setImageUpload] = useState(null);
   const [profilePics , setProfilePics] = useState('')
   const { classes } = useStyles();
+  const navigate = useNavigate();
 
   const form = useForm({
     initialValues: {  firstName: '', lastName: '', role: '', phoneNumber: '',  email: '', password: '', confirmPassword: '' },
@@ -92,6 +95,10 @@ export default function AddUser() {
     } catch (error) {
       notifications.show({ message: error.response.data.message , color: 'red' , });
     }
+};
+
+const handleCancel = () => {
+  navigate('/Dashboard');
 };
 
   return (
@@ -153,7 +160,7 @@ export default function AddUser() {
           </Button>
         </Box>
         <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-          <Button size='sm' color='red.8' >
+          <Button size='sm' color='red.8' onClick={() => handleCancel()}>
             Cancel
           </Button>
           <Button type="submit" size='sm' color='green.9' >

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
+import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, HoverCard,  } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome, IconBuilding } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
@@ -193,11 +193,51 @@ const BusinessTable = () => {
       sortable: true,
       width: '60px', // Set the width of the serial number column
     },
+    /*
     {
       name: 'Profile Picture',
       width: '110px',
       selector: (row) => <img width={50} height={50} src={row.profilePic} />,
     },
+    */
+    {
+      name: 'Profile Picture',
+      width: '110px',
+      selector: (row) => <HoverCard position="bottom-end" >
+      <HoverCard.Target>
+      <img width={50} height={50} src={row.profilePic} />
+      </HoverCard.Target>
+      <HoverCard.Dropdown>
+      <img width={150} height={150} src={row.profilePic} />
+      </HoverCard.Dropdown>
+    </HoverCard>
+       //<img width={50} height={50} src={row.profilePic} />,
+    },
+   /*
+    {
+      name: 'Profile Picture',
+      width: '110px',
+      selector: (row) => <img
+         //width={50} height={50} 
+         src={row.profilePic}
+      style={{
+        transition: 'transform 0.3s ease-in-out',
+        width: '50px', // Initial width
+        height: '50px', // Initial height
+      }}
+      onMouseEnter={(event) => {
+        event.currentTarget.style.transform = 'scale(1.1)';
+        event.currentTarget.style.width = '110px'; // Increase width on hover
+        event.currentTarget.style.height = '110px'; // Increase height on hover
+      }}
+      onMouseLeave={(event) => {
+        event.currentTarget.style.transform = 'scale(1)';
+            event.currentTarget.style.width = '50px'; // Reset width
+            event.currentTarget.style.height = '50px'; // Reset height
+      }}
+        />,
+    },
+    */
     {
       name: 'Business Type',
       selector: (row) => row.type,
