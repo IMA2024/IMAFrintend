@@ -114,7 +114,7 @@ const HeaderTop = () => {
     <Box className={classes.responsiveContainerChild2} >
     <Box className={classes.dashboardHeading}>
     <Title align="center" order={3} >ADMIN DASHBOARD</Title>
-    <Text align="center">Welcome Back {user.firstName} {user.lastName}</Text>
+    <Text align="center">Welcome Back {user?.firstName} {user?.lastName}</Text>
     </Box>
     <Box className={classes.centerLogo}>
     <Image width={150} height={55} fit="contain" src={Logo} />
@@ -129,14 +129,14 @@ const HeaderTop = () => {
                 <IconUserCircle size={'30px'}  color="gray" />
               </Menu.Target>
               <Menu.Dropdown>
-                <Menu.Item icon={<Image width={50} height={50} radius="50%" mx="auto" src={user.profilePic} />}>
+                <Menu.Item icon={<Image width={50} height={50} radius="50%" mx="auto" src={user?.profilePic} />}>
                 
-                <Text style={{ fontSize: '15px' }}>{user.role}</Text>
+                <Text style={{ fontSize: '15px' }}>{user?.role}</Text>
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item>
-                <Text  style={{ fontSize: '15px', color: 'gray' }}>{user.firstName} {user.lastName}</Text>
-                  <Text style={{ color: '#A9A9A9' }}>{user.email}</Text>
+                <Text  style={{ fontSize: '15px', color: 'gray' }}>{user?.firstName} {user?.lastName}</Text>
+                  <Text style={{ color: '#A9A9A9' }}>{user?.email}</Text>
                 </Menu.Item>
                 <Menu.Divider />
                 {/*
