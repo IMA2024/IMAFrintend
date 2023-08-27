@@ -37,7 +37,8 @@ export default function AddBusiness() {
   const [imageUpload, setImageUpload] = useState(null);
   const [profilePics, setProfilePics] = useState('')
   const [countries, setCountries] = useState([]);
-  const { classes } = useStyles()
+  const { classes } = useStyles();
+  const navigate = useNavigate();
 
   const form = useForm({
     initialValues: { name: '', businessOwner: '', type: '', phoneNumber: '', address: '', email: '', description: '' },
@@ -104,6 +105,10 @@ export default function AddBusiness() {
     } catch (error) {
       notifications.show({ message: error.response.data.message, color: 'red', });
     }
+  };
+
+  const handleCancel = () => {
+    navigate('/Dashboard');
   };
 
   return (
@@ -183,7 +188,7 @@ export default function AddBusiness() {
           </Button>
         </Box>
         <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-          <Button size='sm' color='red.8' >
+          <Button size='sm' color='red.8' onClick={() => handleCancel()}>
             Cancel
           </Button>
           <Button type="submit" size='sm' color='green.9' >

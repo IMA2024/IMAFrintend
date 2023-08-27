@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import Axios from 'axios';
-import { ScrollArea ,  Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
+import { ScrollArea ,  Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, HoverCard,  } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
@@ -204,6 +204,7 @@ const columns = [
     sortable: true,
     width: '60px', // Set the width of the serial number column
   },
+  /*
   {
     name: 'Profile Picture',
     width: '110px',
@@ -226,6 +227,20 @@ const columns = [
           event.currentTarget.style.height = '50px'; // Reset height
     }}
       />,
+  },
+  */
+  {
+    name: 'Profile Picture',
+    width: '110px',
+    selector: (row) => <HoverCard position="bottom" >
+    <HoverCard.Target>
+    <img width={50} height={50} src={row.profilePic} />
+    </HoverCard.Target>
+    <HoverCard.Dropdown>
+    <img width={150} height={150} src={row.profilePic} />
+    </HoverCard.Dropdown>
+  </HoverCard>
+     //<img width={50} height={50} src={row.profilePic} />,
   },
     {
         name: 'Role',
