@@ -368,8 +368,23 @@ const BusinessTable = () => {
                       searchable
                       placeholder="Business Type"
                       data={[
-                        { value: 'Commercial', label: 'Commercial' },
-                        { value: 'Industrial', label: 'Industrial' },
+                        { value: 'Advertising and Marketing Agencies', label: 'Advertising and Marketing Agencies' },
+                        { value: 'Agriculture and Farming', label: 'Agriculture and Farming' },
+                        { value: 'Automotive Industry', label: 'Automotive Industry' },
+                        { value: 'Cosmetics and Beauty Products', label: 'Cosmetics and Beauty Products' },
+                        { value: 'E-commerce and Online Retail', label: 'E-commerce and Online Retail' },
+                        { value: 'Export and Import Businesses', label: 'Export and Import Businesses' },
+                        { value: 'Financial Services and Banking', label: 'Financial Services and Banking' },
+                        { value: 'Food and Beverage Industry', label: 'Food and Beverage Industry' },
+                        { value: 'Healthcare and Medical Services', label: 'Healthcare and Medical Services' },
+                        { value: 'Information Technology (IT) Services', label: 'Information Technology (IT) Services' },
+                        { value: 'Logistics and Transportation', label: 'Logistics and Transportation' },
+                        { value: 'Media and Entertainment', label: 'Media and Entertainment' },
+                        { value: 'Pharmaceutical Industry', label: 'Pharmaceutical Industry' },
+                        { value: 'Real Estate and Construction', label: 'Real Estate and Construction' },
+                        { value: 'Telecommunications', label: 'Telecommunications' },
+                        { value: 'Textile and Garment Manufacturing', label: 'Textile and Garment Manufacturing' },
+                        { value: 'Tourism and Travel Agencies', label: 'Tourism and Travel Agencies' },
                       ]}
                     />
                   </Menu.Item>
@@ -410,8 +425,23 @@ const BusinessTable = () => {
               searchable
               placeholder="Business Type"
               data={[
-                { value: 'Commercial', label: 'Commercial' },
-                { value: 'Industrial', label: 'Industrial' },
+                { value: 'Advertising and Marketing Agencies', label: 'Advertising and Marketing Agencies' },
+                { value: 'Agriculture and Farming', label: 'Agriculture and Farming' },
+                { value: 'Automotive Industry', label: 'Automotive Industry' },
+                { value: 'Cosmetics and Beauty Products', label: 'Cosmetics and Beauty Products' },
+                { value: 'E-commerce and Online Retail', label: 'E-commerce and Online Retail' },
+                { value: 'Export and Import Businesses', label: 'Export and Import Businesses' },
+                { value: 'Financial Services and Banking', label: 'Financial Services and Banking' },
+                { value: 'Food and Beverage Industry', label: 'Food and Beverage Industry' },
+                { value: 'Healthcare and Medical Services', label: 'Healthcare and Medical Services' },
+                { value: 'Information Technology (IT) Services', label: 'Information Technology (IT) Services' },
+                { value: 'Logistics and Transportation', label: 'Logistics and Transportation' },
+                { value: 'Media and Entertainment', label: 'Media and Entertainment' },
+                { value: 'Pharmaceutical Industry', label: 'Pharmaceutical Industry' },
+                { value: 'Real Estate and Construction', label: 'Real Estate and Construction' },
+                { value: 'Telecommunications', label: 'Telecommunications' },
+                { value: 'Textile and Garment Manufacturing', label: 'Textile and Garment Manufacturing' },
+                { value: 'Tourism and Travel Agencies', label: 'Tourism and Travel Agencies' },
               ]}
               className={classes.responsiveUserType}
             />

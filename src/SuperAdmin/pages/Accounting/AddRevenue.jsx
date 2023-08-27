@@ -8,6 +8,7 @@ import { storage } from '../../../firebase';
 import { v4 } from "uuid";
 import { getDownloadURL, ref , uploadBytes } from '@firebase/storage';
 import { Dropzone } from '@mantine/dropzone';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -37,7 +38,9 @@ export default function AddRevenue() {
   const [imageUpload, setImageUpload] = useState(null);
   const [profilePics, setProfilePics] = useState('')
   const [countries, setCountries] = useState([]);
-  const {classes} = useStyles()
+  const {classes} = useStyles();
+  const navigate = useNavigate();
+
   const form = useForm({
     initialValues: { title: '', business: '', description: '', date: '', amount: '' },
     validateInputOnChange: true,
@@ -60,6 +63,7 @@ export default function AddRevenue() {
         return null;
       },    },
   });
+
 
   
   useEffect(() =>{
@@ -107,6 +111,10 @@ export default function AddRevenue() {
     } catch (error) {
       notifications.show({ message: error.response.data.message, color: 'red', });
     }
+  };
+
+  const handleCancel = () => {
+    navigate('/Dashboard');
   };
 
   return (
@@ -160,7 +168,7 @@ export default function AddRevenue() {
           </Button>
         </Box>
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="sm"  size='sm' color='red.8' >
+         <Button  mt="sm"  size='sm' color='red.8' onClick={() => handleCancel()}>
           Cancel
         </Button>
         <Button type="submit" mt="sm"  size='sm' color='green.9' >
