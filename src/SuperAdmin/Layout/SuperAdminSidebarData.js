@@ -58,8 +58,13 @@ export const SuperAdminSideBarData = [
     ],
   },
   
-  { name: "Services", link: "/Services", Icon: BiChat },
-  { name: "Contact Us", link: "/ContactUs", Icon: AiOutlineSetting },
-  { name: "FAQs", link: "/Faq", Icon: BiHelpCircle },
-
+ // { name: "Services", link: "/Services", Icon: BiChat },
+ // { name: "Contact Us", link: "/ContactUs", Icon: AiOutlineSetting },
+  {
+    name: "FAQs", Icon: BiHelpCircle,
+    subLink: [
+      { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View FAQs", link: "/ViewFaqs", Icon: AiOutlineEye },
+    ],
+  },
 ];
