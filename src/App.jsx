@@ -18,6 +18,7 @@ import ViewPayment from './SuperAdmin/pages/Payment/ViewPayment';
 import AddBusiness from './SuperAdmin/pages/Business/AddBusiness';
 import ViewBusiness from './SuperAdmin/pages/Business/ViewBusiness';
 import EditBusiness from './SuperAdmin/pages/Business/EditBusiness';
+import EditSubscription from './SuperAdmin/pages/Subscription/EditSubscription';
 import AddSubscription from './SuperAdmin/pages/Subscription/AddSubscription';
 import ViewSubscription from './SuperAdmin/pages/Subscription/ViewSubscription';
 import SubscriptionPaymentChart from './SuperAdmin/pages/Charts/SubscriptionPaymentChart';
@@ -36,8 +37,7 @@ import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
 import StatsGrid from './SuperAdmin/pages/Charts/UserBlocks';
 import Chat from './SuperAdmin/pages/Chat/Chat';
-//import Settings from './SuperAdmin/pages/Settings/Settings';
-import Settings from './SuperAdmin/pages/Settings/settings';
+import Settings from './SuperAdmin/pages/Settings/Settings';
 import ViewProfit from './SuperAdmin/pages/Accounting/ViewProfit';
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
@@ -117,6 +117,7 @@ export default function Demo() {
         <Route path="AddBusiness" element={<AddBusiness />} />
         <Route path="ViewBusiness" element={<ViewBusiness />} />
         <Route path="EditBusiness" element={<EditBusiness />} />
+        <Route path="EditSubscription" element={<EditSubscription />} />
         <Route path="AddSubscription" element={<AddSubscription />} />
         <Route path="ViewSubscription" element={<ViewSubscription />} />
         <Route path="SubscriptionPaymentChart" element={<SubscriptionPaymentChart />} />

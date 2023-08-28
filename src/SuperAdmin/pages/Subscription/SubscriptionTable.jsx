@@ -89,7 +89,8 @@ const { classes } = useStyles();
 const [subscriptions, setSubscriptions] =  useState([]);
 const [search, setSearch] =  useState('');
 const [filteredSubscriptions, setFilteredSubscriptions] =  useState([]);
-const [opened, { open, close }] = useDisclosure(false); 
+const [opened, { open, close }] = useDisclosure(false);
+const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
 const [specificTitle, setSpecificTitle] =  useState('');
 const [specificType, setSpecificType] =  useState('');
 const [specificPrice, setSpecificPrice] =  useState('');
@@ -121,9 +122,13 @@ const handleViewSpecific = (row) => {
   setSpecificDescription(row.description);
 };
 
+const handleViewSpecificBusinesSubscriptions = (row) => {
+  setSlowTransitionOpened(true);
+};
 
 
-const columns = [
+
+const columnsBusinessOwnerSubscriptions = [
   {
     name: '#',
     selector: (row, index) => index + 1, // Generate serial numbers dynamically
@@ -163,7 +168,7 @@ const columns = [
     {
         name: 'Action',
         width: '150px',
-        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' /></Box>
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecificBusinesSubscriptions(row)} /><IconTrash color='gray' /></Box>
     },
 ]
 
@@ -206,7 +211,7 @@ const columnsSuperAdminSubscriptions = [
     {
         name: 'Action',
         width: '150px',
-        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/AddSubscription')} /><IconTrash color='gray' /></Box>
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/EditSubscription')} /><IconTrash color='gray' /></Box>
     },
 ]
 
@@ -244,7 +249,7 @@ useEffect(() => {
         <Tabs.Tab value="Subscriptions" icon={<AiOutlineShoppingCart size="0.8rem" />}>Subscriptions</Tabs.Tab>
       </Tabs.List>
       <Tabs.Panel value="businessOwnerSubscriptions" pt="xs">
-    <DataTable columns={columns} data={filteredSubscriptions}
+    <DataTable columns={columnsBusinessOwnerSubscriptions} data={filteredSubscriptions}
     pagination
     fixedHeader
     fixedHeaderScrollHeight='650px'
@@ -300,7 +305,7 @@ useEffect(() => {
     }
     responsive
      />
-    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>SubscriptioN Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>SubscriptioN Details</Text>} radius={'md'}  opened={slowTransitionOpened}  onClose={() => setSlowTransitionOpened(false)} size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
   <Box  mah={800}><Image maw={800}radius="md" src={`https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2FDon't%20Be%20Late.jpg?alt=media&token=484d01be-6f5d-40cd-906c-6e6e2e762d27`} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
