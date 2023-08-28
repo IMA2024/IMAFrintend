@@ -25,6 +25,7 @@ export const SuperAdminSideBarData = [
     name: "Subscription", Icon: AiOutlineShoppingCart,
     subLink: [
       { name: "Add Subscription", link: "/AddSubscription", Icon: BiCartAdd },
+      //{ name: "Edit Subscription", link: "/EditSubscription", Icon: BiCartAdd },
       { name: "View Subscription", link: "/ViewSubscription", Icon: AiOutlineEye },
     ],
   },
@@ -53,7 +54,7 @@ export const SuperAdminSideBarData = [
   {
     name: "Settings", Icon: AiOutlineSetting,
     subLink: [
-      { name: "Settings", link: "/settings", Icon: AiOutlineEye },
+      { name: "Settings", link: "/Settings", Icon: AiOutlineEye },
     ],
   },
   
