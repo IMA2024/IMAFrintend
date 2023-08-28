@@ -22,7 +22,7 @@ import EditSubscription from './SuperAdmin/pages/Subscription/EditSubscription';
 import AddSubscription from './SuperAdmin/pages/Subscription/AddSubscription';
 import ViewSubscription from './SuperAdmin/pages/Subscription/ViewSubscription';
 import SubscriptionPaymentChart from './SuperAdmin/pages/Charts/SubscriptionPaymentChart';
-import RevenueChart from './SuperAdmin/pages/Charts/RevenueChart';
+import RevenueChart from './SuperAdmin/pages/Charts/ProfitChart';
 import SubscriptionChart from './SuperAdmin/pages/Charts/SubscriptionChart';
 import RegisteredBusinessChart from './SuperAdmin/pages/Charts/RegisteredBusinessChart';
 import StatsGroup from './SuperAdmin/pages/Charts/GroupedStats';
@@ -42,7 +42,7 @@ import ViewProfit from './SuperAdmin/pages/Accounting/ViewProfit/ViewProfit';
 import ViewFaqs from './SuperAdmin/pages/Faqs/ViewFaqs';
 import FaqForm from './SuperAdmin/pages/Faqs/AddFaqs';
 import EditFaqs from './SuperAdmin/pages/Faqs/EditFaqs';
-import Radio from './SuperAdmin/pages/Accounting/ViewProfit/RevenueAndExpense';
+import Radio from './SuperAdmin/pages/Accounting/ViewProfit/RevenueAndExpenses';
 
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';

@@ -75,7 +75,7 @@ const UserData = [
   ] 
 
 
-export default function ProfitBlockss() {
+export default function ProfitBlocks() {
   const [users, setUsers] = useState();
   const [marketingAgents, setMarketingAgents] = useState(); 
   const [owners, setOwners] = useState(); 
@@ -227,11 +227,38 @@ export default function ProfitBlockss() {
       </Paper>
     );
   });
-  
+  const statsCustomer = CustomerData.map((stat) => {
+    const Icon = icons[stat.icon];
+    const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
+
+    return (
+      <Paper withBorder p="md" radius="md" key={stat.title}  mt={20}>
+        <Group position="apart">
+          <Text size="xs" color="dimmed" className={classes.title}>
+          PAYMENTS          
+          </Text>
+        
+          <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
+    
+        </Group>
+        <Group align="flex-end" spacing="xs" mt={25}>
+          <Text className={classes.value}>{customers}</Text>
+          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+            <span>{stat.diff}%</span>
+            <DiffIcon size="1rem" stroke={1.5} />
+          </Text>
+        </Group>
+
+        <Text fz="xs" c="dimmed" mt={7}>
+          Compared to previous month
+        </Text>
+      </Paper>
+    );
+  });
   return (
     <div className={classes.root}>
       <SimpleGrid
-        cols={3}
+        cols={4}
         breakpoints={[
           { maxWidth: 'md', cols: 2 },
           { maxWidth: 'xs', cols: 1 },
@@ -240,6 +267,7 @@ export default function ProfitBlockss() {
         {statsUser}
         {statsMarketing}
         {statsBusiness}
+        {statsCustomer}
       </SimpleGrid>
     </div>
   );

@@ -28,7 +28,7 @@ const useStyles = createStyles((theme) => ({
  }));
 
  //SplineAreaCharts
-const RevenueChart = () => {
+const ProfitChart = () => {
   const {classes} = useStyles()
     const [state, setState] =  useState({
         series: [{
@@ -65,7 +65,7 @@ const RevenueChart = () => {
   return (
     <Paper mt={20} shadow="xs" p="md">
       <Box className={classes.responsiveContainer}>
-    <Title className={classes.inputField} order={4}>Revenue</Title>
+    <Title className={classes.inputField} order={4}>Profit</Title>
       <Select
       className={classes.inputField}
       defaultValue={'Weekly'}
@@ -82,5 +82,5 @@ const RevenueChart = () => {
   )
 }
 
-export default RevenueChart
+export default ProfitChart
 
