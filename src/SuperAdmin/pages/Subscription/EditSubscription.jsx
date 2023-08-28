@@ -46,7 +46,7 @@ export default function EditSubscription() {
 
   const form = useForm({
     initialValues: { title: subscriptionTitle, type: subscriptionType , price: subscriptionPrice, limit: subscriptionLimit, description: subscriptionDescription },
-
+    validateInputOnChange: true,
     validate: {
       title: isNotEmpty('Please Select Title'),
       type: isNotEmpty('Please Select Type'),
