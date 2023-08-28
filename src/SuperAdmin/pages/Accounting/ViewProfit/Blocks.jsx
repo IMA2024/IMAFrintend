@@ -46,53 +46,45 @@ const icons = {
   coin: IconCoin,
 };
 
-const UserData = [
+const RevenueData = [
     {
       "icon": "user",
       "diff": 7
     },
   ]
 
-  const MarketingData = [
+  const ExpenseData = [
     {
      "icon": "user",
       "diff": 3
     },
   ] 
 
-  const BusinessOwnerData = [ 
+  const ProfitData = [ 
     {
      "icon": "user",
       "diff": 2
     },
   ] 
 
-  const CustomerData = [
-    {
-      "icon": "user",
-      "diff": 1
-    },
-  ] 
-
 
 export default function ProfitBlockss() {
-  const [users, setUsers] = useState();
-  const [marketingAgents, setMarketingAgents] = useState(); 
-  const [owners, setOwners] = useState(); 
-  const [customers, setCustomers] = useState(); 
+  const [revenue, setRevenue] = useState();
+  const [expense, setExpense] = useState(); 
+  const [profit, setProfit] = useState(); 
   const { classes } = useStyles();
 
-  const statsUser = UserData.map((stat) => {
+  const statsRevenue = RevenueData.map((stat) => {
     const Icon = icons[stat.icon];
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalUsers');
+          const response = await fetch('http://localhost:5000/admin/totalRevenue');
           const newData = await response.json();
           console.log(response);
-          setUsers(newData);
+          setRevenue(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -104,10 +96,10 @@ export default function ProfitBlockss() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalMarketingAgents');
+          const response = await fetch('http://localhost:5000/admin/totalExpense');
           const newData = await response.json();
           console.log(response);
-          setMarketingAgents(newData);
+          setExpense(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -119,25 +111,10 @@ export default function ProfitBlockss() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalBusinessOwners');
+          const response = await fetch('http://localhost:5000/admin/totalProfit');
           const newData = await response.json();
           console.log(response);
-          setOwners(newData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-    }, []);
-    
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('http://localhost:5000/admin/totalCustomers');
-          const newData = await response.json();
-          console.log(response);
-          setCustomers(newData);
+          setProfit(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -158,7 +135,7 @@ export default function ProfitBlockss() {
         </Group>
 
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{users}</Text>
+          <Text className={classes.value}>{revenue}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -171,7 +148,7 @@ export default function ProfitBlockss() {
       </Paper>
     );
   });
-  const statsMarketing = MarketingData.map((stat) => {
+  const statsExpense = ExpenseData.map((stat) => {
     const Icon = icons[stat.icon];
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
@@ -186,7 +163,7 @@ export default function ProfitBlockss() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{marketingAgents}</Text>
+          <Text className={classes.value}>{expense}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -199,7 +176,7 @@ export default function ProfitBlockss() {
       </Paper>
     );
   });
-  const statsBusiness = BusinessOwnerData.map((stat) => {
+  const statsProfit = ProfitData.map((stat) => {
     const Icon = icons[stat.icon];
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
@@ -214,7 +191,7 @@ export default function ProfitBlockss() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{owners}</Text>
+          <Text className={classes.value}>{profit}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -237,9 +214,9 @@ export default function ProfitBlockss() {
           { maxWidth: 'xs', cols: 1 },
         ]}
       >
-        {statsUser}
-        {statsMarketing}
-        {statsBusiness}
+        {statsRevenue}
+        {statsExpense}
+        {statsProfit}
       </SimpleGrid>
     </div>
   );
