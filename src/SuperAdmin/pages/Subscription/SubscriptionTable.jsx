@@ -7,6 +7,8 @@ import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { modals } from '@mantine/modals';
+import { deleteSubscription } from '../../../api/admin/subscriptions';
+import { notifications } from '@mantine/notifications';
 
 const useStyles = createStyles((theme) => ({
 
@@ -102,6 +104,19 @@ const handleClear = () => {
   setSearch('');
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteSubscription(id);
+      const updatedSubscriptions = subscriptions.filter(subscription => subscription._id !== id);
+      setSubscriptions(updatedSubscriptions);
+      setFilteredSubscriptions(updatedSubscriptions);
+      notifications.show({ message: "Subscription Deleted Successfully", color: 'red' });
+      setSlowTransitionOpened(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 const getSubscriptions = async () => {
 try {
 const response = await axios.get('http://localhost:5000/admin/viewSubscriptions');
@@ -125,8 +140,6 @@ const handleViewSpecific = (row) => {
 const handleViewSpecificBusinesSubscriptions = (row) => {
   setSlowTransitionOpened(true);
 };
-
-
 
 const columnsBusinessOwnerSubscriptions = [
   {
@@ -211,7 +224,8 @@ const columnsSuperAdminSubscriptions = [
     {
         name: 'Action',
         width: '150px',
-        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/EditSubscription')} /><IconTrash color='gray' /></Box>
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/EditSubscription')} /><IconTrash color='gray' onClick={() => handleDelete(row._id)}/>
+        </Box>
     },
 ]
 
