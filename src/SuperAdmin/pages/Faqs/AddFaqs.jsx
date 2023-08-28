@@ -37,8 +37,8 @@ export default function FaqForm() {
     initialValues: { question: '', answer: '' },
     validateInputOnChange: true,
     validate: {
-      questions: (value) => (/^\s*$/.test(value) ? 'Question must not be empty' : null),
-      answers: (value) => (/^\s*$/.test(value) ? 'Answer must not be empty' : null),
+      question: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Question Must Contain Less Than 100 Alphabets'),
+      answer: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Answer Must Contain Less Than 200 Alphabets'),
     },
   });
 
