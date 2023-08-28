@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfitBlocks from './Blocks'
+import ProfitBlockss from './Blocks'
 import RevenueAndExpense from './RevenueAndExpense'
 import { Title } from '@mantine/core'
 
@@ -14,7 +14,7 @@ const ViewProfit = () => {
         >
           View Profit
         </Title>
-      <ProfitBlocks />
+      <ProfitBlockss />
       <RevenueAndExpense />
     </div>
   )

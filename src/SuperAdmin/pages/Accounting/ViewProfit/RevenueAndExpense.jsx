@@ -1,36 +1,29 @@
-import { Center, SegmentedControl, Box } from '@mantine/core';
-import { IconEye, IconCode, IconExternalLink } from '@tabler/icons-react';
-import { useNavigate } from 'react-router-dom';
+import { Tabs, Box } from '@mantine/core';
+import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
+import ViewExpense from '../ViewExpense';
+import ViewRevenue from '../ViewRevenue';
+import RevenueTable from '../RevenueTable';
+import ExpenseTable from '../ExpenseTable';
 
 export default function RevenueAndExpense() {
-const navigate = useNavigate();
-
   return (
-    <div style={{display:'flex', justifyContent:'center', marginTop:'40px'}}>
-    <SegmentedControl
-    size="md"
-      data={[
-        {
-          value: 'preview',
-          label: (
-            <Center onClick={() => navigate('/ViewRevenue')}>
-              <IconEye size="1rem" />
-              <Box ml={10}>View Revenue</Box>
-            </Center>
-          ),
-        },
-        {
-          value: 'code',
-          label: (
-            <Center onClick={() => navigate('/ViewExpense')}>
-              <IconEye size="1rem" />
-              <Box ml={10}>View Expense</Box>
-            </Center>
-          ),
-        },
-       
-      ]}
-    />
-    </div>
+    <Box  mt={20}>
+    <Tabs defaultValue="revenue">
+      <Tabs.List>
+        <Tabs.Tab value="revenue" icon={<IconPhoto size="0.8rem" />}>View Revenue</Tabs.Tab>
+        <Tabs.Tab value="expense" icon={<IconMessageCircle size="0.8rem" />}>View Expense</Tabs.Tab>
+
+      </Tabs.List>
+
+      <Tabs.Panel value="revenue" pt="xs">
+        <RevenueTable />
+      </Tabs.Panel>
+
+      <Tabs.Panel value="expense" pt="xs">
+        <ExpenseTable />
+      </Tabs.Panel>
+
+    </Tabs>
+    </Box>
   );
 }
