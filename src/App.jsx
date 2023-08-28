@@ -38,10 +38,12 @@ import ContactUs from './pages/ContactUs';
 import StatsGrid from './SuperAdmin/pages/Charts/UserBlocks';
 import Chat from './SuperAdmin/pages/Chat/Chat';
 import Settings from './SuperAdmin/pages/Settings/Settings';
-import ViewProfit from './SuperAdmin/pages/Accounting/ViewProfit';
+import ViewProfit from './SuperAdmin/pages/Accounting/ViewProfit/ViewProfit';
 import ViewFaqs from './SuperAdmin/pages/Faqs/ViewFaqs';
 import FaqForm from './SuperAdmin/pages/Faqs/AddFaqs';
 import EditFaqs from './SuperAdmin/pages/Faqs/EditFaqs';
+import Radio from './SuperAdmin/pages/Accounting/ViewProfit/RevenueAndExpense';
+
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
 import BusinessAdd from './BusinessOwner/pages/Business/AddBusiness';
@@ -144,6 +146,8 @@ export default function Demo() {
         <Route path="ViewFaqs" element={<ViewFaqs />} />
         <Route path="FaqForm" element={<FaqForm />} />
         <Route path="EditFaqs" element={<EditFaqs />} />
+        <Route path="Radio" element={<Radio />} />
+       
       </Route>
       {/* These are the routes for Business Panel */}
       <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
