@@ -8,9 +8,8 @@ import { FiUsers } from 'react-icons/fi';
 export const BusinessSideBarData = [
   { name: "Dashboard", link: "/Dashboard", Icon: AiOutlineDashboard },
   {
-    name: "Business", Icon: BiSolidBusiness,
+    name: "Businesses", Icon: BiSolidBusiness,
     subLink: [
-      { name: "My Business", link: "/BusinessPanel/BusinessAdd", Icon: BiSolidBusiness },
       { name: "Add Business", link: "/BusinessPanel/BusinessAdd", Icon: AiOutlineUserAdd },
       { name: "View Business", link: "/BusinessPanel/BusinessView", Icon: AiOutlineEye  },    
     ],

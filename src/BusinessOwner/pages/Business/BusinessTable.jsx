@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, Tabs, Title } from '@mantine/core';
+import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, HoverCard,  } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome, IconBuilding } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 //import { NavLink, Navigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
-//import { deleteBusiness } from '../../../api/admin/businesses';
+import { deleteBusiness } from '../../../api/admin/businesses';
 
 const useStyles = createStyles((theme) => ({
 
@@ -68,6 +68,42 @@ const useStyles = createStyles((theme) => ({
 
   },
 
+  modalContainer: {
+    display:'flex',
+    flexDirection:'column',
+    maxWidth:'700px',
+    backgroundColor:'#E9ECEF',
+    borderRadius:'10px',
+
+    [theme.fn.smallerThan('md')]: {
+      //flexDirection:'column',
+      maxWidth:'700px',
+    },
+   },
+
+   modalImage : {
+    width:'100%',
+    display:'flex',
+    justifyContent:'center',
+    marginBottom:'20px',
+
+    [theme.fn.smallerThan('md')]: {
+      //width:'100%',
+      //marginBottom:'50px',
+    },
+   },
+
+   modalDetails: {
+    width:'100%',
+
+    [theme.fn.smallerThan('md')]: {
+      //width:'100%',
+      maxHeight:'200px',
+      justifyContent:'space-evenly',
+    },
+   },
+
+
 }))
 
 
@@ -88,6 +124,8 @@ const TableBusiness = () => {
   const [specificEmail, setSpecificEmail] = useState('');
   const [specificPhoneNumber, setSpecificPhoneNumber] = useState('');
   const [specificAddress, setSpecificAddress] = useState('');
+  const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
+  const [modalDeletion, SetModalDeletion] = useState('');
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
@@ -99,7 +137,7 @@ const TableBusiness = () => {
     setType('');
     setStatus('');
     };
-    /*
+    
     const handleDelete = async (id) => {
       try {
         await deleteBusiness(id);
@@ -107,19 +145,23 @@ const TableBusiness = () => {
         setBusinesses(updatedBusinesses);
         setFilteredBusinesses(updatedBusinesses);
         notifications.show({ message: "Business Deleted Successfully", color: 'red' });
+        setSlowTransitionOpened(false);
       } catch (error) {
         console.log(error);
       }
     };
-    */
+
+    const deletionConfirmation = (id) => {
+      setSlowTransitionOpened(true);
+      SetModalDeletion(id);
+    };
 
   const getBusinesses = async () => {
     try {
-      const response = await axios.get('https://restcountries.com/v2/all');
-      console.log(response);
-      setBusinesses(response.data);
-      setFilteredBusinesses(response.data);
-      console.log(businesses);
+      const response = await axios.get('http://localhost:5000/admin/viewAllBusinesses');
+      console.log(response.data);
+      setBusinesses(response.data.businesses);
+      setFilteredBusinesses(response.data.businesses);
     } catch (error) {
       console.log(error);
     }
@@ -135,10 +177,10 @@ const TableBusiness = () => {
 
   const handleViewSpecific = (row) => {
     open();
-    setSpecificPicture(row.flag);
+    setSpecificPicture(row.profilePic);
     setSpecificType(row.type);
     setSpecificName(row.name);
-    setSpecificOwner(row.name);
+    setSpecificOwner(row.businessOwner.firstName + row.businessOwner.lastName);
     setSpecificEmail(row.email);
     setSpecificPhoneNumber(row.phoneNumber);
     setSpecificAddress(row.address);
@@ -151,14 +193,54 @@ const TableBusiness = () => {
       sortable: true,
       width: '60px', // Set the width of the serial number column
     },
+    /*
     {
       name: 'Profile Picture',
       width: '110px',
-      selector: (row) => <img width={50} height={50} src={row.flag} />,
+      selector: (row) => <img width={50} height={50} src={row.profilePic} />,
     },
+    */
+    {
+      name: 'Profile Picture',
+      width: '110px',
+      selector: (row) => <HoverCard position="bottom-end" >
+      <HoverCard.Target>
+      <img width={50} height={50} src={row.profilePic} />
+      </HoverCard.Target>
+      <HoverCard.Dropdown>
+      <img width={150} height={150} src={row.profilePic} />
+      </HoverCard.Dropdown>
+    </HoverCard>
+       //<img width={50} height={50} src={row.profilePic} />,
+    },
+   /*
+    {
+      name: 'Profile Picture',
+      width: '110px',
+      selector: (row) => <img
+         //width={50} height={50} 
+         src={row.profilePic}
+      style={{
+        transition: 'transform 0.3s ease-in-out',
+        width: '50px', // Initial width
+        height: '50px', // Initial height
+      }}
+      onMouseEnter={(event) => {
+        event.currentTarget.style.transform = 'scale(1.1)';
+        event.currentTarget.style.width = '110px'; // Increase width on hover
+        event.currentTarget.style.height = '110px'; // Increase height on hover
+      }}
+      onMouseLeave={(event) => {
+        event.currentTarget.style.transform = 'scale(1)';
+            event.currentTarget.style.width = '50px'; // Reset width
+            event.currentTarget.style.height = '50px'; // Reset height
+      }}
+        />,
+    },
+    */
     {
       name: 'Business Type',
-      selector: (row) => row.region,
+      selector: (row) => row.type,
       sortable: true,
     },
     {
@@ -170,33 +252,20 @@ const TableBusiness = () => {
     {
       name: 'Business Owner Name',
       width: '170px',
-      selector: (row) => row.name,
+      selector: (row) => `${row.businessOwner.firstName} ${row.businessOwner.lastName}`,
       sortable: true,
     },
     {
       name: 'Email',
-      selector: (row) => row.name,
+      selector: (row) => row.email,
       sortable: true,
     },
     {
       name: 'Phone Number',
-      selector: (row) => row.area,
+      selector: (row) => row.phoneNumber,
       width: '130px',
       sortable: true,
     },
-    {
-      name: 'Status',
-      selector: (row) => <Badge variant='outline' p={5} >{row.name}</Badge>,
-      width: '130px',
-      sortable: true,
-    },
-    {
-      name: 'Subscription Status',
-      selector: (row) => <Badge variant='outline' p={5} >{row.name}</Badge>,
-      width: '160px',
-      sortable: true,
-    },
-    /*
     {
       name: 'Status',
       cell: (row, index) => (
@@ -225,11 +294,13 @@ const TableBusiness = () => {
       width: '130px',
       sortable: true,
     },
-    */
     {
       name: 'Action',
       width: '150px',
-      cell: (row) => <Box><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => handleDelete(row._id)}/></Box>
+      cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} />
+      {/*<IconTrash color='gray' onClick={() => handleDelete(row._id)}/>*/}
+      <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/>
+      </Box>
     },
   ]
 
@@ -241,11 +312,10 @@ const TableBusiness = () => {
     const result = businesses.filter(business => {
       const matchesSearch = (
         business.name.toLowerCase().includes(search.toLowerCase()) ||
-        business.name.toLowerCase().includes(search.toLowerCase()) ||
+        business.businessOwner.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        business.businessOwner.lastName.toLowerCase().includes(search.toLowerCase()) ||
         business.phoneNumber.toLowerCase().includes(search.toLowerCase())
       );
-      //previously it was......
-      
        const matchesType = type === '' || business.type.toLowerCase().includes(type.toLowerCase());
       const matchesStatus = status === '' || business.status.toLowerCase().includes(status.toLowerCase());
   
@@ -254,7 +324,7 @@ const TableBusiness = () => {
   
     setFilteredBusinesses(result);
   }, [search, type, status, businesses]);
-/*
+
   useEffect(() => {
     getBusinesses().then((data) => {
       const businessesData = data.map((business) => ({ ...business, status: 'Active' }));
@@ -262,7 +332,6 @@ const TableBusiness = () => {
       setFilteredBusinesses(businessesData);
     });
   }, []);
-  */
 
   return (
     <Box >
@@ -299,8 +368,23 @@ const TableBusiness = () => {
                       searchable
                       placeholder="Business Type"
                       data={[
-                        { value: 'Commercial', label: 'Commercial' },
-                        { value: 'Industrial', label: 'Industrial' },
+                        { value: 'Advertising and Marketing Agencies', label: 'Advertising and Marketing Agencies' },
+                        { value: 'Agriculture and Farming', label: 'Agriculture and Farming' },
+                        { value: 'Automotive Industry', label: 'Automotive Industry' },
+                        { value: 'Cosmetics and Beauty Products', label: 'Cosmetics and Beauty Products' },
+                        { value: 'E-commerce and Online Retail', label: 'E-commerce and Online Retail' },
+                        { value: 'Export and Import Businesses', label: 'Export and Import Businesses' },
+                        { value: 'Financial Services and Banking', label: 'Financial Services and Banking' },
+                        { value: 'Food and Beverage Industry', label: 'Food and Beverage Industry' },
+                        { value: 'Healthcare and Medical Services', label: 'Healthcare and Medical Services' },
+                        { value: 'Information Technology (IT) Services', label: 'Information Technology (IT) Services' },
+                        { value: 'Logistics and Transportation', label: 'Logistics and Transportation' },
+                        { value: 'Media and Entertainment', label: 'Media and Entertainment' },
+                        { value: 'Pharmaceutical Industry', label: 'Pharmaceutical Industry' },
+                        { value: 'Real Estate and Construction', label: 'Real Estate and Construction' },
+                        { value: 'Telecommunications', label: 'Telecommunications' },
+                        { value: 'Textile and Garment Manufacturing', label: 'Textile and Garment Manufacturing' },
+                        { value: 'Tourism and Travel Agencies', label: 'Tourism and Travel Agencies' },
                       ]}
                     />
                   </Menu.Item>
@@ -341,8 +425,23 @@ const TableBusiness = () => {
               searchable
               placeholder="Business Type"
               data={[
-                { value: 'Commercial', label: 'Commercial' },
-                { value: 'Industrial', label: 'Industrial' },
+                { value: 'Advertising and Marketing Agencies', label: 'Advertising and Marketing Agencies' },
+                { value: 'Agriculture and Farming', label: 'Agriculture and Farming' },
+                { value: 'Automotive Industry', label: 'Automotive Industry' },
+                { value: 'Cosmetics and Beauty Products', label: 'Cosmetics and Beauty Products' },
+                { value: 'E-commerce and Online Retail', label: 'E-commerce and Online Retail' },
+                { value: 'Export and Import Businesses', label: 'Export and Import Businesses' },
+                { value: 'Financial Services and Banking', label: 'Financial Services and Banking' },
+                { value: 'Food and Beverage Industry', label: 'Food and Beverage Industry' },
+                { value: 'Healthcare and Medical Services', label: 'Healthcare and Medical Services' },
+                { value: 'Information Technology (IT) Services', label: 'Information Technology (IT) Services' },
+                { value: 'Logistics and Transportation', label: 'Logistics and Transportation' },
+                { value: 'Media and Entertainment', label: 'Media and Entertainment' },
+                { value: 'Pharmaceutical Industry', label: 'Pharmaceutical Industry' },
+                { value: 'Real Estate and Construction', label: 'Real Estate and Construction' },
+                { value: 'Telecommunications', label: 'Telecommunications' },
+                { value: 'Textile and Garment Manufacturing', label: 'Textile and Garment Manufacturing' },
+                { value: 'Tourism and Travel Agencies', label: 'Tourism and Travel Agencies' },
               ]}
               className={classes.responsiveUserType}
             />
@@ -361,7 +460,7 @@ const TableBusiness = () => {
             <Button
               size='md'
               className={classes.responsiveAddUserBtn}
-              onClick={() => navigate('/BusinessPanel/BusinessAdd')}
+              onClick={() => navigate('/AddBusiness')}
             >
               Add Business
             </Button>
@@ -369,35 +468,11 @@ const TableBusiness = () => {
         }
         responsive
       />
+      {/*
       <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close} size={800}  >
-      <Tabs variant="pills" defaultValue="Business Details">
-      <Tabs.List position="center" grow mb={'xl'}>
-        <Tabs.Tab value="Business Details" >Business Details</Tabs.Tab>
-        <Tabs.Tab value="Questionnaire Details">Questionnaire Details</Tabs.Tab>
-      </Tabs.List>
-
-      <Tabs.Panel value="Questionnaire Details"pt="xs">
-      <Box h={200} mb={30} style={{ display: 'flex', flexDirection: 'row', justifyContent:'space-evenly' }}>
-        <Box>
-          <Title order={4}>Question/Answers</Title>
-          <Box><Text>1- Are you ineterested in commercial plots? Yes.</Text></Box>
-          <Box><Text>2- What is the range of money which you can afford? 50 lacs.</Text></Box>
-          <Box><Text>3- Which city do you prefer for commercial buying plots? Lahore.</Text></Box>
-          <Box><Text>4- Which city do you prefer for residential buying plots? Lahore.</Text></Box>
-          <Box><Text>5- Have you ever invested in industrial sector? Yes.</Text></Box>
-          </Box>
-          <Box>
-          <Title order={4}>Marketing Agent Details</Title>
-          <Box style={{display:'flex', flexDirection:'row'}}><Text>Agent Name: </Text><Text color='green.9'>Amna</Text></Box>
-          <Box style={{display:'flex', flexDirection:'row'}}><Text>Agent Voice: </Text><Text color='green.9'>Female</Text></Box>
-          </Box>
-          </Box>
-      </Tabs.Panel>
-      
-      <Tabs.Panel value="Business Details" pt="xs">
         <Box mb={30} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Box ><Image width={300} height={200} radius="md" src={specificPicture} alt="Random image" /></Box>
-          <Box  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+          <Box mah={350}><Image maw={300} radius="md" src={specificPicture} alt="Random image" /></Box>
+          <Box mah={350} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
             <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
@@ -406,9 +481,28 @@ const TableBusiness = () => {
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
           </Box>
         </Box>
-        </Tabs.Panel>
-        </Tabs>
       </Modal>
+      */}
+      <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
+  <Box className={classes.modalContainer} mb={30}  p={20}  style={{}}>
+    <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
+    <Box className={classes.modalDetails} style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
+    </Box>
+  </Box>
+      </Modal>
+      <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
+            <Text>Are you sure you want to delete?</Text>
+            <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+            <Button size='sm' color='green.9' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
+            <Button type="submit" size='sm' color='red.8' onClick={() => handleDelete(modalDeletion)} >Delete</Button>
+            </Box>
+        </Modal>
     </Box>
   )
 }
