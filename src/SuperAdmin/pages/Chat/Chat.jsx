@@ -1,6 +1,9 @@
 import React from 'react'
-import { Image, TextInput, Button, Box, createStyles, Paper, Title, Divider, Select, Textarea } from '@mantine/core';
-
+import { Image, TextInput, Button, Box, createStyles, Paper, Title, Divider, Select, Textarea, Text } from '@mantine/core';
+import ChatNavbarContent from './ChatNavbarContent';
+import ChatSearch from './ChatSearch';
+import ChatHeader from './ChatHeader';
+import ChatInput from './ChatInput';
 
 const useStyles = createStyles((theme) => ({
 
@@ -9,20 +12,49 @@ const useStyles = createStyles((theme) => ({
     height:'100%',
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor:'pink',
-/*
+    backgroundColor:'#E9ECEF',
+
     [theme.fn.smallerThan('sm')]: {
       flexDirection: 'column'
     },
-*/
+
   },
 
-  inputField: {
-    width: '50%',
+  responsiveChatSidebar: {
+    width: '30%',
     [theme.fn.smallerThan('sm')]: {
-      width: '100%'
+      width: '100%',
     },
-  }
+
+  },
+
+  responsiveChatScreen: {
+    width: '70%',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor:'white',
+    [theme.fn.smallerThan('sm')]: {
+      width: '100%',
+    },
+  
+  },
+
+  responsiveChatHeader: {
+    height:'15%',
+    backgroundColor:'#5C940D',
+
+  },
+
+  responsiveChats: {
+    height:'70%',
+  },
+
+  responsiveChatInput: {
+    height:'15%',
+    backgroundColor:'#5C940D',
+  },
+  
+
 
 }));
 
@@ -30,10 +62,18 @@ const Chat = () => {
   const { classes } = useStyles();
   return (
     <Box className={classes.responsiveContainer}>
-      <Box></Box>
-      <Box>
-        <Box></Box>
-        <Box></Box>
+      <Box className={classes.responsiveChatSidebar}>
+        <ChatSearch />
+      <ChatNavbarContent />
+      </Box>
+      <Box className={classes.responsiveChatScreen}>
+      <Box className={classes.responsiveChatHeader}>
+       <ChatHeader />
+      </Box>
+        <Box className={classes.responsiveChats}></Box>
+        <Box p={'md'} className={classes.responsiveChatInput}>
+          <ChatInput />
+        </Box>
       </Box>
     </Box>
   )
