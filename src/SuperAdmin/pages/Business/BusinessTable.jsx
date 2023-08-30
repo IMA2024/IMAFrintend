@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, HoverCard,  } from '@mantine/core';
+import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, HoverCard, } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome, IconBuilding } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
-//import { NavLink, Navigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteBusiness } from '../../../api/admin/businesses';
 
@@ -69,39 +68,39 @@ const useStyles = createStyles((theme) => ({
   },
 
   modalContainer: {
-    display:'flex',
-    flexDirection:'column',
-    maxWidth:'700px',
-    backgroundColor:'#E9ECEF',
-    borderRadius:'10px',
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: '700px',
+    backgroundColor: '#E9ECEF',
+    borderRadius: '10px',
 
     [theme.fn.smallerThan('md')]: {
       //flexDirection:'column',
-      maxWidth:'700px',
+      maxWidth: '700px',
     },
-   },
+  },
 
-   modalImage : {
-    width:'100%',
-    display:'flex',
-    justifyContent:'center',
-    marginBottom:'20px',
+  modalImage: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '20px',
 
     [theme.fn.smallerThan('md')]: {
       //width:'100%',
       //marginBottom:'50px',
     },
-   },
+  },
 
-   modalDetails: {
-    width:'100%',
+  modalDetails: {
+    width: '100%',
 
     [theme.fn.smallerThan('md')]: {
       //width:'100%',
-      maxHeight:'200px',
-      justifyContent:'space-evenly',
+      maxHeight: '200px',
+      justifyContent: 'space-evenly',
     },
-   },
+  },
 
 
 }))
@@ -136,32 +135,32 @@ const BusinessTable = () => {
     setSearch('');
     setType('');
     setStatus('');
-    };
-    
-    const handleDelete = async (id) => {
-      try {
-        await deleteBusiness(id);
-        const updatedBusinesses = businesses.filter(business => business._id !== id);
-        setBusinesses(updatedBusinesses);
-        setFilteredBusinesses(updatedBusinesses);
-        notifications.show({ message: "Business Deleted Successfully", color: 'red' });
-        setSlowTransitionOpened(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  };
 
-    const deletionConfirmation = (id) => {
-      setSlowTransitionOpened(true);
-      SetModalDeletion(id);
-    };
+  const handleDelete = async (id) => {
+    try {
+      await deleteBusiness(id);
+      const updatedBusinesses = businesses.filter(business => business._id !== id);
+      setBusinesses(updatedBusinesses);
+      setFilteredBusinesses(updatedBusinesses);
+      notifications.show({ message: "Business Deleted Successfully", color: 'red' });
+      setSlowTransitionOpened(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deletionConfirmation = (id) => {
+    setSlowTransitionOpened(true);
+    SetModalDeletion(id);
+  };
 
   const getBusinesses = async () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewAllBusinesses');
       console.log(response.data);
-      setBusinesses(response.data.businesses);
-      setFilteredBusinesses(response.data.businesses);
+      setBusinesses(response?.data?.businesses);
+      setFilteredBusinesses(response?.data?.businesses);
     } catch (error) {
       console.log(error);
     }
@@ -177,13 +176,13 @@ const BusinessTable = () => {
 
   const handleViewSpecific = (row) => {
     open();
-    setSpecificPicture(row.profilePic);
-    setSpecificType(row.type);
-    setSpecificName(row.name);
-    setSpecificOwner(row.businessOwner.firstName + row.businessOwner.lastName);
-    setSpecificEmail(row.email);
-    setSpecificPhoneNumber(row.phoneNumber);
-    setSpecificAddress(row.address);
+    setSpecificPicture(row?.profilePic);
+    setSpecificType(row?.type || 'N/A');
+    setSpecificName(row?.name || 'N/A');
+    setSpecificOwner(row?.businessOwner?.firstName + row?.businessOwner?.lastName || 'N/A');
+    setSpecificEmail(row?.email || 'N/A');
+    setSpecificPhoneNumber(row?.phoneNumber || 'N/A');
+    setSpecificAddress(row?.address || 'N/A');
   };
 
   const columns = [
@@ -193,76 +192,69 @@ const BusinessTable = () => {
       sortable: true,
       width: '60px', // Set the width of the serial number column
     },
-    /*
-    {
-      name: 'Profile Picture',
-      width: '110px',
-      selector: (row) => <img width={50} height={50} src={row.profilePic} />,
-    },
-    */
     {
       name: 'Profile Picture',
       width: '110px',
       selector: (row) => <HoverCard position="bottom-end" >
-      <HoverCard.Target>
-      <img width={50} height={50} src={row.profilePic} />
-      </HoverCard.Target>
-      <HoverCard.Dropdown>
-      <img width={150} height={150} src={row.profilePic} />
-      </HoverCard.Dropdown>
-    </HoverCard>
-       //<img width={50} height={50} src={row.profilePic} />,
+        <HoverCard.Target>
+          <img width={50} height={50} src={row?.profilePic} />
+        </HoverCard.Target>
+        <HoverCard.Dropdown>
+          <img width={150} height={150} src={row?.profilePic} />
+        </HoverCard.Dropdown>
+      </HoverCard>
+      //<img width={50} height={50} src={row.profilePic} />,
     },
-   /*
-    {
-      name: 'Profile Picture',
-      width: '110px',
-      selector: (row) => <img
-         //width={50} height={50} 
-         src={row.profilePic}
-      style={{
-        transition: 'transform 0.3s ease-in-out',
-        width: '50px', // Initial width
-        height: '50px', // Initial height
-      }}
-      onMouseEnter={(event) => {
-        event.currentTarget.style.transform = 'scale(1.1)';
-        event.currentTarget.style.width = '110px'; // Increase width on hover
-        event.currentTarget.style.height = '110px'; // Increase height on hover
-      }}
-      onMouseLeave={(event) => {
-        event.currentTarget.style.transform = 'scale(1)';
-            event.currentTarget.style.width = '50px'; // Reset width
-            event.currentTarget.style.height = '50px'; // Reset height
-      }}
-        />,
-    },
-    */
+    /*
+     {
+       name: 'Profile Picture',
+       width: '110px',
+       selector: (row) => <img
+          //width={50} height={50} 
+          src={row.profilePic}
+       style={{
+         transition: 'transform 0.3s ease-in-out',
+         width: '50px', // Initial width
+         height: '50px', // Initial height
+       }}
+       onMouseEnter={(event) => {
+         event.currentTarget.style.transform = 'scale(1.1)';
+         event.currentTarget.style.width = '110px'; // Increase width on hover
+         event.currentTarget.style.height = '110px'; // Increase height on hover
+       }}
+       onMouseLeave={(event) => {
+         event.currentTarget.style.transform = 'scale(1)';
+             event.currentTarget.style.width = '50px'; // Reset width
+             event.currentTarget.style.height = '50px'; // Reset height
+       }}
+         />,
+     },
+     */
     {
       name: 'Business Type',
-      selector: (row) => row.type,
+      selector: (row) => row?.type || 'N/A',
       sortable: true,
     },
     {
       name: 'Business Name',
       width: '130px',
-      selector: (row) => row.name,
+      selector: (row) => row?.name || 'N/A',
       sortable: true,
     },
     {
       name: 'Business Owner Name',
       width: '170px',
-      selector: (row) => `${row.businessOwner.firstName} ${row.businessOwner.lastName}`,
+      selector: (row) => `${row?.businessOwner?.firstName} ${row?.businessOwner?.lastName}`,
       sortable: true,
     },
     {
       name: 'Email',
-      selector: (row) => row.email,
+      selector: (row) => row?.email || 'N/A',
       sortable: true,
     },
     {
       name: 'Phone Number',
-      selector: (row) => row.phoneNumber,
+      selector: (row) => row?.phoneNumber || 'N/A',
       width: '130px',
       sortable: true,
     },
@@ -271,7 +263,7 @@ const BusinessTable = () => {
       cell: (row, index) => (
         selectedUserIndex === index ? (
           <Select
-            value={row.status}
+            value={row?.status}
             onChange={(newValue) => {
               toggleStatus(index);
               setSelectedUserIndex();
@@ -298,8 +290,8 @@ const BusinessTable = () => {
       name: 'Action',
       width: '150px',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} />
-      {/*<IconTrash color='gray' onClick={() => handleDelete(row._id)}/>*/}
-      <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/>
+        {/*<IconTrash color='gray' onClick={() => handleDelete(row._id)}/>*/}
+        <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} />
       </Box>
     },
   ]
@@ -311,17 +303,17 @@ const BusinessTable = () => {
   useEffect(() => {
     const result = businesses.filter(business => {
       const matchesSearch = (
-        business.name.toLowerCase().includes(search.toLowerCase()) ||
-        business.businessOwner.firstName.toLowerCase().includes(search.toLowerCase()) ||
-        business.businessOwner.lastName.toLowerCase().includes(search.toLowerCase()) ||
-        business.phoneNumber.toLowerCase().includes(search.toLowerCase())
+        business?.name.toLowerCase().includes(search.toLowerCase()) ||
+        business?.businessOwner?.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        business?.businessOwner?.lastName.toLowerCase().includes(search.toLowerCase()) ||
+        business?.phoneNumber.toLowerCase().includes(search.toLowerCase())
       );
-       const matchesType = type === '' || business.type.toLowerCase().includes(type.toLowerCase());
-      const matchesStatus = status === '' || business.status.toLowerCase().includes(status.toLowerCase());
-  
+      const matchesType = type === '' || business?.type.toLowerCase().includes(type.toLowerCase());
+      const matchesStatus = status === '' || business?.status.toLowerCase().includes(status.toLowerCase());
+
       return matchesSearch && matchesType && matchesStatus;
     });
-  
+
     setFilteredBusinesses(result);
   }, [search, type, status, businesses]);
 
@@ -355,8 +347,8 @@ const BusinessTable = () => {
                 <Menu.Dropdown bg={'#FAF9F6'}>
                   <Menu.Item>
                     <TextInput
-              placeholder='Search'
-              value={search}
+                      placeholder='Search'
+                      value={search}
                       onChange={(e) => setSearch(e.target.value)}
 
                     />
@@ -395,8 +387,8 @@ const BusinessTable = () => {
                       searchable
                       placeholder="Active/Block"
                       data={[
-                { value: 'Active', label: 'Active' },
-                { value: 'Block', label: 'Block' },
+                        { value: 'Active', label: 'Active' },
+                        { value: 'Block', label: 'Block' },
                       ]}
                     />
                   </Menu.Item>
@@ -408,7 +400,7 @@ const BusinessTable = () => {
                 </Menu.Dropdown>
               </Menu>
             </Box>
-            <Button variant="outline" size='md'  onClick={() => handleClear()} className={classes.responsiveClear}>
+            <Button variant="outline" size='md' onClick={() => handleClear()} className={classes.responsiveClear}>
               Clear
             </Button>
             <TextInput
@@ -484,25 +476,25 @@ const BusinessTable = () => {
       </Modal>
       */}
       <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
-  <Box className={classes.modalContainer} mb={30}  p={20}  style={{}}>
-    <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
-    <Box className={classes.modalDetails} style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
+        <Box className={classes.modalContainer} mb={30} p={20} style={{}}>
+          <Box className={classes.modalImage}><Image width={'200'} height={'200'} radius="lg" src={specificPicture} alt="Random image" /></Box>
+          <Box className={classes.modalDetails} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+            <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
-    </Box>
-  </Box>
+          </Box>
+        </Box>
       </Modal>
-      <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
-            <Text>Are you sure you want to delete?</Text>
-            <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-            <Button size='sm' color='green.9' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
-            <Button type="submit" size='sm' color='red.8' onClick={() => handleDelete(modalDeletion)} >Delete</Button>
-            </Box>
-        </Modal>
+      <Modal opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
+        <Text>Are you sure you want to delete?</Text>
+        <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+          <Button size='sm' color='green.9' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
+          <Button type="submit" size='sm' color='red.8' onClick={() => handleDelete(modalDeletion)} >Delete</Button>
+        </Box>
+      </Modal>
     </Box>
   )
 }
