@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
   AppShell,
   Navbar,
@@ -16,11 +16,35 @@ import { Navigate, Outlet } from "react-router-dom";
 import HeaderTop from './Header';
 import SuperAdminNavbar from './SuperAdminNavbar';
 import { SuperAdminSideBarData } from './SuperAdminSidebarData';
+import { BusinessSideBarData } from '../../BusinessOwner/Layout/BusinessSideBarData';
+import { UserContext } from '../../context/users/userContext';
 
 export default function GeneralLayout() {
-  let auth = { token: true }
+  let auth = { token: true };
+  const { user } = useContext(UserContext);
+  //const role = localStorage.getItem('role');
+  let role = user?.role;
+  console.log(role);
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+
+            /*    
+  sideBarLinks = {
+      role === "Social Worker"
+      ? socialSideBarData
+      : role === "Psychologist"
+      ? psychSideBarData
+      : role === "Lawyer"
+      ? LawyerSidebarData
+      : role === "Admin"
+      ? ngoAdminSideBarData
+      : role === "User"
+      ? UserSidebarData
+      : []
+  }
+  */
+  {/*SuperAdminSideBarData={SuperAdminSideBarData}*/} 
+  
 
   return (
     auth.token ? (
@@ -36,12 +60,20 @@ export default function GeneralLayout() {
           <Navbar
           // bg={'#770737'} 
           //bg={'#66A80F'}
-          bg={'#5C940D'}
+          //bg={'#5C940D'}
+          bg={role === "Super Admin" ? '#5C940D' : role === "Business Owner" ? '#5F3DC4' : '#66A80F'}
           hiddenBreakpoint="md"
            hidden={!opened} width={{ sm: 300, lg: 300 }} mt={-1} >
             <ScrollArea type='never' >
             <SuperAdminNavbar
-              SuperAdminSideBarData={SuperAdminSideBarData} />
+              SuperAdminSideBarData= {
+                role === "Super Admin"
+                ? SuperAdminSideBarData
+                : role === "Business Owner"
+                ? BusinessSideBarData
+                : []
+            }
+            />
             </ScrollArea>
           </Navbar>
         }

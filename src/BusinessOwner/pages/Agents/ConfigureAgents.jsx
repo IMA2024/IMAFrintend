@@ -73,17 +73,17 @@ export default function ConfigureAgents() {
   return (
     <Paper withBorder shadow="md" p={35}  radius="md">
        <Title
-          mb={20}
-          align="center"
-          //order={2}
-          sx={{ fontWeight: 650 }}
+           align="center"
+           order={2}
+           sx={{ fontWeight: 550 }}
+           mb={5}
         >
           Configure System Agents
         </Title>
-        <Divider mb={30} />
+      
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
       <Box >
-        <Select withAsterisk size='md' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessName')}
+        <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessName')}
         data={[
             { value: 'react', label: 'React' },
             { value: 'ng', label: 'Angular' },
@@ -92,8 +92,8 @@ export default function ConfigureAgents() {
           ]}
          />
         </Box>
-      <Box mt="md"  className={classes.responsiveContainer}>
-        <Select withAsterisk size='md' className={classes.inputField} label="Agent Name" placeholder="Select Agent Name" {...form.getInputProps('agentName')}
+      <Box mt="sm"  className={classes.responsiveContainer}>
+        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Select Agent Name" {...form.getInputProps('agentName')}
         data={[
             { value: 'react', label: 'React' },
             { value: 'ng', label: 'Angular' },
@@ -101,7 +101,7 @@ export default function ConfigureAgents() {
             { value: 'vue', label: 'Vue' },
           ]}
          />
-        <Select withAsterisk size='md' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('agentVoice')}
+        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('agentVoice')}
             data={[
                 { value: 'react', label: 'React' },
                 { value: 'ng', label: 'Angular' },
@@ -111,10 +111,10 @@ export default function ConfigureAgents() {
          />
         </Box>
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="lg"  size='md' color='red.8' >
+         <Button  mt="lg"  size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button type="submit" mt="lg"  size='md' color='green.9' >
+        <Button type="submit" mt="lg"  size='sm' color='green.9' >
           Submit
         </Button>
         </Box>
