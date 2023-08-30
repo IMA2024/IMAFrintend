@@ -10,38 +10,38 @@ export const BusinessSideBarData = [
   {
     name: "Businesses", Icon: BiSolidBusiness,
     subLink: [
-      { name: "Add Business", link: "/BusinessPanel/BusinessAdd", Icon: AiOutlineUserAdd },
-      { name: "View Business", link: "/BusinessPanel/BusinessView", Icon: AiOutlineEye  },    
+      { name: "Add Business", link: "/BusinessAdd", Icon: AiOutlineUserAdd },
+      { name: "View Business", link: "/BusinessView", Icon: AiOutlineEye  },    
     ],
   },
   {
     name: "Business Questionnaires", Icon: MdQuestionAnswer,
     subLink: [
-      { name: "Add Questionnaire", link: "/BusinessPanel/AddQuestionnaire", Icon: AiOutlineUserAdd },
-      { name: "View Questionnaire", link: "/BusinessPanel/ViewQuestionnaire", Icon: AiOutlineEye  },    
+      { name: "Add Questionnaire", link: "/AddQuestionnaire", Icon: AiOutlineUserAdd },
+      { name: "View Questionnaire", link: "/ViewQuestionnaire", Icon: AiOutlineEye  },    
     ],
   },
   {
     name: "System Agents", Icon: BiUserCircle,
     subLink: [
-      { name: "Configure Agents", link: "/BusinessPanel/ConfigureAgents", Icon: AiOutlineUserAdd },
-      { name: "View Agents", link: "/BusinessPanel/AgentsView", Icon: AiOutlineEye  },    
+      { name: "Configure Agents", link: "/ConfigureAgents", Icon: AiOutlineUserAdd },
+      { name: "View Agents", link: "/AgentsView", Icon: AiOutlineEye  },    
     ],
   },
   {
     name: "Subscription", Icon: AiOutlineShoppingCart,
     subLink: [
-      { name: "Buy Subscription", link: "/BusinessPanel/BuySubscription", Icon: BiCartAdd },
-      { name: "View Subscription", link: "/BusinessPanel/ViewBusinessSubscription", Icon: AiOutlineEye },
+      { name: "Buy Subscription", link: "/BuySubscription", Icon: BiCartAdd },
+      { name: "View Subscription", link: "/ViewBusinessSubscription", Icon: AiOutlineEye },
     ],
   },
   {
     name: "Accounting", Icon: AiOutlineShop,
     subLink: [
-      { name: "Add Revenue", link: "/BusinessPanel/BusinessPanelAddRevenue", Icon: AiOutlineUserAdd },
-      { name: "View Revenue", link: "/ViewBusiness", Icon: AiOutlineEye },
-      { name: "Add Expense", link: "/ViewBusiness", Icon: AiOutlineUserAdd },
-      { name: "View Expense", link: "/ViewBusiness", Icon: AiOutlineEye },
+      { name: "Add Revenue", link: "/BusinessPanelAddRevenue", Icon: AiOutlineUserAdd },
+      { name: "View Revenue", link: "/BusinessPanelViewRevenue", Icon: AiOutlineEye },
+      { name: "Add Expense", link: "/BusinessPanelAddExpense", Icon: AiOutlineUserAdd },
+      { name: "View Expense", link: "/BusinessPanelViewExpense", Icon: AiOutlineEye },
     ],
   },
   {

@@ -9,9 +9,10 @@ const ViewBusinessSubscription = () => {
   return (
     <Box>
         <Title
-          mb={20}
+          order={2}
           align="center"
-          sx={{ fontWeight: 650 }}
+          sx={{ fontWeight: 550 }}
+          mb={5}
         >
           View Subscription Details
         </Title>
