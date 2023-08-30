@@ -62,8 +62,8 @@ import { useContext } from 'react';
       if (response.status === 200) {
 
         notifications.show({ message: `Signin Successfull `, color: 'green' });
-        console.log(response.data);
-        setUser(response.data);
+        console.log(response?.data);
+        setUser(response?.data);
 
         switch (response?.data?.role) {
           case 'Super Admin':

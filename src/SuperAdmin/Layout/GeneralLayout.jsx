@@ -1,17 +1,8 @@
 import { useState, useContext } from 'react';
 import {
-  AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
-  Burger,
-  useMantineTheme,
-  Box,
-  ScrollArea,
-} from '@mantine/core';
+  AppShell, Navbar, Header, MediaQuery, Burger, useMantineTheme, Box, ScrollArea } from '@mantine/core';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Navigate, Outlet } from "react-router-dom";
 import HeaderTop from './Header';
 import SuperAdminNavbar from './SuperAdminNavbar';
@@ -22,11 +13,26 @@ import { UserContext } from '../../context/users/userContext';
 export default function GeneralLayout() {
   let auth = { token: true };
   const { user } = useContext(UserContext);
-  //const role = localStorage.getItem('role');
   let role = user?.role;
-  console.log(role);
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleTokenChange = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        localStorage.clear();
+        navigate('/HeaderMegaMenu/SignIn');
+      }
+    };
+
+    window.addEventListener('storage', handleTokenChange);
+
+    return () => {
+      window.removeEventListener('storage', handleTokenChange);
+    };
+  }, [navigate]);
 
             /*    
   sideBarLinks = {
