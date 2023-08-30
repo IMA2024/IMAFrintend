@@ -113,7 +113,7 @@ const HeaderTop = () => {
     </Box>
     <Box className={classes.responsiveContainerChild2} >
     <Box className={classes.dashboardHeading}>
-    <Title align="center" order={3} >ADMIN DASHBOARD</Title>
+    <Title align="center" order={3} transform="uppercase">{user?.role} DASHBOARD</Title>
     <Text align="center">Welcome Back {user?.firstName} {user?.lastName}</Text>
     </Box>
     <Box className={classes.centerLogo}>
