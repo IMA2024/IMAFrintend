@@ -44,7 +44,7 @@ export default function EditBusiness() {
   const [profilePics, setProfilePics] = useState('')
 
   const form = useForm({
-    initialValues: { businessId: rowData?._id, name: rowData?.name, businessOwner: rowData?.businessOwner, type: rowData?.type, phoneNumber: rowData?.phoneNumber, address: rowData?.address, email: rowData?.email, description: rowData?.description },
+    initialValues: { businessId: rowData?._id, name: rowData?.name, businessOwner: rowData?.businessOwner?._id , type: rowData?.type, phoneNumber: rowData?.phoneNumber, address: rowData?.address, email: rowData?.email, description: rowData?.description },
     validateInputOnChange: true,
     validate: {
       type: isNotEmpty('Please Select Business Type'),
