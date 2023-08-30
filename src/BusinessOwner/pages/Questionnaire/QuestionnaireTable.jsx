@@ -269,7 +269,7 @@ useEffect(() => {
         <Button 
         size='md'
         className={classes.responsiveAddUserBtn}
-        onClick={() => navigate('/BusinessPanel/AddQuestionnaire')}
+        onClick={() => navigate('/AddQuestionnaire')}
         >
         Add Questionnaire
        </Button>

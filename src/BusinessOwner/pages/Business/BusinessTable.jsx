@@ -129,7 +129,7 @@ const TableBusiness = () => {
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
-    navigate('/BusinessPanel/BusinessEdit', { state: { rowData: row } });
+    navigate('/BusinessEdit', { state: { rowData: row } });
   };
 
   const handleClear = () => {
@@ -460,7 +460,7 @@ const TableBusiness = () => {
             <Button
               size='md'
               className={classes.responsiveAddUserBtn}
-              onClick={() => navigate('/AddBusiness')}
+              onClick={() => navigate('/BusinessAdd')}
             >
               Add Business
             </Button>

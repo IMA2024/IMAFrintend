@@ -136,21 +136,23 @@ export default function BuySubscription() {
     <Container my="md">
       <Grid gutter={'xs'}>
         {slicedCountries.map((country, index) => (
-          <Grid.Col xs={6} sm={4} md={4} radius="md" >
-            <Card >
-              <Paper radius="md" mih={300} >
-                <Center mx="auto" mih={40}><Text fw={'bold'} size={30} h={100}>{country.title}</Text></Center>
-                <Center mx="auto" mih={40}><Text size={25} fs={'italic'} color='red.9'>{country.type}</Text></Center>
-                <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
-                  <Image
-                    radius="md"
-                    src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
-                    alt="Random unsplash image"
-                  />
-                </Box></Center>
-                <Center mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{country.price}</Text></Center>
-                <Divider />
-                <Center mih={40} mx="auto"> <Text>{country.description}</Text></Center>
+                   <Grid.Col xs={6} sm={4} md={4} radius="md" >
+                   <Card radius="md">
+                     <Paper radius="md" mih={300} 
+                     //bg={theme.fn.linearGradient(45, '#FFF3BF', '#B197FC')}
+                     >
+                       <Center mx="auto" mih={40}><Text  size={30} h={100}>{country.title}</Text></Center>
+                       <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{country.type}</Text></Center>
+                       <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
+                         <Image
+                           radius="md"
+                           src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
+                           alt="Random unsplash image"
+                         />
+               </Box></Center>
+                       <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{country.price}</Text></Center>
+                       <Divider />
+                       <Center mih={40} mx="auto"> <Text>{country.description}</Text></Center>
                 <Button mih={40} mx="auto" fullWidth color='green.9'
                   onClick={() => {
                     if(subscriptionStatus == false){

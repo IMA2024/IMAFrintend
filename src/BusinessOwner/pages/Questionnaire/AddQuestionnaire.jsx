@@ -82,17 +82,16 @@ export default function AddQuestionnaire() {
   return (
     <Paper withBorder shadow="md" p={35}  radius="md">
        <Title
-          mb={20}
-          align="center"
-          //order={2}
-          sx={{ fontWeight: 650 }}
+        order={2}
+        align="center"
+        sx={{ fontWeight: 550 }}
         >
           Add Questionnaire
         </Title>
-        <Divider mb={30} />
+ 
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
       <Box>
-        <Select withAsterisk size='md' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessName')}
+        <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessName')}
         data={[
             { value: 'react', label: 'React' },
             { value: 'ng', label: 'Angular' },
@@ -102,25 +101,25 @@ export default function AddQuestionnaire() {
          />
         </Box>
   
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question 1" placeholder="Enter Question" {...form.getInputProps('question1')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Answer 1" placeholder="Enter Answer" {...form.getInputProps('answer1')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Question 1" placeholder="Enter Question" {...form.getInputProps('question1')} />
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Answer 1" placeholder="Enter Answer" {...form.getInputProps('answer1')} />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question 2" placeholder="Enter Question" {...form.getInputProps('question2')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Answer 2" placeholder="Enter Answer" {...form.getInputProps('answer2')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Question 2" placeholder="Enter Question" {...form.getInputProps('question2')} />
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Answer 2" placeholder="Enter Answer" {...form.getInputProps('answer2')} />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question3" placeholder="Enter Question" {...form.getInputProps('question3')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Answer 3" placeholder="Enter Answer"  {...form.getInputProps('answer3')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Question3" placeholder="Enter Question" {...form.getInputProps('question3')} />
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Answer 3" placeholder="Enter Answer"  {...form.getInputProps('answer3')} />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question4" placeholder="Enter Question" {...form.getInputProps('question4')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Answer 4" placeholder="Enter Answer"  {...form.getInputProps('answer4')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Question4" placeholder="Enter Question" {...form.getInputProps('question4')} />
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Answer 4" placeholder="Enter Answer"  {...form.getInputProps('answer4')} />
         </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question5" placeholder="Enter Question" {...form.getInputProps('question5')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Answer 5" placeholder="Enter Answer" {...form.getInputProps('answer5')} />
+        <Box mt="sm" className={classes.responsiveContainer}>
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Question5" placeholder="Enter Question" {...form.getInputProps('question5')} />
+        <TextInput className={classes.inputField} withAsterisk size='sm' label="Answer 5" placeholder="Enter Answer" {...form.getInputProps('answer5')} />
         </Box>
         {/*
         <Box style={{display:'flex', justifyContent:'left', gap:'20px'}}>
@@ -130,10 +129,10 @@ export default function AddQuestionnaire() {
         </Box>
         */}
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="lg"  size='md' color='red.8' >
+         <Button  mt="sm"  size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button type="submit" mt="lg"  size='md' color='green.9' >
+        <Button type="submit" mt="sm"  size='sm' color='green.9' >
           Submit
         </Button>
         </Box>

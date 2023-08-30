@@ -147,10 +147,7 @@ export default function Demo() {
         <Route path="FaqForm" element={<FaqForm />} />
         <Route path="EditFaqs" element={<EditFaqs />} />
         <Route path="Radio" element={<Radio />} />
-       
-      </Route>
-      {/* These are the routes for Business Panel */}
-      <Route path="/BusinessPanel" element={<BusinessPanelGeneralLayout />}>
+         {/* These are the routes for Business Panel */}
       <Route path="BusinessAdd" element={<BusinessAdd />} />
       <Route path="BusinessView" element={<BusinessView />} />
       <Route path="BusinessEdit" element={<BusinessEdit />} />
@@ -168,8 +165,10 @@ export default function Demo() {
       <Route path="BusinessPanelViewExpense" element={<BusinessPanelViewExpense />} />
       <Route path="UpdateConfigureAgents" element={<UpdateConfigureAgents />} />
       <Route path="AgentsView" element={<AgentsView />} />
-      </Route>
+  
       {/* The routes for Business Panel end here*/}
+      </Route>
+    
      </Routes></UserProvider>
     </Router>
  

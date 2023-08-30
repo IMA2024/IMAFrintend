@@ -9,9 +9,9 @@ const ViewQuestionnaire = () => {
   return (
     <Box>
         <Title
-          mb={20}
+          order={2}
           align="center"
-          sx={{ fontWeight: 650 }}
+          sx={{ fontWeight: 550 }}
         >
           View Questionnaire Details
         </Title>
