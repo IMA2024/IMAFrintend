@@ -6,7 +6,7 @@ import { MdOutlinePayments, MdQuestionAnswer } from 'react-icons/md';
 import { FiUsers } from 'react-icons/fi';
 
 export const BusinessSideBarData = [
-  { name: "Dashboard", link: "/Dashboard", Icon: AiOutlineDashboard },
+  { name: "Dashboard", link: "/BusinessPanelDashboard", Icon: AiOutlineDashboard },
   {
     name: "Businesses", Icon: BiSolidBusiness,
     subLink: [
