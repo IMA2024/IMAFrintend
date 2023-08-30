@@ -79,7 +79,7 @@ import { useContext } from 'react';
           case 'Business Owner':
             localStorage.setItem('token', response?.data?.token);
             localStorage.setItem('role', response?.data?.role);
-            navigate('/Dashboard');
+            navigate('/BusinessPanelDashboard');
             break;
           case 'Customer':
             localStorage.setItem('token', response?.data?.token);

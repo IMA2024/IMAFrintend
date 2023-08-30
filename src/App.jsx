@@ -63,6 +63,7 @@ import BusinessPanelAddExpense from './BusinessOwner/pages/Accounting/AddExpense
 import BusinessPanelViewExpense from './BusinessOwner/pages/Accounting/ViewExpense';
 import UpdateConfigureAgents from './BusinessOwner/pages/Agents/UpdateConfigureAgents';
 import AgentsView from './BusinessOwner/pages/Agents/ViewAgents';
+import BusinessPanelDashboard from './BusinessOwner/pages/Dashboard/Dashboard';
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -165,7 +166,7 @@ export default function Demo() {
       <Route path="BusinessPanelViewExpense" element={<BusinessPanelViewExpense />} />
       <Route path="UpdateConfigureAgents" element={<UpdateConfigureAgents />} />
       <Route path="AgentsView" element={<AgentsView />} />
-  
+      <Route path="BusinessPanelDashboard" element={<BusinessPanelDashboard />} />
       {/* The routes for Business Panel end here*/}
       </Route>
     

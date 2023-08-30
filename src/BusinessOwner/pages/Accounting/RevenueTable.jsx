@@ -121,8 +121,8 @@ const BusinessPanelRevenueTable = () => {
   const getRevenues = async () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewAllRevenues');
-      setRevenues(response.data.revenues);
-      setfilteredRevenues(response.data.revenues);
+      setRevenues(response?.data?.revenues);
+      setfilteredRevenues(response?.data?.revenues);
     } catch (error) {
       console.log(error);
     }
@@ -131,11 +131,11 @@ const BusinessPanelRevenueTable = () => {
 
   const handleViewSpecific = (row) => {
     open();
-    setSpecificBusiness(row.business.name);
-    setSpecificDescription(row.description);
-    setSpecificDate(row.date);
-    setSpecificAmount(row.amount);
-    setSpecificPicture(row.profilePic);
+    setSpecificBusiness(row?.business?.name || 'N/A');
+    setSpecificDescription(row?.description || 'N/A');
+    setSpecificDate(row?.date || 'N/A');
+    setSpecificAmount(row?.amount || 'N/A');
+    setSpecificPicture(row?.profilePic);
   };
 
   const columns = [
@@ -147,31 +147,31 @@ const BusinessPanelRevenueTable = () => {
     },
     {
       name: 'Title',
-      selector: (row) => row.title,
+      selector: (row) => row?.title || 'N/A',
       width: '130px',
       sortable: true,
     },
     {
       name: 'Business Name',
-      selector: (row) => row.business.name,
+      selector: (row) => row?.business?.name || 'N/A',
       width: '160px',
       sortable: true,
     },
     {
       name: 'Business Details',
       width: '180px',
-      selector: (row) => row.description,
+      selector: (row) => row?.description || 'N/A',
       sortable: true,
     },
     {
       name: 'Date',
       width: '180px',
-      selector: (row) => row.date,
+      selector: (row) => row?.date || 'N/A',
       sortable: true,
     },
     {
       name: 'Amount',
-      selector: (row) => row.amount,
+      selector: (row) => row?.amount || 'N/A',
       width: '150px',
       sortable: true,
     },
@@ -189,8 +189,8 @@ const BusinessPanelRevenueTable = () => {
   useEffect(() => {
     const result = revenues.filter(revenue => {
       const matchesSearch = (
-        revenue.title.toLowerCase().includes(search.toLowerCase()) ||
-        revenue.business.name.toLowerCase().includes(search.toLowerCase())
+        revenue?.title.toLowerCase().includes(search.toLowerCase()) ||
+        revenue?.business?.name.toLowerCase().includes(search.toLowerCase())
       );
   
       return matchesSearch;
