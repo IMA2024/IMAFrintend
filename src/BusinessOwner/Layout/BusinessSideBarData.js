@@ -2,7 +2,7 @@ import { AiOutlineDashboard, AiOutlineShop, AiOutlineSetting, AiFillCaretDown, A
 import { BiUser, BiChat, BiHelpCircle,BiUserCircle, BiSolidBusiness, BiCartAdd} from 'react-icons/bi';
 import { RiTeamLine } from 'react-icons/ri';
 import { IoMdAddCircleOutline } from 'react-icons/io';
-import { MdOutlinePayments } from 'react-icons/md';
+import { MdOutlinePayments, MdQuestionAnswer } from 'react-icons/md';
 import { FiUsers } from 'react-icons/fi';
 
 export const BusinessSideBarData = [
@@ -12,6 +12,20 @@ export const BusinessSideBarData = [
     subLink: [
       { name: "Add Business", link: "/BusinessPanel/BusinessAdd", Icon: AiOutlineUserAdd },
       { name: "View Business", link: "/BusinessPanel/BusinessView", Icon: AiOutlineEye  },    
+    ],
+  },
+  {
+    name: "Business Questionnaires", Icon: MdQuestionAnswer,
+    subLink: [
+      { name: "Add Questionnaire", link: "/BusinessPanel/AddQuestionnaire", Icon: AiOutlineUserAdd },
+      { name: "View Questionnaire", link: "/BusinessPanel/ViewQuestionnaire", Icon: AiOutlineEye  },    
+    ],
+  },
+  {
+    name: "System Agents", Icon: BiUserCircle,
+    subLink: [
+      { name: "Configure Agents", link: "/BusinessPanel/ConfigureAgents", Icon: AiOutlineUserAdd },
+      { name: "View Agents", link: "/BusinessPanel/AgentsView", Icon: AiOutlineEye  },    
     ],
   },
   {
