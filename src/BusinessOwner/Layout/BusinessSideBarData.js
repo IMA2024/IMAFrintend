@@ -51,5 +51,5 @@ export const BusinessSideBarData = [
       { name: "View Payment", link: "/ViewBusiness", Icon: AiOutlineEye },
     ],
   },
-  { name: "Services", link: "/Services" },
+  { name: "Services", link: "/Services", Icon: MdOutlinePayments },
 ];
