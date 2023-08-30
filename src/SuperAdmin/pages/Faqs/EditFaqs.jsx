@@ -37,7 +37,7 @@ export default function EditFaqs() {
   const rowData = location.state.rowData;
 
   const form = useForm({
-    initialValues: { FaqId: rowData._id, questions: rowData.question, answers: rowData.answer },
+    initialValues: { FaqId: rowData._id, questions: rowData?.question, answers: rowData?.answer },
     validateInputOnChange: true,
     validate: {
       questions: (value) => (/^\s*$/.test(value) ? 'Question must not be empty' : null),

@@ -61,9 +61,9 @@ export default function ViewFaqs() {
   const getFAQs = async () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewAllFAQs');
-      setFAQs(response.data.FAQs);
-      setFilteredFAQs(response.data.FAQs);
-      console.log(response.data.FAQs);
+      setFAQs(response?.data?.FAQs);
+      setFilteredFAQs(response?.data?.FAQs);
+      console.log(response?.data?.FAQs);
     } catch (error) {
       console.log(error);
     }

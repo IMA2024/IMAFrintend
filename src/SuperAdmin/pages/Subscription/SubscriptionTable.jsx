@@ -120,9 +120,9 @@ const handleClear = () => {
 const getSubscriptions = async () => {
 try {
 const response = await axios.get('http://localhost:5000/admin/viewSubscriptions');
-setSubscriptions(response.data.subscriptions);
-console.log(response.data.subscriptions);
-setFilteredSubscriptions(response.data.subscriptions);
+setSubscriptions(response?.data?.subscriptions);
+console.log(response?.data?.subscriptions);
+setFilteredSubscriptions(response?.data?.subscriptions);
 } catch (error) {
 console.log(error);
 }
@@ -130,11 +130,11 @@ console.log(error);
 
 const handleViewSpecific = (row) => {
   open();
-  setSpecificTitle(row.title);
-  setSpecificType(row.type);
-  setSpecificPrice(row.price);
-  setSpecificLimit(row.limit);
-  setSpecificDescription(row.description);
+  setSpecificTitle(row?.title || 'N/A');
+  setSpecificType(row?.type || 'N/A');
+  setSpecificPrice(row?.price || 'N/A');
+  setSpecificLimit(row?.limit || 'N/A');
+  setSpecificDescription(row?.description || 'N/A');
 };
 
 const handleViewSpecificBusinesSubscriptions = (row) => {
@@ -150,31 +150,31 @@ const columnsBusinessOwnerSubscriptions = [
   },
     {
         name: 'Business Name',
-        selector: (row) => row.name,
+        selector: (row) => row?.name || 'N/A',
         width: '130px',
         sortable: true,
     },
     {
         name: 'Business Owner Name',
-        selector: (row) => row.capital,
+        selector: (row) => row?.capital || 'N/A',
         width: '170px',
         sortable: true,
       },
     {
         name: 'Subscription Title',
         width: '150px',
-        selector: (row) => row.name,
+        selector: (row) => row?.name || 'N/A',
         sortable: true,
     },
     {
         name: 'Subscription Type',
         width: '150px',
-        selector: (row) => row.region,
+        selector: (row) => row?.region || 'N/A',
         sortable: true,
     },
     {
         name: 'Payment Method',
-        selector: (row) => row.nativeName,
+        selector: (row) => row?.nativeName || 'N/A',
         sortable: true,
     },
  
@@ -194,30 +194,30 @@ const columnsSuperAdminSubscriptions = [
   },
     {
         name: 'Subscription Title',
-        selector: (row) => row.title,
+        selector: (row) => row?.title || 'N/A',
         sortable: true,
     },
     {
         name: 'Subscription Type',
-        selector: (row) => row.type,
+        selector: (row) => row?.type || 'N/A',
         width: '170px',
         sortable: true,
       },
     {
         name: 'Subscription Price',
         width: '150px',
-        selector: (row) => row.price,
+        selector: (row) => row?.price || 'N/A',
         sortable: true,
     },
     {
         name: 'Subscription Limit',
         width: '150px',
-        selector: (row) => row.limit,
+        selector: (row) => row?.limit || 'N/A',
         sortable: true,
     },
     {
         name: 'Description',
-        selector: (row) => row.description,
+        selector: (row) => row?.description || 'N/A',
         sortable: true,
     },
  
@@ -236,8 +236,8 @@ getSubscriptions();
 useEffect(() => {
   const result = subscriptions.filter(subscription => {
     const matchesSearch = (
-      subscription.title.toLowerCase().includes(search.toLowerCase()) ||
-      subscription.type.toLowerCase().includes(search.toLowerCase())
+      subscription?.title.toLowerCase().includes(search.toLowerCase()) ||
+      subscription?.type.toLowerCase().includes(search.toLowerCase())
     );
 
     return matchesSearch;

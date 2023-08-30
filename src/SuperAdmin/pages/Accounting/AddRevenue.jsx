@@ -133,8 +133,8 @@ export default function AddRevenue() {
         <TextInput maxLength={20} withAsterisk size='sm' className={classes.inputField} label="Title" placeholder="Enter Revenue Title" {...form.getInputProps('title')} />
         <Select withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Select Business Name" {...form.getInputProps('business')}
              data={countries.map((country) => ({
-              value: `${country._id}`,
-              label: `${country.name}`,
+              value: `${country?._id}`,
+              label: `${country?.name}`,
             }))}
          />
         </Box>

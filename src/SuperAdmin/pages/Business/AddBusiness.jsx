@@ -148,8 +148,8 @@ export default function AddBusiness() {
           <TextInput maxLength={30} withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Enter Business Name" {...form.getInputProps('name')} />
           <Select withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
             data={countries.map((country) => ({
-              value: `${country._id}`,
-              label: `${country.firstName} ${country.lastName}`,
+              value: `${country?._id}`,
+              label: `${country?.firstName} ${country?.lastName}`,
             }))}
           />
         </Box>

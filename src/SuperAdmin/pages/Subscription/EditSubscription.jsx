@@ -59,8 +59,8 @@ export default function EditSubscription() {
   const getCountries = async () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewSubscriptions');
-      setCountries(response.data.subscriptions);
-      console.log(response.data.subscriptions);
+      setCountries(response?.data?.subscriptions);
+      console.log(response?.data?.subscriptions);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +71,6 @@ export default function EditSubscription() {
   }, []);
 
   useEffect(() => {
-    // Update the form field value whenever subscriptionPrice changes
     form.setFieldValue('title', subscriptionTitle);
     form.setFieldValue('type', subscriptionType);
     form.setFieldValue('price', subscriptionPrice);
@@ -105,9 +104,8 @@ export default function EditSubscription() {
       const response = await updateSubscription(title, price, limit, description);
       console.log(response);
       if (response.status === 200) {
-        // Update the subscription in the local state
         const updatedSubscriptions = countries.map((country) => {
-          if (country.title === title) {
+          if (country?.title === title) {
             return {
               ...country,
               price,
@@ -136,8 +134,8 @@ export default function EditSubscription() {
               <Paper radius="md" mih={300} 
               //bg={theme.fn.linearGradient(45, '#FFF3BF', '#B197FC')}
               >
-                <Center mx="auto" mih={40}><Text  size={30} h={100}>{country.title}</Text></Center>
-                <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{country.type}</Text></Center>
+                <Center mx="auto" mih={40}><Text  size={30} h={100}>{country?.title}</Text></Center>
+                <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{country?.type}</Text></Center>
                 <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
                   <Image
                     radius="md"
@@ -145,17 +143,17 @@ export default function EditSubscription() {
                     alt="Random unsplash image"
                   />
         </Box></Center>
-                <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{country.price}</Text></Center>
+                <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{country?.price}</Text></Center>
                 <Divider />
-                <Center mih={40} mx="auto"> <Text>{country.description}</Text></Center>
+                <Center mih={40} mx="auto"> <Text>{country?.description}</Text></Center>
                 <Button mih={40} mx="auto" fullWidth color='lime.8'
                   onClick={() => {
                     open();
-                    setSubscriptionTitle(country.title);
-                    setSubscriptionType(country.type);
-                    setSubscriptionPrice(country.price);
-                    setSubscriptionLimit(country.limit);
-                    setSubscriptionDescription(country.description);
+                    setSubscriptionTitle(country?.title  || 'N/A');
+                    setSubscriptionType(country?.type  || 'N/A');
+                    setSubscriptionPrice(country?.price || 'N/A');
+                    setSubscriptionLimit(country?.limit || 'N/A');
+                    setSubscriptionDescription(country?.description || 'N/A');
                   }}
                 >
                   Edit
