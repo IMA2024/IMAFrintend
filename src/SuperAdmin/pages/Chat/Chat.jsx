@@ -60,7 +60,17 @@ const useStyles = createStyles((theme) => ({
 
 const Chat = () => {
   const { classes } = useStyles();
+
   return (
+    <Box>
+         <Title
+        order={2}
+        align="center"
+        sx={{ fontWeight: 550 }}
+        mb={5}
+      >
+        Chat
+      </Title>
     <Box className={classes.responsiveContainer}>
       <Box className={classes.responsiveChatSidebar}>
         <ChatSearch />
@@ -75,6 +85,7 @@ const Chat = () => {
           <ChatInput />
         </Box>
       </Box>
+    </Box>
     </Box>
   )
 }

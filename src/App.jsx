@@ -71,6 +71,8 @@ import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 import { UserProvider } from './context/users/userContext';
+import PaymentSucces from './BusinessOwner/components/PaymentSucces';
+import PaymentUnsuccessful from './BusinessOwner/components/PaymentUnsuccessful';
 
 
 export default function Demo() {
@@ -149,7 +151,7 @@ export default function Demo() {
         <Route path="EditFaqs" element={<EditFaqs />} />
         <Route path="Radio" element={<Radio />} />
          {/* These are the routes for Business Panel */}
-      <Route path="BusinessAdd" element={<BusinessAdd />} />
+      <Route path="/BusinessAdd" element={<BusinessAdd />} />
       <Route path="BusinessView" element={<BusinessView />} />
       <Route path="BusinessEdit" element={<BusinessEdit />} />
       <Route path="AddBusinessOwner" element={<AddBusinessOwner />} />
@@ -167,6 +169,8 @@ export default function Demo() {
       <Route path="UpdateConfigureAgents" element={<UpdateConfigureAgents />} />
       <Route path="AgentsView" element={<AgentsView />} />
       <Route path="BusinessPanelDashboard" element={<BusinessPanelDashboard />} />
+      <Route path="PaymentSucces" element={<PaymentSucces />} />
+      <Route path="PaymentUnsuccessful" element={<PaymentUnsuccessful />} />
       {/* The routes for Business Panel end here*/}
       </Route>
     
