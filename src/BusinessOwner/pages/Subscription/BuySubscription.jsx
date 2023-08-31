@@ -3,8 +3,6 @@ import { Grid, Skeleton, Container, Card, Paper, Center, Image, Box, Button, Tex
 import { useDisclosure } from '@mantine/hooks';
 import { isNotEmpty, useForm } from '@mantine/form';
 import axios from 'axios';
-import { notifications } from '@mantine/notifications';
-import { updateSubscription } from '../../../api/admin/subscriptions';
 
 const useStyles = createStyles((theme) => ({
 
@@ -30,24 +28,16 @@ const useStyles = createStyles((theme) => ({
 
 }));
 
-const child = <Skeleton height={140} radius="md" animate={false} />;
-
 export default function BuySubscription() {
-  const { classes } = useStyles();
 
-  const [countries, setCountries] = useState([]);
+  const [subscriptions, setSubscriptions] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState(false);
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [noTransitionOpened, setNoTransitionOpened] = useState(false);
-  const [subscriptionTitle, setSubscriptionTitle] = useState('');
-  const [subscriptionType, setSubscriptionType] = useState('');
-  const [subscriptionPrice, setSubscriptionPrice] = useState('');
-  const [subscriptionLimit, setSubscriptionLimit] = useState('');
-  const [subscriptionDescription, setSubscriptionDescription] = useState('');
 
   const form = useForm({
-    initialValues: { title: subscriptionTitle, type: subscriptionType , price: subscriptionPrice, limit: subscriptionLimit, description: subscriptionDescription },
+    initialValues: { title: '' , type: '' , price: '', limit: '', description: '' },
 
     validate: {
       title: isNotEmpty('Please Select Title'),
@@ -58,91 +48,36 @@ export default function BuySubscription() {
     },
   });
 
-  const getCountries = async () => {
+  const getSubscriptions = async () => {
     try {
-      const response = await axios.get('https://restcountries.com/v2/all');
-      setCountries(response.data);
-      console.log(response.data);
+      const response = await axios.get('http://localhost:5000/businessowner/viewSubscriptions');
+      setSubscriptions(response?.data?.subscriptions);
+      console.log(response?.data?.subscriptions);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    getCountries();
+    getSubscriptions();
   }, []);
-  
 
-  useEffect(() => {
-    // Update the form field value whenever subscriptionPrice changes
-    form.setFieldValue('title', subscriptionTitle);
-    form.setFieldValue('type', subscriptionType);
-    form.setFieldValue('price', subscriptionPrice);
-    form.setFieldValue('limit', subscriptionLimit);
-    form.setFieldValue('description', subscriptionDescription);
-
-  }, [subscriptionTitle, subscriptionType, subscriptionPrice, subscriptionLimit, subscriptionDescription]);
-
-  const handleSubscriptionPriceChange= (event) => {
-    const newPrice = event.currentTarget.value;
-    setSubscriptionPrice(newPrice);
-    form.setFieldValue('price', newPrice);
+  const handleSubmit = async () => {
+    const response = await axios.get('http://localhost:5000/businessowner/selectSubscription');
+    console.log(response);
   };
-
-  const handleSubscriptionLimitChange = (event) => {
-    const newLimit = event.currentTarget.value;
-    setSubscriptionLimit(newLimit);
-    form.setFieldValue('limit', newLimit);
-  };
-
-  const handleSubscriptionDescriptionChange = (event) => {
-    const newDescription = event.currentTarget.value;
-    setSubscriptionDescription(newDescription);
-    form.setFieldValue('description', newDescription);
-  };
-
-  const handleSubmit = async (values) => {
-    const { title, price, limit, description } = values;
-
-    try {
-      const response = await updateSubscription(title, price, limit, description);
-      console.log(response);
-      if (response.status === 200) {
-        // Update the subscription in the local state
-        const updatedSubscriptions = countries.map((country) => {
-          if (country.title === title) {
-            return {
-              ...country,
-              price,
-              limit,
-              description,
-            };
-          }
-          return country;
-        });
-        setCountries(updatedSubscriptions);
-        form.reset();
-        notifications.show({ message: "Subscription Updated Successfully", color: 'green' });
-        close();
-      }
-    } catch (error) {
-      notifications.show({ message: error.response.data.message, color: 'red' });
-    }
-  };
-
-  const slicedCountries = countries.slice(0, 3);
 
   return (
     <Container my="md">
       <Grid gutter={'xs'}>
-        {slicedCountries.map((country, index) => (
+        {subscriptions.map((subscription, index) => (
                    <Grid.Col xs={6} sm={4} md={4} radius="md" >
                    <Card radius="md">
                      <Paper radius="md" mih={300} 
                      //bg={theme.fn.linearGradient(45, '#FFF3BF', '#B197FC')}
                      >
-                       <Center mx="auto" mih={40}><Text  size={30} h={100}>{country.title}</Text></Center>
-                       <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{country.type}</Text></Center>
+                       <Center mx="auto" mih={40}><Text  size={30} h={100}>{subscription.title}</Text></Center>
+                       <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{subscription.type}</Text></Center>
                        <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
                          <Image
                            radius="md"
@@ -150,9 +85,9 @@ export default function BuySubscription() {
                            alt="Random unsplash image"
                          />
                </Box></Center>
-                       <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{country.price}</Text></Center>
+                       <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{subscription.price}</Text></Center>
                        <Divider />
-                       <Center mih={40} mx="auto"> <Text>{country.description}</Text></Center>
+                       <Center mih={40} mx="auto"> <Text>{subscription.description}</Text></Center>
                 <Button mih={40} mx="auto" fullWidth color='green.9'
                   onClick={() => {
                     if(subscriptionStatus == false){
@@ -161,13 +96,6 @@ export default function BuySubscription() {
                     else {
                     setNoTransitionOpened(true)
                     }
-                    /*
-                    setSubscriptionTitle(country.title);
-                    setSubscriptionType(country.type);
-                    setSubscriptionPrice(country.price);
-                    setSubscriptionLimit(country.limit);
-                    setSubscriptionDescription(country.description);
-                    */
                   }}
                 >
                   Subscribe
@@ -182,7 +110,7 @@ export default function BuySubscription() {
             <Text>Are you sure you want to subscribe?</Text>
             <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
             <Button size='sm' color='red.8' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
-            <Button type="submit" size='sm' color='green.9' onClick={() => setSubscriptionStatus(true)} >Subscribe</Button>
+            <Button type="submit" size='sm' color='green.9' onClick={() => handleSubmit()}>Subscribe</Button>
             </Box>
         </Modal>
         <Modal
