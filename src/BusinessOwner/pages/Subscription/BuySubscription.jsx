@@ -3,6 +3,7 @@ import { Grid, Skeleton, Container, Card, Paper, Center, Image, Box, Button, Tex
 import { useDisclosure } from '@mantine/hooks';
 import { isNotEmpty, useForm } from '@mantine/form';
 import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
 
 const useStyles = createStyles((theme) => ({
 
@@ -35,9 +36,9 @@ export default function BuySubscription() {
   const [subscriptionStatus, setSubscriptionStatus] = useState(false);
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [noTransitionOpened, setNoTransitionOpened] = useState(false);
-
+  const [subscribed, setSubscribed] = useState(undefined);
   const form = useForm({
-    initialValues: { title: '' , type: '' , price: '', limit: '', description: '' },
+    initialValues: { title: '', type: '', price: '', limit: '', description: '' },
 
     validate: {
       title: isNotEmpty('Please Select Title'),
@@ -62,39 +63,60 @@ export default function BuySubscription() {
     getSubscriptions();
   }, []);
 
-  const handleSubmit = async () => {
-    const response = await axios.get('http://localhost:5000/businessowner/selectSubscription');
-    console.log(response);
+  // payment integration 
+
+  const makepayment = async (body) => {
+    const stripe = await loadStripe("pk_test_51Nl5XoExU3kznyi3Mj5zTvvnUs7nDh70EPm2Un3oGQDXzhNbZx3SFs5rxAraPoAaLlSOw2EouyXVrsKrwO3ilf6600y0akI2iP");
+
+    const headers = {
+      "Content-Type": "application/json"
+    }
+    const response = await fetch("http://localhost:5000/businessOwner/makePayment", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body)
+    });
+
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id
+    });
+
+    if (result.error) {
+      console.log(result.error);
+    }
   };
 
   return (
     <Container my="md">
       <Grid gutter={'xs'}>
         {subscriptions.map((subscription, index) => (
-                   <Grid.Col xs={6} sm={4} md={4} radius="md" >
-                   <Card radius="md">
-                     <Paper radius="md" mih={300} 
-                     //bg={theme.fn.linearGradient(45, '#FFF3BF', '#B197FC')}
-                     >
-                       <Center mx="auto" mih={40}><Text  size={30} h={100}>{subscription.title}</Text></Center>
-                       <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{subscription.type}</Text></Center>
-                       <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
-                         <Image
-                           radius="md"
-                           src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
-                           alt="Random unsplash image"
-                         />
-               </Box></Center>
-                       <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{subscription.price}</Text></Center>
-                       <Divider />
-                       <Center mih={40} mx="auto"> <Text>{subscription.description}</Text></Center>
+          <Grid.Col xs={6} sm={4} md={4} radius="md" >
+            <Card radius="md">
+              <Paper radius="md" mih={300}
+              //bg={theme.fn.linearGradient(45, '#FFF3BF', '#B197FC')}
+              >
+                <Center mx="auto" mih={40}><Text size={30} h={100}>{subscription.title}</Text></Center>
+                <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{subscription.type}</Text></Center>
+                <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
+                  <Image
+                    radius="md"
+                    src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
+                    alt="Random unsplash image"
+                  />
+                </Box></Center>
+                <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{subscription.price}</Text></Center>
+                <Divider />
+                <Center mih={40} mx="auto"> <Text>{subscription.description}</Text></Center>
                 <Button mih={40} mx="auto" fullWidth color='green.9'
                   onClick={() => {
-                    if(subscriptionStatus == false){
-                    setSlowTransitionOpened(true);
+                    setSubscribed(subscription);
+                    if (subscriptionStatus == false) {
+                      setSlowTransitionOpened(true);
                     }
                     else {
-                    setNoTransitionOpened(true)
+                      setNoTransitionOpened(true)
                     }
                   }}
                 >
@@ -106,24 +128,24 @@ export default function BuySubscription() {
         ))}
       </Grid>
       <Box>
-        <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
-            <Text>Are you sure you want to subscribe?</Text>
-            <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+        <Modal opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
+          <Text>Are you sure you want to subscribe?</Text>
+          <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
             <Button size='sm' color='red.8' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
-            <Button type="submit" size='sm' color='green.9' onClick={() => handleSubmit()}>Subscribe</Button>
-            </Box>
+            <Button type="submit" size='sm' color='green.9' onClick={() => makepayment({subscribed : subscribed})}>Subscribe</Button>
+          </Box>
         </Modal>
         <Modal
-        opened={noTransitionOpened}
-        onClose={() => setNoTransitionOpened(false)}
-        transitionProps={{ transition: 'fade', duration: 600, timingFunction: 'linear' }}
-        title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Please consider this</Text>} 
-      >
-        <Text>You cant subscribe to more than one subscription for your business.</Text>
-        <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-        <Button  size='sm' color='red.8' onClick={() => setNoTransitionOpened(false)}>Close Message</Button>
-        </Box>
-      </Modal>
+          opened={noTransitionOpened}
+          onClose={() => setNoTransitionOpened(false)}
+          transitionProps={{ transition: 'fade', duration: 600, timingFunction: 'linear' }}
+          title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Please consider this</Text>}
+        >
+          <Text>You cant subscribe to more than one subscription for your business.</Text>
+          <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+            <Button size='sm' color='red.8' onClick={() => setNoTransitionOpened(false)}>Close Message</Button>
+          </Box>
+        </Modal>
       </Box>
     </Container>
   );
