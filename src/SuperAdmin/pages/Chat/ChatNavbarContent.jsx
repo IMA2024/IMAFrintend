@@ -15,8 +15,8 @@ const data = [
   { icon: IconActivity, label: 'Rachel', description: 'Item with description' },
   { icon: IconActivity, label: 'Monica', description: 'Item with description' },
   { icon: IconActivity, label: 'Chandler', description: 'Item with description' },
-
-
+  { icon: IconActivity, label: 'Noor', description: 'Item with description' },
+  { icon: IconActivity, label: 'Mahnoor', description: 'Item with description' },
 ];
 
 export default function ChatNavbarContent() {
