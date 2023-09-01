@@ -436,7 +436,7 @@ const TableAgents = () => {
             <Button
               size='md'
               className={classes.responsiveAddUserBtn}
-              onClick={() => navigate('/BusinessPanel/ConfigureAgents')}
+              onClick={() => navigate('/ConfigureAgents')}
             >
               Configure Agent
             </Button>

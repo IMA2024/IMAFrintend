@@ -278,15 +278,15 @@ useEffect(() => {
     }
     responsive
      />
-    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Payment Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Questionnaire Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
     <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" >Silver Subscription</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificRole}</Text></Box>
+    <Box ><Badge variant="filled" >Business Questionnnaire</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>Ahmed</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10th August, 2023</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>10,000 PKR</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Agent Name:</Text><Text fw={'bold'} ml={5}>Haleema</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Agent Voice:</Text><Text fw={'bold'} ml={5}>Female</Text></Box>
     </Box>
   </Box>
       </Modal>

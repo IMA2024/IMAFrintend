@@ -1,4 +1,4 @@
-import { AiOutlineDashboard, AiOutlineShop, AiOutlineSetting, AiFillCaretDown, AiFillCaretUp, AiOutlineUserAdd, AiOutlineEye, AiOutlineShoppingCart  } from 'react-icons/ai';
+import { AiOutlineDashboard, AiOutlineShop, AiOutlineSetting, AiFillCaretDown, AiFillCaretUp, AiOutlineUserAdd, AiOutlineEye, AiOutlineShoppingCart, AiFillWechat  } from 'react-icons/ai';
 import { BiUser, BiChat, BiHelpCircle,BiUserCircle, BiSolidBusiness, BiCartAdd} from 'react-icons/bi';
 import { RiTeamLine } from 'react-icons/ri';
 import { IoMdAddCircleOutline } from 'react-icons/io';
@@ -42,14 +42,37 @@ export const BusinessSideBarData = [
       { name: "View Revenue", link: "/BusinessPanelViewRevenue", Icon: AiOutlineEye },
       { name: "Add Expense", link: "/BusinessPanelAddExpense", Icon: AiOutlineUserAdd },
       { name: "View Expense", link: "/BusinessPanelViewExpense", Icon: AiOutlineEye },
+      { name: "View Profit", link: "/BusinessPanelViewProfit", Icon: AiOutlineEye },
     ],
   },
   {
     name: "Payment", Icon: MdOutlinePayments,
     subLink: [
-      { name: "Add Payment", link: "/AddBusiness", Icon: AiOutlineUserAdd },
-      { name: "View Payment", link: "/ViewBusiness", Icon: AiOutlineEye },
+      { name: "View Payment", link: "/BusinessPanelViewPayment", Icon: AiOutlineEye },
     ],
   },
-  { name: "Services", link: "/Services", Icon: MdOutlinePayments },
+  {
+    name: "Chat", Icon: AiFillWechat,
+    subLink: [
+      { name: "Start Chats", link: "/ChatBusinessOwner", Icon: AiOutlineEye },
+    ],
+  },
+  {
+    name: "FAQs", Icon: BiHelpCircle,
+    subLink: [
+      { name: "View FAQs", link: "/BusinessOwnerViewFaqs", Icon: AiOutlineEye },
+    ],
+  },
+  { name: "Services", Icon: MdOutlinePayments,
+  subLink: [
+    { name: "View Services", link: "/Services", Icon: AiOutlineEye },
+  ],
+ },
+  {
+    name: "Settings", Icon: AiOutlineSetting,
+    subLink: [
+      { name: "View Settings", link: "/Settings", Icon: AiOutlineEye },
+    ],
+  },
+  
 ];
