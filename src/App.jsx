@@ -64,6 +64,10 @@ import BusinessPanelViewExpense from './BusinessOwner/pages/Accounting/ViewExpen
 import UpdateConfigureAgents from './BusinessOwner/pages/Agents/UpdateConfigureAgents';
 import AgentsView from './BusinessOwner/pages/Agents/ViewAgents';
 import BusinessPanelDashboard from './BusinessOwner/pages/Dashboard/Dashboard';
+import BusinessPanelViewProfit from './BusinessOwner/pages/Accounting/ViewProfit';
+import BusinessOwnerViewFaqs from './BusinessOwner/pages/Faq/BusinessOwnerFaq';
+import BusinessPanelViewPayment from './BusinessOwner/pages/Accounting/ViewPayments';
+import ChatBusinessOwner from './BusinessOwner/pages/Chat/ChatBusinessOwner';
  {/* The routes for Business Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -171,6 +175,10 @@ export default function Demo() {
       <Route path="BusinessPanelDashboard" element={<BusinessPanelDashboard />} />
       <Route path="PaymentSucces" element={<PaymentSucces />} />
       <Route path="PaymentUnsuccessful" element={<PaymentUnsuccessful />} />
+      <Route path="BusinessPanelViewProfit" element={<BusinessPanelViewProfit />} />
+      <Route path="BusinessOwnerViewFaqs" element={<BusinessOwnerViewFaqs />} />
+      <Route path="BusinessPanelViewPayment" element={<BusinessPanelViewPayment />} />
+      <Route path="ChatBusinessOwner" element={<ChatBusinessOwner />} />
       {/* The routes for Business Panel end here*/}
       </Route>
     

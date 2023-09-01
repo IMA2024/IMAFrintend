@@ -8,6 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
+  responsiveSearchContainer: {
+    width:'100%',
+    display: 'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+  },
+
     responsiveSearchRow: {
       display:'flex',
       flexDirection: 'row-reverse',
@@ -188,6 +195,7 @@ useEffect(() => {
     highlightOnHover
     subHeader
     subHeaderComponent={
+      <Box className={classes.responsiveSearchContainer}>
       <Box className={classes.responsiveSearchRow}>
         <Box className={classes.responsiveFilterIcon} >
           <Menu shadow="" width={200} closeOnItemClick={false} >
@@ -223,45 +231,22 @@ useEffect(() => {
         onChange={(e) => setSearch(e.target.value)}
         className={classes.responsiveSearch}
          />
-         {/*
-        <Select
-         size='md'
-        onSearchChange={setRegion}
-        searchValue={region}
-        searchable
-        placeholder="Select User Type"
-        data={[
-        { value: 'americas', label: 'americas' },
-        { value: 'africa', label: 'africa' },
-        { value: 'europe', label: 'europe' },
-        { value: 'asia', label: 'asia' },
-      ]}
-      className={classes.responsiveUserType}
-    />
-         <Select
-         size='md' 
-        searchable
-        placeholder="Active/Block"
-        data={[
-        { value: 'Active', label: 'Active' },
-        { value: 'Block', label: 'Block' },
-      ]}
-      className={classes.responsiveActiveBlock}
-    />
-    <Button 
-    size='md'
-    className={classes.responsiveAddUserBtn}
-    onClick={() => navigate('/AddExpense')}
-    >
-    Add Expense
-    </Button>
-    */}
-        </Box>
+         </Box>
+     <Button
+              size='md'
+              className={classes.responsiveAddUserBtn}
+              onClick={() => navigate('/BuySubscription')}
+            >
+              Buy Subscription
+      </Button>
+      </Box>
+   
+      
         
     }
     responsive
      />
-    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Payment Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Subscription Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
     <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>

@@ -483,6 +483,7 @@ const TableBusiness = () => {
         </Box>
       </Modal>
       */}
+      {/*
       <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
   <Box className={classes.modalContainer} mb={30}  p={20}  style={{}}>
     <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
@@ -496,6 +497,22 @@ const TableBusiness = () => {
     </Box>
   </Box>
       </Modal>
+    */}
+      
+          <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Business Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+  <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
+    <Box  mah={380}><Image height={200} width={400} radius="md" src={specificPicture} alt="Random image" /></Box>
+    <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" >{specificType}</Badge></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificName}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificOwner}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Email:</Text><Text fw={'bold'} ml={5}>{specificEmail}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Phone Number:</Text><Text fw={'bold'} ml={5}>{specificPhoneNumber}</Text></Box>
+        <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>{specificAddress}</Text></Box>
+    </Box>
+  </Box>
+      </Modal>
+      
       <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
             <Text>Are you sure you want to delete?</Text>
             <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
