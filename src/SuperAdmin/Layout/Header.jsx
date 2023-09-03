@@ -5,6 +5,8 @@ import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/Images/IMALogo.jpg';
 import { UserContext } from '../../context/users/userContext';
+import { SpotlightProvider, spotlight } from '@mantine/spotlight';
+import { useState, useEffect } from 'react';
 
 const useStyles = createStyles((theme) => ({
  
@@ -94,6 +96,54 @@ const HeaderTop = () => {
   //   }
   // }, []);
 
+  const [query, setQuery] = useState('');
+  const actions =
+    //query !== '%%secret%%'
+     // ?
+       [
+          {
+            title: 'Reveal secret actions',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => setQuery('%%secret%%'),
+            closeOnTrigger: false,
+          },
+          {
+            title: 'Meaow secret actions',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => setQuery('%%secret%%'),
+            closeOnTrigger: false,
+          },
+          {
+            title: 'Billi',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => setQuery('%%secret%%'),
+            closeOnTrigger: false,
+          },
+          {
+            title: 'Tom',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => setQuery('%%secret%%'),
+            closeOnTrigger: false,
+          },
+          {
+            title: 'Jerry',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => setQuery('%%secret%%'),
+            closeOnTrigger: false,
+          },
+        ]
+   /*   : [
+          { title: 'Super secret action', keywords: '%%secret%%', onTrigger: () => {} },
+          {
+            title: 'Rick roll',
+            description: 'Do not click',
+            keywords: '%%secret%%',
+            onTrigger: () => {
+              window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+            },
+          },
+        ];*/
+
   const handleEdit = () => {
     navigate("/Settings");
   }
@@ -105,11 +155,24 @@ const HeaderTop = () => {
     navigate("/HeaderMegaMenu/SignIn");
   };
 
+  const handleIconSearchClick = () => {
+    spotlight.open();
+  };
+
   return (
+    <SpotlightProvider
+    actions={actions}
+    query={query}
+    onQueryChange={setQuery}
+    searchIcon={<IconSearch size="1.2rem" />}
+    searchPlaceholder="Search..."
+    shortcut="mod + K"
+    nothingFoundMessage="Nothing found..."
+    >
     <Box className={classes.responsiveContainer}>
     <Box  className={classes.responsiveContainerChild1} >
     <Box className={classes.LogoWithSearch}><Image width={150} height={55} fit="contain" src={Logo} /></Box>
-    <Box className={classes.searchWithLogo}><IconSearch color="gray" /></Box>
+    <Box className={classes.searchWithLogo}><IconSearch onClick={handleIconSearchClick} color="gray" /></Box>
     </Box>
     <Box className={classes.responsiveContainerChild2} >
     <Box className={classes.dashboardHeading}>
@@ -121,7 +184,7 @@ const HeaderTop = () => {
     </Box>
     </Box>
     <Box className={classes.responsiveContainerChild3}>
-    <Box className={classes.searchWithToggle}><IconSearch color="gray" /></Box>
+    <Box className={classes.searchWithToggle}><IconSearch onClick={handleIconSearchClick} color="gray" /></Box>
     <Box ml={'1rem'}><ActionToggle /></Box>
     <Box ml={'1rem'} mr={'1rem'}>
     <Menu shadow="" width={300}>
@@ -156,6 +219,7 @@ const HeaderTop = () => {
             </Box>
     </Box>
     </Box>
+    </SpotlightProvider>
 
   )
 }

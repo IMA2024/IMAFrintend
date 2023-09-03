@@ -1,5 +1,4 @@
-import { Center } from '@mantine/core';
-import { SpotlightProvider } from '@mantine/spotlight';
+
 import {BrowserRouter as Router, Route, Link, Routes, json} from "react-router-dom"
 import EmailBanner from './pages/Services';
 import GeneralLayout from './SuperAdmin/Layout/GeneralLayout';
@@ -75,40 +74,29 @@ import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 import { UserProvider } from './context/users/userContext';
+import { SpotlightProvider  } from '@mantine/spotlight';
 import PaymentSucces from './BusinessOwner/components/PaymentSucces';
 import PaymentUnsuccessful from './BusinessOwner/components/PaymentUnsuccessful';
 
 
 export default function Demo() {
-  //const [colorScheme, toggleColorScheme] = useState('light');
-  /*
-    // State variable to hold the value from local storage
-    const [storedValue, setStoredValue] = useState('');
+  const [colorScheme, setColorScheme] = useState('light');
 
-    // Key to access the value from local storage
-    const storageKey = 'color-scheme';
-  
-    // Function to update the state with the value from local storage
-    useEffect(() => {
-      // Retrieve the value associated with storageKey from local storage
-      const valueFromLocalStorage = localStorage.getItem('color-scheme');
-  
-      // Update the state with the retrieved value
-      setStoredValue(valueFromLocalStorage);
-      console.log(valueFromLocalStorage);
+  function toggleColorScheme(value) {
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  }
 
-      
-    });
+  const colors = {
+    colorScheme: colorScheme
+  }
 
-    //console.log(storedValue);
-    //console.log(valueFromLocalStorage);
-    */
-    //const storedValue = useLocalStorage('color-scheme', 'light');
-    //console.log(storedValue);
+
   
   return (
       <>
-     
+         <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <MantineProvider theme={{ colors }} withGlobalStyles withNormalizeCSS>
+   
     <Router><UserProvider>
      <Routes>
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
@@ -184,7 +172,9 @@ export default function Demo() {
     
      </Routes></UserProvider>
     </Router>
- 
+
+    </MantineProvider>
+    </ColorSchemeProvider>
       </>
   );
 }
