@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         //colorScheme: 'dark',
       }}
      >
+      {/*
      <SpotlightProvider shortcut={['mod + P', 'mod + K', '/']} actions={[ {
     title: 'Home',
     description: 'Get to home page',
@@ -29,9 +30,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     icon: <IconHome size="1.2rem" />,
   },
   ]}>
+*/}
       <Notifications />
     <App />
-    </SpotlightProvider>
+    {/*</SpotlightProvider>*/}
     </MantineProvider>
   </React.StrictMode>
 
