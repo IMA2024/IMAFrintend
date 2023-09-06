@@ -149,38 +149,46 @@ const columnsBusinessOwnerSubscriptions = [
     width: '60px', // Set the width of the serial number column
   },
     {
-        name: 'Business Name',
+        name: <strong>Business Name</strong>,
         selector: (row) => row?.name || 'N/A',
-        width: '130px',
+        width: '190px',
         sortable: true,
+        allowOverflow: 'yes',
     },
     {
-        name: 'Business Owner Name',
+        name: <strong>Business Owner Name</strong>,
         selector: (row) => row?.capital || 'N/A',
-        width: '170px',
+       width: '190px',
         sortable: true,
+        allowOverflow: 'yes',
       },
     {
-        name: 'Subscription Title',
-        width: '150px',
+        name: <strong>Subscription Title</strong>,
+        width: '190px',
+        allowOverflow: 'yes',
         selector: (row) => row?.name || 'N/A',
         sortable: true,
     },
     {
-        name: 'Subscription Type',
-        width: '150px',
+        name: <strong>Subscription Type</strong>,
+        width: '190px',
+        allowOverflow: 'yes',
         selector: (row) => row?.region || 'N/A',
         sortable: true,
     },
     {
-        name: 'Payment Method',
+        name: <strong>Payment Method</strong>,
+        width: '190px',
+        allowOverflow: 'yes',
         selector: (row) => row?.nativeName || 'N/A',
         sortable: true,
+
     },
  
     {
-        name: 'Action',
-        width: '150px',
+        name: <strong>Action</strong>,
+        width: '190px',
+        allowOverflow: 'yes',
         cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecificBusinesSubscriptions(row)} /><IconTrash color='gray' /></Box>
     },
 ]
@@ -193,36 +201,37 @@ const columnsSuperAdminSubscriptions = [
     width: '60px', // Set the width of the serial number column
   },
     {
-        name: 'Subscription Title',
+        name: <strong>Subscription Title</strong>,
         selector: (row) => row?.title || 'N/A',
         sortable: true,
     },
     {
-        name: 'Subscription Type',
+        name: <strong>Subscription Type</strong>,
         selector: (row) => row?.type || 'N/A',
         width: '170px',
         sortable: true,
       },
     {
-        name: 'Subscription Price',
-        width: '150px',
+        name: <strong>Subscription Price</strong>,
+        width: '180px',
+        //allowOverflow: 'yes',
         selector: (row) => row?.price || 'N/A',
         sortable: true,
     },
     {
-        name: 'Subscription Limit',
-        width: '150px',
+        name: <strong>Subscription Limit</strong>,
+        width: '180px',
         selector: (row) => row?.limit || 'N/A',
         sortable: true,
     },
     {
-        name: 'Description',
+        name: <strong>Description</strong>,
         selector: (row) => row?.description || 'N/A',
         sortable: true,
     },
  
     {
-        name: 'Action',
+        name: <strong>Action</strong>,
         width: '150px',
         cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/EditSubscription')} /><IconTrash color='gray' onClick={() => handleDelete(row._id)}/>
         </Box>
@@ -256,7 +265,11 @@ useEffect(() => {
     }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
       <Tabs defaultValue="businessOwnerSubscriptions">
       <Tabs.List>
         <Tabs.Tab value="businessOwnerSubscriptions" icon={<AiOutlineShoppingCart size="0.8rem" />}>Business Owner Subscriptions</Tabs.Tab>

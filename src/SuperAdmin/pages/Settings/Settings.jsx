@@ -112,7 +112,7 @@ export default function Settings() {
       </Title>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
-          <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='md' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
+          <TextInput disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='sm' label="Role" placeholder="Select Role" {...form.getInputProps('role')}
           />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>

@@ -63,7 +63,8 @@ import BusinessPanelViewExpense from './BusinessOwner/pages/Accounting/ViewExpen
 import UpdateConfigureAgents from './BusinessOwner/pages/Agents/UpdateConfigureAgents';
 import AgentsView from './BusinessOwner/pages/Agents/ViewAgents';
 import BusinessPanelDashboard from './BusinessOwner/pages/Dashboard/Dashboard';
-import BusinessPanelViewProfit from './BusinessOwner/pages/Accounting/ViewProfit';
+//import BusinessPanelViewProfit from './BusinessOwner/pages/Accounting/ViewProfit';
+import BusinessPanelViewProfit from "./BusinessOwner/pages/Accounting/ViewProfit/ViewProfit";
 import BusinessOwnerViewFaqs from './BusinessOwner/pages/Faq/BusinessOwnerFaq';
 import BusinessPanelViewPayment from './BusinessOwner/pages/Accounting/ViewPayments';
 import ChatBusinessOwner from './BusinessOwner/pages/Chat/ChatBusinessOwner';

@@ -140,43 +140,43 @@ const RevenueTable = () => {
 
   const columns = [
     {
-      name: '#',
+      name: <strong>#</strong>,
       selector: (row, index) => index + 1, // Generate serial numbers dynamically
       sortable: true,
       width: '60px', // Set the width of the serial number column
     },
     {
-      name: 'Title',
+      name: <strong>Title</strong>,
       selector: (row) => row?.title || 'N/A',
       width: '130px',
       sortable: true,
     },
     {
-      name: 'Business Name',
+      name: <strong>Business Name</strong>,
       selector: (row) => row?.business?.name || 'N/A',
       width: '160px',
       sortable: true,
     },
     {
-      name: 'Business Details',
+      name: <strong>Business Details</strong>,
       width: '180px',
       selector: (row) => row?.description || 'N/A',
       sortable: true,
     },
     {
-      name: 'Date',
+      name: <strong>Date</strong>,
       width: '180px',
       selector: (row) => row?.date || 'N/A',
       sortable: true,
     },
     {
-      name: 'Amount',
+      name: <strong>Amount</strong>,
       selector: (row) => row?.amount || 'N/A',
       width: '150px',
       sortable: true,
     },
     {
-      name: 'Action',
+      name: <strong>Action</strong>,
       width: '120px',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>
     },
@@ -208,7 +208,11 @@ const RevenueTable = () => {
   }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
       <DataTable columns={columns} data={filteredRevenues}
         pagination
         fixedHeader

@@ -106,46 +106,46 @@ const handleViewSpecific = (row) => {
 
 const columns = [
   {
-    name: '#',
+    name: <strong>#</strong>,
     selector: (row, index) => index + 1, // Generate serial numbers dynamically
     sortable: true,
     width: '60px', // Set the width of the serial number column
   },
   {
-    name: 'Business Owner Name',
+    name: <strong>Business Owner Name</strong>,
     selector: (row) => row.capital,
-    width: '170px',
+    width: '190px',
     sortable: true,
   },
     {
-        name: 'Business Name',
+        name: <strong>Business Name</strong>,
         selector: (row) => row.name,
         sortable: true,
     },
     {
-        name: 'Business POC',
+        name: <strong>Business POC</strong>,
         width: '140px',
         selector: (row) => row.name,
         sortable: true,
     },
     {
-        name: 'Subscription Type',
-        width: '150px',
+        name: <strong>Subscription Type</strong>,
+        width: '160px',
         selector: (row) => row.region,
         sortable: true,
     },
     {
-        name: 'Payment Method',
+        name: <strong>Payment Method</strong>,
         selector: (row) => row.nativeName,
         sortable: true,
     },
     {
-        name: 'Amount',
+        name: <strong>Amount</strong>,
         selector: (row) => row.nativeName,
         sortable: true,
     },
     {
-        name: 'Action',
+        name: <strong>Action</strong>,
         width: '150px',
         cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' /></Box>
     },
@@ -180,7 +180,11 @@ useEffect(() => {
     }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
     <DataTable columns={columns} data={filteredCountries}
     pagination
     fixedHeader
