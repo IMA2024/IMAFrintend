@@ -39,12 +39,11 @@ export default function BusinessEdit() {
   const rowData = location.state.rowData;
   const { classes } = useStyles();
   const navigate = useNavigate();
-  const [countries, setCountries] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
   const [profilePics, setProfilePics] = useState('');
 
   const form = useForm({
-    initialValues: {businessId: rowData._id , name: rowData.name , businessOwner: rowData.businessOwner, type: rowData.type, phoneNumber: rowData.phoneNumber, address: rowData.address, email: rowData.email , description: rowData.description },
+    initialValues: {businessId: rowData?._id , name: rowData?.name , businessOwner: rowData?.businessOwner?.firstName + ' '+ rowData?.businessOwner?.lastName, type: rowData?.type, phoneNumber: rowData?.phoneNumber, address: rowData?.address, email: rowData?.email , description: rowData?.description },
     validateInputOnChange: true,
     validate: {
       type: isNotEmpty('Please Select Business Type'),
@@ -63,16 +62,6 @@ export default function BusinessEdit() {
       description: (value) => (/^(?!\s*$).*/.test(value) ? null : 'Business Description Must Not Be Empty')
     },
   });
-
-  useEffect(() =>{
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/admin/businessOwnersList');
-      const newData =  await response.json();
-      console.log(newData);
-      setCountries(newData);
-    };
-    fetchData();
-  }, []);
 
   const handleUploadImage = async () => {
     if (imageUpload === null) return;
@@ -94,10 +83,10 @@ export default function BusinessEdit() {
   };
 
   const handleSubmit = async (values) => {
-    const { businessId, type, name, businessOwner, address, phoneNumber, description } = values;
+    const { businessId, type, name, address, phoneNumber, description } = values;
 
     try {
-      const response = await updateBusiness(businessId, profilePics, type, name, businessOwner, address, phoneNumber, description );
+      const response = await updateBusiness(businessId, profilePics, type, name, rowData?.businessOwner?._id, address, phoneNumber, description );
       if (response.status === 201 || response.status === 200 ) {
         form.reset();
         setProfilePics('');
@@ -123,21 +112,30 @@ export default function BusinessEdit() {
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
         <Box>
         <Select withAsterisk size='sm' label="Business Type" placeholder="Select Business Type" {...form.getInputProps('type')}
-        data={[
-            { value: 'Commercial', label: 'Commercial' },
-            { value: 'Industrial', label: 'Industrial' },
-          ]}
-         />
+         data={[
+          { value: 'Advertising and Marketing Agencies', label: 'Advertising and Marketing Agencies' },
+          { value: 'Agriculture and Farming', label: 'Agriculture and Farming' },
+          { value: 'Automotive Industry', label: 'Automotive Industry' },
+          { value: 'Cosmetics and Beauty Products', label: 'Cosmetics and Beauty Products' },
+          { value: 'E-commerce and Online Retail', label: 'E-commerce and Online Retail' },
+          { value: 'Export and Import Businesses', label: 'Export and Import Businesses' },
+          { value: 'Financial Services and Banking', label: 'Financial Services and Banking' },
+          { value: 'Food and Beverage Industry', label: 'Food and Beverage Industry' },
+          { value: 'Healthcare and Medical Services', label: 'Healthcare and Medical Services' },
+          { value: 'Information Technology (IT) Services', label: 'Information Technology (IT) Services' },
+          { value: 'Logistics and Transportation', label: 'Logistics and Transportation' },
+          { value: 'Media and Entertainment', label: 'Media and Entertainment' },
+          { value: 'Pharmaceutical Industry', label: 'Pharmaceutical Industry' },
+          { value: 'Real Estate and Construction', label: 'Real Estate and Construction' },
+          { value: 'Telecommunications', label: 'Telecommunications' },
+          { value: 'Textile and Garment Manufacturing', label: 'Textile and Garment Manufacturing' },
+          { value: 'Tourism and Travel Agencies', label: 'Tourism and Travel Agencies' },
+        ]}
+      />
         </Box>
       <Box mt="sm" className={classes.responsiveContainer}>
         <TextInput maxLength={30} withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Edit Business Name" {...form.getInputProps('name')} />
-        <TextInput withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
-      
-        //data={countries.map((country) => ({
-         // value: `${country._id}`,
-          //label: `${country.firstName} ${country.lastName}`,
-       // }))}
-      
+        <TextInput  disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')}
          />
         </Box>
         <Box mt="sm"  className={classes.responsiveContainer}>
