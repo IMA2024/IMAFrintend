@@ -216,7 +216,7 @@ const columns = [
 
   },
   {
-    name: <strong>Profile Picture</strong>,
+    name: <strong>Picture</strong>,
   // width: '110px',
    allowOverflow: 'yes',
     selector: (row) => <HoverCard position="bottom" >

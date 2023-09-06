@@ -10,6 +10,13 @@ import { deleteBusiness } from '../../../api/admin/businesses';
 
 const useStyles = createStyles((theme) => ({
 
+  responsiveSearchContainer: {
+    width:'100%',
+    display: 'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+  },
+
   responsiveSearchRow: {
     display: 'flex',
     flexDirection: 'row-reverse',
@@ -26,6 +33,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveAddUserBtn: {
+    marginTop:'20px',
+    marginRight:'25px',
     [theme.fn.smallerThan('sm')]: {
     },
 
@@ -187,13 +196,14 @@ const BusinessTable = () => {
 
   const columns = [
     {
-      name: '#',
+      name: <strong>#</strong>,
       selector: (row, index) => index + 1, // Generate serial numbers dynamically
       sortable: true,
       width: '60px', // Set the width of the serial number column
+      //allowOverflow: 'yes',
     },
     {
-      name: 'Profile Picture',
+      name: <strong>Picture</strong>,
       //width: '110px',
       allowOverflow: 'yes',
       selector: (row) => <HoverCard position="bottom-end" >
@@ -206,60 +216,36 @@ const BusinessTable = () => {
       </HoverCard>
       //<img width={50} height={50} src={row.profilePic} />,
     },
-    /*
-     {
-       name: 'Profile Picture',
-       width: '110px',
-       selector: (row) => <img
-          //width={50} height={50} 
-          src={row.profilePic}
-       style={{
-         transition: 'transform 0.3s ease-in-out',
-         width: '50px', // Initial width
-         height: '50px', // Initial height
-       }}
-       onMouseEnter={(event) => {
-         event.currentTarget.style.transform = 'scale(1.1)';
-         event.currentTarget.style.width = '110px'; // Increase width on hover
-         event.currentTarget.style.height = '110px'; // Increase height on hover
-       }}
-       onMouseLeave={(event) => {
-         event.currentTarget.style.transform = 'scale(1)';
-             event.currentTarget.style.width = '50px'; // Reset width
-             event.currentTarget.style.height = '50px'; // Reset height
-       }}
-         />,
-     },
-     */
+
     {
-      name: 'Business Type',
+      name: <strong>Business Type</strong>,
       selector: (row) => row?.type || 'N/A',
       sortable: true,
       allowOverflow: 'yes',
       width: '250px',
     },
     {
-      name: 'Business Name',
-      width: '150px',
+      name: <strong>Business Name</strong>,
+      width: '200px',
       selector: (row) => row?.name || 'N/A',
       sortable: true,
       allowOverflow: 'yes',
     },
     {
-      name: 'Business Owner Name',
+      name: <strong>Business Owner Name</strong>,
       width: '190px',
       selector: (row) => `${row?.businessOwner?.firstName} ${row?.businessOwner?.lastName}`,
       sortable: true,
       allowOverflow: 'yes',
     },
     {
-      name: 'Email',
+      name: <strong>Email</strong>,
       selector: (row) => row?.email || 'N/A',
       sortable: true,
      // allowOverflow: 'yes',
     },
     {
-      name: 'Phone Number',
+      name: <strong>Phone Number</strong>,
       selector: (row) => row?.phoneNumber || 'N/A',
       width: '150px',
       sortable: true,
@@ -269,7 +255,7 @@ const BusinessTable = () => {
     },
     },
     {
-      name: 'Status',
+      name: <strong>Status</strong>,
       cell: (row, index) => (
         selectedUserIndex === index ? (
           <Select
@@ -298,7 +284,7 @@ const BusinessTable = () => {
       allowOverflow: 'yes',
     },
     {
-      name: 'Action',
+      name: <strong>Action</strong>,
       //width: '150px',
       allowOverflow: 'yes',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} />
@@ -352,6 +338,7 @@ const BusinessTable = () => {
         highlightOnHover
         subHeader
         subHeaderComponent={
+          <Box className={classes.responsiveSearchContainer}>
           <Box className={classes.responsiveSearchRow}>
             <Box className={classes.responsiveFilterIcon} >
               <Menu shadow="" width={200} closeOnItemClick={false} >
@@ -465,7 +452,9 @@ const BusinessTable = () => {
               ]}
               className={classes.responsiveActiveBlock}
             />
-            <Button
+         
+          </Box>
+          <Button
               size='md'
               className={classes.responsiveAddUserBtn}
               onClick={() => navigate('/AddBusiness')}

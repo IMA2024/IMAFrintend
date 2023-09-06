@@ -1,9 +1,11 @@
 import { Tabs, Box } from '@mantine/core';
 import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
-import RevenueTable from '../RevenueTable';
-import ExpenseTable from '../ExpenseTable';
+// import RevenueTable from '../RevenueTable';
+// import ExpenseTable from '../ExpenseTable';
+import BusinessPanelExpenseTable from '../ExpenseTable'
+import BusinessPanelRevenueTable from '../RevenueTable'
 
-export default function RevenueAndExpense() {
+export default function RevenueExpense() {
   return (
     <Box  mt={20}>
     <Tabs defaultValue="revenue">
@@ -14,11 +16,11 @@ export default function RevenueAndExpense() {
       </Tabs.List>
 
       <Tabs.Panel value="revenue" pt="xs">
-        <RevenueTable />
+        <BusinessPanelRevenueTable />
       </Tabs.Panel>
 
       <Tabs.Panel value="expense" pt="xs">
-        <ExpenseTable />
+        <BusinessPanelExpenseTable />
       </Tabs.Panel>
 
     </Tabs>
