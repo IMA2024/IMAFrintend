@@ -3,11 +3,12 @@ import DataTable from 'react-data-table-component'
 import axios from 'axios';
 import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, HoverCard,  } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome, IconBuilding } from '@tabler/icons-react';
+import { IconFilter, IconEdit, IconEye, IconTrash} from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
-//import { NavLink, Navigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
-import { deleteBusiness } from '../../../api/admin/businesses';
+import { deleteBusiness } from '../../../api/businessOwner/businesses';
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -103,9 +104,7 @@ const useStyles = createStyles((theme) => ({
     },
    },
 
-
 }))
-
 
 const TableBusiness = () => {
 
@@ -126,6 +125,7 @@ const TableBusiness = () => {
   const [specificAddress, setSpecificAddress] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
@@ -156,16 +156,21 @@ const TableBusiness = () => {
       SetModalDeletion(id);
     };
 
-  const getBusinesses = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllBusinesses');
-      console.log(response.data);
-      setBusinesses(response.data.businesses);
-      setFilteredBusinesses(response.data.businesses);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    const getBusinesses = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/businessOwner/viewAllBusinesses');
+        console.log(response.data.businesses);
+    
+        // Filter businesses based on the logged-in user's _id
+        const userBusinesses = response.data.businesses.filter((business) => business.businessOwner._id === user._id);
+    
+        setBusinesses(userBusinesses);
+        setFilteredBusinesses(userBusinesses);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    
 
   const toggleStatus = (index) => {
     const updatedBusinesses = [...businesses];
@@ -177,13 +182,13 @@ const TableBusiness = () => {
 
   const handleViewSpecific = (row) => {
     open();
-    setSpecificPicture(row.profilePic);
-    setSpecificType(row.type);
-    setSpecificName(row.name);
-    setSpecificOwner(row.businessOwner.firstName + row.businessOwner.lastName);
-    setSpecificEmail(row.email);
-    setSpecificPhoneNumber(row.phoneNumber);
-    setSpecificAddress(row.address);
+    setSpecificPicture(row?.profilePic);
+    setSpecificType(row?.type || 'N/A');
+    setSpecificName(row?.name || 'N/A');
+    setSpecificOwner(row?.businessOwner?.firstName + " " + row?.businessOwner?.lastName || 'N/A');
+    setSpecificEmail(row?.email || 'N/A');
+    setSpecificPhoneNumber(row?.phoneNumber || 'N/A');
+    setSpecificAddress(row?.address || 'N/A');
   };
 
   const columns = [

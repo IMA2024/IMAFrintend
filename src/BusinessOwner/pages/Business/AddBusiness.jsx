@@ -1,13 +1,15 @@
 import { isNotEmpty, useForm } from '@mantine/form';
 import { Image, TextInput, Button, Box, createStyles, Paper, Title, Divider, Select, Textarea } from '@mantine/core';
-import { useState, useEffect } from 'react';
-import { addBusiness } from '../../../api/admin/businesses';
+import { useState } from 'react';
+import { addBusiness } from '../../../api/businessOwner/businesses';
 import { storage } from '../../../firebase';
 import { v4 } from "uuid";
 import { getDownloadURL, ref , uploadBytes } from '@firebase/storage';
 import { Dropzone } from '@mantine/dropzone';
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -36,12 +38,12 @@ const useStyles = createStyles((theme) => ({
 export default function BusinessAdd() {
   const [imageUpload, setImageUpload] = useState(null);
   const [profilePics, setProfilePics] = useState('')
-  const [countries, setCountries] = useState([]);
+  const { user } = useContext(UserContext);
   const { classes } = useStyles();
   const navigate = useNavigate();
 
   const form = useForm({
-    initialValues: { name: '', businessOwner: '', type: '', phoneNumber: '', address: '', email: '', description: '' },
+    initialValues: { name: '', businessOwner: user?.firstName +" "+ user?.lastName, type: '', phoneNumber: '', address: '', email: '', description: '' },
     validateInputOnChange: true,
     validate: {
       type: isNotEmpty('Please Select Business Type'),
@@ -60,16 +62,6 @@ export default function BusinessAdd() {
       description: (value) => (/^(?!\s*$).*/.test(value) ? null : 'Business Description Must Not Be Empty')
     },
   });
-
-  useEffect(() =>{
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/admin/businessOwnersList');
-      const newData =  await response.json();
-      console.log(newData);
-      setCountries(newData);
-    };
-    fetchData();
-  }, []);
 
   const handleUploadImage = async () => {
     if (imageUpload === null) return;
@@ -91,10 +83,10 @@ export default function BusinessAdd() {
   };
 
   const handleSubmit = async (values) => {
-    const { type , name , businessOwner, email, address, phoneNumber, description } = values;
+    const { type , name , email, address, phoneNumber, description } = values;
 
     try {
-      const response = await addBusiness(profilePics, type , name , businessOwner, email, address, phoneNumber, description);
+      const response = await addBusiness(profilePics, type , name , user._id, email, address, phoneNumber, description);
       if (response.status === 201 || response.status === 200 ) {
         form.reset();
         setProfilePics('');
@@ -146,7 +138,7 @@ export default function BusinessAdd() {
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
           <TextInput maxLength={30} withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Enter Business Name" {...form.getInputProps('name')} />
-          <TextInput withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')} />
+          <TextInput  disabled sx={{'&:hover': { cursor: 'not-allowed', borderColor: 'red'}}} withAsterisk size='sm' className={classes.inputField} label="Business Owner Name" placeholder="Select Business Owner Name" {...form.getInputProps('businessOwner')} />
         </Box>
         <Box mt="sm" className={classes.responsiveContainer}>
           <TextInput maxLength={25} withAsterisk size='sm' className={classes.inputField} label="Business Email" placeholder="Enter Business Email" {...form.getInputProps('email')} />
