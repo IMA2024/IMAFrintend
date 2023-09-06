@@ -67,6 +67,9 @@ export default function GeneralLayout() {
           // bg={'#770737'} 
           //bg={'#66A80F'}
           //bg={'#5C940D'}
+          sx={{
+            fontFamily: 'Poppins'
+          }}
           bg={role === "Super Admin" ? '#5C940D' : role === "Business Owner" ? '#5F3DC4' : '#66A80F'}
           hiddenBreakpoint="md"
            hidden={!opened} width={{ sm: 300, lg: 300 }} mt={-1} >

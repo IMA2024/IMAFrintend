@@ -194,7 +194,8 @@ const BusinessTable = () => {
     },
     {
       name: 'Profile Picture',
-      width: '110px',
+      //width: '110px',
+      allowOverflow: 'yes',
       selector: (row) => <HoverCard position="bottom-end" >
         <HoverCard.Target>
           <img width={50} height={50} src={row?.profilePic} />
@@ -234,29 +235,38 @@ const BusinessTable = () => {
       name: 'Business Type',
       selector: (row) => row?.type || 'N/A',
       sortable: true,
+      allowOverflow: 'yes',
+      width: '250px',
     },
     {
       name: 'Business Name',
-      width: '130px',
+      width: '150px',
       selector: (row) => row?.name || 'N/A',
       sortable: true,
+      allowOverflow: 'yes',
     },
     {
       name: 'Business Owner Name',
-      width: '170px',
+      width: '190px',
       selector: (row) => `${row?.businessOwner?.firstName} ${row?.businessOwner?.lastName}`,
       sortable: true,
+      allowOverflow: 'yes',
     },
     {
       name: 'Email',
       selector: (row) => row?.email || 'N/A',
       sortable: true,
+     // allowOverflow: 'yes',
     },
     {
       name: 'Phone Number',
       selector: (row) => row?.phoneNumber || 'N/A',
-      width: '130px',
+      width: '150px',
       sortable: true,
+      allowOverflow: 'yes',
+      style: {
+       // marginLeft: '8px', // override the cell padding for data cells   
+    },
     },
     {
       name: 'Status',
@@ -283,12 +293,14 @@ const BusinessTable = () => {
           </Badge>
         )
       ),
-      width: '130px',
+      //width: '130px',
       sortable: true,
+      allowOverflow: 'yes',
     },
     {
       name: 'Action',
-      width: '150px',
+      //width: '150px',
+      allowOverflow: 'yes',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} />
         {/*<IconTrash color='gray' onClick={() => handleDelete(row._id)}/>*/}
         <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} />
@@ -326,7 +338,11 @@ const BusinessTable = () => {
   }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
       <DataTable columns={columns} data={filteredBusinesses}
         pagination
         fixedHeader

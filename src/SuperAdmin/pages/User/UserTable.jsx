@@ -11,6 +11,13 @@ import { notifications } from '@mantine/notifications';
 
 const useStyles = createStyles((theme) => ({
 
+  responsiveSearchContainer: {
+    width:'100%',
+    display: 'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+  },
+
     responsiveSearchRow: {
       display:'flex',
       flexDirection: 'row-reverse',
@@ -35,7 +42,8 @@ const useStyles = createStyles((theme) => ({
     },
   
     responsiveAddUserBtn: {
-     
+      marginTop:'20px',
+      marginRight:'25px',
       [theme.fn.smallerThan('sm')]: {
       },
   
@@ -199,39 +207,18 @@ const handleViewSpecific = (row) => {
 
 const columns = [
   {
-    name: '#',
+    name: <strong>#</strong>,
     selector: (row, index) => index + 1, // Generate serial numbers dynamically
     sortable: true,
     width: '60px', // Set the width of the serial number column
+    //allowOverflow: 'yes',
+    
+
   },
-  /*
   {
-    name: 'Profile Picture',
-    width: '110px',
-    selector: (row) => <img
-       //width={50} height={50} 
-       src={row.profilePic}
-    style={{
-      transition: 'transform 0.3s ease-in-out',
-      width: '50px', // Initial width
-      height: '50px', // Initial height
-    }}
-    onMouseEnter={(event) => {
-      event.currentTarget.style.transform = 'scale(1.1)';
-      event.currentTarget.style.width = '110px'; // Increase width on hover
-      event.currentTarget.style.height = '110px'; // Increase height on hover
-    }}
-    onMouseLeave={(event) => {
-      event.currentTarget.style.transform = 'scale(1)';
-          event.currentTarget.style.width = '50px'; // Reset width
-          event.currentTarget.style.height = '50px'; // Reset height
-    }}
-      />,
-  },
-  */
-  {
-    name: 'Profile Picture',
-    width: '110px',
+    name: <strong>Profile Picture</strong>,
+  // width: '110px',
+   allowOverflow: 'yes',
     selector: (row) => <HoverCard position="bottom" >
     <HoverCard.Target>
     <img width={50} height={50} src={row.profilePic} />
@@ -243,35 +230,45 @@ const columns = [
      //<img width={50} height={50} src={row.profilePic} />,
   },
     {
-        name: 'Role',
+        name: <strong >Role</strong>,
         selector: (row) => row.role,
         sortable: true,
+        allowOverflow: 'yes',
     },
     {
-        name: 'First Name',
-        width: '110px',
+        name: <strong>First Name</strong>,
+        //width: '110px',
         selector: (row) => row.firstName,
         sortable: true,
+        allowOverflow: 'yes',
     },
     {
-        name: 'Last Name',
-        width: '110px',
+        name: <strong>Last Name</strong>,
+        //width: '110px',
         selector: (row) => row.lastName,
         sortable: true,
+        allowOverflow: 'yes',
     },
     {
-        name: 'Email',
+        name: <strong>Email</strong>,
         selector: (row) => row.email,
         sortable: true,
+        //allowOverflow: 'yes',
+        //width: '130px',
     },
     {
-        name: 'Phone Number',
+        name: <strong>Phone No</strong>,
         selector: (row) => row.phoneNumber,
-        width: '130px',
+        //width: '130px',
         sortable: true,
+        allowOverflow: 'yes',
+        style: {
+         // marginLeft: '12px', // override the cell padding for data cells   
+      },
+        
     },
     {
-      name: 'Status',
+      name: <strong>Status</strong>,
       cell: (row, index) => (
         selectedUserIndex === index ? (
           <Select
@@ -295,12 +292,14 @@ const columns = [
           </Badge>
         )
       ),
-      width: '130px',
+     // width: '130px',
       sortable: true,
+     // allowOverflow: 'yes',
     },
     {
-        name: 'Action',
-        width: '150px',
+        name: <strong>Action</strong>,
+        //width: '150px',
+        //allowOverflow: 'yes',
         cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/></Box>
     },
 ]
@@ -335,7 +334,11 @@ useEffect(() => {
 }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
     <DataTable columns={columns} data={filteredUsers}
     pagination
     fixedHeader
@@ -345,6 +348,7 @@ useEffect(() => {
     highlightOnHover
     subHeader
     subHeaderComponent={
+      <Box className={classes.responsiveSearchContainer}>
       <Box className={classes.responsiveSearchRow}>
         <Box className={classes.responsiveFilterIcon} >
           <Menu shadow="" width={200} closeOnItemClick={false} >
@@ -432,7 +436,8 @@ useEffect(() => {
       ]}
       className={classes.responsiveActiveBlock}
     />
-    <Button 
+        </Box>
+        <Button 
     size='md'
     className={classes.responsiveAddUserBtn}
     onClick={() => navigate('/AddUser')}
