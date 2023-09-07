@@ -5,9 +5,10 @@ import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge,
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEye, IconTrash, } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
-import { deleteRevenue } from "../../../api/admin/accounting";
+import { deleteRevenue } from "../../../api/businessOwner/accounting";
 import { notifications } from '@mantine/notifications';
-
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -93,6 +94,7 @@ const BusinessPanelRevenueTable = () => {
   const [specificAmount, setSpecificAmount] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -118,15 +120,21 @@ const BusinessPanelRevenueTable = () => {
     SetModalDeletion(id);
   };
 
-  const getRevenues = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllRevenues');
-      setRevenues(response?.data?.revenues);
-      setfilteredRevenues(response?.data?.revenues);
-    } catch (error) {
-      console.log(error);
-    }
+const getRevenues = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000/admin/viewAllRevenues');
+    const allRevenues = response?.data?.revenues;
+
+    const myRevenues = allRevenues?.filter((revenue) => revenue?.business?.businessOwner === user?._id);
+    
+    // Update the state with the filtered revenues
+    setRevenues(myRevenues);
+    setfilteredRevenues(myRevenues);
+  } catch (error) {
+    console.log(error);
   }
+}
+
 
 
   const handleViewSpecific = (row) => {
@@ -267,15 +275,15 @@ const BusinessPanelRevenueTable = () => {
         }
         responsive
       />
-      <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Expense Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
+      <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Revenue Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image maw={800} radius="md" src={specificPicture} alt="Random image" /></Box>
           <Box mah={380} miw={250} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-            <Box ><Badge variant="filled" >Car Business</Badge></Box>
+            {/* <Box ><Badge variant="filled" >Car Business</Badge></Box> */}
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Details:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
           </Box>
         </Box>
       </Modal>

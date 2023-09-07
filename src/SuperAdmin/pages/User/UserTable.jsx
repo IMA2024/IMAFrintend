@@ -178,13 +178,19 @@ const deletionConfirmation = (id) => {
 const getUsers = async () => {
   try {
     const response = await Axios.get('http://localhost:5000/admin/viewAllUsers');
-    console.log(response.data.users);
-    setUsers(response.data.users);
-    setFilteredUsers(response.data.users);
+    const allUsers = response.data.users;
+
+    // Filter out the super admin based on a condition (for example, role === 'superAdmin')
+    const filteredUsers = allUsers.filter((user) => user.role !== 'Super Admin');
+
+    // Update the state with the filtered users
+    setUsers(filteredUsers);
+    setFilteredUsers(filteredUsers);
   } catch (error) {
     console.log(error);
   }
-}
+};
+
 
 const toggleStatus = (index) => {
   const updatedUsers = [...users];

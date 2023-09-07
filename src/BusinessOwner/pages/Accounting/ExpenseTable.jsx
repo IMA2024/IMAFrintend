@@ -6,7 +6,9 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEye, IconTrash, IconUser } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
-import { deleteExpense } from '../../../api/admin/accounting';
+import { deleteExpense } from '../../../api/businessOwner/accounting';
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -94,6 +96,7 @@ const BusinessPanelExpenseTable = () => {
   const [specificAmount, setSpecificAmount] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -104,7 +107,7 @@ const BusinessPanelExpenseTable = () => {
   const handleDelete = async (id) => {
     try {
       await deleteExpense(id);
-      const updatedExpenses = expenses.filter(expense => expense._id !== id);
+      const updatedExpenses = expenses?.filter(expense => expense._id !== id);
       setExpenses(updatedExpenses);
       setFilteredExpenses(updatedExpenses);
       notifications.show({ message: "Expense Deleted Successfully", color: 'red' });
@@ -122,8 +125,13 @@ const BusinessPanelExpenseTable = () => {
   const getExpenses = async () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewAllExpenses');
-      setExpenses(response?.data?.expenses);
-      setFilteredExpenses(response?.data?.expenses);
+      const allExpenses = response?.data?.expenses;
+  
+      const myExpenses = allExpenses?.filter((expense) => expense?.business?.businessOwner === user?._id);
+      
+      // Update the state with the filtered revenues
+      setExpenses(myExpenses);
+      setfilteredExpenses(myExpenses);
     } catch (error) {
       console.log(error);
     }
@@ -268,11 +276,11 @@ const BusinessPanelExpenseTable = () => {
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image maw={800} radius="md" src={specificPicture} alt="Random image" /></Box>
           <Box mah={380} miw={250} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-            <Box ><Badge variant="filled" >Car Business</Badge></Box>
+            {/* <Box ><Badge variant="filled" >Car Business</Badge></Box> */}
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Details:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Amount</Text><Text fw={'bold'} ml={5}>{specificAmount}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
           </Box>
         </Box>
       </Modal>

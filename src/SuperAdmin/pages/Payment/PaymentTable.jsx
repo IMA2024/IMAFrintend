@@ -89,7 +89,7 @@ const navigate = useNavigate();
 
 const getCountries = async () => {
 try {
-const response = await axios.get('https://restcountries.com/v2/all');
+const response = await axios.get('');
 setCountries(response.data);
 setFilteredCountries(response.data);
 } catch (error) {

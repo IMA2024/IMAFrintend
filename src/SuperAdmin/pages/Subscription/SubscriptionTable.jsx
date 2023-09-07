@@ -132,7 +132,7 @@ const handleViewSpecific = (row) => {
   open();
   setSpecificTitle(row?.title || 'N/A');
   setSpecificType(row?.type || 'N/A');
-  setSpecificPrice(row?.price || 'N/A');
+  setSpecificPrice(row?.price);
   setSpecificLimit(row?.limit || 'N/A');
   setSpecificDescription(row?.description || 'N/A');
 };
@@ -215,7 +215,7 @@ const columnsSuperAdminSubscriptions = [
         name: <strong>Subscription Price</strong>,
         width: '180px',
         //allowOverflow: 'yes',
-        selector: (row) => row?.price || 'N/A',
+        selector: (row) => row?.price + " $",
         sortable: true,
     },
     {
@@ -338,7 +338,7 @@ useEffect(() => {
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
     <Box ><Badge variant="filled" >{specificTitle}</Badge></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Type:</Text><Text fw={'bold'} ml={5}>{specificType}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Price:</Text><Text fw={'bold'} ml={5}>{specificPrice}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Price:</Text><Text fw={'bold'} ml={5}>{specificPrice} $</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Limit:</Text><Text fw={'bold'} ml={5}>{specificLimit}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
     </Box>
@@ -410,11 +410,12 @@ useEffect(() => {
      />
     <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Subscription</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
-    <Box  mah={800}><Image maw={800}radius="md" src={`https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2FDon't%20Be%20Late.jpg?alt=media&token=484d01be-6f5d-40cd-906c-6e6e2e762d27`} alt="Random image" /></Box>
+    <Box  mah={800}><Image maw={800}radius="md" src={`https://www.5startoolboxstore.com/wp-content/uploads/2021/02/130073453-subscription-label-subscription-red-band-sign-subscription.jpg`} alt="Random image" /></Box>
+    {/* // src={`https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2FDon't%20Be%20Late.jpg?alt=media&token=484d01be-6f5d-40cd-906c-6e6e2e762d27`} alt="Random image" /></Box> */}
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
     <Box ><Badge variant="filled" >{specificTitle}</Badge></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Type:</Text><Text fw={'bold'} ml={5}>{specificType}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Price:</Text><Text fw={'bold'} ml={5}>{specificPrice}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Price:</Text><Text fw={'bold'} ml={5}>{specificPrice} $</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Limit:</Text><Text fw={'bold'} ml={5}>{specificLimit}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
     </Box>
