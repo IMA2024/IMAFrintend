@@ -89,60 +89,74 @@ const HeaderTop = () => {
   const { user , setUser } = useContext(UserContext)
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     navigate("/HeaderMegaMenu/SignIn");
-  //   }
-  // }, []);
 
   const [query, setQuery] = useState('');
-  const actions =
-    //query !== '%%secret%%'
-     // ?
+  const SuperAdminActions =
+  
        [
           {
-            title: 'Reveal secret actions',
+            title: 'Dashboard',
             description: 'Click this action to reveal secret actions',
-            onTrigger: () => setQuery('%%secret%%'),
-            closeOnTrigger: false,
+            onTrigger: () => navigate("/Dashboard"),
+            //closeOnTrigger: false,
           },
           {
-            title: 'Meaow secret actions',
+            title: 'Add User',
             description: 'Click this action to reveal secret actions',
-            onTrigger: () => setQuery('%%secret%%'),
-            closeOnTrigger: false,
+            onTrigger: () => navigate("/AddUser"),
           },
           {
-            title: 'Billi',
+            title: 'View User',
             description: 'Click this action to reveal secret actions',
-            onTrigger: () => setQuery('%%secret%%'),
-            closeOnTrigger: false,
+            onTrigger: () => navigate("/ViewUser"),
           },
           {
-            title: 'Tom',
+            title: 'Add Business',
             description: 'Click this action to reveal secret actions',
-            onTrigger: () => setQuery('%%secret%%'),
-            closeOnTrigger: false,
+            onTrigger: () => navigate("/AddBusiness"),
           },
           {
-            title: 'Jerry',
+            title: 'View Business',
             description: 'Click this action to reveal secret actions',
-            onTrigger: () => setQuery('%%secret%%'),
-            closeOnTrigger: false,
+            onTrigger: () => navigate("/ViewBusiness"),
+          },
+          {
+            title: 'Add Subscription',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/AddSubscription"),
+          },
+          {
+            title: 'View Subscription',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/ViewSubscription"),
+          },
+          {
+            title: 'Add Revenue',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/AddRevenue"),
+          },
+          {
+            title: 'View Revenue',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/ViewRevenue"),
+          },
+          {
+            title: 'Add Expense',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/AddExpense"),
+          },
+          {
+            title: 'View Expense',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/ViewExpense"),
+          },
+          {
+            title: 'View Payments',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/ViewPayment"),
           },
         ]
-   /*   : [
-          { title: 'Super secret action', keywords: '%%secret%%', onTrigger: () => {} },
-          {
-            title: 'Rick roll',
-            description: 'Do not click',
-            keywords: '%%secret%%',
-            onTrigger: () => {
-              window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-            },
-          },
-        ];*/
+  
 
   const handleEdit = () => {
     navigate("/Settings");
@@ -161,7 +175,7 @@ const HeaderTop = () => {
 
   return (
     <SpotlightProvider
-    actions={actions}
+    actions={SuperAdminActions}
     query={query}
     onQueryChange={setQuery}
     searchIcon={<IconSearch size="1.2rem" />}

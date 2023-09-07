@@ -206,11 +206,11 @@ const BusinessTable = () => {
       name: <strong>Picture</strong>,
       //width: '110px',
       allowOverflow: 'yes',
-      selector: (row) => <HoverCard position="bottom-end" >
+      selector: (row) => <HoverCard position="bottom" withinPortal='true' >
         <HoverCard.Target>
           <img width={50} height={50} src={row?.profilePic} />
         </HoverCard.Target>
-        <HoverCard.Dropdown>
+        <HoverCard.Dropdown p={0}>
           <img width={150} height={150} src={row?.profilePic} />
         </HoverCard.Dropdown>
       </HoverCard>
