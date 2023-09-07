@@ -99,14 +99,15 @@ export default function BuySubscription() {
               >
                 <Center mx="auto" mih={40}><Text size={30} h={100}>{subscription.title}</Text></Center>
                 <Center mx="auto" mih={40} mb={20}><Text size={25} fs={'italic'} color='red.9'>{subscription.type}</Text></Center>
-                <Center mx="auto" mih={40}> <Box maw={100} mx="auto">
+                <Center mx="auto" mih={100}> <Box maw={160} mx="auto">
                   <Image
                     radius="md"
-                    src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
+                    // src="https://storeassets.im-cdn.com/products/af11d2/wqK1UW3TRDG6Z6wOJB3h_silver.jpg"
+                    src="https://www.5startoolboxstore.com/wp-content/uploads/2021/02/130073453-subscription-label-subscription-red-band-sign-subscription.jpg"
                     alt="Random unsplash image"
                   />
                 </Box></Center>
-                <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{subscription.price}</Text></Center>
+                <Center mb={20} mih={40} mx="auto"> <Text size={25} fs={'italic'} color='blue.9'>{subscription.price} $</Text></Center>
                 <Divider />
                 <Center mih={40} mx="auto"> <Text>{subscription.description}</Text></Center>
                 <Button mih={40} mx="auto" fullWidth color='green.9'

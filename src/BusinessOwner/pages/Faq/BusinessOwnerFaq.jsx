@@ -1,11 +1,9 @@
 import React from 'react';
 import { createStyles, Image, Accordion, Grid, Col, Container, Title, Button, Text } from '@mantine/core';
-import { IconEdit, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
-import { deleteFAQ } from '../../../api/admin/faq';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -60,7 +58,7 @@ export default function BusinessOwnerViewFaqs() {
 
   const getFAQs = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllFAQs');
+      const response = await axios.get('http://localhost:5000/businessOwner/viewAllFAQs');
       setFAQs(response?.data?.FAQs);
       setFilteredFAQs(response?.data?.FAQs);
       console.log(response?.data?.FAQs);

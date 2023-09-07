@@ -4,9 +4,10 @@ import axios from 'axios';
 import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEye, IconTrash, IconUser } from '@tabler/icons-react';
-import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteExpense } from '../../../api/admin/accounting';
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -94,8 +95,7 @@ const BusinessPanelPaymentTable = () => {
   const [specificAmount, setSpecificAmount] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
-
-  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const handleClear = () => {
     setSearch('');
@@ -122,8 +122,13 @@ const BusinessPanelPaymentTable = () => {
   const getExpenses = async () => {
     try {
       const response = await axios.get('http://localhost:5000/admin/viewAllExpenses');
-      setExpenses(response?.data?.expenses);
-      setFilteredExpenses(response?.data?.expenses);
+      const allExpenses = response?.data?.expenses;
+  
+      const myExpenses = allExpenses?.filter((expense) => expense?.business?.businessOwner === user?._id);
+      
+      // Update the state with the filtered revenues
+      setExpenses(myExpenses);
+      setfilteredExpenses(myExpenses);
     } catch (error) {
       console.log(error);
     }
@@ -179,7 +184,7 @@ const BusinessPanelPaymentTable = () => {
     },
     {
         name: 'Payment Method',
-        selector: (row) => row?.amount || 'N/A',
+        selector: (row) => 'Stripe',
         width: '150px',
         sortable: true,
       },
@@ -276,12 +281,12 @@ const BusinessPanelPaymentTable = () => {
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image maw={800} radius="md" src={specificPicture} alt="Random image" /></Box>
           <Box mah={380} miw={250} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-            <Box ><Badge variant="filled" >Car Business</Badge></Box>
+            {/* <Box ><Badge variant="filled" >{specificBusiness}</Badge></Box> */}
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Method:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Amount:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Method:</Text><Text fw={'bold'} ml={5}> Stripe</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
           </Box>
         </Box>
       </Modal>

@@ -2,13 +2,15 @@ import { isNotEmpty , useForm } from '@mantine/form';
 import { Image, NumberInput, TextInput, Button, Box , createStyles, Paper, Textarea, Title, Divider, Select } from '@mantine/core';
 import Datepicker from '../../../components/Date';
 import { useEffect , useState } from 'react';
-import { addExpense } from '../../../api/admin/accounting';
+import { addExpense } from '../../../api/businessOwner/accounting';
 import { notifications } from '@mantine/notifications';
 import { storage } from '../../../firebase';
 import { v4 } from "uuid";
 import { getDownloadURL, ref , uploadBytes } from '@firebase/storage';
 import { Dropzone } from '@mantine/dropzone';
 import { useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -38,6 +40,7 @@ export default function BusinessPanelAddExpense() {
   const [imageUpload, setImageUpload] = useState(null);
   const [profilePics, setProfilePics] = useState('')
   const [countries, setCountries] = useState([]);
+  const { user } = useContext(UserContext);
   const {classes} = useStyles();
   const navigate = useNavigate();
 
@@ -69,7 +72,11 @@ export default function BusinessPanelAddExpense() {
       const response = await fetch('http://localhost:5000/admin/businessesList');
       const newData =  await response.json();
       console.log(newData);
-      setCountries(newData);
+
+      const filteredBusinesses = newData.filter((business) => business.businessOwner === user._id);
+
+      // Update the state with the filtered businesses
+      setCountries(filteredBusinesses);
     };
     fetchData();
   }, []);
