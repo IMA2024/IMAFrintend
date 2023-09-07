@@ -7,14 +7,15 @@ import { IoMdAddCircle } from 'react-icons/io';
 import { useState } from 'react';
 import { Text, Image } from '@mantine/core';
 
+
 const SuperAdminNavbar = ({SuperAdminSideBarData}) => {
 
   const [opened, setOpened] = useState(null);
-  
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [subHoveredLink, setSubHoveredLink] = useState(null);
 
   const handleToggleVisibility1 = (val) => {
     val === opened ? setOpened(null) : setOpened(val);
-
   };
   
 
@@ -47,6 +48,7 @@ const SuperAdminNavbar = ({SuperAdminSideBarData}) => {
     color: 'white',
     fontSize: '15px',
     borderRadius: '4px',
+     //backgroundColor: "#5F3DC4",
   };
 
   const pointerStyles = {
@@ -79,7 +81,12 @@ const SuperAdminNavbar = ({SuperAdminSideBarData}) => {
                 <NavLink
                   exact
                   to={obj.link}
-                  style={navLinkStyles}
+                  onMouseEnter={() => setHoveredLink(obj.name)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                  style={{
+                    ...navLinkStyles,
+                    backgroundColor: hoveredLink === obj.name ? '#C92A2A' : 'initial', // Change background color on hover
+                  }}
                   activeStyle={{ fontWeight: 'bold' }}
                   onClick={() => handleToggleVisibility1(obj.name)}
                 >
@@ -101,7 +108,13 @@ const SuperAdminNavbar = ({SuperAdminSideBarData}) => {
                           <NavLink
                             exact
                             to={subObj.link}
-                            style={SubnavLinkStyles}
+                            onMouseEnter={() => setSubHoveredLink(subObj.name)}
+                            onMouseLeave={() => setSubHoveredLink(null)}
+                            //style={SubnavLinkStyles}
+                            style={{
+                              ...SubnavLinkStyles,
+                              backgroundColor: subHoveredLink === subObj.name ? '#FF6B6B' : 'initial', // Change background color on hover
+                            }}
                             activeStyle={{ fontWeight: 'bold' }}
                           >
                             {subObj.Icon && <subObj.Icon style={iconStyles} />}
