@@ -1,9 +1,10 @@
 import { isNotEmpty , useForm } from '@mantine/form';
-import { NumberInput, TextInput, Button, Box , createStyles, Paper, Textarea, Title, Divider, Select } from '@mantine/core';
-import Datepicker from '../../../components/Date';
+import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select } from '@mantine/core';
 import { useEffect , useState } from 'react';
-import { addExpense } from '../../../api/admin/accounting';
+import { addAgent } from '../../../api/businessOwner/agent';
 import { notifications } from '@mantine/notifications';
+import React, { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -32,16 +33,16 @@ const useStyles = createStyles((theme) => ({
 export default function ConfigureAgents() {
 
   const [countries, setCountries] = useState([]);
+  const { user } = useContext(UserContext);
   const {classes} = useStyles();
 
   const form = useForm({
-    initialValues: { businessName: '', agentName: '', agentVoice: '' },
+    initialValues: { business: '', agent: '', voice: '' },
     validateInputOnChange: true,
-    // functions will be used to validate values at corresponding key
     validate: {
-      businessName: isNotEmpty('Please Select Business Name'),
-      agentName: isNotEmpty('Please Select Agent Name'),
-      agentVoice: isNotEmpty('Please Select Agent Voice'),
+      business: isNotEmpty('Please Select Business Name'),
+      agent: isNotEmpty('Please Select Agent Name'),
+      voice: isNotEmpty('Please Select Agent Voice'),
     },
   });
 
@@ -49,20 +50,21 @@ export default function ConfigureAgents() {
     const fetchData = async () => {
       const response = await fetch('http://localhost:5000/admin/businessesList');
       const newData =  await response.json();
-      console.log(newData);
-      setCountries(newData);
+
+      const filteredBusinesses = newData.filter((business) => business.businessOwner === user._id);
+      setCountries(filteredBusinesses);
     };
     fetchData();
   }, []);
 
   const handleSubmit = async (values) => {
-    const { title , business , description , date , amount } = values;
+    const { business , name , voice  } = values;
 
     try {
-      const response = await addExpense( title , business , description , date , amount );
+      const response = await addAgent( business , name );
       if (response.status === 201) {
         form.reset();
-        notifications.show({ message: `Expense Added Successfully`, color: 'green' });
+        notifications.show({ message: `Agent Added Successfully`, color: 'green' });
       }
 
     } catch (error) {
@@ -83,30 +85,26 @@ export default function ConfigureAgents() {
       
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
       <Box >
-        <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessName')}
-        data={[
-            { value: 'react', label: 'React' },
-            { value: 'ng', label: 'Angular' },
-            { value: 'svelte', label: 'Svelte' },
-            { value: 'vue', label: 'Vue' },
-          ]}
+        <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('business')}
+             data={countries.map((country) => ({
+              value: `${country._id}`,
+              label: `${country.name}`,
+            }))}
          />
         </Box>
       <Box mt="sm"  className={classes.responsiveContainer}>
-        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Select Agent Name" {...form.getInputProps('agentName')}
+        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Select Agent Name" {...form.getInputProps('agent')}
         data={[
-            { value: 'react', label: 'React' },
-            { value: 'ng', label: 'Angular' },
-            { value: 'svelte', label: 'Svelte' },
-            { value: 'vue', label: 'Vue' },
+            { value: 'Max', label: 'Max' },
+            { value: 'John', label: 'John' },
+            { value: 'Lilly', label: 'Lilly' },
+            { value: 'Bella', label: 'Bella' },
           ]}
          />
-        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('agentVoice')}
+        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('voice')}
             data={[
-                { value: 'react', label: 'React' },
-                { value: 'ng', label: 'Angular' },
-                { value: 'svelte', label: 'Svelte' },
-                { value: 'vue', label: 'Vue' },
+                { value: 'Male', label: 'Male' },
+                { value: 'Female', label: 'Female' },
               ]}
          />
         </Box>
