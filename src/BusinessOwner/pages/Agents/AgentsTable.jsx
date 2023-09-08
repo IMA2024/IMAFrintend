@@ -5,9 +5,10 @@ import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge,
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome, IconBuilding } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
-//import { NavLink, Navigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteBusiness } from '../../../api/admin/businesses';
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -110,6 +111,7 @@ const useStyles = createStyles((theme) => ({
 const TableAgents = () => {
 
   const { classes } = useStyles();
+  const { user } = useContext(UserContext);
   const [businesses, setBusinesses] = useState([]);
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
