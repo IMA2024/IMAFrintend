@@ -4,6 +4,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { isNotEmpty, useForm } from '@mantine/form';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -32,11 +34,13 @@ const useStyles = createStyles((theme) => ({
 export default function BuySubscription() {
 
   const [subscriptions, setSubscriptions] = useState([]);
+  const [businesses, setBusinesses] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState(false);
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [noTransitionOpened, setNoTransitionOpened] = useState(false);
   const [subscribed, setSubscribed] = useState(undefined);
+  const { user } = useContext(UserContext);
   const form = useForm({
     initialValues: { title: '', type: '', price: '', limit: '', description: '' },
 
@@ -59,9 +63,26 @@ export default function BuySubscription() {
     }
   }
 
+  useEffect(() =>{
+    const fetchData = async () => {
+      const response = await fetch('http://localhost:5000/admin/businessesList');
+      const newData =  await response.json();
+      console.log(newData);
+
+      const filteredBusinesses = newData.filter((business) => business.businessOwner === user._id);
+
+      // Update the state with the filtered businesses
+      setBusinesses(filteredBusinesses);
+    };
+    fetchData();
+  }, []);
+
+
   useEffect(() => {
     getSubscriptions();
   }, []);
+
+
 
   // payment integration 
 
@@ -129,13 +150,20 @@ export default function BuySubscription() {
         ))}
       </Grid>
       <Box>
-        <Modal opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
-          <Text>Are you sure you want to subscribe?</Text>
+    
+        <Modal opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Select the business for subscription</Text>} transitionProps={{ transition: 'rotate-left' }}>
+        {businesses?.map((business, index) => (
+          <Box style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+          <Text mb={20}>{business?.name}</Text>
+          <Button type="submit" size='sm' color='green.9' onClick={() => makepayment({subscribed : subscribed})}>Subscribe</Button>
+          </Box>
+          ))}
           <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
             <Button size='sm' color='red.8' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
-            <Button type="submit" size='sm' color='green.9' onClick={() => makepayment({subscribed : subscribed})}>Subscribe</Button>
+
           </Box>
         </Modal>
+         
         <Modal
           opened={noTransitionOpened}
           onClose={() => setNoTransitionOpened(false)}
