@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
+import { Button, TextInput, Box, createStyles, Menu, Text, Modal, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconFilter, IconEye, IconTrash, IconUser } from '@tabler/icons-react';
+import { IconFilter, IconEye, IconTrash } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
-import { deleteExpense } from '../../../api/admin/accounting';
+import { deletePayment } from '../../../api/businessOwner/payment';
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
 
@@ -77,22 +77,20 @@ const useStyles = createStyles((theme) => ({
     },
 
   },
-
 }))
-
 
 const BusinessPanelPaymentTable = () => {
 
   const { classes } = useStyles();
-  const [expenses, setExpenses] = useState([]);
+  const [payments, setPayments] = useState([]);
   const [search, setSearch] = useState('');
-  const [filteredExpenses, setFilteredExpenses] = useState([]);
+  const [filteredPayments, setFilteredPayments] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
-  const [specificPicture, setSpecificPicture] = useState('');
+  const [specificTitle, setSpecificTitle] = useState('');
   const [specificBusiness, setSpecificBusiness] = useState('');
-  const [specificDescription, setSpecificDescription] = useState('');
   const [specificDate, setSpecificDate] = useState('');
   const [specificAmount, setSpecificAmount] = useState('');
+  const [specificMethod, setSpecificMethod] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
   const { user } = useContext(UserContext);
@@ -103,11 +101,11 @@ const BusinessPanelPaymentTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteExpense(id);
-      const updatedExpenses = expenses.filter(expense => expense._id !== id);
-      setExpenses(updatedExpenses);
-      setFilteredExpenses(updatedExpenses);
-      notifications.show({ message: "Expense Deleted Successfully", color: 'red' });
+      await deletePayment(id);
+      const updatedPayments = payments.filter(payment => payment._id !== id);
+      setPayments(updatedPayments);
+      setFilteredPayments(updatedPayments);
+      notifications.show({ message: "Payment Deleted Successfully", color: 'red' });
       setSlowTransitionOpened(false);
     } catch (error) {
       console.log(error);
@@ -119,16 +117,13 @@ const BusinessPanelPaymentTable = () => {
     SetModalDeletion(id);
   };
 
-  const getExpenses = async () => {
+  const getPayments = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllExpenses');
-      const allExpenses = response?.data?.expenses;
-  
-      const myExpenses = allExpenses?.filter((expense) => expense?.business?.businessOwner === user?._id);
-      
-      // Update the state with the filtered revenues
-      setExpenses(myExpenses);
-      setfilteredExpenses(myExpenses);
+      const response = await axios.get('http://localhost:5000/businessOwner/viewAllPayments');
+      const allPayments = response?.data?.payments;
+      const myPayments = allPayments?.filter((payment) => payment?.business?.businessOwner?._id === user?._id);
+      setPayments(myPayments);
+      setFilteredPayments(myPayments);
     } catch (error) {
       console.log(error);
     }
@@ -137,11 +132,11 @@ const BusinessPanelPaymentTable = () => {
 
   const handleViewSpecific = (row) => {
     open();
+    setSpecificTitle(row?.title || 'N/A');
     setSpecificBusiness(row?.business?.name || 'N/A');
-    setSpecificDescription(row?.description || 'N/A');
     setSpecificDate(row?.date || 'N/A');
     setSpecificAmount(row?.amount || 'N/A');
-    setSpecificPicture(row?.profilePic);
+    setSpecificMethod(row?.method || 'N/A');
 
   };
 
@@ -153,7 +148,7 @@ const BusinessPanelPaymentTable = () => {
       width: '60px',
     },
     {
-      name: 'Title',
+      name: 'Subscription Title',
       selector: (row) => row?.title || 'N/A',
       width: '130px',
       sortable: true,
@@ -167,7 +162,7 @@ const BusinessPanelPaymentTable = () => {
     {
       name: 'Business Owner Name',
       width: '180px',
-      selector: (row) => row?.description || 'N/A',
+      selector: (row) => `${row?.business?.businessOwner?.firstName} ${row?.business?.businessOwner?.lastName}` || 'N/A',
       sortable: true,
     },
     {
@@ -178,13 +173,13 @@ const BusinessPanelPaymentTable = () => {
     },
     {
       name: 'Payment Amount',
-      selector: (row) => row?.amount || 'N/A',
+      selector: (row) => row?.amount + " $" || 'N/A',
       width: '150px',
       sortable: true,
     },
     {
         name: 'Payment Method',
-        selector: (row) => 'Stripe',
+        selector: (row) =>  row?.method || 'N/A',
         width: '150px',
         sortable: true,
       },
@@ -196,29 +191,31 @@ const BusinessPanelPaymentTable = () => {
   ]
 
   useEffect(() => {
-    const result = expenses.filter(expense => {
+    const result = payments.filter(payment => {
       const matchesSearch = (
-        expense?.title.toLowerCase().includes(search.toLowerCase()) ||
-        expense?.business?.name.toLowerCase().includes(search.toLowerCase())
+        payment?.title.toLowerCase().includes(search.toLowerCase()) ||
+        payment?.business?.name.toLowerCase().includes(search.toLowerCase()) ||
+        payment?.business?.businessOwner?.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        payment?.business?.businessOwner?.lastName.toLowerCase().includes(search.toLowerCase())
       );
   
       return matchesSearch;
     });
   
-    setFilteredExpenses(result);
-  }, [search, expenses]);
+    setFilteredPayments(result);
+  }, [search, payments]);
 
   useEffect(() => {
-    getExpenses().then((data) => {
-      const expensesData = data.map((expense) => ({ ...expense, status: 'active' }));
-      setExpenses(expensesData);
-      setFilteredExpenses(expensesData);
+    getPayments().then((data) => {
+      const paymentsData = data.map((payment) => ({ ...payment, status: 'active' }));
+      setPayments(paymentsData);
+      setFilteredPayments(paymentsData);
     });
   }, []);
 
   return (
     <Box >
-      <DataTable columns={columns} data={filteredExpenses}
+      <DataTable columns={columns} data={filteredPayments}
         pagination
         fixedHeader
         fixedHeaderScrollHeight='650px'
@@ -264,29 +261,20 @@ const BusinessPanelPaymentTable = () => {
               className={classes.responsiveSearch}
             />
           </Box>
-          {/*
-          <Button
-              size='md'
-              className={classes.responsiveAddUserBtn}
-              onClick={() => navigate('/AddExpense')}
-            >
-              Add Expense
-            </Button>
-        */}
           </Box>
         }
         responsive
       />
       <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Payment Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
-          <Box mah={800}><Image maw={800} radius="md" src={specificPicture} alt="Random image" /></Box>
+          <Box mah={800}><Image maw={800} radius="md" src={'https://www.digitaloutlook.com.au/wp-content/uploads/2017/09/future_payment_methods-compressor-1.jpg'} alt="Random image" /></Box>
           <Box mah={380} miw={250} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
             {/* <Box ><Badge variant="filled" >{specificBusiness}</Badge></Box> */}
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Method:</Text><Text fw={'bold'} ml={5}> Stripe</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Description:</Text><Text fw={'bold'} ml={5}>{specificDescription}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Title:</Text><Text fw={'bold'} ml={5}>{specificTitle}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}></Text>Business Name:<Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount} $</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Payment Method:</Text><Text fw={'bold'} ml={5}>{specificMethod}</Text></Box>
           </Box>
         </Box>
       </Modal>

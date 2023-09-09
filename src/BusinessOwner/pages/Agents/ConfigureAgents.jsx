@@ -37,11 +37,11 @@ export default function ConfigureAgents() {
   const {classes} = useStyles();
 
   const form = useForm({
-    initialValues: { business: '', agent: '', voice: '' },
+    initialValues: { business: '', name: '', voice: '' },
     validateInputOnChange: true,
     validate: {
       business: isNotEmpty('Please Select Business Name'),
-      agent: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Agent Name Must Contain 3 to 20 Alphabets'),
+      name: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Agent Name Must Contain 3 to 20 Alphabets'),
       voice: isNotEmpty('Please Select Agent Voice'),
     },
   });
@@ -50,8 +50,7 @@ export default function ConfigureAgents() {
     const fetchData = async () => {
       const response = await fetch('http://localhost:5000/admin/businessesList');
       const newData =  await response.json();
-
-      const filteredBusinesses = newData.filter((business) => business.businessOwner === user._id);
+      const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
       setCountries(filteredBusinesses);
     };
     fetchData();
@@ -61,7 +60,7 @@ export default function ConfigureAgents() {
     const { business , name , voice  } = values;
 
     try {
-      const response = await addAgent( business , name );
+      const response = await addAgent( business , name , voice);
       if (response.status === 201) {
         form.reset();
         notifications.show({ message: `Agent Added Successfully`, color: 'green' });
@@ -93,7 +92,7 @@ export default function ConfigureAgents() {
          />
         </Box>
       <Box mt="sm"  className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Enter Agent Name: Amna" {...form.getInputProps('agent')} />
+        <TextInput withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Enter Agent Name: Amna" {...form.getInputProps('name')} />
         <Select withAsterisk size='sm' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('voice')}
             data={[
                 { value: 'Male', label: 'Male' },

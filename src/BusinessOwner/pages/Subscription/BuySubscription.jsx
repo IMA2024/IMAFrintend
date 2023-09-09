@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Skeleton, Container, Card, Paper, Center, Image, Box, Button, Text, Divider, Group, createStyles, Modal, Select, TextInput, Textarea } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import { isNotEmpty, useForm } from '@mantine/form';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
@@ -35,12 +34,12 @@ export default function BuySubscription() {
 
   const [subscriptions, setSubscriptions] = useState([]);
   const [businesses, setBusinesses] = useState([]);
-  const [opened, { open, close }] = useDisclosure(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState(false);
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [noTransitionOpened, setNoTransitionOpened] = useState(false);
   const [subscribed, setSubscribed] = useState(undefined);
   const { user } = useContext(UserContext);
+
   const form = useForm({
     initialValues: { title: '', type: '', price: '', limit: '', description: '' },
 
@@ -69,7 +68,7 @@ export default function BuySubscription() {
       const newData =  await response.json();
       console.log(newData);
 
-      const filteredBusinesses = newData.filter((business) => business.businessOwner === user._id);
+      const filteredBusinesses = newData?.filter((business) => business?.businessOwner === user?._id);
 
       // Update the state with the filtered businesses
       setBusinesses(filteredBusinesses);
@@ -86,7 +85,7 @@ export default function BuySubscription() {
 
   // payment integration 
 
-  const makepayment = async (body) => {
+  const makepayment = async (businessId, subscribed) => {
     const stripe = await loadStripe("pk_test_51Nl5XoExU3kznyi3Mj5zTvvnUs7nDh70EPm2Un3oGQDXzhNbZx3SFs5rxAraPoAaLlSOw2EouyXVrsKrwO3ilf6600y0akI2iP");
 
     const headers = {
@@ -95,7 +94,7 @@ export default function BuySubscription() {
     const response = await fetch("http://localhost:5000/businessOwner/makePayment", {
       method: "POST",
       headers: headers,
-      body: JSON.stringify(body)
+      body: JSON.stringify({ businessId, subscribed })
     });
 
     const session = await response.json();
@@ -155,7 +154,7 @@ export default function BuySubscription() {
         {businesses?.map((business, index) => (
           <Box style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
           <Text mb={20}>{business?.name}</Text>
-          <Button type="submit" size='sm' color='green.9' onClick={() => makepayment({subscribed : subscribed})}>Subscribe</Button>
+          <Button type="submit" size='sm' color='green.9' onClick={() => makepayment(business?._id,subscribed)}>Subscribe</Button>
           </Box>
           ))}
           <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
