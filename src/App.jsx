@@ -44,6 +44,10 @@ import EditFaqs from './SuperAdmin/pages/Faqs/EditFaqs';
 import Radio from './SuperAdmin/pages/Accounting/ViewProfit/RevenueAndExpenses';
  {/* These are the routes for Landing Page */}
  import HeroHeader from "./pages/LandingPage/HeroHeader";
+ import StepperNumbers from "./pages/LandingPage/StepperNumbers";
+ import StepperHeadings from "./pages/LandingPage/StepperHeadings";
+ import StepperDescription from "./pages/LandingPage/SteppperDescription";
+ import Stepper from "./pages/LandingPage/Stepper";
   {/* The routes for Landing Page end here*/}
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
@@ -104,6 +108,10 @@ export default function Demo() {
     <Router><UserProvider>
      <Routes>
      <Route path="/LandingPage" element={<LandingPage />} />
+     <Route path="/StepperNumbers" element={<StepperNumbers />} />
+     <Route path="/StepperHeadings" element={<StepperHeadings />} />
+     <Route path="/StepperDescription" element={<StepperDescription />} />
+     <Route path="/Stepper" element={<Stepper />} />
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
       <Route path="SignIn" element={<SignIn />} />
       <Route path="SignUp" element={<SignUp />} />
