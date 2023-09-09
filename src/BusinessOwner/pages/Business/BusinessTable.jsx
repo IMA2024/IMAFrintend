@@ -159,10 +159,10 @@ const TableBusiness = () => {
     const getBusinesses = async () => {
       try {
         const response = await axios.get('http://localhost:5000/businessOwner/viewAllBusinesses');
-        console.log(response.data.businesses);
+        console.log(response?.data?.businesses);
     
         // Filter businesses based on the logged-in user's _id
-        const userBusinesses = response.data.businesses.filter((business) => business.businessOwner._id === user._id);
+        const userBusinesses = response?.data?.businesses.filter((business) => business?.businessOwner?._id === user._id);
     
         setBusinesses(userBusinesses);
         setFilteredBusinesses(userBusinesses);
@@ -210,10 +210,10 @@ const TableBusiness = () => {
       width: '110px',
       selector: (row) => <HoverCard position="bottom-end" >
       <HoverCard.Target>
-      <img width={50} height={50} src={row.profilePic} />
+      <img width={50} height={50} src={row?.profilePic} />
       </HoverCard.Target>
       <HoverCard.Dropdown>
-      <img width={150} height={150} src={row.profilePic} />
+      <img width={150} height={150} src={row?.profilePic} />
       </HoverCard.Dropdown>
     </HoverCard>
        //<img width={50} height={50} src={row.profilePic} />,
@@ -245,29 +245,29 @@ const TableBusiness = () => {
     */
     {
       name: 'Business Type',
-      selector: (row) => row.type,
+      selector: (row) => row?.type,
       sortable: true,
     },
     {
       name: 'Business Name',
       width: '130px',
-      selector: (row) => row.name,
+      selector: (row) => row?.name,
       sortable: true,
     },
     {
       name: 'Business Owner Name',
       width: '170px',
-      selector: (row) => `${row.businessOwner.firstName} ${row.businessOwner.lastName}`,
+      selector: (row) => `${row?.businessOwner?.firstName} ${row?.businessOwner?.lastName}`,
       sortable: true,
     },
     {
       name: 'Email',
-      selector: (row) => row.email,
+      selector: (row) => row?.email,
       sortable: true,
     },
     {
       name: 'Phone Number',
-      selector: (row) => row.phoneNumber,
+      selector: (row) => row?.phoneNumber,
       width: '130px',
       sortable: true,
     },
@@ -276,7 +276,7 @@ const TableBusiness = () => {
       cell: (row, index) => (
         selectedUserIndex === index ? (
           <Select
-            value={row.status}
+            value={row?.status}
             onChange={(newValue) => {
               toggleStatus(index);
               setSelectedUserIndex();
@@ -316,13 +316,13 @@ const TableBusiness = () => {
   useEffect(() => {
     const result = businesses.filter(business => {
       const matchesSearch = (
-        business.name.toLowerCase().includes(search.toLowerCase()) ||
-        business.businessOwner.firstName.toLowerCase().includes(search.toLowerCase()) ||
-        business.businessOwner.lastName.toLowerCase().includes(search.toLowerCase()) ||
-        business.phoneNumber.toLowerCase().includes(search.toLowerCase())
+        business?.name.toLowerCase().includes(search.toLowerCase()) ||
+        business?.businessOwner?.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        business?.businessOwner?.lastName.toLowerCase().includes(search.toLowerCase()) ||
+        business?.phoneNumber.toLowerCase().includes(search.toLowerCase())
       );
-       const matchesType = type === '' || business.type.toLowerCase().includes(type.toLowerCase());
-      const matchesStatus = status === '' || business.status.toLowerCase().includes(status.toLowerCase());
+       const matchesType = type === '' || business?.type.toLowerCase().includes(type.toLowerCase());
+      const matchesStatus = status === '' || business?.status.toLowerCase().includes(status.toLowerCase());
   
       return matchesSearch && matchesType && matchesStatus;
     });
