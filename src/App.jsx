@@ -42,7 +42,9 @@ import ViewFaqs from './SuperAdmin/pages/Faqs/ViewFaqs';
 import FaqForm from './SuperAdmin/pages/Faqs/AddFaqs';
 import EditFaqs from './SuperAdmin/pages/Faqs/EditFaqs';
 import Radio from './SuperAdmin/pages/Accounting/ViewProfit/RevenueAndExpenses';
-
+ {/* These are the routes for Landing Page */}
+ import HeroHeader from "./pages/LandingPage/HeroHeader";
+  {/* The routes for Landing Page end here*/}
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
 import BusinessAdd from './BusinessOwner/pages/Business/AddBusiness';
@@ -78,6 +80,7 @@ import { UserProvider } from './context/users/userContext';
 import { SpotlightProvider  } from '@mantine/spotlight';
 import PaymentSucces from './BusinessOwner/components/PaymentSucces';
 import PaymentUnsuccessful from './BusinessOwner/components/PaymentUnsuccessful';
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 
 export default function Demo() {
@@ -100,6 +103,7 @@ export default function Demo() {
    
     <Router><UserProvider>
      <Routes>
+     <Route path="/LandingPage" element={<LandingPage />} />
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
       <Route path="SignIn" element={<SignIn />} />
       <Route path="SignUp" element={<SignUp />} />
@@ -143,6 +147,7 @@ export default function Demo() {
         <Route path="FaqForm" element={<FaqForm />} />
         <Route path="EditFaqs" element={<EditFaqs />} />
         <Route path="Radio" element={<Radio />} />
+
          {/* These are the routes for Business Panel */}
       <Route path="/BusinessAdd" element={<BusinessAdd />} />
       <Route path="BusinessView" element={<BusinessView />} />
@@ -169,6 +174,7 @@ export default function Demo() {
       <Route path="BusinessPanelViewPayment" element={<BusinessPanelViewPayment />} />
       <Route path="ChatBusinessOwner" element={<ChatBusinessOwner />} />
       {/* The routes for Business Panel end here*/}
+      
       </Route>
     
      </Routes></UserProvider>

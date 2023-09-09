@@ -1,5 +1,5 @@
 import { isNotEmpty , useForm } from '@mantine/form';
-import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select } from '@mantine/core';
+import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select, TextInput } from '@mantine/core';
 import { useEffect , useState } from 'react';
 import { addAgent } from '../../../api/businessOwner/agent';
 import { notifications } from '@mantine/notifications';
@@ -41,7 +41,7 @@ export default function ConfigureAgents() {
     validateInputOnChange: true,
     validate: {
       business: isNotEmpty('Please Select Business Name'),
-      agent: isNotEmpty('Please Select Agent Name'),
+      agent: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Agent Name Must Contain 3 to 20 Alphabets'),
       voice: isNotEmpty('Please Select Agent Voice'),
     },
   });
@@ -93,14 +93,7 @@ export default function ConfigureAgents() {
          />
         </Box>
       <Box mt="sm"  className={classes.responsiveContainer}>
-        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Select Agent Name" {...form.getInputProps('agent')}
-        data={[
-            { value: 'Max', label: 'Max' },
-            { value: 'John', label: 'John' },
-            { value: 'Lilly', label: 'Lilly' },
-            { value: 'Bella', label: 'Bella' },
-          ]}
-         />
+        <TextInput withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Enter Agent Name: Amna" {...form.getInputProps('agent')} />
         <Select withAsterisk size='sm' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('voice')}
             data={[
                 { value: 'Male', label: 'Male' },
