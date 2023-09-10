@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
+import { Button, TextInput, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome  } from '@tabler/icons-react';
+import { IconFilter, IconEye, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
+import { deleteSubscriptionRecord } from '../../../api/businessOwner/subscription';
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -80,35 +83,67 @@ const useStyles = createStyles((theme) => ({
 const BusinessSubscriptionTable = () => {
 
 const { classes } = useStyles();
-const [countries, setCountries] =  useState([]);
+const { user } = useContext(UserContext);
+const [subscriptions, setSubscriptions] =  useState([]);
 const [search, setSearch] =  useState('');
-const [region, setRegion] =  useState('');
-const [filteredCountries, setFilteredCountries] =  useState([]);
+const [type, setType] =  useState('');
+const [filteredSubscriptions, setFilteredSubscriptions] =  useState([]);
 const [opened, { open, close }] = useDisclosure(false); 
-const [specificPicture, setSpecificPicture] =  useState('');
-const [specificRole, setSpecificRole] =  useState('');
-const [specificFirstName, setSpecificFirstName] =  useState('');
-const [specificLastName, setSpecificLastName] =  useState('');
-const [specificEmail, setSpecificEmail] =  useState('');
-const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
-const [specificAddress, setSpecificAddress] =  useState('');
+const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
+const [specificTitle, setSpecificTitle] =  useState('');
+const [specificType, setSpecificType] =  useState('');
+const [specificBusiness, setSpecificBusiness] =  useState('');
+const [specificAmount, setSpecificAmount] =  useState('');
+const [specificMethod, setSpecificMethod] =  useState('');
+const [specificDate, setSpecificDate] =  useState('');
 const navigate = useNavigate();
 
-const getCountries = async () => {
-try {
-const response = await axios.get('https://restcountries.com/v2/all');
-setCountries(response.data);
-setFilteredCountries(response.data);
-} catch (error) {
-console.log(error);
-}
+
+const handleClear = () => {
+  setSearch('');
+  setType('');
+  };
+
+const handleDelete = async (id) => {
+  try {
+    await deleteSubscriptionRecord(id);
+    const updatedSubscriptions = subscriptions.filter(subscription => subscription?._id !== id);
+    setSubscriptions(updatedSubscriptions);
+    setFilteredSubscriptions(updatedSubscriptions);
+    notifications.show({ message: "Subscription Deleted Successfully", color: 'red' });
+    setSlowTransitionOpened(false);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deletionConfirmation = (id) => {
+  setSlowTransitionOpened(true);
+  SetModalDeletion(id);
+};
+
+const getSubscriptions = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000/businessOwner/viewSubscriptionRecord');
+    const allSubscriptions = response?.data?.subscriptions;
+    const mySubscriptions = allSubscriptions?.filter((subscription) => subscription?.business?.businessOwner === user?._id);
+    setSubscriptions(mySubscriptions);
+    setFilteredSubscriptions(mySubscriptions);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
 const handleViewSpecific = (row) => {
   open();
-  setSpecificRole(row.name);
-  setSpecificPicture(row.flag);
+  setSpecificTitle(row?.title || 'N/A');
+  setSpecificType(row?.type || 'N/A');
+  setSpecificBusiness(row?.business?.name || 'N/A');
+  setSpecificDate(row?.date || 'N/A');
+  setSpecificAmount(row?.amount || 'N/A');
+  setSpecificMethod(row?.method || 'N/A');
+
 };
 
 const columns = [
@@ -121,72 +156,71 @@ const columns = [
     {
         name: 'Business Name',
         width: '150px',
-        selector: (row) => row.name,
+        selector: (row) => row?.business?.name || "N/A",
         sortable: true,
     },
     {
         name: 'Subscription Title',
         width: '150px',
-        selector: (row) => row.name,
+        selector: (row) => row?.title || "N/A",
         sortable: true,
     },
     {
         name: 'Subscription Type',
         width: '150px',
-        selector: (row) => row.region,
+        selector: (row) => row?.type || "N/A",
         sortable: true,
     },
     {
         name: 'Payment Method',
         width: '150px',
-        selector: (row) => row.nativeName,
+        selector: (row) => row?.method || "N/A",
         sortable: true,
     },
     {
-      name: 'Status',
+      name: 'Amount',
       width: '150px',
-      selector: (row) => row.nativeName,
+      selector: (row) => row?.amount + " $"|| "N/A",
       sortable: true,
   },
  
     {
         name: 'Action',
         width: '150px',
-        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' /></Box>
-    },
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>    },
 ]
 
 useEffect(() => {
-getCountries();
+getSubscriptions();
 }, []);
 
 useEffect(() => {
-const result = countries.filter(country => {
-    return country.name.toLowerCase().match(search.toLowerCase());
+const result = subscriptions.filter(subscription => {
+    return subscription?.business?.name.toLowerCase().match(search.toLowerCase());
 });
 
-setFilteredCountries(result);
+setFilteredSubscriptions(result);
 }, [search]);
 
 useEffect(() => {
-    const resultSelect = countries.filter(country => {
-        return country.region.toLowerCase().match(region.toLowerCase());
+    const resultSelect = subscriptions.filter(subscription => {
+        return subscription?.type.toLowerCase().match(type.toLowerCase());
     });
     
-    setFilteredCountries(resultSelect);
-    }, [region]);
+    setFilteredSubscriptions(resultSelect);
+    }, [type]);
 
 useEffect(() => {
-    getCountries().then((data) => {
-        const countriesData = data.map((country) => ({ ...country, status: 'active' }));
-        setCountries(countriesData);
-        setFilteredCountries(countriesData);
+    getSubscriptions().then((data) => {
+        const subscriptionsData = data.map((subscription) => ({ ...subscription, status: 'active' }));
+        setSubscriptions(subscriptionsData);
+        setFilteredSubscriptions(subscriptionsData);
       });
     }, []);
 
   return (
     <Box >
-    <DataTable columns={columns} data={filteredCountries}
+    <DataTable columns={columns} data={filteredSubscriptions}
     pagination
     fixedHeader
     fixedHeaderScrollHeight='650px'
@@ -214,14 +248,14 @@ useEffect(() => {
          />
          </Menu.Item>
     <Menu.Item>
-    <Button variant="outline" miw={165}>
+    <Button variant="outline" miw={165} onClick ={() => {handleClear()}} >
             Clear
         </Button>
     </Menu.Item>
             </Menu.Dropdown>
           </Menu>
         </Box>
-        <Button variant="outline" size='md' className={classes.responsiveClear}>
+        <Button variant="outline" size='md' className={classes.responsiveClear} onClick ={() => {handleClear()}} >
             Clear
         </Button>
         <TextInput
@@ -239,10 +273,7 @@ useEffect(() => {
             >
               Buy Subscription
       </Button>
-      </Box>
-   
-      
-        
+      </Box>   
     }
     responsive
      />
@@ -250,14 +281,22 @@ useEffect(() => {
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
     <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" >Silver Subscription</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificRole}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10th August, 2023</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>10,000 PKR</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Title:</Text><Text fw={'bold'} ml={5}>{specificTitle}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Type:</Text><Text fw={'bold'} ml={5}>{specificType}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount} $</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Method:</Text><Text fw={'bold'} ml={5}>{specificMethod}</Text></Box>
     </Box>
   </Box>
       </Modal>
+      <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
+            <Text>Are you sure you want to delete?</Text>
+            <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+            <Button size='sm' color='green.9' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
+            <Button type="submit" size='sm' color='red.8' onClick={() => handleDelete(modalDeletion)} >Delete</Button>
+            </Box>
+        </Modal>
      </Box>
   )
 }
