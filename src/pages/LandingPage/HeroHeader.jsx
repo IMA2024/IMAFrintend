@@ -74,7 +74,8 @@ const useStyles = createStyles((theme) => ({
 
   control: {
     marginTop: `calc(${theme.spacing.xl} * 1.5)`,
-
+    backgroundColor: '#4E8480' ,
+   
     [theme.fn.smallerThan('sm')]: {
       width: '100%',
     },
@@ -104,7 +105,7 @@ export default function HeroHeader() {
           more than 120 customizable components and hooks to cover you in any situation
         </Text>
 
-        <Button variant="gradient" size="xl" radius="xl" className={classes.control}>
+        <Button  size="xl" radius="xl" className={classes.control}>
           Get started
         </Button>
       </Container>
@@ -123,7 +124,7 @@ export default function HeroHeader() {
           more than 120 customizable components and hooks to cover you in any situation
         </Text>
 
-        <Button variant="gradient" size="xl" radius="xl" className={classes.control}>
+        <Button size="xl" radius="xl" className={classes.control}>
           Get started
         </Button>
       </Container>
@@ -142,7 +143,7 @@ export default function HeroHeader() {
           more than 120 customizable components and hooks to cover you in any situation
         </Text>
 
-        <Button variant="gradient" size="xl" radius="xl" className={classes.control}>
+        <Button variant='default' size="xl" radius="xl" className={classes.control}>
           Get started
         </Button>
       </Container>
