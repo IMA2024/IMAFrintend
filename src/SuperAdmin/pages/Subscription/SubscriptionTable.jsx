@@ -88,7 +88,6 @@ const SubscriptionTable = () => {
 
   const { classes } = useStyles();
   const [subscriptions, setSubscriptions] = useState([]);
-
   const [search, setSearch] = useState('');
   const [filteredSubscriptions, setFilteredSubscriptions] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
@@ -98,8 +97,9 @@ const SubscriptionTable = () => {
   const [specificSubscriptionTitle, setSpecificSubscriptionTitle] = useState('');
   const [specificSubscriptionType, setSpecificSubscriptionType] = useState('');
   const [specificSubscriptionMethod, setSpecificSubscriptionMethod] = useState('');
-  const [specificSubscriptionAmount, setSpecificSubscriptionAmount] = useState('');
-
+  const [specificSubscriptionAmount, setSpecificSubscriptionAmount] = useState('')
+  const [modalDeletion, SetModalDeletion] = useState('');
+  const [noTransitionOpened, setNoTransitionOpened] = useState(false);
   const [subscriptionsRecord, setSubscriptionsRecord] = useState([]);
   const [searchRecord, setSearchRecord] = useState('');
   const [filteredSubscriptionsRecord, setFilteredSubscriptionsRecord] = useState([]);
@@ -118,11 +118,11 @@ const SubscriptionTable = () => {
   const handleDeleteRecord = async (id) => {
     try {
       await deleteSubscriptionRecord(id);
-      const updatedSubscriptionsRecords = subscriptionsRecords.filter(subscriptionRecord => subscriptionRecord?._id !== id);
-      setSubscriptions(updatedSubscriptionsRecords);
-      setFilteredSubscriptions(updatedSubscriptionsRecords);
+      const updatedSubscriptionsRecords = subscriptionsRecord.filter(subscriptionRecord => subscriptionRecord?._id !== id);
+      setSubscriptionsRecord(updatedSubscriptionsRecords);
+      setFilteredSubscriptionsRecord(updatedSubscriptionsRecords);
       notifications.show({ message: "Subscription Deleted Successfully", color: 'red' });
-      setSlowTransitionOpened(false);
+      setSlowTransitionOpenedRecord(false);
     } catch (error) {
       console.log(error);
     }
@@ -140,14 +140,15 @@ const SubscriptionTable = () => {
       setSubscriptions(updatedSubscriptions);
       setFilteredSubscriptions(updatedSubscriptions);
       notifications.show({ message: "Subscription Deleted Successfully", color: 'red' });
-      setSlowTransitionOpened(false);
+      setNoTransitionOpened(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const deletionConfirmation = (id) => {
-    setSlowTransitionOpened(true);
+    // setSlowTransitionOpened(true);
+    setNoTransitionOpened(true);
     SetModalDeletion(id);
   };
 
@@ -174,12 +175,12 @@ const SubscriptionTable = () => {
   }
 
   const handleViewSpecificRecord = (recordRow) => {
-    open();
+    setSlowTransitionOpened(true);
     setSpecificBusiness(recordRow?.business?.name || 'N/A');
     setSpecificBusinessOwner(`${recordRow?.business?.businessOwner?.firstName} ${recordRow?.business?.businessOwner?.lastName}` || 'N/A');
     setSpecificSubscriptionTitle(recordRow?.title || 'N/A');
     setSpecificSubscriptionType(recordRow?.type || 'N/A');
-    setSpecificSubscriptionAmount(recordRow?.price);
+    setSpecificSubscriptionAmount(recordRow?.amount);
     setSpecificSubscriptionMethod(recordRow?.method || 'N/A');
   };
 
@@ -248,7 +249,7 @@ const SubscriptionTable = () => {
       name: <strong>Action</strong>,
       width: '190px',
       allowOverflow: 'yes',
-      cell: (recordRow) => <Box><IconEye color='gray' onClick={() => handleViewSpecificRecord(recordRow)} /><IconTrash color='gray' onClick={() => deletionConfirmationRecord(recordRow._id)} /></Box>
+      cell: (recordRow) => <Box><IconEye color='gray' onClick={() => handleViewSpecificRecord(recordRow)} /><IconTrash color='gray' onClick={() => deletionConfirmationRecord(recordRow?._id)} /></Box>
     },
   ]
 
@@ -292,7 +293,7 @@ const SubscriptionTable = () => {
     {
       name: <strong>Action</strong>,
       width: '150px',
-      cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/EditSubscription')} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} />
+      cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => navigate('/EditSubscription')} /><IconTrash color='gray' onClick={() => deletionConfirmation(row?._id)} />
       </Box>
     },
   ]
@@ -421,7 +422,6 @@ const SubscriptionTable = () => {
             <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
               <Box mah={800}><Image maw={800} radius="md" src={`https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2FDon't%20Be%20Late.jpg?alt=media&token=484d01be-6f5d-40cd-906c-6e6e2e762d27`} alt="Random image" /></Box>
               <Box mah={380} miw={250} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-                <Box ><Badge variant="filled" >{specificTitle}</Badge></Box>
                 <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
                 <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificBusinessOwner}</Text></Box>
                 <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><Text ml={5}>Subscription Title:</Text><Text fw={'bold'} ml={5}>{specificSubscriptionTitle}</Text></Box>
@@ -516,10 +516,10 @@ const SubscriptionTable = () => {
               </Box>
             </Box>
           </Modal>
-          <Modal  opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
+          <Modal  opened={noTransitionOpened}   onClose={() => setNoTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Deletion Confirmation</Text>} transitionProps={{ transition: 'rotate-left' }}>
             <Text>Are you sure you want to delete?</Text>
             <Box mt={'xl'} style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-            <Button size='sm' color='green.9' onClick={() => setSlowTransitionOpened(false)}>Cancel</Button>
+            <Button size='sm' color='green.9' onClose={() => setNoTransitionOpened(false)}>Cancel</Button>
             <Button type="submit" size='sm' color='red.8' onClick={() => handleDelete(modalDeletion)} >Delete</Button>
             </Box>
         </Modal>

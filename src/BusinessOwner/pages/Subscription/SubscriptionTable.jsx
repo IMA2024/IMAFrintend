@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteSubscriptionRecord } from '../../../api/businessOwner/subscription';
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
+import { notifications } from '@mantine/notifications';
 
 const useStyles = createStyles((theme) => ({
 
@@ -96,6 +97,7 @@ const [specificBusiness, setSpecificBusiness] =  useState('');
 const [specificAmount, setSpecificAmount] =  useState('');
 const [specificMethod, setSpecificMethod] =  useState('');
 const [specificDate, setSpecificDate] =  useState('');
+const [modalDeletion, SetModalDeletion] = useState('');
 const navigate = useNavigate();
 
 
@@ -187,7 +189,7 @@ const columns = [
     {
         name: 'Action',
         width: '150px',
-        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>    },
+        cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row?._id)} /></Box>    },
 ]
 
 useEffect(() => {
