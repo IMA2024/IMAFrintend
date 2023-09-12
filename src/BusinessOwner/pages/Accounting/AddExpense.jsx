@@ -73,7 +73,7 @@ export default function BusinessPanelAddExpense() {
       const newData =  await response.json();
       console.log(newData);
 
-      const filteredBusinesses = newData.filter((business) => business.businessOwner === user._id);
+      const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
 
       // Update the state with the filtered businesses
       setCountries(filteredBusinesses);
@@ -137,8 +137,8 @@ export default function BusinessPanelAddExpense() {
         <TextInput maxLength={20} withAsterisk size='sm' className={classes.inputField} label="Title" placeholder="Enter Expense Title" {...form.getInputProps('title')} />
         <Select withAsterisk size='sm' className={classes.inputField} label="Business Name" placeholder="Select Business Name" {...form.getInputProps('business')}
              data={countries.map((country) => ({
-              value: `${country._id}`,
-              label: `${country.name}`,
+              value: `${country?._id}`,
+              label: `${country?.name}`,
             }))}
          />
         </Box>
