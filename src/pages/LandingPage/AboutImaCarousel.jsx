@@ -36,6 +36,22 @@ const useStyles = createStyles((theme) => ({
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     },
+
+    image4: {
+      position: 'relative',
+      backgroundImage:
+        'url(https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
+
+    image5: {
+      position: 'relative',
+      backgroundImage:
+        'url(https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
   
  
   }));
@@ -44,6 +60,9 @@ const useStyles = createStyles((theme) => ({
 export default function AboutImaCarousel() {
     const { classes } = useStyles();
   const autoplay = useRef(Autoplay({ delay: 2000 }));
+
+
+
   return (
     
     <Box className={classes.parentBox}>
@@ -59,6 +78,8 @@ export default function AboutImaCarousel() {
       <Carousel.Slide  className={classes.image1}></Carousel.Slide>
       <Carousel.Slide className={classes.image2}></Carousel.Slide>
       <Carousel.Slide className={classes.image3}></Carousel.Slide>
+      <Carousel.Slide className={classes.image4}></Carousel.Slide>
+      <Carousel.Slide className={classes.image5}></Carousel.Slide>
       {/* ...other slides */}
     </Carousel>
     </Box>

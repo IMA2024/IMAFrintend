@@ -1,6 +1,8 @@
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
 import { createStyles, Paper, Text, Title, Button, useMantineTheme, rem, Divider, ThemeIcon, Box, Badge } from '@mantine/core';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef } from 'react';
 
 const useStyles = createStyles((theme) => ({
   carouselContainer:{
@@ -58,6 +60,7 @@ const useStyles = createStyles((theme) => ({
 
 function Card({ image, title, category }) {
   const { classes } = useStyles();
+  
   return (
     <Box className={classes.card}>
       <Box className={classes.pictureHalf}
@@ -127,8 +130,13 @@ export default function Reviews() {
   const theme = useMantineTheme();
   const { classes } = useStyles();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
   const slides = data.map((item) => (
-    <Carousel.Slide key={item.title}>
+    <Carousel.Slide key={item.title}
+    plugins={[autoplay.current]}
+      onMouseEnter={autoplay.current.stop}
+      onMouseLeave={autoplay.current.reset}
+    >
       <Card {...item} />
     </Carousel.Slide>
   ));

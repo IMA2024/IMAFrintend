@@ -1,6 +1,6 @@
 
 import {BrowserRouter as Router, Route, Link, Routes, json} from "react-router-dom"
-import EmailBanner from './pages/Services';
+import EmailBanner from './pages/LandingPage/Services';
 import GeneralLayout from './SuperAdmin/Layout/GeneralLayout';
 import ViewTable from './pages/ViewTable';
 import AddExpense from './SuperAdmin/pages/Accounting/AddExpense';
@@ -30,10 +30,13 @@ import GroupedStackedColumns from './SuperAdmin/pages/Charts/GroupedStackedColum
 import ColumnRotatedLabelChart from './SuperAdmin/pages/Charts/ColumnRotatedLabelChart';
 import SimpleDonut from './SuperAdmin/pages/Charts/SimpleDonut';
 import Dashboard from './SuperAdmin/pages/Charts/Dashboard';
-import Services from './pages/Services';
-import Reviews from './pages/Reviews';
+
+//import Reviews from './pages/Reviews';
+import Reviews from "./pages/LandingPage/Reviews";
 import Faq from './pages/Faq';
-import ContactUs from './pages/ContactUs';
+//import ContactUs from './pages/ContactUs';
+import ContactUs from "./pages/LandingPage/ContactUs";
+
 import StatsGrid from './SuperAdmin/pages/Charts/UserBlocks';
 import Chat from './SuperAdmin/pages/Chat/Chat';
 import Settings from './SuperAdmin/pages/Settings/Settings';
@@ -50,6 +53,9 @@ import StepperDetails from "./pages/LandingPage/StepperDetails";
 import AboutImaDetails from "./pages/LandingPage/AboutImaDetails";
 import AboutImaCarousel from "./pages/LandingPage/AboutImaCarousel";
 import AboutIma from "./pages/LandingPage/AboutIma";
+import Services from './pages/LandingPage/Services';
+import LandingFooter from "./pages/LandingPage/LandingFooter";
+import LandingHeader from "./pages/LandingPage/LandingHeader";
   {/* The routes for Landing Page end here*/}
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
@@ -116,6 +122,11 @@ export default function Demo() {
     <Route path="/AboutImaDetails" element={<AboutImaDetails />} /> 
     <Route path="/AboutImaCarousel" element={<AboutImaCarousel />} /> 
     <Route path="/AboutIma" element={<AboutIma />} /> 
+    <Route path="Services" element={<Services />} />
+    <Route path="ContactUs" element={<ContactUs />} /> 
+    <Route path="LandingFooter" element={<LandingFooter />} /> 
+    <Route path="Reviews" element={<Reviews />} />
+    <Route path="LandingHeader" element={<LandingHeader />} /> 
 
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
       <Route path="SignIn" element={<SignIn />} />
@@ -148,10 +159,10 @@ export default function Demo() {
         <Route path="TotalRevenueBlocks" element={<TotalRevenueBlocks />} />
         <Route path="SimpleDonut" element={<SimpleDonut />} />
         <Route path="Dashboard" element={<Dashboard />} />
-        <Route path="Services" element={<Services />} />
-        <Route path="Reviews" element={<Reviews />} />
+   
+        
         <Route path="Faq" element={<Faq />} />
-        <Route path="ContactUs" element={<ContactUs />} /> 
+       
         <Route path="StatsGrid" element={<StatsGrid />} /> 
         <Route path="Chat" element={<Chat />} /> 
         <Route path="Settings" element={<Settings />} /> 

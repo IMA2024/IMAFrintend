@@ -74,7 +74,7 @@ const useStyles = createStyles((theme) => ({
 
   control: {
     marginTop: `calc(${theme.spacing.xl} * 1.5)`,
-    backgroundColor: '#4E8480' ,
+    backgroundColor: '#4E8480',
    
     [theme.fn.smallerThan('sm')]: {
       width: '100%',
@@ -99,7 +99,7 @@ export default function HeroHeader() {
         zIndex={0}
       />
       <Container className={classes.container}>
-        <Title className={classes.title}>A fully featured React components library</Title>
+        <Title className={classes.title}>Innovative Solutions For Modern Marketing</Title>
         <Text className={classes.description} size="xl" mt="xl">
           Build fully functional accessible web applications faster than ever – Mantine includes
           more than 120 customizable components and hooks to cover you in any situation
@@ -118,7 +118,7 @@ export default function HeroHeader() {
         zIndex={0}
       />
       <Container className={classes.container}>
-        <Title className={classes.title}>A fully featured React components library</Title>
+        <Title className={classes.title}>Innovative Solutions For Modern Marketing</Title>
         <Text className={classes.description} size="xl" mt="xl">
           Build fully functional accessible web applications faster than ever – Mantine includes
           more than 120 customizable components and hooks to cover you in any situation
@@ -137,13 +137,51 @@ export default function HeroHeader() {
         zIndex={0}
       />
       <Container className={classes.container}>
-        <Title className={classes.title}>A fully featured React components library</Title>
+        <Title className={classes.title}>Innovative Solutions For Modern Marketing</Title>
         <Text className={classes.description} size="xl" mt="xl">
           Build fully functional accessible web applications faster than ever – Mantine includes
           more than 120 customizable components and hooks to cover you in any situation
         </Text>
 
-        <Button variant='default' size="xl" radius="xl" className={classes.control}>
+        <Button  size="xl" radius="xl" className={classes.control}>
+          Get started
+        </Button>
+      </Container>
+    </div>
+    </Carousel.Slide>
+    <Carousel.Slide><div className={classes.hero3}>
+      <Overlay
+        gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
+        opacity={1}
+        zIndex={0}
+      />
+      <Container className={classes.container}>
+        <Title className={classes.title}>Innovative Solutions For Modern Marketing</Title>
+        <Text className={classes.description} size="xl" mt="xl">
+          Build fully functional accessible web applications faster than ever – Mantine includes
+          more than 120 customizable components and hooks to cover you in any situation
+        </Text>
+
+        <Button size="xl" radius="xl" className={classes.control}>
+          Get started
+        </Button>
+      </Container>
+    </div>
+    </Carousel.Slide>
+    <Carousel.Slide><div className={classes.hero3}>
+      <Overlay
+        gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
+        opacity={1}
+        zIndex={0}
+      />
+      <Container className={classes.container}>
+        <Title className={classes.title}>Innovative Solutions For Modern Marketing</Title>
+        <Text className={classes.description} size="xl" mt="xl">
+          Build fully functional accessible web applications faster than ever – Mantine includes
+          more than 120 customizable components and hooks to cover you in any situation
+        </Text>
+
+        <Button size="xl" radius="xl" className={classes.control}>
           Get started
         </Button>
       </Container>
