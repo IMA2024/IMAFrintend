@@ -27,9 +27,10 @@ const useStyles = createStyles((theme) => ({
       theme.colors[theme.primaryColor][7]
     } 100%)`,
     */
-    backgroundImage: theme.fn.gradient({ from: 'teal.9', to: 'lime.7', deg: 100 }),
-    borderRadius: theme.radius.md,
+    //backgroundImage: theme.fn.gradient({ from: 'teal.9', to: 'lime.7', deg: 100 }),
+    //borderRadius: theme.radius.md,
     padding: `calc(${theme.spacing.xl} * 2.5)`,
+    backgroundColor: '#4E8480',
 
     [theme.fn.smallerThan('sm')]: {
       padding: `calc(${theme.spacing.xl} * 1.5)`,
@@ -44,7 +45,7 @@ const useStyles = createStyles((theme) => ({
   icon: {
     marginRight: theme.spacing.md,
     //backgroundImage : `linear-gradient(135deg, ${theme.colors[theme.primaryColor][4]} 0%, ${theme.colors[theme.primaryColor][6]} 100%)`,
-    backgroundImage: theme.fn.gradient({ from: 'lime.7', to: 'lime.7', deg: 100 }),
+   // backgroundImage: theme.fn.gradient({ from: 'lime.7', to: 'lime.7', deg: 100 }),
     //backgroundColor: 'lime',
   },
 
@@ -112,9 +113,16 @@ function ContactIcon({
     <div 
     className={classes.wrapperContactIcon}
     >
-        <ThemeIcon size={40} radius="md" className={classes.icon}>
-          <Icon size="1.5rem" />
-        </ThemeIcon>
+        <ThemeIcon
+        size={40}
+        radius="md"
+        variant="outline"
+        className={classes.icon}
+        //gradient={{ deg: 100, from: 'teal.9', to: 'lime.7' }}
+        color='gray.0'
+      >
+        <Icon size="1.5rem"  />
+      </ThemeIcon>
 
 
       <div>

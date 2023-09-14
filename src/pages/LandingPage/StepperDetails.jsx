@@ -22,6 +22,7 @@ function StyledStepper(props) {
           //marginLeft: rem(-2),
           //marginRight: rem(-2),
           backgroundColor: '#4E8480',
+          color: '#4E8480',
         },
       }}
       {...props}
@@ -33,7 +34,7 @@ export default function StepperDetails() {
   const [active, setActive] = useState(0);
 
   return (
-    <Box pb={50} style={{backgroundColor:'#F8F8F8'}}
+    <Box pb={50} style={{backgroundColor:'#E9ECEF'}}
     sx={{
       fontFamily:'Poppins'
     }}
