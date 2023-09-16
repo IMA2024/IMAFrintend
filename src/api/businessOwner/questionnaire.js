@@ -1,8 +1,8 @@
 import { Axios } from "../connection";
 
-export const addQuestionnaire = async ( businessId , questionnaire ) => {
+export const addQuestionnaire = async ( business , questionnaire ) => {
     const response = await Axios.post('businessOwner/addQuestionnaire',
-      {  businessId , questionnaire })
+      { business , questionnaire })
    return response;
 }
 
