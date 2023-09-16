@@ -84,6 +84,10 @@ import BusinessPanelViewPayment from './BusinessOwner/pages/Accounting/ViewPayme
 import ChatBusinessOwner from './BusinessOwner/pages/Chat/ChatBusinessOwner';
  {/* The routes for Business Panel end here*/}
 
+  {/* These are the routes for Marketung Agent Panel */}
+import ConfigureCrawler from "./MarketingAgent.jsx/pages/Crawler/ConfigureCrawler";
+  {/* The routes for Marketung Agent Panel end here*/}
+
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import { useColorScheme } from '@mantine/hooks';
@@ -198,6 +202,10 @@ export default function Demo() {
       <Route path="BusinessPanelViewPayment" element={<BusinessPanelViewPayment />} />
       <Route path="ChatBusinessOwner" element={<ChatBusinessOwner />} />
       {/* The routes for Business Panel end here*/}
+
+      {/* These are the routes for Marketung Agent Panel */}
+      <Route path="ConfigureCrawler" element={<ConfigureCrawler />} />
+  {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
     
