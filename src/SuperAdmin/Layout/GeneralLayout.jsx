@@ -8,6 +8,7 @@ import HeaderTop from './Header';
 import SuperAdminNavbar from './SuperAdminNavbar';
 import { SuperAdminSideBarData } from './SuperAdminSidebarData';
 import { BusinessSideBarData } from '../../BusinessOwner/Layout/BusinessSideBarData';
+import { MarketingAgentSideBarData } from '../../MarketingAgent.jsx/Layout/MarketingAgentSidebarData';
 import { UserContext } from '../../context/users/userContext';
 
 export default function GeneralLayout() {
@@ -70,7 +71,7 @@ export default function GeneralLayout() {
           sx={{
             fontFamily: 'Poppins'
           }}
-          bg={role === "Super Admin" ? '#5C940D' : role === "Business Owner" ? '#5F3DC4' : '#66A80F'}
+          bg={role === "Super Admin" ? '#5C940D' : role === "Business Owner" ? '#5F3DC4' : role === "Marketing Agent" ? '#862E9C' : '#66A80F'}
           hiddenBreakpoint="md"
            hidden={!opened} width={{ sm: 300, lg: 300 }} mt={-1} >
             <ScrollArea type='never' >
@@ -80,6 +81,8 @@ export default function GeneralLayout() {
                 ? SuperAdminSideBarData
                 : role === "Business Owner"
                 ? BusinessSideBarData
+                : role === "Marketing Agent"
+                ? MarketingAgentSideBarData
                 : []
             }
             />
