@@ -88,4 +88,10 @@ export const MarketingAgentSideBarData = [
       { name: "Business", link: "/ViewBusiness", Icon: AiOutlineEye },
     ],
   },
+  {
+    name: "Execute Dialer", Icon: BiSolidBusiness,
+    subLink: [
+      { name: "Execute Dialer", link: "/ExecuteDialer", Icon: AiOutlineEye },
+    ],
+  },
 ];
