@@ -86,6 +86,13 @@ import ChatBusinessOwner from './BusinessOwner/pages/Chat/ChatBusinessOwner';
 
   {/* These are the routes for Marketung Agent Panel */}
 import ConfigureCrawler from "./MarketingAgent.jsx/pages/Crawler/ConfigureCrawler";
+import ChooseBusiness from "./MarketingAgent.jsx/pages/ChooseBusiness/ChooseBusiness";
+import BusinessOwnerQuestions from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/BusinessOwnerQuestions";
+import MarketingAgentQuestions from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/MarketingAgentQuestions";
+import QuestionnaireTab from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/QuestionnaireTab";
+import ChooseQuestionnaire from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/ChooseQuestionnaire";
+import AgentConfiguration from "./MarketingAgent.jsx/pages/Agent/AgentConfigiration";
+import ExecuteDialer from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ExecuteDialer";
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -205,6 +212,13 @@ export default function Demo() {
 
       {/* These are the routes for Marketung Agent Panel */}
       <Route path="ConfigureCrawler" element={<ConfigureCrawler />} />
+      <Route path="ChooseBusiness" element={<ChooseBusiness />} />
+      <Route path="BusinessOwnerQuestions" element={<BusinessOwnerQuestions />} />
+      <Route path="MarketingAgentQuestions" element={<MarketingAgentQuestions />} />
+      <Route path="QuestionnaireTab" element={<QuestionnaireTab />} />
+      <Route path="ChooseQuestionnaire" element={<ChooseQuestionnaire />} />
+      <Route path="AgentConfiguration" element={<AgentConfiguration />} />
+      <Route path="ExecuteDialer" element={<ExecuteDialer />} />
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
