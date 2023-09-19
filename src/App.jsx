@@ -93,6 +93,7 @@ import QuestionnaireTab from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx
 import ChooseQuestionnaire from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/ChooseQuestionnaire";
 import AgentConfiguration from "./MarketingAgent.jsx/pages/Agent/AgentConfigiration";
 import ExecuteDialer from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ExecuteDialer";
+import ViewCallPriority from "./MarketingAgent.jsx/pages/CallPriorityCollection/ViewCallPriority";
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -219,6 +220,7 @@ export default function Demo() {
       <Route path="ChooseQuestionnaire" element={<ChooseQuestionnaire />} />
       <Route path="AgentConfiguration" element={<AgentConfiguration />} />
       <Route path="ExecuteDialer" element={<ExecuteDialer />} />
+      <Route path="ViewCallPriority" element={<ViewCallPriority />} />
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
