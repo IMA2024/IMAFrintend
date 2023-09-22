@@ -94,6 +94,8 @@ import ChooseQuestionnaire from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.
 import AgentConfiguration from "./MarketingAgent.jsx/pages/Agent/AgentConfigiration";
 import ExecuteDialer from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ExecuteDialer";
 import ViewCallPriority from "./MarketingAgent.jsx/pages/CallPriorityCollection/ViewCallPriority";
+import ViewBusinessOnwersMA from "./MarketingAgent.jsx/pages/BusinessOwner/ViewBusinessOnwer";
+import AddQuestionnaireMA from "./MarketingAgent.jsx/pages/Questionnaire/AddQuestionnaire";
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -221,6 +223,9 @@ export default function Demo() {
       <Route path="AgentConfiguration" element={<AgentConfiguration />} />
       <Route path="ExecuteDialer" element={<ExecuteDialer />} />
       <Route path="ViewCallPriority" element={<ViewCallPriority />} />
+      <Route path="ViewBusinessOnwersMA" element={<ViewBusinessOnwersMA />} />
+      <Route path="AddQuestionnaireMA" element={<AddQuestionnaireMA />} />
+
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
