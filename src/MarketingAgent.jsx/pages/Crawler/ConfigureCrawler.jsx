@@ -1,5 +1,5 @@
 import { isNotEmpty , useForm } from '@mantine/form';
-import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select, TextInput } from '@mantine/core';
+import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select, TextInput, Group } from '@mantine/core';
 import { useEffect , useState } from 'react';
 import { addAgent } from '../../../api/businessOwner/agent';
 import { notifications } from '@mantine/notifications';
@@ -30,7 +30,7 @@ const useStyles = createStyles((theme) => ({
    
  }));
 
-export default function ConfigureCrawler() {
+export default function ConfigureCrawler({nextStep, prevStep}) {
 
   const [countries, setCountries] = useState([]);
   const { user } = useContext(UserContext);
@@ -58,6 +58,8 @@ export default function ConfigureCrawler() {
 
   const handleSubmit = async (values) => {
     const { business , name , voice  } = values;
+    console.log('hi');
+    nextStep()
 {/*
     try {
       const response = await addAgent( business , name , voice);
@@ -99,6 +101,10 @@ export default function ConfigureCrawler() {
           Run Crawler
         </Button>
         </Box>
+        <Group position="center" mt="xl">
+        <Button variant="default">Back</Button>
+        <Button type='submit'>Next step</Button>
+      </Group>
       </form>
     </Paper>
   );

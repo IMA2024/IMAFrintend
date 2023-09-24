@@ -1,5 +1,5 @@
 import { isNotEmpty , useForm } from '@mantine/form';
-import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select, TextInput } from '@mantine/core';
+import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select, TextInput, Group } from '@mantine/core';
 import { useEffect , useState } from 'react';
 import { addAgent } from '../../../api/businessOwner/agent';
 import { notifications } from '@mantine/notifications';
@@ -30,7 +30,7 @@ const useStyles = createStyles((theme) => ({
    
  }));
 
-export default function AgentConfiguration() {
+export default function AgentConfiguration({nextStep, prevStep}) {
 
   const [countries, setCountries] = useState([]);
   const { user } = useContext(UserContext);
@@ -56,6 +56,8 @@ export default function AgentConfiguration() {
   }, []);
 
   const handleSubmit = async (values) => {
+    console.log('hi');
+    nextStep()
     /*
     const { business , name , voice  } = values;
 
@@ -97,10 +99,14 @@ export default function AgentConfiguration() {
          <Button  mt="lg"  size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button type="submit" mt="lg"  size='sm' color='green.9' >
+        <Button  mt="lg"  size='sm' color='green.9' >
           Choose
         </Button>
         </Box>
+        <Group position="center" mt="xl">
+        <Button variant="default">Back</Button>
+        <Button type='submit'>Next step</Button>
+      </Group>
       </form>
     </Paper>
   );

@@ -2,7 +2,7 @@ import React from 'react'
 import QuestionnaireTab from './QuestionnaireTab'
 import { Title } from '@mantine/core'
 
-const ChooseQuestionnaire = () => {
+const ChooseQuestionnaire = ({nextStep, prevStep}) => {
   return (
     <div>
        <Title
@@ -13,7 +13,7 @@ const ChooseQuestionnaire = () => {
         >
           Step 2: Choose Questionnaire
         </Title>
-      <QuestionnaireTab />
+      <QuestionnaireTab nextStep={nextStep} prevStep={prevStep} />
     </div>
   )
 }

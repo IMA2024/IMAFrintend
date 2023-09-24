@@ -14,26 +14,26 @@ export default function ExecuteDialer() {
     <>
       <Stepper active={active} onStepClick={setActive} breakpoint="sm">
       <Stepper.Step label="First step" description="Choose Business">
-        <ChooseBusiness />
+        <ChooseBusiness nextStep={nextStep} prevStep={prevStep} />
         </Stepper.Step>
         <Stepper.Step label="Second step" description="Choose Questionnaire">
-          <ChooseQuestionnaire />
+          <ChooseQuestionnaire nextStep={nextStep} prevStep={prevStep}  />
         </Stepper.Step>
         <Stepper.Step label="Third step" description="Configure Agent">
-          <AgentConfiguration />
+          <AgentConfiguration nextStep={nextStep} prevStep={prevStep}  />
         </Stepper.Step>
         <Stepper.Step label="Fourth step" description="Configure Crawler">
-          <ConfigureCrawler />
+          <ConfigureCrawler nextStep={nextStep} prevStep={prevStep} />
         </Stepper.Step>
         <Stepper.Completed>
           Completed, click back button to get to previous step
         </Stepper.Completed>
       </Stepper>
 
-      <Group position="center" mt="xl">
+      {/* <Group position="center" mt="xl">
         <Button variant="default" onClick={prevStep}>Back</Button>
         <Button onClick={nextStep}>Next step</Button>
-      </Group>
+      </Group> */}
     </>
   );
 }
