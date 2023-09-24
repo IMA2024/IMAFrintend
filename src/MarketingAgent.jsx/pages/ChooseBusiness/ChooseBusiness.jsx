@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from '@mantine/form';
-import { Button, Container, createStyles, Paper, Textarea, Title, Divider, Box, Select } from '@mantine/core';
+import { Button, Container, createStyles, Paper, Textarea, Title, Divider, Box, Select, Group } from '@mantine/core';
 import { addFAQ } from '../../../api/admin/faq';
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +29,7 @@ const useStyles = createStyles((theme) => ({
 
 }));
 
-export default function ChooseBusiness() {
+export default function ChooseBusiness({nextStep, prevStep}) {
   const { classes } = useStyles();
   const navigate = useNavigate();
 
@@ -43,6 +43,8 @@ export default function ChooseBusiness() {
   });
 
   const handleSubmit = async (values) => {
+    console.log('hi');
+    nextStep()
     {/*
     const { question, answer } = values;
 
@@ -106,10 +108,14 @@ export default function ChooseBusiness() {
         <Button  mt="sm"  size='sm' color='red.8' >
           Cancel
         </Button>
-          <Button type="submit" mt="sm" size="sm" color="green.9" >
+          <Button mt="sm" size="sm" color="green.9" >
             Choose
           </Button>
         </Container>
+        <Group position="center" mt="xl">
+        <Button variant="default">Back</Button>
+        <Button type='submit'>Next step</Button>
+      </Group>
       </form>
     </Paper>
   );

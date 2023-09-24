@@ -71,7 +71,7 @@ export const MarketingAgentSideBarData = [
   },
   */
   {
-    name: "Business Owners", Icon: BiSolidBusiness,
+    name: "Businesses", Icon: BiSolidBusiness,
     subLink: [
       { name: "View Businesses", link: "/ViewBusinessOnwersMA", Icon: AiOutlineEye },
     ],

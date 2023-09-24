@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStyles, Image, Accordion, Grid, Col, Container, Title, Button, Text, Box } from '@mantine/core';
+import { createStyles, Image, Accordion, Grid, Col, Container, Title, Button, Text, Box, Group } from '@mantine/core';
 import { IconEdit, IconTrash, IconPlus } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function BusinessOwnerQuestions() {
+export default function BusinessOwnerQuestions({nextStep, prevStep}) {
   const [FAQs, setFAQs] =  useState([]);
   const [filteredFAQs, setFilteredFAQs] =  useState([]);
   const { classes } = useStyles();
@@ -56,6 +56,11 @@ export default function BusinessOwnerQuestions() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleNextStep = () => {
+    console.log('hi');
+    nextStep()
   };
 
   const getFAQs = async () => {
@@ -108,6 +113,10 @@ export default function BusinessOwnerQuestions() {
           Choose
         </Button>
         </Box>
+        <Group position="center" mt="xl">
+        <Button variant="default">Back</Button>
+        <Button onClick={handleNextStep}>Next step</Button>
+      </Group>
     </div>
   );
 }

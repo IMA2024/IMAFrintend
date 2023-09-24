@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStyles, Image, Accordion, Grid, Col, Container, Title, Button, Text, Box } from '@mantine/core';
+import { createStyles, Image, Accordion, Grid, Col, Container, Title, Button, Text, Box, Group } from '@mantine/core';
 import { IconEdit, IconTrash, IconPlus } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function MarketingAgentQuestions() {
+export default function MarketingAgentQuestions({nextStep, prevStep}) {
   const [FAQs, setFAQs] =  useState([]);
   const [filteredFAQs, setFilteredFAQs] =  useState([]);
   const { classes } = useStyles();
@@ -44,6 +44,11 @@ export default function MarketingAgentQuestions() {
 
   const handleEdit = (item) => {
     navigate('/EditFaqs', { state: { rowData: item } });
+  };
+
+  const handleNextStep = () => {
+    console.log('hi');
+    nextStep()
   };
 
   const handleDelete = async (id) => {
@@ -104,10 +109,14 @@ export default function MarketingAgentQuestions() {
       <Button  mt="sm"  size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button type="submit" mt="sm"  size='sm' color='green.9' >
+        <Button mt="sm"  size='sm' color='green.9' >
           Choose
         </Button>
         </Box>
+        <Group position="center" mt="xl">
+        <Button variant="default">Back</Button>
+        <Button onClick={handleNextStep}>Next step</Button>
+      </Group>
     </div>
   );
 }

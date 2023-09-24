@@ -128,27 +128,45 @@ const columns = [
         sortable: true,
 },
 {
-        name: 'Agent Name',
+        name: 'Business Owner Name',
         selector: (row) => row.capital,
         //width: '170px',
         sortable: true,
 },
 {
-        name: 'Agent Voice',
+        name: 'Agent Name',
         //width: '150px',
         selector: (row) => row.name,
         sortable: true,
 },
 {
-        name: 'Business Questionnaire',
-        width: '180px',
+    name: 'Questionnaire',
+    //width: '150px',
+    selector: (row) => row.name,
+    sortable: true,
+},
+{
+    name: 'Email',
+    //width: '150px',
+    selector: (row) => row.name,
+    sortable: true,
+},
+{
+    name: 'Phone Number',
+    //width: '150px',
+    selector: (row) => row.name,
+    sortable: true,
+},
+{
+        name: 'Status',
+       // width: '180px',
         selector: (row) => row.region,
         sortable: true,
 },
 {
         name: 'Action',
-        width: '150px',
-        cell: (row) => <Box><IconEdit color='gray' /><IconEye onClick={() => handleViewSpecific(row)}  color='gray' /><IconTrash color='gray' /></Box>,
+       // width: '150px',
+        cell: (row) => <Box><IconEye onClick={() => handleViewSpecific(row)}  color='gray' /><IconTrash color='gray' /></Box>,
 },
 ]
 
@@ -180,6 +198,11 @@ useEffect(() => {
       });
     }, []);
 
+     const ExpandedComponent = ({ data }) => (
+  <pre>{JSON.stringify(data, null, 2)}</pre>
+  //<Box bg={'pink'}>{data.name}</Box>
+  );
+
   return (
     <Box>
     <DataTable columns={columns} data={filteredCountries}
@@ -189,6 +212,8 @@ useEffect(() => {
     selectableRows
     selectableRowsHighlight
     highlightOnHover
+    expandableRows
+    expandableRowsComponent={ExpandedComponent}
     subHeader
     subHeaderComponent={
       <Box className={classes.responsiveSearchContainer}>
@@ -266,6 +291,7 @@ useEffect(() => {
     </Button>
     */}
         </Box>
+        {/*
         <Button 
         size='md'
         className={classes.responsiveAddUserBtn}
@@ -273,20 +299,21 @@ useEffect(() => {
         >
         Add Questionnaire
        </Button>
+*/}
         </Box>
         
     }
     responsive
      />
-    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Questionnaire Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Business Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
     <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
     <Box ><Badge variant="filled" >Business Questionnnaire</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>Ahmed</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Car Selling Business</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Agent Name:</Text><Text fw={'bold'} ml={5}>Haleema</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Agent Voice:</Text><Text fw={'bold'} ml={5}>Female</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Ahmed</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Phone Number:</Text><Text fw={'bold'} ml={5}>0333 1234567</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10-3-23</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Status:</Text><Text fw={'bold'} ml={5}>High Priority</Text></Box>
     </Box>
   </Box>
       </Modal>

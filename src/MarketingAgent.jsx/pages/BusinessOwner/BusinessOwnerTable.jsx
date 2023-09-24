@@ -305,12 +305,12 @@ useEffect(() => {
     }
     responsive
      />
-    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Call Priority Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+    <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Business Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
     <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
     <Box ><Badge variant="filled" >Business Questionnnaire</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Customer Name:</Text><Text fw={'bold'} ml={5}>Ahmed</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>Ahmed</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Phone Number:</Text><Text fw={'bold'} ml={5}>0333 1234567</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10-3-23</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Status:</Text><Text fw={'bold'} ml={5}>High Priority</Text></Box>

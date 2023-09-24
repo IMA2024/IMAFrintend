@@ -3,7 +3,7 @@ import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react'
 import BusinessOwnerQuestions from './BusinessOwnerQuestions';
 import MarketingAgentQuestions from './MarketingAgentQuestions';
 
-export default function QuestionnaireTab() {
+export default function QuestionnaireTab({nextStep, prevStep}) {
   return (
     <Box  mt={20} >
     <Tabs defaultValue="businessOwner">
@@ -14,11 +14,11 @@ export default function QuestionnaireTab() {
       </Tabs.List>
 
       <Tabs.Panel value="businessOwner" pt="xs">
-        <BusinessOwnerQuestions />
+        <BusinessOwnerQuestions nextStep={nextStep} prevStep={prevStep} />
       </Tabs.Panel>
 
       <Tabs.Panel value="marketingAgent" pt="xs">
-        <MarketingAgentQuestions />
+        <MarketingAgentQuestions nextStep={nextStep} prevStep={prevStep} />
       </Tabs.Panel>
 
     </Tabs>
