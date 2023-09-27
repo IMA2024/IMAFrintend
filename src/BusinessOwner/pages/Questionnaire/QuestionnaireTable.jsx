@@ -117,54 +117,55 @@ const handleViewSpecific = (row) => {
 
 const columns = [
 {
-    name: '#',
+    name: <strong>#</strong>,
     selector: (row, index) => index + 1, // Generate serial numbers dynamically
     sortable: true,
     width: '60px', // Set the width of the serial number column
 },
 {
-        name: 'Business Name',
+        name: <strong>Business Name</strong>,
+        width: '150px',
         selector: (row) => row.name,
         sortable: true,
 },
 {
-        name: 'Business Owner Name',
+        name: <strong>Business Owner Name</strong>,
         selector: (row) => row.capital,
-        //width: '170px',
+        width: '190px',
         sortable: true,
 },
 {
-        name: 'Agent Name',
-        //width: '150px',
+        name: <strong>Agent Name</strong>,
+        width: '150px',
         selector: (row) => row.name,
         sortable: true,
 },
 {
-    name: 'Questionnaire',
-    //width: '150px',
+    name: <strong>Questionnaire</strong>,
+    width: '150px',
     selector: (row) => row.name,
     sortable: true,
 },
 {
-    name: 'Email',
-    //width: '150px',
+    name: <strong>Email</strong>,
+    width: '150px',
     selector: (row) => row.name,
     sortable: true,
 },
 {
-    name: 'Phone Number',
-    //width: '150px',
+    name: <strong>Phone Number</strong>,
+    width: '150px',
     selector: (row) => row.name,
     sortable: true,
 },
 {
-        name: 'Status',
-       // width: '180px',
+        name: <strong>Status</strong>,
+        width: '180px',
         selector: (row) => row.region,
         sortable: true,
 },
 {
-        name: 'Action',
+        name: <strong>Action</strong>,
        // width: '150px',
         cell: (row) => <Box><IconEye onClick={() => handleViewSpecific(row)}  color='gray' /><IconTrash color='gray' /></Box>,
 },
@@ -204,7 +205,11 @@ useEffect(() => {
   );
 
   return (
-    <Box>
+    <Box
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
     <DataTable columns={columns} data={filteredCountries}
     pagination
     fixedHeader

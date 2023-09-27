@@ -204,7 +204,7 @@ const BusinessTable = () => {
     },
     {
       name: <strong>Picture</strong>,
-      //width: '110px',
+      width: '110px',
       allowOverflow: 'yes',
       selector: (row) => <HoverCard position="bottom" withinPortal='true' >
         <HoverCard.Target>
