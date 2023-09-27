@@ -8,8 +8,8 @@ const useStyles = createStyles((theme) => ({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        gap: '16px',
-        //backgroundColor:'pink',
+        gap: '120px',
+      
     
         [theme.fn.smallerThan('sm')]: {
           flexDirection: 'column'
@@ -31,7 +31,7 @@ const useStyles = createStyles((theme) => ({
 const AboutIma = () => {
     const { classes } = useStyles();
   return (
-    <Box className={classes.responsiveContainer} p={50}>
+    <Box className={classes.responsiveContainer} pt={50} pb={50} pl={30} pr={30}>
         <Box className={classes.innerContainer}><AboutImaDetails/></Box>
         <Box className={classes.innerContainer}><AboutImaCarousel/></Box>
     </Box>

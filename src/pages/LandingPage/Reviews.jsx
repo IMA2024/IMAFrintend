@@ -23,12 +23,13 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     //fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontFamily: `cursive, ${theme.fontFamily}`,
-    fontWeight: 300,
-    color: theme.black,
+    //fontFamily: `cursive, ${theme.fontFamily}`,
+    //fontWeight: 300,
+    //color: theme.black,
     //color: 'teal',
-    lineHeight: 1.2,
-    fontSize: rem(22),
+    //lineHeight: 1.2,
+    //fontSize: rem(22),
+    fontFamily:'Poppins',
     marginTop: theme.spacing.xl,
   },
 
@@ -45,6 +46,8 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
+    paddingLeft: 40,
+    paddingRight: 40,
     //marginBottom: '10%',
     //height: '100%',
     
@@ -52,6 +55,9 @@ const useStyles = createStyles((theme) => ({
   pictureHalf : {
     width: '50%',
     backgroundColor:'pink',
+    position: 'relative',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
 
   },
  
@@ -75,11 +81,13 @@ function Card({ image, title, category }) {
         <Text className={classes.category} size="xs">
           {category}
         </Text>
-        <Title order={3} className={classes.title}>
+        <Text  className={classes.title}>
           {title}
-        </Title>
+        </Text>
       </div>
-      <Badge mt={'md'} variant="gradient" gradient={{ from: 'teal.9', to: 'lime.7', deg: 105 }}>
+      <Badge mt={'md'} style={{backgroundColor: '#4E8480', color:'#FFFF'}}
+     // variant="gradient" gradient={{ from: 'teal.9', to: 'lime.7', deg: 105 }}
+      >
         Customer Review
       </Badge>
     </Paper>
@@ -90,37 +98,37 @@ function Card({ image, title, category }) {
 const data = [
   {
     image:
-      'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
     title: '"Best forests to visit in North America."',
     category: 'Phoebe Charles:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1559494007-9f5847c49d94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnxoSnhGcGl5NHpiQXx8ZW58MHx8fHx8&auto=format&fit=crop&w=600&q=60',
     title: '"Hawaii beaches review: better than you think."',
     category: 'Andrew Joey:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1608481337062-4093bf3ed404?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+      'https://plus.unsplash.com/premium_photo-1670282393309-70fd7f8eb1ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80',
     title: '"Mountains at night: 12 best locations to enjoy the view."',
     category: 'Michelle:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1543096222-72de739f7917?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
     title: '"Aurora in Norway: when to visit for best experience."',
     category: 'Kendall:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1509868918748-a554ad25f858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
     title: '"Best places to visit this winter."',
     category: 'Courtney:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1582721478779-0ae163c05a60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
     title: '"Active volcanos reviews: travel at your own risk."',
     category: 'Khloe:',
   },
@@ -130,7 +138,7 @@ export default function Reviews() {
   const theme = useMantineTheme();
   const { classes } = useStyles();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-  const autoplay = useRef(Autoplay({ delay: 2000 }));
+  const autoplay = useRef(Autoplay({ delay: 4000 }));
   const slides = data.map((item) => (
     <Carousel.Slide key={item.title}
     plugins={[autoplay.current]}
@@ -143,7 +151,7 @@ export default function Reviews() {
 
   return (
    
-    <Box >
+    <Box  mb={50}>
         <Title
           mb={5}
           align="center"
@@ -160,13 +168,25 @@ export default function Reviews() {
         >
           What People Say About Our Services
         </Title>
-        <Divider mb={20} />
+        <Divider mb={20} ml={40} mr={40} />
     <Carousel
-      slideSize="50%"
-      breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: rem(2) }]}
-      slideGap="xl"
-      align="start"
-      slidesToScroll={mobile ? 1 : 2}
+    
+      // slideSize="50%"
+      // breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: rem(2) }]}
+      // slideGap="xl"
+      // align="start"
+      // slidesToScroll={mobile ? 1 : 2}
+  
+  slideSize="50%"
+  breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: rem(2) }]}
+  slideGap="xl"
+  align="start"
+  slidesToScroll={mobile ? 1 : 2}
+  // Attach the autoplay plugin to the Carousel itself
+  plugins={[autoplay.current]}
+  // You can also stop and reset the autoplay when needed
+  onMouseEnter={() => autoplay.current.stop()}
+  onMouseLeave={() => autoplay.current.reset()}
     >
       {slides}
     </Carousel>
