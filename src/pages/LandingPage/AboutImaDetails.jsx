@@ -3,9 +3,11 @@ import { Slider, rem, Box, Text, Title } from '@mantine/core';
 
 export default function AboutImaDetails() {
   return (
-    <Box sx={{
+    <Box  sx={{
       fontFamily:'Poppins'
-    }}>
+    }}
+    
+    >
       <Title order={3} align='left'>
       ABOUT IMA
       </Title>

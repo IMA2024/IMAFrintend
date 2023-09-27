@@ -30,7 +30,14 @@ const useStyles = createStyles((theme) => ({
     //backgroundImage: theme.fn.gradient({ from: 'teal.9', to: 'lime.7', deg: 100 }),
     //borderRadius: theme.radius.md,
     padding: `calc(${theme.spacing.xl} * 2.5)`,
-    backgroundColor: '#4E8480',
+    //backgroundColor: '#4E8480',
+    //checking stuff
+    position: 'relative',
+    backgroundImage:
+      'url(https://media.istockphoto.com/id/867940676/photo/paper.webp?b=1&s=170667a&w=0&k=20&c=eKcvw7UFHNW4r-NFm0xBuFCll7rtiJDMI_Ai4RReptE=)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    //checking end
 
     [theme.fn.smallerThan('sm')]: {
       padding: `calc(${theme.spacing.xl} * 1.5)`,
@@ -51,12 +58,13 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    color: theme.white,
+    color: theme.black,
     lineHeight: 1,
   },
 
   description: {
-    color: theme.colors[theme.primaryColor][0],
+    //color: theme.colors[theme.primaryColor][0],
+    color: theme.black,
     maxWidth: rem(300),
 
     [theme.fn.smallerThan('sm')]: {
@@ -72,7 +80,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   social: {
-    color: theme.white,
+    //color: theme.white,
+    color:'red',
 
     '&:hover': {
       color: theme.colors[theme.primaryColor][1],
@@ -94,7 +103,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   control: {
-    backgroundColor: 'teal',
+    //backgroundColor: 'teal',
+    backgroundColor: '#4E8480',
   },
 }));
 
@@ -105,6 +115,7 @@ function ContactIcon({
   title,
   description,
   variant = 'gradient',
+  
   className,
   ...others
 }) {
@@ -119,7 +130,7 @@ function ContactIcon({
         variant="outline"
         className={classes.icon}
         //gradient={{ deg: 100, from: 'teal.9', to: 'lime.7' }}
-        color='gray.0'
+        color='red'
       >
         <Icon size="1.5rem"  />
       </ThemeIcon>
@@ -168,7 +179,7 @@ export default function ContactUs() {
 
   return (
     
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper} style={{marginLeft:'30px', marginRight:'30px'}}>
       <SimpleGrid cols={2} spacing={50} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <div>
           <Title className={classes.title}>Contact us</Title>
@@ -176,7 +187,7 @@ export default function ContactUs() {
             Leave your email and we will get back to you within 24 hours
           </Text>
 
-          <ContactIconsList variant="white" />
+          <ContactIconsList  />
 
           <Group mt="xl">{icons}</Group>
         </div>

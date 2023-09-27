@@ -88,8 +88,11 @@ const useStyles = createStyles((theme) => ({
 
   linkActive: {
     '&, &:hover': {
-      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
-      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+      // backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
+      // color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+      backgroundColor: '#4E8480',
+      color:'#FFFF',
+
     },
   },
 }));
@@ -119,18 +122,20 @@ export default function LandingHeader() {
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-    <a
+    <NavLink
+    exact
+    to={link.link}
       key={link.label}
-      href={link.link}
+      //href={link.link}
       className={cx(classes.link, { [classes.linkActive]: active === link.link })}
       onClick={(event) => {
-        event.preventDefault();
+        //event.preventDefault();
         setActive(link.link);
         close();
       }}
     >
       {link.label}
-    </a>
+    </NavLink>
   ));
 
   return (
@@ -144,7 +149,7 @@ export default function LandingHeader() {
 
         <Group className={classes.hiddenMobile}>
             <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant="default">Sign up</Button>
           </Group>
 
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />

@@ -5,11 +5,11 @@ import { createStyles, rem, Box } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
     parentBox : {
-        paddingLeft:'120px',
+        //paddingLeft:'120px',
 
       //  backgroundColor:'pink',
         [theme.fn.smallerThan('sm')]: {
-            paddingLeft:'0px'
+           // paddingLeft:'0px'
           },
     },
 
@@ -19,6 +19,9 @@ const useStyles = createStyles((theme) => ({
         'url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      
+     
+
     },
   
     image2: {
@@ -27,6 +30,7 @@ const useStyles = createStyles((theme) => ({
         'url(https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+    
     },
   
     image3: {
@@ -65,9 +69,9 @@ export default function AboutImaCarousel() {
 
   return (
     
-    <Box className={classes.parentBox}>
+    <Box className={classes.parentBox} style={{backgroundColor:'pink'}}>
     <Carousel
-      maw={450}
+      //maw={450}
      // mx="auto"
       withIndicators
       height={350}
