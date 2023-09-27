@@ -193,7 +193,7 @@ const TableBusiness = () => {
 
   const columns = [
     {
-      name: '#',
+      name: <strong>#</strong>,
       selector: (row, index) => index + 1, // Generate serial numbers dynamically
       sortable: true,
       width: '60px', // Set the width of the serial number column
@@ -206,7 +206,7 @@ const TableBusiness = () => {
     },
     */
     {
-      name: 'Profile Picture',
+      name: <strong>Picture</strong>,
       width: '110px',
       selector: (row) => <HoverCard position="bottom-end" >
       <HoverCard.Target>
@@ -244,35 +244,35 @@ const TableBusiness = () => {
     },
     */
     {
-      name: 'Business Type',
+      name: <strong>Business Type</strong>,
       selector: (row) => row?.type,
       sortable: true,
     },
     {
-      name: 'Business Name',
-      width: '130px',
+      name: <strong>Business Name</strong>,
+      width: '200px',
       selector: (row) => row?.name,
       sortable: true,
     },
     {
-      name: 'Business Owner Name',
-      width: '170px',
+      name: <strong>Business Owner Name</strong>,
+      width: '190px',
       selector: (row) => `${row?.businessOwner?.firstName} ${row?.businessOwner?.lastName}`,
       sortable: true,
     },
     {
-      name: 'Email',
+      name: <strong>Email</strong>,
       selector: (row) => row?.email,
       sortable: true,
     },
     {
-      name: 'Phone Number',
+      name: <strong>Phone Number</strong>,
       selector: (row) => row?.phoneNumber,
-      width: '130px',
+      width: '150px',
       sortable: true,
     },
     {
-      name: 'Status',
+      name: <strong>Status</strong>,
       cell: (row, index) => (
         selectedUserIndex === index ? (
           <Select
@@ -300,7 +300,7 @@ const TableBusiness = () => {
       sortable: true,
     },
     {
-      name: 'Action',
+      name: <strong>Action</strong>,
       width: '150px',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} />
       {/*<IconTrash color='gray' onClick={() => handleDelete(row._id)}/>*/}
@@ -339,7 +339,11 @@ const TableBusiness = () => {
   }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
       <DataTable columns={columns} data={filteredBusinesses}
         pagination
         fixedHeader

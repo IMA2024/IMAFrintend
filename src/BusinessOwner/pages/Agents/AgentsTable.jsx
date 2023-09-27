@@ -12,6 +12,13 @@ import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
+  responsiveSearchContainer: {
+    width:'100%',
+    display: 'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+  },
+
   responsiveSearchRow: {
     display: 'flex',
     flexDirection: 'row-reverse',
@@ -28,6 +35,9 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveAddUserBtn: {
+
+    marginTop:'20px',
+
     [theme.fn.smallerThan('sm')]: {
     },
 
@@ -173,32 +183,32 @@ const TableAgents = () => {
 
   const columns = [
     {
-      name: '#',
+      name: <strong>#</strong>,
       selector: (row, index) => index + 1, // Generate serial numbers dynamically
       sortable: true,
       width: '60px', // Set the width of the serial number column
     },
     {
-      name: 'Business Name',
+      name: <strong>Business Name</strong>,
       //width: '130px',
       selector: (row) => row?.business?.name,
       sortable: true,
     },
     {
-        name: 'Agent Name',
+        name: <strong>Agent Name</strong>,
         //width: '130px',
         selector: (row) => row?.name,
         sortable: true,
       },
       {
-        name: 'Agent Voice',
+        name: <strong>Agent Voice</strong>,
         //width: '130px',
         selector: (row) => row?.voice,
         sortable: true,
       },
     {
-      name: 'Action',
-      width: '150px',
+      name: <strong>Action</strong>,
+      //width: '150px',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} />
       <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/>
       </Box>
@@ -232,7 +242,11 @@ const TableAgents = () => {
   }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
       <DataTable columns={columns} data={filteredAgents}
         pagination
         fixedHeader
@@ -242,6 +256,7 @@ const TableAgents = () => {
         highlightOnHover
         subHeader
         subHeaderComponent={
+          <Box className={classes.responsiveSearchContainer}>
           <Box className={classes.responsiveSearchRow}>
             <Box className={classes.responsiveFilterIcon} >
               <Menu shadow="" width={200} closeOnItemClick={false} >
@@ -302,7 +317,9 @@ const TableAgents = () => {
               ]}
               className={classes.responsiveUserType}
             />
-            <Button
+           
+          </Box>
+          <Button
               size='md'
               className={classes.responsiveAddUserBtn}
               onClick={() => navigate('/ConfigureAgents')}

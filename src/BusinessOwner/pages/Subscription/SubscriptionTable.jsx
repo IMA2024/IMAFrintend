@@ -35,6 +35,7 @@ const useStyles = createStyles((theme) => ({
     },
   
     responsiveAddUserBtn: {
+      marginTop:'20px',
      
       [theme.fn.smallerThan('sm')]: {
       },
@@ -150,44 +151,44 @@ const handleViewSpecific = (row) => {
 
 const columns = [
   {
-    name: '#',
+    name: <strong>#</strong>,
     selector: (row, index) => index + 1, // Generate serial numbers dynamically
     sortable: true,
     width: '60px', // Set the width of the serial number column
   },
     {
-        name: 'Business Name',
+        name: <strong>Business Name</strong>,
         width: '150px',
         selector: (row) => row?.business?.name || "N/A",
         sortable: true,
     },
     {
-        name: 'Subscription Title',
-        width: '150px',
+        name: <strong>Subscription Title</strong>,
+        width: '170px',
         selector: (row) => row?.title || "N/A",
         sortable: true,
     },
     {
-        name: 'Subscription Type',
-        width: '150px',
+        name: <strong>Subscription Type</strong>,
+        width: '170px',
         selector: (row) => row?.type || "N/A",
         sortable: true,
     },
     {
-        name: 'Payment Method',
-        width: '150px',
+        name: <strong>Payment Method</strong>,
+        width: '170px',
         selector: (row) => row?.method || "N/A",
         sortable: true,
     },
     {
-      name: 'Amount',
+      name: <strong>Amount</strong>,
       width: '150px',
       selector: (row) => row?.amount + " $"|| "N/A",
       sortable: true,
   },
  
     {
-        name: 'Action',
+        name: <strong>Action</strong>,
         width: '150px',
         cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row?._id)} /></Box>    },
 ]
@@ -221,7 +222,11 @@ useEffect(() => {
     }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
     <DataTable columns={columns} data={filteredSubscriptions}
     pagination
     fixedHeader
@@ -286,7 +291,7 @@ useEffect(() => {
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Name:</Text><Text fw={'bold'} ml={5}>{specificBusiness}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Title:</Text><Text fw={'bold'} ml={5}>{specificTitle}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Subscription Type:</Text><Text fw={'bold'} ml={5}>{specificType}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>
+    {/*<Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>{specificDate}</Text></Box>*/}
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>{specificAmount} $</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Method:</Text><Text fw={'bold'} ml={5}>{specificMethod}</Text></Box>
     </Box>

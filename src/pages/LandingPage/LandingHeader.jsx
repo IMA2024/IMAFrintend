@@ -46,6 +46,12 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
+    //backgroundColor:'pink',
+    //width: '100%',
+    // maxWidth: '100%',
+    minWidth: '100%',
+      //marginLeft: 0, 
+      //marginRight: 0 
   },
 
   links: {
@@ -128,8 +134,8 @@ export default function LandingHeader() {
   ));
 
   return (
-    <Header height={HEADER_HEIGHT} mb={120} className={classes.root}>
-      <Container className={classes.header}>
+    <Header height={HEADER_HEIGHT} className={classes.root} >
+      <Container className={classes.header} >
          {/*<MantineLogo size={30} />*/}
          <Image width={120} height={45} size={30} fit="contain" src={Logo} />
         <Group spacing={5} className={classes.links}>
