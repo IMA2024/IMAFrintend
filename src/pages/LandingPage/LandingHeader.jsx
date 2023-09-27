@@ -14,7 +14,8 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 //import { MantineLogo } from '@mantine/ds';
 import Logo from '../../assets/Images/IMALogo.jpg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 
 const HEADER_HEIGHT = rem(60);
 
@@ -120,6 +121,14 @@ export default function LandingHeader() {
   const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+  const navigate = useNavigate();
+
+  const GoToSignIn = () => {
+    navigate('/HeaderMegaMenu/SignIn' );
+
+  };
+
+    
 
   const items = links.map((link) => (
     <NavLink
@@ -148,7 +157,7 @@ export default function LandingHeader() {
         </Group>
 
         <Group className={classes.hiddenMobile}>
-            <Button variant="default">Log in</Button>
+            <Button variant="default" onClick={() => GoToSignIn()}>Log in</Button>
             <Button variant="default">Sign up</Button>
           </Group>
 

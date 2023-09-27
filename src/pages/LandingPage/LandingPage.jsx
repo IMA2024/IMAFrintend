@@ -11,6 +11,7 @@ import LandingFooter from './LandingFooter'
 const LandingPage = () => {
   return (
     <div>
+      
       <LandingHeader />
         <HeroHeader />
         <AboutIma />

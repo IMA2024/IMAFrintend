@@ -129,6 +129,7 @@ export default function Demo() {
    
     <Router><UserProvider>
      <Routes>
+      
      <Route path="/LandingPage" element={<LandingPage />} />
      <Route path="/StepperDetails" element={<StepperDetails />} />
      <Route path="/StepperHeadings" element={<StepperHeadings />} />
@@ -141,6 +142,7 @@ export default function Demo() {
     <Route path="LandingFooter" element={<LandingFooter />} /> 
     <Route path="Reviews" element={<Reviews />} />
     <Route path="LandingHeader" element={<LandingHeader />} /> 
+  
 
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
       <Route path="SignIn" element={<SignIn />} />

@@ -173,6 +173,12 @@ const HeaderTop = () => {
     spotlight.open();
   };
 
+  const GoToLandingPage = () => {
+    navigate('/LandingPage')
+  };
+
+  
+
   return (
     <SpotlightProvider
     actions={SuperAdminActions}
@@ -185,7 +191,7 @@ const HeaderTop = () => {
     >
     <Box className={classes.responsiveContainer}>
     <Box  className={classes.responsiveContainerChild1} >
-    <Box className={classes.LogoWithSearch}><Image width={150} height={55} fit="contain" src={Logo} /></Box>
+    <Box className={classes.LogoWithSearch}><Image onClick={() => GoToLandingPage()} width={150} height={55} fit="contain" src={Logo} /></Box>
     <Box className={classes.searchWithLogo}><IconSearch onClick={handleIconSearchClick} color="gray" /></Box>
     </Box>
     <Box className={classes.responsiveContainerChild2} >
