@@ -179,7 +179,7 @@ export default function ContactUs() {
 
   return (
     
-    <div className={classes.wrapper} style={{marginLeft:'30px', marginRight:'30px'}}>
+    <div className={classes.wrapper} >
       <SimpleGrid cols={2} spacing={50} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <div>
           <Title className={classes.title}>Contact us</Title>
