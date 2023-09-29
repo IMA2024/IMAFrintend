@@ -5,7 +5,7 @@ import Logo from '../../assets/Images/IMALogo.jpg';
 
 const useStyles = createStyles((theme) => ({
   footer: {
-    marginTop: 50,
+    //marginTop: 50,
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
     backgroundColor: '#E9ECEF',
