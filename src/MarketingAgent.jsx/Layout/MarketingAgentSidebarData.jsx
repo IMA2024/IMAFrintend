@@ -70,10 +70,18 @@ export const MarketingAgentSideBarData = [
     ],
   },
   */
+ /*
   {
     name: "Businesses", Icon: BiSolidBusiness,
     subLink: [
       { name: "View Businesses", link: "/ViewBusinessOnwersMA", Icon: AiOutlineEye },
+    ],
+  },
+  */
+  {
+    name: "Agents", Icon: BiSolidBusiness,
+    subLink: [
+      { name: "View Agents", link: "/ViewAgentsMA", Icon: AiOutlineEye },
     ],
   },
   {
@@ -92,6 +100,7 @@ export const MarketingAgentSideBarData = [
     name: "Business Questionnaire", Icon: BiSolidBusiness,
     subLink: [
       { name: "Add Questionnaire", link: "/AddQuestionnaireMA", Icon: AiOutlineEye },
+      { name: "View Questionnaire", link: "/ViewQuestionnaireMA", Icon: AiOutlineEye },
     ],
   },
   

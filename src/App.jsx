@@ -91,11 +91,13 @@ import BusinessOwnerQuestions from "./MarketingAgent.jsx/pages/ChooseQuestionnai
 import MarketingAgentQuestions from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/MarketingAgentQuestions";
 import QuestionnaireTab from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/QuestionnaireTab";
 import ChooseQuestionnaire from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/ChooseQuestionnaire";
-import AgentConfiguration from "./MarketingAgent.jsx/pages/Agent/AgentConfigiration";
+import AgentConfiguration from "./MarketingAgent.jsx/pages/ChooseAgent/AgentConfigiration";
 import ExecuteDialer from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ExecuteDialer";
 import ViewCallPriority from "./MarketingAgent.jsx/pages/CallPriorityCollection/ViewCallPriority";
 import ViewBusinessOnwersMA from "./MarketingAgent.jsx/pages/BusinessOwner/ViewBusinessOnwer";
 import AddQuestionnaireMA from "./MarketingAgent.jsx/pages/Questionnaire/AddQuestionnaire";
+import ViewQuestionnaireMA from "./MarketingAgent.jsx/pages/Questionnaire/ViewQuestionnaireMA";
+import ViewAgentsMA from "./MarketingAgent.jsx/pages/Agents/ViewAgentsMA";
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -227,7 +229,8 @@ export default function Demo() {
       <Route path="ViewCallPriority" element={<ViewCallPriority />} />
       <Route path="ViewBusinessOnwersMA" element={<ViewBusinessOnwersMA />} />
       <Route path="AddQuestionnaireMA" element={<AddQuestionnaireMA />} />
-
+      <Route path="ViewQuestionnaireMA" element={<ViewQuestionnaireMA />} />
+      <Route path="ViewAgentsMA" element={<ViewAgentsMA />} />
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
