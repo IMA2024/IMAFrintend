@@ -99,6 +99,7 @@ import ViewQuestionnaireMA from "./MarketingAgent.jsx/pages/Questionnaire/ViewQu
 import ViewAgentsMA from "./MarketingAgent.jsx/pages/Agents/ViewAgentsMA";
 import ConfigureAgentsMA from "./MarketingAgent.jsx/pages/Agents/ConfigureAgentsMA";
 import ConfigureCrawlerMA from './MarketingAgent.jsx/pages/ConfigureCrawler/ConfigureCrawlerMA'
+import EditAgentsMA from "./MarketingAgent.jsx/pages/Agents/EditAgentsMA";
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -233,6 +234,7 @@ export default function Demo() {
       <Route path="ViewAgentsMA" element={<ViewAgentsMA />} />
       <Route path="ConfigureAgentsMA" element={<ConfigureAgentsMA />} />
       <Route path="ConfigureCrawlerMA" element={<ConfigureCrawlerMA />} />
+      <Route path="EditAgentsMA" element={<EditAgentsMA />} />
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
