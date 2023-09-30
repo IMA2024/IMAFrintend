@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Stepper, Button, Group } from '@mantine/core';
-import ChooseBusiness from '../ChooseBusiness/ChooseBusiness';
-import ChooseQuestionnaire from '../ChooseQuestionnaire.jsx/ChooseQuestionnaire';
-import AgentConfiguration from '../ChooseAgent/AgentConfigiration';
-import ConfigureCrawler from '../Crawler/ConfigureCrawler';
+//import ChooseBusiness from '../ChooseBusiness/ChooseBusiness';
+import ChooseBusiness from './ChooseBusiness/ChooseBusiness';
+//import ChooseQuestionnaire from '../ChooseQuestionnaire.jsx/ChooseQuestionnaire';
+import ChooseQuestionnaire from './ChooseQuestionnaire.jsx/ChooseQuestionnaire';
+//import AgentConfiguration from '../ChooseAgent/AgentConfigiration';
+import AgentConfiguration from './ChooseAgent/AgentConfigiration';
+import ConfigureCrawler from './ChooseCrawler/ConfigureCrawler';
 
 export default function ExecuteDialer() {
   const [active, setActive] = useState(0);

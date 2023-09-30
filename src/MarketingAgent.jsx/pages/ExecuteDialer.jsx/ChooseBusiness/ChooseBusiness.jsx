@@ -1,7 +1,8 @@
 import React from 'react';
 import { useForm } from '@mantine/form';
 import { Button, Container, createStyles, Paper, Textarea, Title, Divider, Box, Select, Group } from '@mantine/core';
-import { addFAQ } from '../../../api/admin/faq';
+//import { addFAQ } from '../../../api/admin/faq';
+import { addFAQ } from '../../../../api/admin/faq';
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,10 +1,10 @@
 import { isNotEmpty , useForm } from '@mantine/form';
 import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select, TextInput, Group } from '@mantine/core';
 import { useEffect , useState } from 'react';
-import { addAgent } from '../../../api/businessOwner/agent';
+import { addAgent } from '../../../../api/businessOwner/agent';
 import { notifications } from '@mantine/notifications';
 import React, { useContext } from "react";
-import { UserContext } from '../../../context/users/userContext';
+import { UserContext } from '../../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -30,18 +30,19 @@ const useStyles = createStyles((theme) => ({
    
  }));
 
-export default function AgentConfiguration({nextStep, prevStep}) {
+export default function ConfigureCrawler({nextStep, prevStep}) {
 
   const [countries, setCountries] = useState([]);
   const { user } = useContext(UserContext);
   const {classes} = useStyles();
 
   const form = useForm({
-    initialValues: { name: '', voice: '' },
+    initialValues: { url: '', callButtonTag: '', tableTag: '' },
     validateInputOnChange: true,
     validate: {
-      name: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Agent Name Must Contain 3 to 20 Alphabets'),
-      voice: isNotEmpty('Please Select Agent Voice'),
+      url: isNotEmpty('Please Enter Url'),
+      callButtonTag: isNotEmpty('Please Enter Call Button Tag By Classname'),
+      tableTag: isNotEmpty('Please Enter Table Tag By Classname'),
     },
   });
 
@@ -56,11 +57,10 @@ export default function AgentConfiguration({nextStep, prevStep}) {
   }, []);
 
   const handleSubmit = async (values) => {
+    const { business , name , voice  } = values;
     console.log('hi');
     nextStep()
-    /*
-    const { business , name , voice  } = values;
-
+{/*
     try {
       const response = await addAgent( business , name , voice);
       if (response.status === 201) {
@@ -71,7 +71,7 @@ export default function AgentConfiguration({nextStep, prevStep}) {
     } catch (error) {
       notifications.show({ message: error.response.data.message, color: 'red', });
     }
-    */
+*/}
   };
 
   return (
@@ -82,25 +82,23 @@ export default function AgentConfiguration({nextStep, prevStep}) {
            sx={{ fontWeight: 550 }}
            mb={5}
         >
-          Step 3: Configure System Agents
+          Configure Crawler
         </Title>
       
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
+      <Box >
+      <TextInput withAsterisk size='sm' label="Url" placeholder="Enter Url: mantine.dev" {...form.getInputProps('url')} />
+        </Box>
       <Box mt="sm"  className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Enter Agent Name: Amna" {...form.getInputProps('name')} />
-        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('voice')}
-            data={[
-                { value: 'Male', label: 'Male' },
-                { value: 'Female', label: 'Female' },
-              ]}
-         />
+        <TextInput withAsterisk size='sm' className={classes.inputField} label="Call Button Tag" placeholder="Enter Call Button Tag Classname: responsiveInput" {...form.getInputProps('callButtonTag')} />
+        <TextInput withAsterisk size='sm' className={classes.inputField} label="Table Tag" placeholder="Enter Table Tag" {...form.getInputProps('tableTag')} />
         </Box>
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
          <Button  mt="lg"  size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button  mt="lg"  size='sm' color='green.9' >
-          Choose
+        <Button type="submit" mt="lg"  size='sm' color='green.9' >
+          Run Crawler
         </Button>
         </Box>
         <Group position="center" mt="xl">

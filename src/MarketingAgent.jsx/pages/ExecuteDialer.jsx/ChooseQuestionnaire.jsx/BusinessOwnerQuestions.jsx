@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
-import { deleteFAQ } from '../../../api/admin/faq';
+//import { deleteFAQ } from '../../../api/admin/faq';
+import { deleteFAQ } from '../../../../api/admin/faq';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
-    //paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+   // paddingBottom: `calc(${theme.spacing.xl} * 2)`,
   },
 
   title: {
@@ -36,7 +37,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function MarketingAgentQuestions({nextStep, prevStep}) {
+export default function BusinessOwnerQuestions({nextStep, prevStep}) {
   const [FAQs, setFAQs] =  useState([]);
   const [filteredFAQs, setFilteredFAQs] =  useState([]);
   const { classes } = useStyles();
@@ -44,11 +45,6 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
 
   const handleEdit = (item) => {
     navigate('/EditFaqs', { state: { rowData: item } });
-  };
-
-  const handleNextStep = () => {
-    console.log('hi');
-    nextStep()
   };
 
   const handleDelete = async (id) => {
@@ -61,6 +57,11 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleNextStep = () => {
+    console.log('hi');
+    nextStep()
   };
 
   const getFAQs = async () => {
@@ -89,7 +90,7 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
   */}
           <Col >
             <Title order={2} ta="left" className={classes.title}>
-              Marketing Agent Questionnaire
+              Business Owner Questionnaire
             </Title>
             <Accordion chevron={<Text display={'none'}><IconPlus size="1rem" /></Text>} defaultValue="reset-password" variant="default" data= {filteredFAQs}>
               {FAQs.map((item, index) => (
@@ -109,7 +110,7 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
       <Button  mt="sm"  size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button mt="sm"  size='sm' color='green.9' >
+        <Button type="submit" mt="sm"  size='sm' color='green.9' >
           Choose
         </Button>
         </Box>

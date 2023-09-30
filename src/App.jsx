@@ -85,19 +85,20 @@ import ChatBusinessOwner from './BusinessOwner/pages/Chat/ChatBusinessOwner';
  {/* The routes for Business Panel end here*/}
 
   {/* These are the routes for Marketung Agent Panel */}
-import ConfigureCrawler from "./MarketingAgent.jsx/pages/Crawler/ConfigureCrawler";
-import ChooseBusiness from "./MarketingAgent.jsx/pages/ChooseBusiness/ChooseBusiness";
-import BusinessOwnerQuestions from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/BusinessOwnerQuestions";
-import MarketingAgentQuestions from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/MarketingAgentQuestions";
-import QuestionnaireTab from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/QuestionnaireTab";
-import ChooseQuestionnaire from "./MarketingAgent.jsx/pages/ChooseQuestionnaire.jsx/ChooseQuestionnaire";
-import AgentConfiguration from "./MarketingAgent.jsx/pages/ChooseAgent/AgentConfigiration";
+import ConfigureCrawler from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ChooseCrawler/ConfigureCrawler";
+import ChooseBusiness from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ChooseBusiness/ChooseBusiness";
+import BusinessOwnerQuestions from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ChooseQuestionnaire.jsx/BusinessOwnerQuestions";
+import MarketingAgentQuestions from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ChooseQuestionnaire.jsx/MarketingAgentQuestions";
+import QuestionnaireTab from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ChooseQuestionnaire.jsx/QuestionnaireTab";
+import ChooseQuestionnaire from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ChooseQuestionnaire.jsx/ChooseQuestionnaire";
+import AgentConfiguration from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ChooseAgent/AgentConfigiration";
 import ExecuteDialer from "./MarketingAgent.jsx/pages/ExecuteDialer.jsx/ExecuteDialer";
 import ViewCallPriority from "./MarketingAgent.jsx/pages/CallPriorityCollection/ViewCallPriority";
-import ViewBusinessOnwersMA from "./MarketingAgent.jsx/pages/BusinessOwner/ViewBusinessOnwer";
 import AddQuestionnaireMA from "./MarketingAgent.jsx/pages/Questionnaire/AddQuestionnaire";
 import ViewQuestionnaireMA from "./MarketingAgent.jsx/pages/Questionnaire/ViewQuestionnaireMA";
 import ViewAgentsMA from "./MarketingAgent.jsx/pages/Agents/ViewAgentsMA";
+import ConfigureAgentsMA from "./MarketingAgent.jsx/pages/Agents/ConfigureAgentsMA";
+import ConfigureCrawlerMA from './MarketingAgent.jsx/pages/ConfigureCrawler/ConfigureCrawlerMA'
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -227,10 +228,11 @@ export default function Demo() {
       <Route path="AgentConfiguration" element={<AgentConfiguration />} />
       <Route path="ExecuteDialer" element={<ExecuteDialer />} />
       <Route path="ViewCallPriority" element={<ViewCallPriority />} />
-      <Route path="ViewBusinessOnwersMA" element={<ViewBusinessOnwersMA />} />
       <Route path="AddQuestionnaireMA" element={<AddQuestionnaireMA />} />
       <Route path="ViewQuestionnaireMA" element={<ViewQuestionnaireMA />} />
       <Route path="ViewAgentsMA" element={<ViewAgentsMA />} />
+      <Route path="ConfigureAgentsMA" element={<ConfigureAgentsMA />} />
+      <Route path="ConfigureCrawlerMA" element={<ConfigureCrawlerMA />} />
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
