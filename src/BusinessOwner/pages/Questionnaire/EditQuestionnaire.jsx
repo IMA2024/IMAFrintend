@@ -1,9 +1,11 @@
 import { isNotEmpty , useForm } from '@mantine/form';
-import { NumberInput, TextInput, Button, Box , createStyles, Paper, Textarea, Title, Divider, Select } from '@mantine/core';
-import Datepicker from '../../../components/Date';
+import { TextInput, Button, Box , createStyles, Paper, Title, Select, MultiSelect } from '@mantine/core';
 import { useEffect , useState } from 'react';
-import { addExpense } from '../../../api/admin/accounting';
 import { notifications } from '@mantine/notifications';
+import React, { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
+import { addQuestionnaire } from '../../../api/businessOwner/questionnaire';
+import { useLocation } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -31,47 +33,58 @@ const useStyles = createStyles((theme) => ({
 
 export default function EditQuestionnaire() {
 
-  const [countries, setCountries] = useState([]);
-  
+  const [businesses, setBusinesses] = useState([]);
+  const [questionnaire, setQuestionnaire] = useState([]);
+  const { user } = useContext(UserContext);
   const {classes} = useStyles();
+  const location = useLocation();
+  const rowData = location.state.rowData;
 
-  const form = useForm({
-    initialValues: { businessName: '', question1: '', question2: '', question3: '', question4: '', question5: '', question6: '', question7: '', question8: '', question9: '', question10: '' },
-    validateInputOnChange: true,
-    // functions will be used to validate values at corresponding key
-    validate: {
-      businessName: isNotEmpty('Please Select Business Name'),
-      question1: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question2: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question3: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question4: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question5: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question6: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question7: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question8: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question9: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-      question10: (value) => (/^[a-zA-Z\s]{10,70}$/.test(value) ? null : 'Question Should Contain Atleast 10 Alphabets'),
-    },
-  });
+const form = useForm({
+  initialValues: {
+    businessId: rowData?._id,
+    // Initialize question and answer fields dynamically based on the initial state
+    ...questionnaire.reduce(
+      (acc, _, index) => ({
+        ...acc,
+        [`question${index + 1}`]: rowData?._questionnaire,
+        [`answer${index + 1}`]: rowData?._questionnaire,
+      }),
+      {}
+    ),
+  },
+ 
+  validate: {
+    businessId: isNotEmpty('Please Select Business Name'),
+    // Add validation for dynamically generated question and answer fields
+    
+    // Additionally, add a general validation for answers using a custom function
+    
+  },
+  
+});
 
-  useEffect(() =>{
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/admin/businessesList');
-      const newData =  await response.json();
-      console.log(newData);
-      setCountries(newData);
-    };
-    fetchData();
-  }, []);
+useEffect(() =>{
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:5000/admin/businessesList');
+    const newData =  await response.json();
+    console.log(newData);
+
+    const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
+
+    // Update the state with the filtered businesses
+    setBusinesses(filteredBusinesses);
+  };
+  fetchData();
+}, []);
 
   const handleSubmit = async (values) => {
-    const { title , business , description , date , amount } = values;
-
+    const { businessId } = values; 
     try {
-      const response = await addExpense( title , business , description , date , amount );
+      const response = await addQuestionnaire( businessId , questionnaire );
       if (response.status === 201) {
         form.reset();
-        notifications.show({ message: `Expense Added Successfully`, color: 'green' });
+        notifications.show({ message: `Questionnaire Added Successfully`, color: 'green' });
       }
 
     } catch (error) {
@@ -79,61 +92,100 @@ export default function EditQuestionnaire() {
     }
   };
 
+  const handleAddQuestion = () => {
+    // Check if the maximum number of questions (10) has been reached before adding a new question
+    if (questionnaire.length < 10) {
+      // Add a new question and answer field to the state
+      setQuestionnaire([...questionnaire, { question: '', options: [] }]);
+    } else {
+      notifications.show({
+        message: 'You can only add a maximum of 10 questions.',
+        color: 'red',
+      });
+    }
+  };
+
   return (
     <Paper withBorder shadow="md" p={35}  radius="md">
        <Title
-          mb={20}
-          align="center"
-          //order={2}
-          sx={{ fontWeight: 650 }}
+        order={2}
+        align="center"
+        sx={{ fontWeight: 550 }}
         >
-          Edit Questionnaire
+          Update Questionnaire
         </Title>
-        <Divider mb={30} />
+ 
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
       <Box>
-        <Select withAsterisk size='md' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessName')}
-        data={[
-            { value: 'react', label: 'React' },
-            { value: 'ng', label: 'Angular' },
-            { value: 'svelte', label: 'Svelte' },
-            { value: 'vue', label: 'Vue' },
-          ]}
+        <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessId')}
+        data={businesses.map((business) => ({
+          value: `${business?._id}`,
+          label: `${business?.name}`,
+        }))}
          />
         </Box>
-  
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question1" placeholder="Enter Question" {...form.getInputProps('question1')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question2" placeholder="Enter Question" {...form.getInputProps('question2')} />
-        </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question3" placeholder="Enter Question" {...form.getInputProps('question3')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question4" placeholder="Enter Question" {...form.getInputProps('question4')} />
-        </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question5" placeholder="Enter Question" {...form.getInputProps('question5')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question6" placeholder="Enter Question" {...form.getInputProps('question6')} />
-        </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question7" placeholder="Enter Question" {...form.getInputProps('question7')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question8" placeholder="Enter Question" {...form.getInputProps('question8')} />
-        </Box>
-        <Box mt="md" className={classes.responsiveContainer}>
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question9" placeholder="Enter Question" {...form.getInputProps('question9')} />
-        <TextInput className={classes.inputField} withAsterisk size='md' label="Question10" placeholder="Enter Question" {...form.getInputProps('question10')} />
-        </Box>
-        {/*
-        <Box style={{display:'flex', justifyContent:'left', gap:'20px'}}>
+     {questionnaire.map((item, index) => (
+          <div key={index}>
+            <Box mt="sm" className={classes.responsiveContainer}>
+              <TextInput
+                className={classes.inputField}
+                maxLength={200}
+                withAsterisk
+                size="sm"
+                label={`Question ${index + 1}`}
+                placeholder="Enter Question"
+                onChange={(event)=>{
+                  let newQuestionare = [...questionnaire];
+                  let currentQuestion = newQuestionare[index];
+                  currentQuestion.question = event.currentTarget.value;
+                  newQuestionare[index] = currentQuestion;
+                  setQuestionnaire(newQuestionare);
+                }}
+                value={item.question}
+              />
+              <MultiSelect
+                className={classes.inputField}
+                withAsterisk
+                size="sm"
+                label={`Answer ${index + 1}`}
+                placeholder="Enter Answer"
+                value={item.options}
+                onChange={(options)=>{
+                  let newQuestionare = [...questionnaire];
+                  let currentQuestion = newQuestionare[index];
+                  currentQuestion.options = options;
+                  newQuestionare[index] = currentQuestion;
+                  setQuestionnaire(newQuestionare);
+                  console.log(newQuestionare);
+                }}
+                // {...form.getInputProps(`answer${index + 1}`)}
+                data = {
+                  [
+                  { value: 'Yes', label: 'Yes' },
+                  { value: 'G', label: 'G' },
+                  { value: 'Han', label: 'Han' },
+                  { value: 'Han g', label: 'Han g' },
+                  { value: 'No', label: 'No' },
+                  { value: 'Nahi', label: 'Nahi' },
+                  { value: 'Nopes', label: 'Nopes' },
+                  ]
+              }
+              />
+            </Box>
+          </div>
+        ))}
+        
+        <Box style={{display:'flex', justifyContent:'left', gap:'20px'}} onClick={handleAddQuestion}>
         <Button  mt="sm"  size='sm' variant="outline"> 
           + Add Question
         </Button>
         </Box>
-        */}
+      
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="lg"  size='md' color='red.8' >
+         <Button  mt="sm"  size='sm' color='red.8' >
           Cancel
         </Button>
-        <Button type="submit" mt="lg"  size='md' color='green.9' >
+        <Button type="submit" mt="sm"  size='sm' color='green.9' >
           Submit
         </Button>
         </Box>
