@@ -5,10 +5,8 @@ import { Button, TextInput, Box, createStyles, Menu, Text, Modal, Badge, Image }
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEye, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from "react";
-import { UserContext } from '../../../context/users/userContext';
 import { notifications } from '@mantine/notifications';
-import { deleteQuestionnaire } from '../../../api/businessOwner/questionnaire';
+import { deleteQuestionnaire } from '../../../api/marketingAgent/questionnaire';
 
 const useStyles = createStyles((theme) => ({
 
@@ -84,7 +82,6 @@ const useStyles = createStyles((theme) => ({
 
 
 const QuestionnaireTableMA = () => {
-  const { user } = useContext(UserContext);
   const { classes } = useStyles();
   const [questionnaires, setQuestionnaires] = useState([]);
   const [search, setSearch] = useState('');
@@ -124,13 +121,11 @@ const QuestionnaireTableMA = () => {
 
   const getQuestionnaires = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/businessOwner/viewAllQuestionnaires');
-      console.log(response?.data?.questionnaires);
-
-      const userQuestionnaires = response?.data?.questionnaires.filter((questionnaire) => questionnaire?.business?.businessOwner?._id === user?._id);
-
-      setQuestionnaires(userQuestionnaires);
-      setFilteredQuestionnaires(userQuestionnaires);
+      const response = await axios.get('http://localhost:5000/marketingAgent/viewAllQuestionnaires');
+      const allQuestionnaires = response?.data?.questionnaires;
+      console.log(allQuestionnaires)
+      setQuestionnaires(allQuestionnaires);
+      setFilteredQuestionnaires(allQuestionnaires);
     } catch (error) {
       console.log(error);
     }

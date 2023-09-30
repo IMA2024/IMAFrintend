@@ -1,10 +1,10 @@
 import { isNotEmpty , useForm } from '@mantine/form';
 import { TextInput, Button, Box , createStyles, Paper, Title, Select, MultiSelect } from '@mantine/core';
 import { useEffect , useState } from 'react';
+import axios from 'axios';
 import { notifications } from '@mantine/notifications';
-import React, { useContext } from "react";
-import { UserContext } from '../../../context/users/userContext';
-import { addQuestionnaire } from '../../../api/businessOwner/questionnaire';
+import { React } from "react";
+import { addQuestionnaire } from '../../../api/marketingAgent/questionnaire';
 
 const useStyles = createStyles((theme) => ({
 
@@ -34,7 +34,6 @@ export default function AddQuestionnaireMA() {
 
   const [businesses, setBusinesses] = useState([]);
   const [questionnaire, setQuestionnaire] = useState([]);
-  const { user } = useContext(UserContext);
   const {classes} = useStyles();
 
 const form = useForm({
@@ -60,19 +59,14 @@ const form = useForm({
   },
   
 });
-
 useEffect(() =>{
-  const fetchData = async () => {
-    const response = await fetch('http://localhost:5000/admin/businessesList');
-    const newData =  await response.json();
-    console.log(newData);
-
-    const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
-
-    // Update the state with the filtered businesses
-    setBusinesses(filteredBusinesses);
+  const getBusinesses = async () => {
+    const response = await axios.get('http://localhost:5000/marketingAgent/viewAllSubscribedBusinesses');
+    const businesses = response?.data?.businesses;
+    console.log(businesses)
+    setBusinesses(businesses);
   };
-  fetchData();
+  getBusinesses();
 }, []);
 
   const handleSubmit = async (values) => {
@@ -115,7 +109,7 @@ useEffect(() =>{
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
       <Box>
         <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessId')}
-        data={businesses.map((business) => ({
+        data={businesses?.map((business) => ({
           value: `${business?._id}`,
           label: `${business?.name}`,
         }))}

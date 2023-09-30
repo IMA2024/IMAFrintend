@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from '@mantine/form';
 import { Button, Container, createStyles, Paper, Textarea, Title, Divider, Box, Select, Group } from '@mantine/core';
-//import { addFAQ } from '../../../api/admin/faq';
-import { addFAQ } from '../../../../api/admin/faq';
 import { notifications } from '@mantine/notifications';
+import { useEffect , useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
@@ -30,9 +30,13 @@ const useStyles = createStyles((theme) => ({
 
 }));
 
+
+
 export default function ChooseBusiness({nextStep, prevStep}) {
   const { classes } = useStyles();
   const navigate = useNavigate();
+  const [businesses, setBusinesses] = useState([]);
+
 
   const form = useForm({
     initialValues: { businessOwner: '', business: '' },
@@ -42,6 +46,16 @@ export default function ChooseBusiness({nextStep, prevStep}) {
       business: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Please Select Business Name'),
     },
   });
+
+  useEffect(() =>{
+    const getBusinesses = async () => {
+      const response = await axios.get('http://localhost:5000/marketingAgent/viewAllSubscribedBusinesses');
+      const businesses = response?.data?.businesses;
+      console.log(businesses)
+      setBusinesses(businesses);
+    };
+    getBusinesses();
+  }, []);
 
   const handleSubmit = async (values) => {
     console.log('hi');
@@ -99,12 +113,10 @@ export default function ChooseBusiness({nextStep, prevStep}) {
             placeholder="Select Business Name"
             {...form.getInputProps('business')}
             maxLength={200}
-            data={[
-                { value: 'react', label: 'React' },
-                { value: 'ng', label: 'Angular' },
-                { value: 'svelte', label: 'Svelte' },
-                { value: 'vue', label: 'Vue' },
-              ]}
+            data={businesses?.map((business) => ({
+              value: `${business?._id}`,
+              label: `${business?.name}`,
+            }))}
           />
        {/* </Box> */}
         <Container mt="sm" style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>

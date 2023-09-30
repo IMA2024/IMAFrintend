@@ -6,9 +6,9 @@ export const addAgent = async ( business , name , voice) => {
    return response;
 }
 
-export const updateAgent = async ( agentId , business , name , voice) => {
+export const updateAgent = async ( agentId, business, name, voice) => {
    const response = await Axios.put('marketingAgent/updateAgent',
-      { agentId , business , name , voice })
+      { agentId, business, name, voice })
    return response;
 };
 

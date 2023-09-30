@@ -7,8 +7,6 @@ import { IconFilter, IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteAgent } from '../../../api/businessOwner/agent';
-import { useContext } from "react";
-import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -113,15 +111,11 @@ const useStyles = createStyles((theme) => ({
       justifyContent:'space-evenly',
     },
    },
-
-
 }))
-
 
 const AgentsTableMA = () => {
 
   const { classes } = useStyles();
-  const { user } = useContext(UserContext);
   const [agents, setAgents] = useState([]);
   const [search, setSearch] = useState('');
   const [voice, setVoice] = useState('');
@@ -163,12 +157,11 @@ const AgentsTableMA = () => {
 
     const getAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/businessOwner/viewAllAgents');
+        const response = await axios.get('http://localhost:5000/marketingAgent/viewAllAgents');
         const allAgents = response?.data?.agents;
-        console.log(allAgents);
-        const myAgents = allAgents?.filter((agent) => agent?.business?.businessOwner?._id === user?._id);
-        setAgents(myAgents);
-        setFilteredAgents(myAgents);
+        console.log(allAgents)
+        setAgents(allAgents);
+        setFilteredAgents(allAgents);
       } catch (error) {
         console.log(error);
       }

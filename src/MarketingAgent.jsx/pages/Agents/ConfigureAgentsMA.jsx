@@ -1,10 +1,11 @@
 import { isNotEmpty , useForm } from '@mantine/form';
-import { Button, Box , createStyles, Paper, Textarea, Title, Divider, Select, TextInput } from '@mantine/core';
+import { Button, Box , createStyles, Paper, Title, Divider, Select, TextInput } from '@mantine/core';
 import { useEffect , useState } from 'react';
-import { addAgent } from '../../../api/businessOwner/agent';
+import { addAgent } from '../../../api/marketingAgent/agent';
 import { notifications } from '@mantine/notifications';
-import React, { useContext } from "react";
-import { UserContext } from '../../../context/users/userContext';
+import axios from 'axios';
+import React from "react";
+
 
 const useStyles = createStyles((theme) => ({
 
@@ -33,7 +34,6 @@ const useStyles = createStyles((theme) => ({
 export default function ConfigureAgentsMA() {
 
   const [countries, setCountries] = useState([]);
-  const { user } = useContext(UserContext);
   const {classes} = useStyles();
 
   const form = useForm({
@@ -47,13 +47,12 @@ export default function ConfigureAgentsMA() {
   });
 
   useEffect(() =>{
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/admin/businessesList');
-      const newData =  await response.json();
-      const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
-      setCountries(filteredBusinesses);
+    const getBusinesses = async () => {
+      const response = await axios.get('http://localhost:5000/marketingAgent/viewAllSubscribedBusinesses');
+      const businesses = response?.data?.businesses;
+      setCountries(businesses);
     };
-    fetchData();
+    getBusinesses();
   }, []);
 
   const handleSubmit = async (values) => {
@@ -85,9 +84,9 @@ export default function ConfigureAgentsMA() {
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
       <Box >
         <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('business')}
-             data={countries.map((country) => ({
-              value: `${country._id}`,
-              label: `${country.name}`,
+             data={countries?.map((country) => ({
+              value: `${country?._id}`,
+              label: `${country?.name}`,
             }))}
          />
         </Box>
