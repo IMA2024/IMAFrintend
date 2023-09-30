@@ -3,7 +3,7 @@ import DataTable from 'react-data-table-component'
 import axios from 'axios';
 import { Button, TextInput, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconFilter, IconEye, IconTrash } from '@tabler/icons-react';
+import { IconFilter, IconEye, IconTrash, IconEdit } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
@@ -99,6 +99,10 @@ const QuestionnaireTable = () => {
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
   const navigate = useNavigate();
+
+  const handleEdit = (row) => {
+    navigate('/EditQuestionnaire', { state: { rowData: row } });
+  };
 
   const handleClear = () => {
     setSearch('');
@@ -198,8 +202,9 @@ const QuestionnaireTable = () => {
     },
     {
       name: <strong>Action</strong>,
-      // width: '150px',
-      cell: (row) => <Box><IconEye onClick={() => handleViewSpecific(row)} color='gray' /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>,
+       width: '150px',
+      cell: (row) => <Box><IconEye onClick={() => handleViewSpecific(row)} color='gray' /><IconEdit color='gray' onClick={() => handleEdit(row)} />
+      <IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>,
     },
   ]
 
