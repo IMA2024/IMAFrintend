@@ -73,6 +73,7 @@ export default function ChooseBusiness({nextStep, prevStep}) {
       </Title>
       <Divider mb={30} />
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
+        {/*
         <Box className={classes.responsiveContainer}>
           <Select
             withAsterisk
@@ -89,10 +90,11 @@ export default function ChooseBusiness({nextStep, prevStep}) {
                 { value: 'vue', label: 'Vue' },
               ]}
           />
+            */}
           <Select
             withAsterisk
             size="sm"
-            className={classes.inputField}
+           // className={classes.inputField}
             label="Business Name"
             placeholder="Select Business Name"
             {...form.getInputProps('business')}
@@ -104,7 +106,7 @@ export default function ChooseBusiness({nextStep, prevStep}) {
                 { value: 'vue', label: 'Vue' },
               ]}
           />
-        </Box>
+       {/* </Box> */}
         <Container mt="sm" style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
         <Button  mt="sm"  size='sm' color='red.8' >
           Cancel

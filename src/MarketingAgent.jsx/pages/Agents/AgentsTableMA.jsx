@@ -135,7 +135,7 @@ const AgentsTableMA = () => {
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
-    navigate('/BusinessPanel/BusinessEdit', { state: { rowData: row } });
+    navigate('/EditAgentsMA', { state: { rowData: row } });
   };
 
   const handleClear = () => {
@@ -322,7 +322,7 @@ const AgentsTableMA = () => {
           <Button
               size='md'
               className={classes.responsiveAddUserBtn}
-              onClick={() => navigate('/ConfigureAgents')}
+              onClick={() => navigate('/ConfigureAgentsMA')}
             >
               Configure Agent
             </Button>
