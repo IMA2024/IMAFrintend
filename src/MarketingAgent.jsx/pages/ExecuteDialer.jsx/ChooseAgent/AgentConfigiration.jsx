@@ -39,11 +39,13 @@ export default function AgentConfiguration({nextStep, prevStep}) {
   const {classes} = useStyles();
 
   const form = useForm({
-    initialValues: { name: '', voice: '' },
+    initialValues: { name: '', voice: '', phoneNumber: '', extension:'' },
     validateInputOnChange: true,
     validate: {
       name: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Agent Name Must Contain 3 to 20 Alphabets'),
       voice: isNotEmpty('Please Select Agent Voice'),
+      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number Must Be 11 Digits'),
+      extension: isNotEmpty('Please Enter Extension'),
     },
   });
 
@@ -59,21 +61,12 @@ export default function AgentConfiguration({nextStep, prevStep}) {
 
   const handleSubmit = async (values) => {
     console.log('hi');
-    nextStep()
-    /*
-    const { business , name , voice  } = values;
+    nextStep();
+   // hello !!! write your code here for handlesubmit
+  };
 
-    try {
-      const response = await addAgent( business , name , voice);
-      if (response.status === 201) {
-        form.reset();
-        notifications.show({ message: `Agent Added Successfully`, color: 'green' });
-      }
-
-    } catch (error) {
-      notifications.show({ message: error.response.data.message, color: 'red', });
-    }
-    */
+  const handleBack = () => {
+    prevStep();
   };
 
   return (
@@ -84,7 +77,7 @@ export default function AgentConfiguration({nextStep, prevStep}) {
            sx={{ fontWeight: 550 }}
            mb={5}
         >
-          Step 3: Configure System Agents
+          Step 3: Execute Dialer
         </Title>
       
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
@@ -92,6 +85,9 @@ export default function AgentConfiguration({nextStep, prevStep}) {
         <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Enter Agent Name: Amna" {...form.getInputProps('name')} 
          data={[
           { value: 'Amna', label: 'Amna' },
+          { value: 'Laraib', label: 'Laraib' },
+          { value: 'Abdullah', label: 'Abdullah' },
+          { value: 'Afnan', label: 'Afnan' },
           { value: 'Ali', label: 'Ali' },
         ]}
         />
@@ -102,6 +98,11 @@ export default function AgentConfiguration({nextStep, prevStep}) {
               ]}
          />
         </Box>
+        <Box mt="sm"  className={classes.responsiveContainer}>
+        <TextInput maxLength={11} withAsterisk size='sm' label="Phone Number" placeholder="Enter User Phone Number" className={classes.inputField} {...form.getInputProps('phoneNumber')} />
+        <TextInput  withAsterisk size='sm' label="Extension" placeholder="Enter Extension" className={classes.inputField} {...form.getInputProps('extension')} />
+          </Box>
+          {/*
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
          <Button  mt="lg"  size='sm' color='red.8' >
           Cancel
@@ -110,9 +111,10 @@ export default function AgentConfiguration({nextStep, prevStep}) {
           Choose
         </Button>
         </Box>
+            */}
         <Group position="center" mt="xl">
-        <Button variant="default">Back</Button>
-        <Button type='submit'>Next step</Button>
+        <Button variant="default" onClick={() => handleBack()}>Back</Button>
+        <Button type='submit'>Execute Dialer</Button>
       </Group>
       </form>
     </Paper>
