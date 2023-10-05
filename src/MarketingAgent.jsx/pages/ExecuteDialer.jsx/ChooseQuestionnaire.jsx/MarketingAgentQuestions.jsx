@@ -52,6 +52,10 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
     nextStep()
   };
 
+  const handleBack = () => {
+    prevStep();
+  };
+
   const handleDelete = async (id) => {
     try {
       await deleteFAQ(id);
@@ -106,6 +110,7 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
           </Col>
         </Grid>
       </Container>
+      {/*
       <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
       <Button  mt="sm"  size='sm' color='red.8' >
           Cancel
@@ -114,8 +119,9 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
           Choose
         </Button>
         </Box>
+              */}
         <Group position="center" mt="xl">
-        <Button variant="default">Back</Button>
+        <Button variant="default" onClick={() => handleBack()}>Back</Button>
         <Button onClick={handleNextStep}>Next step</Button>
       </Group>
     </div>

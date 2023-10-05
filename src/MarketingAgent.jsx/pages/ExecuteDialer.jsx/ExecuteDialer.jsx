@@ -25,9 +25,11 @@ export default function ExecuteDialer() {
         <Stepper.Step label="Third step" description="Configure Agent">
           <AgentConfiguration nextStep={nextStep} prevStep={prevStep}  />
         </Stepper.Step>
+        {/*
         <Stepper.Step label="Fourth step" description="Configure Crawler">
           <ConfigureCrawler nextStep={nextStep} prevStep={prevStep} />
         </Stepper.Step>
+  */}
         <Stepper.Completed>
           Completed, click back button to get to previous step
         </Stepper.Completed>
