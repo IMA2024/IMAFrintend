@@ -121,8 +121,9 @@ export default function BusinessPanelAddRevenue() {
   };
 
   const handleCancel = () => {
-    navigate('/Dashboard');
+    navigate('/BusinessPanelDashboard');
   };
+
 
   return (
     <Paper withBorder shadow="md" pt={10} pb={10} pl={35} pr={35}  radius="md">

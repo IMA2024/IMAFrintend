@@ -90,7 +90,7 @@ export default function FaqForm() {
         </Box>
         <Container mt="sm" style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
           <Button mt="sm" size="sm" color="red.8" onClick={() => handleCancel()}>
-            Clear
+            Cancel
           </Button>
           <Button type="submit" mt="sm" size="sm" color="green.9">
             Submit

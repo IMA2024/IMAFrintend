@@ -100,7 +100,7 @@ export default function BusinessAdd() {
   };
 
   const handleCancel = () => {
-    navigate('/Dashboard');
+    navigate('/BusinessPanelDashboard');
   };
 
   return (

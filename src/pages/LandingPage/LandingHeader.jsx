@@ -127,7 +127,10 @@ export default function LandingHeader() {
     navigate('/HeaderMegaMenu/SignIn' );
 
   };
+  const GoToSignUp = () => {
+    navigate('/HeaderMegaMenu/SignUp' );
 
+  };
     
 
   const items = links.map((link) => (
@@ -158,7 +161,7 @@ export default function LandingHeader() {
 
         <Group className={classes.hiddenMobile}>
             <Button variant="default" onClick={() => GoToSignIn()}>Log in</Button>
-            <Button variant="default">Sign up</Button>
+            <Button variant="default" onClick={() => GoToSignUp()} >Sign up</Button>
           </Group>
 
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />

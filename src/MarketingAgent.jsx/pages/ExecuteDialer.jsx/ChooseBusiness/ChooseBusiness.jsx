@@ -39,10 +39,12 @@ export default function ChooseBusiness({nextStep, prevStep}) {
 
 
   const form = useForm({
-    initialValues: { businessOwner: '', business: '' },
+    initialValues: { 
+      //businessOwner: '',
+       business: '' },
     validateInputOnChange: true,
     validate: {
-      businessOwner: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Please Select Business Owner Name'),
+     // businessOwner: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Please Select Business Owner Name'),
       business: (value) => (/^(?!\s*$).+/.test(value) ? null : 'Please Select Business Name'),
     },
   });
@@ -56,6 +58,7 @@ export default function ChooseBusiness({nextStep, prevStep}) {
     };
     getBusinesses();
   }, []);
+
 
   const handleSubmit = async (values) => {
     console.log('hi');
