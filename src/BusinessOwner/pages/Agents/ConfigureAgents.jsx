@@ -5,6 +5,7 @@ import { addAgent } from '../../../api/businessOwner/agent';
 import { notifications } from '@mantine/notifications';
 import React, { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -35,6 +36,7 @@ export default function ConfigureAgents() {
   const [countries, setCountries] = useState([]);
   const { user } = useContext(UserContext);
   const {classes} = useStyles();
+  const navigate = useNavigate();
 
   const form = useForm({
     initialValues: { business: '', name: '', voice: '' },
@@ -71,6 +73,10 @@ export default function ConfigureAgents() {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/BusinessPanelDashboard');
+  };
+
   return (
     <Paper withBorder shadow="md" p={35}  radius="md">
        <Title
@@ -101,7 +107,7 @@ export default function ConfigureAgents() {
          />
         </Box>
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="lg"  size='sm' color='red.8' >
+         <Button  mt="lg"  size='sm' color='red.8' onClick={() => handleCancel()}>
           Cancel
         </Button>
         <Button type="submit" mt="lg"  size='sm' color='green.9' >

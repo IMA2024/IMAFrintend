@@ -5,6 +5,7 @@ import { notifications } from '@mantine/notifications';
 import React, { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
 import { addQuestionnaire } from '../../../api/businessOwner/questionnaire';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
 
@@ -36,6 +37,8 @@ export default function AddQuestionnaire() {
   const [questionnaire, setQuestionnaire] = useState([]);
   const { user } = useContext(UserContext);
   const {classes} = useStyles();
+  const navigate = useNavigate();
+
 
 const form = useForm({
   initialValues: {
@@ -100,6 +103,10 @@ useEffect(() =>{
         color: 'red',
       });
     }
+  };
+
+  const handleCancel = () => {
+    navigate('/BusinessPanelDashboard');
   };
 
   return (
@@ -179,7 +186,7 @@ useEffect(() =>{
         </Box>
       
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="sm"  size='sm' color='red.8' >
+         <Button  mt="sm"  size='sm' color='red.8'  onClick={() => handleCancel()} >
           Cancel
         </Button>
         <Button type="submit" mt="sm"  size='sm' color='green.9' >

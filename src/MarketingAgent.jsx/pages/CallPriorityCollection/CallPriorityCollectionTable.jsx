@@ -117,36 +117,36 @@ const handleViewSpecific = (row) => {
 
 const columns = [
 {
-    name: '#',
+    name: <strong>#</strong>,
     selector: (row, index) => index + 1, // Generate serial numbers dynamically
     sortable: true,
     width: '60px', // Set the width of the serial number column
 },
 {
-        name: 'Customer Name',
+        name: <strong>Customer Name</strong>,
         selector: (row) => row.name,
         sortable: true,
 },
 {
-        name: 'Phone Number',
+        name: <strong>Phone Number</strong>,
         selector: (row) => row.capital,
         //width: '170px',
         sortable: true,
 },
 {
-        name: 'Date',
+        name: <strong>Date</strong>,
         //width: '150px',
         selector: (row) => row.name,
         sortable: true,
 },
 {
-        name: 'Status',
+        name: <strong>Status</strong>,
        // width: '180px',
         selector: (row) => row.region,
         sortable: true,
 },
 {
-        name: 'Action',
+        name: <strong>Action</strong>,
        // width: '150px',
         cell: (row) => <Box><IconEye onClick={() => handleViewSpecific(row)}  color='gray' /><IconTrash color='gray' /></Box>,
 },
@@ -181,7 +181,11 @@ useEffect(() => {
     }, []);
 
   return (
-    <Box>
+    <Box 
+    sx={{
+      fontFamily:'Poppins'
+    }}
+    >
     <DataTable columns={columns} data={filteredCountries}
     pagination
     fixedHeader
