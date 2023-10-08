@@ -8,7 +8,7 @@ const useStyles = createStyles((theme) => ({
     //marginTop: 50,
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
-    backgroundColor: '#E9ECEF',
+   // backgroundColor: '#E9ECEF',
    // backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
     borderTop: `${rem(1)} solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
@@ -189,7 +189,8 @@ export default function LandingFooter() {
       <Container className={classes.inner}>
         <div className={classes.logo}>
          {/*<MantineLogo size={30} />*/}
-         <Image width={150} height={55} size={30} fit="contain" src={Logo} />
+         {/*<Image width={150} height={55} size={30} fit="contain" src={Logo} />*/}
+         <Text fs={'italic'} fw={'bold'} ff={'cursive'} size={25}>IMA</Text>
           <Text size="xs" color="dimmed" className={classes.description}>
             Build fully functional accessible web applications faster than ever
           </Text>

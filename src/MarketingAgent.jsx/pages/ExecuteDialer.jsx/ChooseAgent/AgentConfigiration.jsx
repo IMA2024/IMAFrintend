@@ -44,7 +44,7 @@ export default function AgentConfiguration({nextStep, prevStep}) {
     validate: {
       name: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Agent Name Must Contain 3 to 20 Alphabets'),
       voice: isNotEmpty('Please Select Agent Voice'),
-      phoneNumber: (value) => (/^\d{11}$/.test(value) ? null : 'Phone Number Must Be 11 Digits'),
+      phoneNumber: isNotEmpty('Please Enter Phone Number'),
       extension: isNotEmpty('Please Enter Extension'),
     },
   });

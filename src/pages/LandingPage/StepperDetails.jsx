@@ -46,10 +46,10 @@ export default function StepperDetails() {
         Four Easy Steps
       </Title>
     <StyledStepper style={{paddingLeft: '20px', paddingRight: '20px'}}  breakpoint="xs"  active={active} onStepClick={setActive}>
-      <Stepper.Step color='#4E8480'  icon={<Text color='white' fw={'lighter'}>01</Text>} label={<Text color='black' >Register Your Business</Text>}  description={<Text  color='black'> Select your plan and register your business</Text>}   />
-      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>02</Text>} label={<Text color='black'>Make Business Questionnaire</Text>} description={<Text color='black'>Select pre-defined script or create custom script</Text>}  />
-      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>03</Text>} label={<Text color='black'>Select Your Agent</Text>} description={<Text color='black'>Select your agents or customize them</Text>}   />
-      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>04</Text>} label={<Text color='black'>Start Business Marketing</Text>} description={<Text color='black'>Start Business Marketing</Text>}   />
+      <Stepper.Step color='#4E8480'  icon={<Text color='white' fw={'lighter'}>01</Text>} label={<Text color='black' >Register Business</Text>}  description={<Text  color='black'> Select plan and register business</Text>}   />
+      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>02</Text>} label={<Text color='black'>Make Questionnaire</Text>} description={<Text color='black'>Select script</Text>}  />
+      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>03</Text>} label={<Text color='black'>Select Agent</Text>} description={<Text color='black'>Select your agents</Text>}   />
+      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>04</Text>} label={<Text color='black'>Start Marketing</Text>} description={<Text color='black'>Start Business Marketing</Text>}   />
     </StyledStepper>
     </Box>
   );

@@ -9,7 +9,8 @@ import {
   Transition,
   rem,
   Image,
-  Button
+  Button,
+  Text
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 //import { MantineLogo } from '@mantine/ds';
@@ -73,12 +74,14 @@ const useStyles = createStyles((theme) => ({
     padding: `${rem(8)} ${rem(12)}`,
     borderRadius: theme.radius.sm,
     textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    //color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    color: 'black',
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
 
     '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+      //backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+      color:'#454545',
     },
 
     [theme.fn.smallerThan('sm')]: {
@@ -91,11 +94,35 @@ const useStyles = createStyles((theme) => ({
     '&, &:hover': {
       // backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
       // color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
-      backgroundColor: '#4E8480',
-      color:'#FFFF',
+      //backgroundColor: '#4E8480',
+      color:'#454545',
+      //textDecoration: 'underline', // Underline on hover
+      textDecoration: `underline ${rem(2)} solid`, // Add space between text and underline
+      textDecorationSkipInk: 'auto', 
 
     },
   },
+
+  profilingLink: {
+    display: 'block',
+    lineHeight: 1,
+    padding: `${rem(8)} ${rem(12)}`,
+    borderRadius: theme.radius.sm,
+    textDecoration: 'none',
+    color: 'black',
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+
+    '&:hover': {
+
+      //color:'#777777',
+      borderRadius: 20,
+      backgroundColor:'black',
+     color:'white',
+     padding:10,
+    },
+  },
+  
 }));
 
 const links = [
@@ -154,14 +181,25 @@ export default function LandingHeader() {
     <Header height={HEADER_HEIGHT} className={classes.root} >
       <Container className={classes.header} >
          {/*<MantineLogo size={30} />*/}
-         <Image width={120} height={45} size={30} fit="contain" src={Logo} />
+         {/*<Image width={120} height={45} size={30} fit="contain" src={Logo} />*/}
+         <Text fs={'italic'} fw={'bold'} ff={'cursive'} size={25}>IMA</Text>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
 
         <Group className={classes.hiddenMobile}>
+          <Text
+          className={classes.profilingLink}
+          onClick={() => GoToSignIn()}
+             >Log In</Text>
+               <Text
+          className={classes.profilingLink}
+          onClick={() => GoToSignUp()}
+             >Sign Up</Text>
+             {/*
             <Button variant="default" onClick={() => GoToSignIn()}>Log in</Button>
             <Button variant="default" onClick={() => GoToSignUp()} >Sign up</Button>
+  */}
           </Group>
 
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
