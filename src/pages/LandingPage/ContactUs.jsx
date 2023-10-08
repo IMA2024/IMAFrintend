@@ -22,6 +22,7 @@ const useStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: 400,
     boxSizing: 'border-box',
+    backgroundColor:'#E9ECEF',
     /*
     backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
       theme.colors[theme.primaryColor][7]
@@ -33,8 +34,8 @@ const useStyles = createStyles((theme) => ({
     //backgroundColor: '#4E8480',
     //checking stuff
     position: 'relative',
-    backgroundImage:
-      'url(https://media.istockphoto.com/id/867940676/photo/paper.webp?b=1&s=170667a&w=0&k=20&c=eKcvw7UFHNW4r-NFm0xBuFCll7rtiJDMI_Ai4RReptE=)',
+   // backgroundImage:
+      //'url(https://media.istockphoto.com/id/867940676/photo/paper.webp?b=1&s=170667a&w=0&k=20&c=eKcvw7UFHNW4r-NFm0xBuFCll7rtiJDMI_Ai4RReptE=)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     //checking end
