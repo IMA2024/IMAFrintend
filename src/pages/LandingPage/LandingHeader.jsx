@@ -25,6 +25,9 @@ const useStyles = createStyles((theme) => ({
     position: 'relative',
     zIndex: 1,
     backgroundColor: '#E9ECEF',
+    borderBottom: `${rem(1)} solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[5]
+    }`,
   },
 
   dropdown: {
@@ -78,6 +81,7 @@ const useStyles = createStyles((theme) => ({
     color: 'black',
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
+    fontFamily:'Poppins',
 
     '&:hover': {
       //backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
@@ -112,6 +116,7 @@ const useStyles = createStyles((theme) => ({
     color: 'black',
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
+    fontFamily:'Poppins',
 
     '&:hover': {
 
@@ -127,19 +132,19 @@ const useStyles = createStyles((theme) => ({
 
 const links = [
     {
-        "link": "/Home",
+        "link": "/LandingPage",
         "label": "Home"
       },
       {
-        "link": "/About",
+        "link": "/AboutUsPage",
         "label": "About"
       },
       {
-        "link": "/Services",
+        "link": "/ServicesPage",
         "label": "Services"
       },
       {
-        "link": "/ContactUs",
+        "link": "/ContactUsPage",
         "label": "Contact Us"
       }
 ]

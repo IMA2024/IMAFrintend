@@ -7,6 +7,7 @@ import Services from './Services'
 import Reviews from './Reviews'
 import ContactUs from './ContactUs'
 import LandingFooter from './LandingFooter'
+import WhyChooseUs from './WhyChooseUs'
 
 const LandingPage = () => {
   return (
@@ -18,7 +19,7 @@ const LandingPage = () => {
         <StepperDetails />
         <Services />
         <Reviews />
-       <ContactUs />
+       <WhyChooseUs />
         <LandingFooter />
         
     </div>

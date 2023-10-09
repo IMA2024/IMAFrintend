@@ -15,14 +15,14 @@ function StyledStepper(props) {
         },
 
         stepIcon: {
-          backgroundColor: '#4E8480',
+          backgroundColor: '#2F9E44',
         },
 
         separator: {
           //marginLeft: rem(-2),
           //marginRight: rem(-2),
-          backgroundColor: '#4E8480',
-          color: '#4E8480',
+          backgroundColor: '#2F9E44',
+          color: '#2F9E44',
         },
       }}
       {...props}
@@ -42,14 +42,14 @@ export default function StepperDetails() {
       <Title pt={50}  pl={20} pr={20} order={3} weight={100} align="left">
         How To Get Started?
       </Title>
-      <Title mt={20} mb={20} pl={20} pr={20} order={6} weight={100} align="left" color='#4E8480'>
+      <Title mt={20} mb={20} pl={20} pr={20} order={6} weight={100} align="left" color='#2F9E44'>
         Four Easy Steps
       </Title>
     <StyledStepper style={{paddingLeft: '20px', paddingRight: '20px'}}  breakpoint="xs"  active={active} onStepClick={setActive}>
-      <Stepper.Step color='#4E8480'  icon={<Text color='white' fw={'lighter'}>01</Text>} label={<Text color='black' >Register Business</Text>}  description={<Text  color='black'> Select plan and register business</Text>}   />
-      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>02</Text>} label={<Text color='black'>Make Questionnaire</Text>} description={<Text color='black'>Select script</Text>}  />
-      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>03</Text>} label={<Text color='black'>Select Agent</Text>} description={<Text color='black'>Select your agents</Text>}   />
-      <Stepper.Step color='#4E8480' icon={<Text color='white' fw={'lighter'}>04</Text>} label={<Text color='black'>Start Marketing</Text>} description={<Text color='black'>Start Business Marketing</Text>}   />
+      <Stepper.Step color='#2F9E44'  icon={<Text color='white' fw={'lighter'}>01</Text>} label={<Text color='black' ff={'Poppins'} >Register Business</Text>}  description={<Text  color='black' ff={'Poppins'}> Select plan and register business</Text>}   />
+      <Stepper.Step color='#2F9E44' icon={<Text color='white' fw={'lighter'}>02</Text>} label={<Text color='black' ff={'Poppins'}>Make Questionnaire</Text>} description={<Text color='black' ff={'Poppins'}>Select script</Text>}  />
+      <Stepper.Step color='#2F9E44' icon={<Text color='white' fw={'lighter'}>03</Text>} label={<Text color='black' ff={'Poppins'}>Select Agent</Text>} description={<Text color='black' ff={'Poppins'}>Select your agents</Text>}   />
+      <Stepper.Step color='#2F9E44' icon={<Text color='white' fw={'lighter'}>04</Text>} label={<Text color='black' ff={'Poppins'}>Start Marketing</Text>} description={<Text color='black' ff={'Poppins'}>Start Business Marketing</Text>}   />
     </StyledStepper>
     </Box>
   );
