@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { UserContext } from '../../context/users/userContext';
 import { useContext } from 'react';
+import CarouselProfiling from './CarouselProfiling';
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -13,7 +14,7 @@ import { useContext } from 'react';
       backgroundImage:
         'url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&q=80)',
     },
-  
+  /*
     form: {
       borderRight: `${rem(1)} solid ${
         theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
@@ -27,10 +28,48 @@ import { useContext } from 'react';
       },
     },
   
+    */
+  
     title: {
-      color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-      fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+      //color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+      color: '#2F9E44',
+    //  fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     },
+
+    responsiveConatainer : {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      margin:'20px',
+      //gap: '5px',
+
+      [theme.fn.smallerThan('sm')]: {
+        flexDirection: 'column',
+
+      },
+    },
+
+    child1: {
+      width: '50%',
+      [theme.fn.smallerThan('sm')]: {
+        width: '100%'
+      },
+     },
+
+     child2: {
+      width: '50%',
+      [theme.fn.smallerThan('sm')]: {
+        display:'none',
+      },
+     },
+
+     paddingPaper : {
+      paddingLeft: '30px',
+
+      [theme.fn.smallerThan('sm')]: {
+        paddingLeft: '0px',
+      },
+     },
   }));
   
   export default function SignIn() {
@@ -102,27 +141,43 @@ import { useContext } from 'react';
     };
 
     return (
-      <div className={classes.wrapper}>
-        <Paper className={classes.form} radius={0} p={30}>
-          <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
-            Welcome to IMA!
+      <Box style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      sx={{
+        fontFamily: 'Poppins'
+      }}
+      >
+      <Box className={classes.responsiveConatainer} >
+        <Box className={classes.child2}  >
+          <CarouselProfiling  />
+        </Box>
+        <Box className={classes.child1} >
+        <Paper className={classes.paddingPaper}>
+          <Title order={2} className={classes.title} ta="center" mt="md" mb={50} >
+            Sign In to IMA!
           </Title>
           <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
           <TextInput maxLength={25} label="Email address" placeholder="user@gmail.com" size="md" {...form.getInputProps('email')}  />
           <PasswordInput maxLength={20} label="Password" placeholder="Your Password" mt="md" size="md" {...form.getInputProps('password')} />
           <Box>
-          <Button  fullWidth mt="xl" size="md" type='submit' >
+          <Button  fullWidth mt="xl" size="md" type='submit' color='green.8'>
             Login
           </Button>
           </Box>
-          <Text ta="center" mt="md">
+          <Text ta="center" mt="md"
+           sx={{
+            fontFamily: 'Poppins'
+          }}>
           Don't Have An Account? 
-          <Anchor mt={'md'} color='dark.1' component="button" size="xl" onClick={() => GoToSignUp()}>
+          <Anchor mt={'md'} color='green.8' component="button" size="lg" onClick={() => GoToSignUp()}
+          >
            SignUp
           </Anchor>
           </Text>
           </form>
         </Paper>
-      </div>
+        </Box>
+      </Box>
+      </Box>
+   
     );
   }

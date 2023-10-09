@@ -27,14 +27,14 @@ export default function AboutImaDetails() {
       <Slider 
        styles={(theme) => ({
         markFilled: {
-          borderColor: '#4E8480',
+          borderColor: '#2F9E44',
           display:'none',
         },
         thumb: {
           display:'none',
         },
         bar: {
-          backgroundColor: '#4E8480',
+          backgroundColor: '#2F9E44',
         }
       })}
     
@@ -46,14 +46,14 @@ export default function AboutImaDetails() {
        <Slider 
        styles={(theme) => ({
         markFilled: {
-          borderColor: '#4E8480',
+          borderColor: '#2F9E44',
           display:'none',
         },
         thumb: {
           display:'none',
         },
         bar: {
-          backgroundColor: '#4E8480',
+          backgroundColor: '#2F9E44',
         }
       })}
     
@@ -65,14 +65,14 @@ export default function AboutImaDetails() {
        <Slider 
        styles={(theme) => ({
         markFilled: {
-          borderColor: '#4E8480',
+          borderColor: '#2F9E44',
           display:'none',
         },
         thumb: {
           display:'none',
         },
         bar: {
-          backgroundColor: '#4E8480',
+          backgroundColor: '#2F9E44',
         }
       })}
     
@@ -84,14 +84,14 @@ export default function AboutImaDetails() {
        <Slider 
        styles={(theme) => ({
         markFilled: {
-          borderColor: '#4E8480',
+          borderColor: '#2F9E44',
           display:'none',
         },
         thumb: {
           display:'none',
         },
         bar: {
-          backgroundColor: '#4E8480',
+          backgroundColor: '#2F9E44',
         }
       })}
     

@@ -3,6 +3,7 @@ import { TextInput, Button, Box, createStyles, Paper, PasswordInput, Title, Divi
 import { Signup } from '../../api/profiling/Signup';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
+import CarouselProfiling from './CarouselProfiling';
 
 const useStyles = createStyles((theme) => ({
 
@@ -43,7 +44,46 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('sm')]: {
       width: '100%'
     },
-  }
+  },
+
+  title: {
+    //color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+    color: '#2F9E44',
+    //fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  },
+
+  responsiveConatainer : {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    margin:'20px',
+    //gap: '5px',
+
+    [theme.fn.smallerThan('sm')]: {
+      flexDirection: 'column',
+      height:'100%',
+    },
+  },
+
+  child1: {
+    width: '50%',
+    [theme.fn.smallerThan('sm')]: {
+      width: '100%'
+    },
+   },
+   child2: {
+    width: '50%',
+    [theme.fn.smallerThan('sm')]: {
+      display:'none',
+    },
+   },
+   paddingPaper : {
+    paddingLeft: '30px',
+
+    [theme.fn.smallerThan('sm')]: {
+      paddingLeft: '0px',
+    },
+   },
 
 }));
 
@@ -92,16 +132,21 @@ export default function SignUp() {
   }
 
   return (
-    <Box className={classes.wrapper}>
-      <Paper className={classes.form} withBorder shadow="md" radius={0} p={30}>
-        <Title
-          mb={20}
-          align="center"
-          sx={{ fontWeight: 650 }}
-        >
-          Sign Up
-        </Title>
-        <Divider mb={20} />
+    <Box style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+    sx={{
+      fontFamily: 'Poppins'
+    }}
+    >
+      <Box className={classes.responsiveConatainer} >
+      <Box className={classes.child2}  >
+          <CarouselProfiling  />
+        </Box>
+        <Box className={classes.child1} >
+      <Paper  className={classes.paddingPaper} >
+      <Title order={2} className={classes.title} ta="center" mt="md" mb={30} >
+            Sign Up to IMA!
+          </Title>
+       
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
           <Box>
             <Select withAsterisk size='md' label="Role" placeholder="Select Your Role" {...form.getInputProps('role')}
@@ -112,37 +157,33 @@ export default function SignUp() {
               ]}
             />
           </Box>
-          <Box mt="md" >
-            <TextInput maxLength={20} withAsterisk size='md' label="First Name" placeholder="Enter Your First Name" {...form.getInputProps('firstName')} />
+          <Box mt="md" className={classes.responsiveContainer}>
+            <TextInput className={classes.inputField} maxLength={20} withAsterisk size='md' label="First Name" placeholder="Enter Your First Name" {...form.getInputProps('firstName')} />
+            <TextInput className={classes.inputField} maxLength={20} withAsterisk size='md' label="Last Name" placeholder="Enter Your Last Name" {...form.getInputProps('lastName')} />
           </Box>
-          <Box mt="md" >
-            <TextInput maxLength={20} withAsterisk size='md' label="Last Name" placeholder="Enter Your Last Name" {...form.getInputProps('lastName')} />
-          </Box>
-          <Box mt="md" >
-            <TextInput maxLength={25} withAsterisk size='md' label="Email" placeholder="Enter Your Email" {...form.getInputProps('email')} />
-          </Box>
-          <Box mt="md" >
-            <TextInput maxLength={11} withAsterisk size='md' label="Phone Number" placeholder="Enter Your Phone Number"  {...form.getInputProps('phoneNumber')} />
-          </Box>
-          <Box mt="md" >
-            <PasswordInput maxLength={20}size='md' withAsterisk label="Password" placeholder="Enter Your Password"  {...form.getInputProps('password')} />
-          </Box>
-          <Box mt="md" >
-            <PasswordInput maxLength={20} size='md' withAsterisk label="Confirm Password" placeholder="Confirm Your Password"  {...form.getInputProps('confirmPassword')} />
+          <Box mt="md" className={classes.responsiveContainer}>
+            <TextInput className={classes.inputField} maxLength={25} withAsterisk size='md' label="Email" placeholder="Enter Your Email" {...form.getInputProps('email')} />
+            <TextInput  className={classes.inputField} maxLength={11} withAsterisk size='md' label="Phone Number" placeholder="Enter Your Phone Number"  {...form.getInputProps('phoneNumber')} />
+            </Box>
+            <Box mt="md" className={classes.responsiveContainer}>
+            <PasswordInput className={classes.inputField} maxLength={20}size='md' withAsterisk label="Password" placeholder="Enter Your Password"  {...form.getInputProps('password')} />
+            <PasswordInput className={classes.inputField} maxLength={20} size='md' withAsterisk label="Confirm Password" placeholder="Confirm Your Password"  {...form.getInputProps('confirmPassword')} />
           </Box>
           <Box mt={'md'} >
-            <Button fullWidth mt="xl" size="md" type='submit'>
+            <Button fullWidth mt="xl" size="md" type='submit' color='green.8'>
               Sign Up
             </Button>
-            <Text ta="center" mt="md">
+            <Text ta="center" mt={'sm'} >
               Already Have An Account?
-              <Anchor mt={'md'} color='dark.1' component="button" size="xl" onClick={() => GoToSignIn()}>
+              <Anchor  color='green.8' component="button" size="lg" onClick={() => GoToSignIn()}>
                 SignIn
               </Anchor>
             </Text>
           </Box>
         </form>
       </Paper>
+      </Box>
+      </Box>
     </Box>
   );
 }

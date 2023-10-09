@@ -56,6 +56,10 @@ import AboutIma from "./pages/LandingPage/AboutIma";
 import Services from './pages/LandingPage/Services';
 import LandingFooter from "./pages/LandingPage/LandingFooter";
 import LandingHeader from "./pages/LandingPage/LandingHeader";
+import WhyChooseUs from "./pages/LandingPage/WhyChooseUs";
+import AboutUsPage from "./pages/LandingPage/CompletePages/AboutUsPage";
+import ContactUsPage from "./pages/LandingPage/CompletePages/ContactUsPage";
+import ServicesPage from "./pages/LandingPage/CompletePages/ServicesPage";
   {/* The routes for Landing Page end here*/}
  {/* These are the routes for Business Panel */}
  import BusinessPanelGeneralLayout from './BusinessOwner/Layout/BusinessPanelGeneralLayout';
@@ -146,7 +150,10 @@ export default function Demo() {
     <Route path="LandingFooter" element={<LandingFooter />} /> 
     <Route path="Reviews" element={<Reviews />} />
     <Route path="LandingHeader" element={<LandingHeader />} /> 
-  
+    <Route path="WhyChooseUs" element={<WhyChooseUs />} /> 
+    <Route path="AboutUsPage" element={<AboutUsPage />} /> 
+    <Route path="ContactUsPage" element={<ContactUsPage />} /> 
+    <Route path="ServicesPage" element={<ServicesPage />} /> 
 
       <Route path="/HeaderMegaMenu" element={<HeaderMegaMenu />}>
       <Route path="SignIn" element={<SignIn />} />

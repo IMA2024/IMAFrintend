@@ -34,7 +34,17 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('sm')]: {
       //width: '100%',
     },
-  }
+  },
+  paper: {
+    /* Your Paper styles here */
+    transition: 'transform 0.3s', // Apply a transition to the transform property
+    '&:hover': {
+      transform: 'scale(1.1)', // Enlarge the Paper element by 10% on hover
+      //backgroundColor: '#2F9E44', // Change the background color on hover
+      //color: '#F8F9FA', // Change the text color on hover
+      /* You can add any other styles or animations here as needed */
+    },
+  },
 }));
 
 const features = [
@@ -71,6 +81,7 @@ export default  function Services() {
     onMouseEnter={() => setHoveredCard(index)}
     onMouseLeave={() => setHoveredCard(null)}
     bg={hoveredCard === index ? '#E9ECEF' : 'initial'}
+    className={`${classes.paper} ${hoveredCard === index ? 'hovered' : ''}`}
     >
     <div key={feature.title}>
       <ThemeIcon
@@ -124,12 +135,13 @@ export default  function Services() {
           </Text>
 
           <Button
-            //variant="gradient"
-            //gradient={{ deg: 100, from: '#4E8480', to: '#4E8480' }}
+           // variant="gradient"
+           // gradient={{ deg: 100, from: '#000', to: '#000' }}
+           color='green.8'
             size="lg"
            // mt="xl"
             radius="xl" 
-            className={classes.control}
+            //className={classes.control}
           >
             View More
           </Button>
