@@ -3,12 +3,17 @@ import { useMediaQuery } from '@mantine/hooks';
 import { createStyles, Paper, Text, Title, Button, useMantineTheme, rem, Divider, ThemeIcon, Box, Badge } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
+import Laraib from '../../assets/Images/Laraib.jpeg';
+import Abdullah from '../../assets/Images/Abdullah.jpeg';
+import Afnan from '../../assets/Images/Afnan.jpeg';
+import sirTRA from '../../assets/Images/sirTRA.jpeg';
 
 const useStyles = createStyles((theme) => ({
   carouselContainer:{
     //backgroundImage: theme.fn.gradient({ from: 'teal.9', to: 'teal.9', deg: 100 }),
     //backgroundImage: theme.fn.primaryColor(theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.blue[1])
     //background: theme.colors.green[2],
+    //<Image onClick={() => GoToLandingPage()} width={150} height={55} fit="contain" src={Logo} />
     
   },
   
@@ -104,37 +109,37 @@ function Card({ image, title, category }) {
 const data = [
   {
     image:
-      'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
+      sirTRA,
     title: ' "The call analytics and scripts make my job efficient, and the lead generation process is seamless. I recommend IMA to fellow agents."',
     category: 'Phoebe Charles:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnxoSnhGcGl5NHpiQXx8ZW58MHx8fHx8&auto=format&fit=crop&w=600&q=60',
+      Afnan,
     title: '"As a marketing agent, I rely on IMA is a powerful tools to connect with business owners and customers. "',
     category: 'Andrew Joey:',
   },
   {
     image:
-      'https://plus.unsplash.com/premium_photo-1670282393309-70fd7f8eb1ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80',
+      Abdullah,
     title: '"IMA web scrapper is a game-changer. It saved me hours of manual work in gathering contacts." ',
     category: 'Michelle:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1543096222-72de739f7917?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
+      Laraib,
       title: ' "The call analytics and scripts make my job efficient, and the lead generation process is seamless. I recommend IMA to fellow agents."',
     category: 'Kendall:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1509868918748-a554ad25f858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
+    Afnan,
       title: '"As a marketing agent, I rely on IMA is a powerful tools to connect with business owners and customers. "',
     category: 'Courtney:',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60',
+      Abdullah,
       title: '"IMA web scrapper is a game-changer. It saved me hours of manual work in gathering contacts." ',
     category: 'Khloe:',
   },
