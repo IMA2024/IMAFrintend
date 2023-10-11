@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import ReactApexChart from "react-apexcharts";
 import { Box, Title, Paper, createStyles, Select  } from '@mantine/core';
-import RegisteredBusinessDonutBO from './RegisteredBusinessDonut';
 
 const useStyles = createStyles((theme) => ({
 
@@ -24,37 +23,20 @@ const useStyles = createStyles((theme) => ({
    [theme.fn.smallerThan('sm')]: {
      width: '40%'
    },
-  },
-
-  responsiveContainerChart: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-
-    [theme.fn.smallerThan('sm')]: {
-        flexDirection: 'column'
-      },
-  },
-
-  inputFieldChart: {
-    width: '50%',
-    [theme.fn.smallerThan('sm')]: {
-      width: '100%'
-    },
-   },
+  }
    
  }));
 
  //SplineAreaCharts
-const RegisteredBusinessChartBO = () => {
+const CallsChart = () => {
   const {classes} = useStyles()
     const [state, setState] =  useState({
         series: [{
             name: 'series1',
-            data: [110, 60, 48, 71, 62, 129, 120]
+            data: [31, 40, 28, 51, 42 , 109, 100]
           }, {
             name: 'series2',
-            data: [41, 110, 65, 52, 54, 72, 61]
+            data: [11, 32, 45, 32, 34, 52, 41]
           }],
           options: {
             chart: {
@@ -83,7 +65,7 @@ const RegisteredBusinessChartBO = () => {
   return (
     <Paper mt={20} shadow="xs" p="md">
       <Box className={classes.responsiveContainer}>
-    <Title className={classes.inputField} order={4}>Businesses Registered</Title>
+    <Title className={classes.inputField} order={4}>Calls</Title>
       <Select
       className={classes.inputField}
       defaultValue={'Weekly'}
@@ -91,13 +73,8 @@ const RegisteredBusinessChartBO = () => {
       data={['Weekly', 'Monthly', 'Yearly']}
     />
     </Box>
-    <Box p={20} style={{ border: '1px dotted gray' }} className={classes.responsiveContainerChart}>
-        <Box className={classes.inputFieldChart}>
+    <Box p={20} style={{ border: '1px dotted gray' }}>
     <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
-    </Box>
-    <Box className={classes.inputFieldChart}>
-    <RegisteredBusinessDonutBO />
-    </Box>
     </Box>
     </Paper>
  
@@ -105,5 +82,5 @@ const RegisteredBusinessChartBO = () => {
   )
 }
 
-export default RegisteredBusinessChartBO
+export default CallsChart
 
