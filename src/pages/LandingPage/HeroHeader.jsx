@@ -2,6 +2,7 @@ import { createStyles, Overlay, Container, Title, Button, Text, rem } from '@man
 import { useRef } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   hero1: {
@@ -96,9 +97,19 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+
+
 export default function HeroHeader() {
   const { classes } = useStyles();
+  const navigate = useNavigate();
   const autoplay = useRef(Autoplay({ delay: 2000 }));
+
+  const GoToSignIn = () => {
+    navigate('/HeaderMegaMenu/SignIn' );
+    console.log('sadfgh');
+  
+  };
+
   return (
     <Carousel
     plugins={[autoplay.current]}
@@ -129,6 +140,7 @@ export default function HeroHeader() {
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
           color='green.8'
+          onClick={() => GoToSignIn()}
         >
           Get started
         </Button>
@@ -158,6 +170,7 @@ export default function HeroHeader() {
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
           color='green.8'
+          onClick={() => GoToSignIn()}
         >
           Get started
         </Button>
@@ -187,6 +200,7 @@ export default function HeroHeader() {
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
           color='green.8'
+          onClick={() => GoToSignIn()}
         >
           Get started
         </Button>
@@ -216,6 +230,7 @@ export default function HeroHeader() {
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
           color='green.8'
+          onClick={() => GoToSignIn()}
         >
           Get started
         </Button>
@@ -245,6 +260,7 @@ export default function HeroHeader() {
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
           color='green.8'
+          onClick={() => GoToSignIn()}
         >
           Get started
         </Button>

@@ -24,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       theme={{
         // use custom font in MantineProvider
         fontFamily: 'Poppins',
+        loader: 'bars'
       }}
      >
 

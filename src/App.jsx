@@ -81,11 +81,18 @@ import BusinessPanelViewExpense from './BusinessOwner/pages/Accounting/ViewExpen
 import UpdateConfigureAgents from './BusinessOwner/pages/Agents/UpdateConfigureAgents';
 import AgentsView from './BusinessOwner/pages/Agents/ViewAgents';
 import BusinessPanelDashboard from './BusinessOwner/pages/Dashboard/Dashboard';
+import BusinessBlocksBO from "./BusinessOwner/pages/Dashboard/BusinessBlocksBO";
 //import BusinessPanelViewProfit from './BusinessOwner/pages/Accounting/ViewProfit';
 import BusinessPanelViewProfit from "./BusinessOwner/pages/Accounting/ViewProfit/ViewProfit";
 import BusinessOwnerViewFaqs from './BusinessOwner/pages/Faq/BusinessOwnerFaq';
 import BusinessPanelViewPayment from './BusinessOwner/pages/Accounting/ViewPayments';
 import ChatBusinessOwner from './BusinessOwner/pages/Chat/ChatBusinessOwner';
+import RegisteredBusinessChartBO from "./BusinessOwner/pages/Dashboard/RegisteredBusinessChartBO";
+import SubscriptionsBlockBO from "./BusinessOwner/pages/Dashboard/SubscriptionBlockBO";
+import SubscriptionChartBO from "./BusinessOwner/pages/Dashboard/SubscriptionChartBO";
+import ProfitBlocksBO from "./BusinessOwner/pages/Dashboard/ProfitBlocksBO";
+import ProfitChartBO from "./BusinessOwner/pages/Dashboard/ProfitChartBO";
+import SubscriptionPaymentChartBO from "./BusinessOwner/pages/Dashboard/SubscriptionPaymentChartBO";
  {/* The routes for Business Panel end here*/}
 
   {/* These are the routes for Marketung Agent Panel */}
@@ -224,6 +231,13 @@ export default function Demo() {
       <Route path="BusinessOwnerViewFaqs" element={<BusinessOwnerViewFaqs />} />
       <Route path="BusinessPanelViewPayment" element={<BusinessPanelViewPayment />} />
       <Route path="ChatBusinessOwner" element={<ChatBusinessOwner />} />
+      <Route path="BusinessBlocksBO" element={<BusinessBlocksBO />} />
+      <Route path="RegisteredBusinessChartBO" element={<RegisteredBusinessChartBO />} />
+      <Route path="SubscriptionsBlockBO" element={<SubscriptionsBlockBO />} />
+      <Route path="SubscriptionChartBO" element={<SubscriptionChartBO />} />
+      <Route path="ProfitBlocksBO" element={<ProfitBlocksBO />} />
+      <Route path="ProfitChartBO" element={<ProfitChartBO />} />
+      <Route path="SubscriptionPaymentChartBO" element={<SubscriptionPaymentChartBO />} />
       {/* The routes for Business Panel end here*/}
 
       {/* These are the routes for Marketung Agent Panel */}
