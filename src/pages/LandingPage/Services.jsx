@@ -12,6 +12,7 @@ import {
 } from '@mantine/core';
 import {  IconFlame, IconBrandInstagram, IconMagnet, IconPhoneCall, IconDialpad } from '@tabler/icons-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -75,6 +76,7 @@ const features = [
 export default  function Services() {
   const { classes } = useStyles();
   const [hoveredCard, setHoveredCard] = useState(null);
+  const navigate = useNavigate();
 
   const items = features.map((feature, index) => (
     <Paper shadow="md" pl={30} pr={30} withBorder pt={70} pb={70}
@@ -111,6 +113,11 @@ export default  function Services() {
     </Paper>
   ));
 
+  const GoToServices = () => {
+    navigate('/ServicesPage' );
+
+  };
+
   return (
    
     <div className={classes.wrapper}>
@@ -142,6 +149,7 @@ export default  function Services() {
            // mt="xl"
             radius="xl" 
             //className={classes.control}
+            onClick={() => GoToServices()}
           >
             View More
           </Button>

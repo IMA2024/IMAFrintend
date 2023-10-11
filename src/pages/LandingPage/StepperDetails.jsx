@@ -39,12 +39,17 @@ export default function StepperDetails() {
       fontFamily:'Poppins'
     }}
     >
-      <Title pt={50}  pl={20} pr={20} order={3} weight={100} align="left">
+      <Title pt={50}  pl={20} pr={20}  order={3} weight={100} align="center">
         How To Get Started?
       </Title>
-      <Title mt={20} mb={20} pl={20} pr={20} order={6} weight={100} align="left" color='#2F9E44'>
+      
+      <Title mt={5} mb={40} pl={20} pr={20} order={6} weight={100} align="center"
+      // color='#2F9E44'
+          color='gray.7'
+       >
         Four Easy Steps
       </Title>
+  
     <StyledStepper style={{paddingLeft: '20px', paddingRight: '20px'}}  breakpoint="xs"  active={active} onStepClick={setActive}>
       <Stepper.Step color='#2F9E44'  icon={<Text color='white' fw={'lighter'}>01</Text>} label={<Text color='black' ff={'Poppins'} >Register Business</Text>}  description={<Text  color='black' ff={'Poppins'}> Select plan and register business</Text>}   />
       <Stepper.Step color='#2F9E44' icon={<Text color='white' fw={'lighter'}>02</Text>} label={<Text color='black' ff={'Poppins'}>Make Questionnaire</Text>} description={<Text color='black' ff={'Poppins'}>Select script</Text>}  />
