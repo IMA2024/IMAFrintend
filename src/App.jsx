@@ -93,6 +93,7 @@ import SubscriptionChartBO from "./BusinessOwner/pages/Dashboard/SubscriptionCha
 import ProfitBlocksBO from "./BusinessOwner/pages/Dashboard/ProfitBlocksBO";
 import ProfitChartBO from "./BusinessOwner/pages/Dashboard/ProfitChartBO";
 import SubscriptionPaymentChartBO from "./BusinessOwner/pages/Dashboard/SubscriptionPaymentChartBO";
+import RegisteredBusinessDonutBO from "./BusinessOwner/pages/Dashboard/RegisteredBusinessDonut";
  {/* The routes for Business Panel end here*/}
 
   {/* These are the routes for Marketung Agent Panel */}
@@ -111,6 +112,7 @@ import ViewAgentsMA from "./MarketingAgent.jsx/pages/Agents/ViewAgentsMA";
 import ConfigureAgentsMA from "./MarketingAgent.jsx/pages/Agents/ConfigureAgentsMA";
 import ConfigureCrawlerMA from './MarketingAgent.jsx/pages/ConfigureCrawler/ConfigureCrawlerMA'
 import EditAgentsMA from "./MarketingAgent.jsx/pages/Agents/EditAgentsMA";
+import DashboardMA from "./MarketingAgent.jsx/pages/Dashboard/DashboardMA";
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -238,6 +240,7 @@ export default function Demo() {
       <Route path="ProfitBlocksBO" element={<ProfitBlocksBO />} />
       <Route path="ProfitChartBO" element={<ProfitChartBO />} />
       <Route path="SubscriptionPaymentChartBO" element={<SubscriptionPaymentChartBO />} />
+      <Route path="RegisteredBusinessDonutBO" element={<RegisteredBusinessDonutBO />} />
       {/* The routes for Business Panel end here*/}
 
       {/* These are the routes for Marketung Agent Panel */}
@@ -256,6 +259,7 @@ export default function Demo() {
       <Route path="ConfigureAgentsMA" element={<ConfigureAgentsMA />} />
       <Route path="ConfigureCrawlerMA" element={<ConfigureCrawlerMA />} />
       <Route path="EditAgentsMA" element={<EditAgentsMA />} />
+      <Route path="DashboardMA" element={<DashboardMA />} />
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
