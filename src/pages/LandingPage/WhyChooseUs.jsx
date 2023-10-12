@@ -36,7 +36,7 @@ import {
         transition: 'transform 0.3s', // Apply a transition to the transform property
         '&:hover': {
           transform: 'scale(1.1)', // Enlarge the Paper element by 10% on hover
-          backgroundColor: '#2F9E44', // Change the background color on hover
+         // backgroundColor: '#2F9E44', // Change the background color on hover
           color: '#F8F9FA', // Change the text color on hover
           /* You can add any other styles or animations here as needed */
         },
