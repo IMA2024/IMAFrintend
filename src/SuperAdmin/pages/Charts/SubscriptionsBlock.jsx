@@ -99,7 +99,6 @@ export default function SubscriptionsBlock() {
 
   const [totalSubscriptions, setTotalSubscriptions] = useState(); 
   const [totalRevenue, setTotalRevenue] = useState(); 
-  const [totalBusinesses, setTotalBusinesses] = useState(); 
   const { classes } = useStyles();
 
   useEffect(() => {
@@ -124,21 +123,6 @@ export default function SubscriptionsBlock() {
         const newData = await response.json();
         console.log(response);
         setTotalRevenue(newData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/admin/totalBusinesses');
-        const newData = await response.json();
-        console.log(response);
-        setTotalBusinesses(newData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

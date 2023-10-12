@@ -97,45 +97,15 @@ const SubscriptionData = [
 
 export default function BusinessBlocksBO() {
 
-  const [totalSubscriptions, setTotalSubscriptions] = useState(); 
-  const [totalRevenue, setTotalRevenue] = useState(); 
   const [totalBusinesses, setTotalBusinesses] = useState(); 
+  const [subscribed, setSubscribed] = useState();
+  const [unsubscribed, setUnsubscribed] = useState(); 
   const { classes } = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalSubscriptions');
-        const newData = await response.json();
-        console.log(response);
-        setTotalSubscriptions(newData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/admin/totalRevenue');
-        const newData = await response.json();
-        console.log(response);
-        setTotalRevenue(newData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/admin/totalBusinesses');
+        const response = await fetch('http://localhost:5000/businessOwner/totalBusinesses');
         const newData = await response.json();
         console.log(response);
         setTotalBusinesses(newData);
@@ -146,17 +116,47 @@ export default function BusinessBlocksBO() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/businessOwner/subscribedBusinesses');
+        const newData = await response.json();
+        console.log(response);
+        setSubscribed(newData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/businessOwner/unsubscribedBusinesses');
+        const newData = await response.json();
+        console.log(response);
+        setUnsubscribed(newData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
  
   const subsData = SubscriptionData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{totalSubscriptions}</Text>
+      <Text className={classes.count}>{totalBusinesses}</Text>
       <Text className={classes.title}>Subscribed Businesses</Text>
       <Text className={classes.description}>24% more than in the same month last year, 33% more than two yuserBears ago</Text>
     </div>
   ));
   const payData = PaymentData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{stat.stats}</Text>
+      <Text className={classes.count}>{unsubscribed}</Text>
       <Text className={classes.title}>Unsubscribed Businesses</Text>
       <Text className={classes.description}>13% less compared to last month, new user engagement up by 6%</Text>
     </div>
@@ -164,7 +164,7 @@ export default function BusinessBlocksBO() {
 
   const businessData = BusinessData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{totalBusinesses}</Text>
+      <Text className={classes.count}>{subscribed}</Text>
       <Text className={classes.title}>Total Businesses</Text>
       <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
     </div>

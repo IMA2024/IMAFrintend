@@ -126,6 +126,7 @@ const BusinessTable = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedUserIndex, setSelectedUserIndex] = useState();
   const [specificPicture, setSpecificPicture] = useState('');
+  const [specificSubscribed, setSpecificSubscribed] = useState('');
   const [specificType, setSpecificType] = useState('');
   const [specificName, setSpecificName] = useState('');
   const [specificOwner, setSpecificOwner] = useState('');
@@ -185,6 +186,7 @@ const BusinessTable = () => {
 
   const handleViewSpecific = (row) => {
     open();
+    setSpecificSubscribed(row?.subscribed);
     setSpecificPicture(row?.profilePic);
     setSpecificType(row?.type || 'N/A');
     setSpecificName(row?.name || 'N/A');
@@ -485,6 +487,7 @@ const BusinessTable = () => {
           <Box className={classes.modalImage}><Image width={'200'} height={'200'} radius="lg" src={specificPicture} alt="Random image" /></Box>
           <Box className={classes.modalDetails} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
             <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
+            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificSubscribed}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>

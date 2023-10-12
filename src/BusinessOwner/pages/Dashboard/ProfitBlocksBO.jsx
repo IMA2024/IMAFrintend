@@ -79,7 +79,7 @@ export default function ProfitBlocksBO() {
   const [revenue, setRevenue] = useState();
   const [expense, setExpense] = useState(); 
   const [profit, setProfit] = useState();
-  const [customers, setCustomers] = useState();  
+  const [payments, setPayments] = useState();  
   const { classes } = useStyles();
 
   const statsUser = UserData.map((stat) => {
@@ -89,7 +89,7 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalRevenue');
+          const response = await fetch('http://localhost:5000/businessOwner/totalRevenue');
           const newData = await response.json();
           console.log(response);
           setRevenue(newData);
@@ -104,7 +104,7 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalExpense');
+          const response = await fetch('http://localhost:5000/businessOwner/totalExpense');
           const newData = await response.json();
           console.log(response);
           setExpense(newData);
@@ -119,7 +119,7 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalProfit');
+          const response = await fetch('http://localhost:5000/businessOwner/totalProfit');
           const newData = await response.json();
           console.log(response);
           setProfit(newData);
@@ -134,10 +134,10 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalCustomers');
+          const response = await fetch('http://localhost:5000/businessOwner/totalPayments');
           const newData = await response.json();
           console.log(response);
-          setCustomers(newData);
+          setPayments(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -242,7 +242,7 @@ export default function ProfitBlocksBO() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{customers}</Text>
+          <Text className={classes.value}>{payments}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
