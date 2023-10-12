@@ -76,10 +76,10 @@ const UserData = [
 
 
 export default function ProfitBlocks() {
-  const [revenue, setRevenue] = useState();
-  const [expense, setExpense] = useState(); 
-  const [profit, setProfit] = useState();
-  const [customers, setCustomers] = useState();  
+  const [totalRevenue, setTotalRevenue] = useState();
+  const [totalExpense, setTotalExpense] = useState(); 
+  const [totalProfit, setTotalProfit] = useState();
+  const [totalPayments, setTotalPayments] = useState();  
   const { classes } = useStyles();
 
   const statsUser = UserData.map((stat) => {
@@ -92,7 +92,7 @@ export default function ProfitBlocks() {
           const response = await fetch('http://localhost:5000/admin/totalRevenue');
           const newData = await response.json();
           console.log(response);
-          setRevenue(newData);
+          setTotalRevenue(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -107,7 +107,7 @@ export default function ProfitBlocks() {
           const response = await fetch('http://localhost:5000/admin/totalExpense');
           const newData = await response.json();
           console.log(response);
-          setExpense(newData);
+          setTotalExpense(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -122,7 +122,7 @@ export default function ProfitBlocks() {
           const response = await fetch('http://localhost:5000/admin/totalProfit');
           const newData = await response.json();
           console.log(response);
-          setProfit(newData);
+          setTotalProfit(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -134,10 +134,10 @@ export default function ProfitBlocks() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalCustomers');
+          const response = await fetch('http://localhost:5000/admin/totalPayments');
           const newData = await response.json();
           console.log(response);
-          setCustomers(newData);
+          setTotalPayments(newData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -158,7 +158,7 @@ export default function ProfitBlocks() {
         </Group>
 
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{revenue}</Text>
+          <Text className={classes.value}>{totalRevenue}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -186,7 +186,7 @@ export default function ProfitBlocks() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{expense}</Text>
+          <Text className={classes.value}>{totalExpense}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -214,7 +214,7 @@ export default function ProfitBlocks() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{profit}</Text>
+          <Text className={classes.value}>{totalProfit}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -242,7 +242,7 @@ export default function ProfitBlocks() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{customers}</Text>
+          <Text className={classes.value}>{totalPayments}</Text>
           <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />

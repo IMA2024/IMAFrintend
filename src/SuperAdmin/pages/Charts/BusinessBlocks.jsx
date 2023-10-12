@@ -97,18 +97,18 @@ const SubscriptionData = [
 
 export default function BusinessBlocks() {
 
-  const [totalSubscriptions, setTotalSubscriptions] = useState(); 
-  const [totalRevenue, setTotalRevenue] = useState(); 
+  const [subscribedBusinesses, setSubscribedBusinesses] = useState(); 
+  const [unsubscribedBusinesses, setUnsubscribedBusinesses] = useState(); 
   const [totalBusinesses, setTotalBusinesses] = useState(); 
   const { classes } = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalSubscriptions');
+        const response = await fetch('http://localhost:5000/admin/subscribedBusinesses');
         const newData = await response.json();
         console.log(response);
-        setTotalSubscriptions(newData);
+        setSubscribedBusinesses(newData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -120,10 +120,10 @@ export default function BusinessBlocks() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalRevenue');
+        const response = await fetch('http://localhost:5000/admin/unsubscribedBusinesses');
         const newData = await response.json();
         console.log(response);
-        setTotalRevenue(newData);
+        setUnsubscribedBusinesses(newData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -149,14 +149,14 @@ export default function BusinessBlocks() {
  
   const subsData = SubscriptionData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{totalSubscriptions}</Text>
+      <Text className={classes.count}>{subscribedBusinesses}</Text>
       <Text className={classes.title}>Subscribed Businesses</Text>
       <Text className={classes.description}>24% more than in the same month last year, 33% more than two yuserBears ago</Text>
     </div>
   ));
   const payData = PaymentData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{stat.stats}</Text>
+      <Text className={classes.count}>{unsubscribedBusinesses}</Text>
       <Text className={classes.title}>Unsubscribed Businesses</Text>
       <Text className={classes.description}>13% less compared to last month, new user engagement up by 6%</Text>
     </div>
