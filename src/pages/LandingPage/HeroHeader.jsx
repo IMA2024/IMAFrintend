@@ -139,7 +139,8 @@ export default function HeroHeader() {
        // className={classes.control}
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
-          color='green.8'
+          //color='green.8'
+          color='dark.9'
           onClick={() => GoToSignIn()}
         >
           Get started
@@ -169,7 +170,7 @@ export default function HeroHeader() {
        // className={classes.control}
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
-          color='green.8'
+          color='dark.9'
           onClick={() => GoToSignIn()}
         >
           Get started
@@ -199,7 +200,7 @@ export default function HeroHeader() {
        // className={classes.control}
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
-          color='green.8'
+          color='dark.9'
           onClick={() => GoToSignIn()}
         >
           Get started
@@ -229,7 +230,7 @@ export default function HeroHeader() {
        // className={classes.control}
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
-          color='green.8'
+          color='dark.9'
           onClick={() => GoToSignIn()}
         >
           Get started
@@ -259,7 +260,7 @@ export default function HeroHeader() {
        // className={classes.control}
        // variant="gradient"
           //  gradient={{ deg: 100, from: '#000', to: '#000' }}
-          color='green.8'
+          color='dark.9'
           onClick={() => GoToSignIn()}
         >
           Get started

@@ -111,37 +111,37 @@ const data = [
     image:
       sirTRA,
     title: ' "The call analytics and scripts make my job efficient, and the lead generation process is seamless. I recommend IMA to fellow agents."',
-    category: 'Phoebe Charles:',
+    category: 'Mr Tehseen Riaz Abbasi:',
   },
   {
     image:
       Afnan,
     title: '"As a marketing agent, I rely on IMA is a powerful tools to connect with business owners and customers. "',
-    category: 'Andrew Joey:',
+    category: 'Afnan Malik:',
   },
   {
     image:
       Abdullah,
     title: '"IMA web scrapper is a game-changer. It saved me hours of manual work in gathering contacts." ',
-    category: 'Michelle:',
+    category: 'Abdullah:',
   },
   {
     image:
       Laraib,
       title: ' "The call analytics and scripts make my job efficient, and the lead generation process is seamless. I recommend IMA to fellow agents."',
-    category: 'Kendall:',
+    category: 'Laraib Saghir:',
   },
   {
     image:
     Afnan,
       title: '"As a marketing agent, I rely on IMA is a powerful tools to connect with business owners and customers. "',
-    category: 'Courtney:',
+    category: 'Afnan Malik:',
   },
   {
     image:
       Abdullah,
       title: '"IMA web scrapper is a game-changer. It saved me hours of manual work in gathering contacts." ',
-    category: 'Khloe:',
+    category: 'Abdullah:',
   },
 ];
 
