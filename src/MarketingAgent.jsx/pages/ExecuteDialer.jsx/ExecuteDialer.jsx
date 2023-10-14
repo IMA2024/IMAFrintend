@@ -15,7 +15,7 @@ export default function ExecuteDialer() {
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+      <Stepper mt={'xl'} mb={'xl'} active={active} onStepClick={setActive} breakpoint="sm">
       <Stepper.Step label="First step" description="Choose Business">
         <ChooseBusiness nextStep={nextStep} prevStep={prevStep} />
         </Stepper.Step>

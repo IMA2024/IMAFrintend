@@ -1,3 +1,4 @@
+{/*
 import React from 'react';
 import { createStyles, Image, Accordion, Grid, Col, Container, Title, Button, Text, Box, Group } from '@mantine/core';
 import { IconEdit, IconTrash, IconPlus } from '@tabler/icons-react';
@@ -11,7 +12,7 @@ import { deleteFAQ } from '../../../../api/admin/faq';
 const useStyles = createStyles((theme) => ({
   wrapper: {
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
-    //paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+   // paddingBottom: `calc(${theme.spacing.xl} * 2)`,
   },
 
   title: {
@@ -37,7 +38,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function MarketingAgentQuestions({nextStep, prevStep}) {
+export default function BusinessOwnerQuestions({nextStep, prevStep}) {
   const [FAQs, setFAQs] =  useState([]);
   const [filteredFAQs, setFilteredFAQs] =  useState([]);
   const { classes } = useStyles();
@@ -45,15 +46,6 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
 
   const handleEdit = (item) => {
     navigate('/EditFaqs', { state: { rowData: item } });
-  };
-
-  const handleNextStep = () => {
-    console.log('hi');
-    nextStep()
-  };
-
-  const handleBack = () => {
-    prevStep();
   };
 
   const handleDelete = async (id) => {
@@ -66,6 +58,15 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleNextStep = () => {
+    console.log('hi');
+    nextStep()
+  };
+
+  const handleBack = () => {
+    prevStep();
   };
 
   const getFAQs = async () => {
@@ -87,14 +88,10 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
     <div className={classes.wrapper}>
       <Container size="lg">
         <Grid id="faq-grid" >
-            {/*
-          <Col span={12} md={6}>
-            <Image src="https://ui.mantine.dev/_next/static/media/image.b0c2306b.svg" alt="Frequently Asked Questions" />
-          </Col>
-  */}
+          
           <Col >
             <Title order={2} ta="left" className={classes.title}>
-              Marketing Agent Questionnaire
+              Business Owner Questionnaire
             </Title>
             <Accordion chevron={<Text display={'none'}><IconPlus size="1rem" /></Text>} defaultValue="reset-password" variant="default" data= {filteredFAQs}>
               {FAQs.map((item, index) => (
@@ -110,16 +107,7 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
           </Col>
         </Grid>
       </Container>
-      {/*
-      <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-      <Button  mt="sm"  size='sm' color='red.8' >
-          Cancel
-        </Button>
-        <Button mt="sm"  size='sm' color='green.9' >
-          Choose
-        </Button>
-        </Box>
-              */}
+    
         <Group position="center" mt="xl">
         <Button variant="default" onClick={() => handleBack()}>Back</Button>
         <Button onClick={handleNextStep}>Next step</Button>
@@ -127,3 +115,42 @@ export default function MarketingAgentQuestions({nextStep, prevStep}) {
     </div>
   );
 }
+*/}
+import React, { useEffect, useState } from 'react'
+//import TableForBusinessOnwers from './BusinessOwnerTable';
+import BusinessOwnerQuestionTable from './BusinessOwnerQuestionTable';
+import { Title, Box, Group, Button } from '@mantine/core';
+
+
+
+const MarketingAgentQuestions = ({nextStep, prevStep}) => {
+
+  const handleNextStep = () => {
+    console.log('hi');
+    nextStep()
+  };
+
+  const handleBack = () => {
+    prevStep();
+  };
+
+  return (
+    <Box>
+        <Title
+          order={2}
+          align="center"
+          sx={{ fontWeight: 550 }}
+        >
+          View Business Questionnaire
+        </Title>
+        <BusinessOwnerQuestionTable />
+        
+        <Group position="center" mt="xl">
+        <Button variant="default" onClick={() => handleBack()}>Back</Button>
+        <Button onClick={handleNextStep}>Next step</Button>
+      </Group>
+    </Box>
+  )
+}
+
+export default MarketingAgentQuestions

@@ -1,3 +1,4 @@
+{/*
 import React from 'react';
 import { createStyles, Image, Accordion, Grid, Col, Container, Title, Button, Text, Box, Group } from '@mantine/core';
 import { IconEdit, IconTrash, IconPlus } from '@tabler/icons-react';
@@ -87,11 +88,7 @@ export default function BusinessOwnerQuestions({nextStep, prevStep}) {
     <div className={classes.wrapper}>
       <Container size="lg">
         <Grid id="faq-grid" >
-            {/*
-          <Col span={12} md={6}>
-            <Image src="https://ui.mantine.dev/_next/static/media/image.b0c2306b.svg" alt="Frequently Asked Questions" />
-          </Col>
-  */}
+          
           <Col >
             <Title order={2} ta="left" className={classes.title}>
               Business Owner Questionnaire
@@ -110,16 +107,7 @@ export default function BusinessOwnerQuestions({nextStep, prevStep}) {
           </Col>
         </Grid>
       </Container>
-      {/*
-      <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-      <Button  mt="sm"  size='sm' color='red.8' >
-          Cancel
-        </Button>
-        <Button type="submit" mt="sm"  size='sm' color='green.9' >
-          Choose
-        </Button>
-        </Box>
-              */}
+    
         <Group position="center" mt="xl">
         <Button variant="default" onClick={() => handleBack()}>Back</Button>
         <Button onClick={handleNextStep}>Next step</Button>
@@ -127,3 +115,42 @@ export default function BusinessOwnerQuestions({nextStep, prevStep}) {
     </div>
   );
 }
+*/}
+import React, { useEffect, useState } from 'react'
+//import TableForBusinessOnwers from './BusinessOwnerTable';
+import BusinessOwnerQuestionTable from './BusinessOwnerQuestionTable';
+import { Title, Box, Group, Button } from '@mantine/core';
+
+
+
+const BusinessOwnerQuestions = ({nextStep, prevStep}) => {
+
+  const handleNextStep = () => {
+    console.log('hi');
+    nextStep()
+  };
+
+  const handleBack = () => {
+    prevStep();
+  };
+
+  return (
+    <Box>
+        <Title
+          order={2}
+          align="center"
+          sx={{ fontWeight: 550 }}
+        >
+          View Business Questionnaire
+        </Title>
+        <BusinessOwnerQuestionTable />
+        
+        <Group position="center" mt="xl">
+        <Button variant="default" onClick={() => handleBack()}>Back</Button>
+        <Button onClick={handleNextStep}>Next step</Button>
+      </Group>
+    </Box>
+  )
+}
+
+export default BusinessOwnerQuestions
