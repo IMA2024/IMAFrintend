@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReactApexChart from "react-apexcharts";
 import { Box, Title, Paper, createStyles, Select  } from '@mantine/core';
+import RegisteredBusinessDonutSA from './RegisteredBusinessDonutSA';
 
 const useStyles = createStyles((theme) => ({
 
@@ -23,7 +24,24 @@ const useStyles = createStyles((theme) => ({
    [theme.fn.smallerThan('sm')]: {
      width: '40%'
    },
-  }
+  },
+
+  responsiveContainerChart: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+
+    [theme.fn.smallerThan('sm')]: {
+        flexDirection: 'column'
+      },
+  },
+
+  inputFieldChart: {
+    width: '50%',
+    [theme.fn.smallerThan('sm')]: {
+      width: '100%'
+    },
+   },
    
  }));
 
@@ -33,10 +51,10 @@ const RegisteredBusinessChart = () => {
     const [state, setState] =  useState({
         series: [{
             name: 'series1',
-            data: [31, 40, 28, 51, 42, 109, 100]
+            data: [110, 60, 48, 71, 62, 129, 120]
           }, {
             name: 'series2',
-            data: [11, 32, 45, 32, 34, 52, 41]
+            data: [41, 110, 65, 52, 54, 72, 61]
           }],
           options: {
             chart: {
@@ -73,8 +91,13 @@ const RegisteredBusinessChart = () => {
       data={['Weekly', 'Monthly', 'Yearly']}
     />
     </Box>
-    <Box p={20} style={{ border: '1px dotted gray' }}>
+    <Box p={20} style={{ border: '1px dotted gray' }} className={classes.responsiveContainerChart}>
+        <Box className={classes.inputFieldChart}>
     <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
+    </Box>
+    <Box className={classes.inputFieldChart}>
+    <RegisteredBusinessDonutSA />
+    </Box>
     </Box>
     </Paper>
  
@@ -83,4 +106,5 @@ const RegisteredBusinessChart = () => {
 }
 
 export default RegisteredBusinessChart
+
 

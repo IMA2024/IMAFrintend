@@ -65,7 +65,7 @@ export const BusinessSideBarData = [
   },
   { name: "Services", Icon: MdOutlinePayments,
   subLink: [
-    { name: "View Services", link: "/Services", Icon: AiOutlineEye },
+    { name: "View Services", link: "/ServicesBO", Icon: AiOutlineEye },
   ],
  },
   {

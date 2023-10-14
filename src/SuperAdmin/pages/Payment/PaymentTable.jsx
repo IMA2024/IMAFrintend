@@ -145,49 +145,49 @@ const PaymentTable = () => {
 
   const columns = [
     {
-      name: '#',
+      name: <strong>#</strong>,
       selector: (row, index) => index + 1,
       sortable: true,
       width: '60px',
     },
     {
-      name: 'Subscription Title',
+      name: <strong>Subscription Title</strong>,
       selector: (row) => row?.title || 'N/A',
-      width: '130px',
+      width: '170px',
       sortable: true,
     },
     {
-      name: 'Business Name',
+      name: <strong>Business Name</strong>,
       selector: (row) => row?.business?.name || 'N/A',
       width: '160px',
       sortable: true,
     },
     {
-      name: 'Business Owner Name',
-      width: '180px',
+      name: <strong>Business Owner Name</strong>,
+      width: '190px',
       selector: (row) => `${row?.business?.businessOwner?.firstName} ${row?.business?.businessOwner?.lastName}` || 'N/A',
       sortable: true,
     },
     {
-      name: 'Date',
+      name: <strong>Date</strong>,
       width: '180px',
       selector: (row) => row?.date || 'N/A',
       sortable: true,
     },
     {
-      name: 'Payment Amount',
+      name: <strong>Payment Amount</strong>,
       selector: (row) => row?.amount + " $" || 'N/A',
-      width: '150px',
+      width: '170px',
       sortable: true,
     },
     {
-      name: 'Payment Method',
+      name: <strong>Payment Method</strong>,
       selector: (row) => row?.method || 'N/A',
-      width: '150px',
+      width: '170px',
       sortable: true,
     },
     {
-      name: 'Action',
+      name: <strong>Action</strong>,
       width: '120px',
       cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>
     },
@@ -219,7 +219,11 @@ const PaymentTable = () => {
   }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily: 'Poppins'
+    }}
+    >
       <DataTable columns={columns} data={filteredPayments}
         pagination
         fixedHeader
