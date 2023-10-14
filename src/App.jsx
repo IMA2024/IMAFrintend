@@ -30,6 +30,7 @@ import GroupedStackedColumns from './SuperAdmin/pages/Charts/GroupedStackedColum
 import ColumnRotatedLabelChart from './SuperAdmin/pages/Charts/ColumnRotatedLabelChart';
 import SimpleDonut from './SuperAdmin/pages/Charts/SimpleDonut';
 import Dashboard from './SuperAdmin/pages/Charts/Dashboard';
+import RegisteredBusinessDonutSA from "./SuperAdmin/pages/Charts/RegisteredBusinessDonutSA";
 
 //import Reviews from './pages/Reviews';
 import Reviews from "./pages/LandingPage/Reviews";
@@ -94,6 +95,7 @@ import ProfitBlocksBO from "./BusinessOwner/pages/Dashboard/ProfitBlocksBO";
 import ProfitChartBO from "./BusinessOwner/pages/Dashboard/ProfitChartBO";
 import SubscriptionPaymentChartBO from "./BusinessOwner/pages/Dashboard/SubscriptionPaymentChartBO";
 import RegisteredBusinessDonutBO from "./BusinessOwner/pages/Dashboard/RegisteredBusinessDonut";
+import ServicesBO from "./BusinessOwner/pages/Services/ServicesBO";
  {/* The routes for Business Panel end here*/}
 
   {/* These are the routes for Marketung Agent Panel */}
@@ -195,6 +197,7 @@ export default function Demo() {
         <Route path="TotalRevenueBlocks" element={<TotalRevenueBlocks />} />
         <Route path="SimpleDonut" element={<SimpleDonut />} />
         <Route path="Dashboard" element={<Dashboard />} />
+        <Route path="RegisteredBusinessDonutSA" element={<RegisteredBusinessDonutSA />} />
    
         
         <Route path="Faq" element={<Faq />} />
@@ -241,6 +244,7 @@ export default function Demo() {
       <Route path="ProfitChartBO" element={<ProfitChartBO />} />
       <Route path="SubscriptionPaymentChartBO" element={<SubscriptionPaymentChartBO />} />
       <Route path="RegisteredBusinessDonutBO" element={<RegisteredBusinessDonutBO />} />
+      <Route path="ServicesBO" element={<ServicesBO />} />
       {/* The routes for Business Panel end here*/}
 
       {/* These are the routes for Marketung Agent Panel */}

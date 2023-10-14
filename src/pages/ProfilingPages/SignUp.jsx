@@ -151,7 +151,7 @@ export default function SignUp() {
           <Box>
             <Select withAsterisk size='md' label="Role" placeholder="Select Your Role" {...form.getInputProps('role')}
               data={[
-                { value: 'Marketing Agent', label: 'Marketing Agent' },
+                //{ value: 'Marketing Agent', label: 'Marketing Agent' },
                 { value: 'Business Owner', label: 'Business Owner' },
                 { value: 'Customer', label: 'Customer' },
               ]}

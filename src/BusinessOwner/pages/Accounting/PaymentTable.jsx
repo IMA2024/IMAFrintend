@@ -150,18 +150,18 @@ const BusinessPanelPaymentTable = () => {
     {
       name: <strong>Subscription Title</strong>,
       selector: (row) => row?.title || 'N/A',
-      width: '130px',
+      width: '185px',
       sortable: true,
     },
     {
       name: <strong>Business Name</strong>,
       selector: (row) => row?.business?.name || 'N/A',
-      width: '160px',
+      width: '185px',
       sortable: true,
     },
     {
       name: <strong>Business Owner Name</strong>,
-      width: '180px',
+      width: '185px',
       selector: (row) => `${row?.business?.businessOwner?.firstName} ${row?.business?.businessOwner?.lastName}` || 'N/A',
       sortable: true,
     },
@@ -174,13 +174,13 @@ const BusinessPanelPaymentTable = () => {
     {
       name: <strong>Payment Amount</strong>,
       selector: (row) => row?.amount + " $" || 'N/A',
-      width: '150px',
+      width: '185px',
       sortable: true,
     },
     {
         name: <strong>Payment Method</strong>,
         selector: (row) =>  row?.method || 'N/A',
-        width: '150px',
+        width: '185px',
         sortable: true,
       },
     {

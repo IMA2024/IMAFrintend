@@ -216,7 +216,11 @@ const getRevenues = async () => {
   }, []);
 
   return (
-    <Box >
+    <Box 
+    sx={{
+      fontFamily: 'Poppins'
+    }}
+    >
       <DataTable columns={columns} data={filteredRevenues}
         pagination
         fixedHeader
