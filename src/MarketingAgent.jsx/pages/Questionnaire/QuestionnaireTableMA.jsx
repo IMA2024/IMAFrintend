@@ -221,7 +221,6 @@ const QuestionnaireTableMA = () => {
 
   const ExpandedComponent = ({ data }) => (
     <pre>{JSON.stringify(data?.questionnaire, null, 2)}</pre>
-    //<Box bg={'pink'}>{data.name}</Box>
   );
 
   return (

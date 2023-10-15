@@ -7,6 +7,7 @@ import { notifications } from '@mantine/notifications';
 import React, { useContext } from "react";
 //import { UserContext } from '../../../context/users/userContext';
 import { UserContext } from '../../../../context/users/userContext';
+import axios from "axios"
 
 const useStyles = createStyles((theme) => ({
 
@@ -59,11 +60,28 @@ export default function AgentConfiguration({nextStep, prevStep}) {
     fetchData();
   }, []);
 
-  const handleSubmit = async (values) => {
-    console.log('hi');
-    nextStep();
-   // hello !!! write your code here for handlesubmit
-  };
+//-------------------------- Changes Here-----------------------------------
+const handleSubmit = async (values) => {
+  try {
+    const response = await axios.post('http://127.0.0.1:5000/execute_dialer', {
+      phoneNumber: values.phoneNumber,
+      extension: values.extension,
+    });
+
+    if (response.status === 200) {
+      // Success, handle it here
+      console.log('Dialer executed successfully');
+    } else {
+      console.error('Failed to execute dialer');
+    }
+  } catch (error) {
+    console.error('Error executing dialer:', error);
+  }
+
+  nextStep();
+};
+
+//------------------------- Changes Closed --------------------------------------
 
   const handleBack = () => {
     prevStep();
