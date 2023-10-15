@@ -90,11 +90,6 @@ const SubscriptionData = [
 
   ];
 
-
-
-
-
-
 export default function BusinessBlocksBO() {
 
   const [totalBusinesses, setTotalBusinesses] = useState(); 
@@ -149,7 +144,7 @@ export default function BusinessBlocksBO() {
  
   const subsData = SubscriptionData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{totalBusinesses}</Text>
+      <Text className={classes.count}>{subscribed}</Text>
       <Text className={classes.title}>Subscribed Businesses</Text>
       <Text className={classes.description}>24% more than in the same month last year, 33% more than two yuserBears ago</Text>
     </div>
@@ -164,7 +159,7 @@ export default function BusinessBlocksBO() {
 
   const businessData = BusinessData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{subscribed}</Text>
+      <Text className={classes.count}>{totalBusinesses}</Text>
       <Text className={classes.title}>Total Businesses</Text>
       <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
     </div>

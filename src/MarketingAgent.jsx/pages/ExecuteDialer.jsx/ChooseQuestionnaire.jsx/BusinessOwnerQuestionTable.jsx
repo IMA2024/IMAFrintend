@@ -6,7 +6,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEye, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
-//import { deleteQuestionnaire } from '../../../api/marketingAgent/questionnaire';
 import { deleteQuestionnaire } from '../../../../api/marketingAgent/questionnaire';
 
 const useStyles = createStyles((theme) => ({
