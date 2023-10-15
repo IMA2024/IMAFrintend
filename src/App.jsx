@@ -31,6 +31,9 @@ import ColumnRotatedLabelChart from './SuperAdmin/pages/Charts/ColumnRotatedLabe
 import SimpleDonut from './SuperAdmin/pages/Charts/SimpleDonut';
 import Dashboard from './SuperAdmin/pages/Charts/Dashboard';
 import RegisteredBusinessDonutSA from "./SuperAdmin/pages/Charts/RegisteredBusinessDonutSA";
+import ViewTerms from "./SuperAdmin/pages/TermsConditions/ViewTerms";
+import ViewRules from "./SuperAdmin/pages/RulesRegulations/ViewRules";
+import OurTeam from "./SuperAdmin/pages/OurTeam/OurTeam";
 
 //import Reviews from './pages/Reviews';
 import Reviews from "./pages/LandingPage/Reviews";
@@ -201,6 +204,7 @@ export default function Demo() {
    
         
         <Route path="Faq" element={<Faq />} />
+        
        
         <Route path="StatsGrid" element={<StatsGrid />} /> 
         <Route path="Chat" element={<Chat />} /> 
@@ -210,6 +214,9 @@ export default function Demo() {
         <Route path="FaqForm" element={<FaqForm />} />
         <Route path="EditFaqs" element={<EditFaqs />} />
         <Route path="Radio" element={<Radio />} />
+        <Route path="ViewTerms" element={<ViewTerms />} />
+        <Route path="ViewRules" element={<ViewRules />} />
+        <Route path="OurTeam" element={<OurTeam />} />
 
          {/* These are the routes for Business Panel */}
       <Route path="/BusinessAdd" element={<BusinessAdd />} />

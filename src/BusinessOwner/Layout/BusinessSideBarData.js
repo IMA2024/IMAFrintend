@@ -74,5 +74,21 @@ export const BusinessSideBarData = [
       { name: "View Settings", link: "/Settings", Icon: AiOutlineEye },
     ],
   },
+
+  {
+    name: "Terms & Conditions", Icon: BiHelpCircle,
+    subLink: [
+     // { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View Terms", link: "/ViewTerms", Icon: AiOutlineEye },
+    ],
+  },
+
+  {
+    name: "Rules & Regulations", Icon: BiHelpCircle,
+    subLink: [
+     // { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View Rules", link: "/ViewRules", Icon: AiOutlineEye },
+    ],
+  },
   
 ];
