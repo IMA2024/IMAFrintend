@@ -50,4 +50,31 @@ export const MarketingAgentSideBarData = [
       { name: "View Call Analytics", link: "/ViewCallPriority", Icon: AiOutlineEye },
     ],
   },
+  {
+    name: "Chat", Icon: AiFillWechat,
+    subLink: [
+      { name: "View Chats", link: "/Chat", Icon: AiOutlineEye },
+    ],
+  },
+  {
+    name: "Settings", Icon: AiOutlineSetting,
+    subLink: [
+      { name: "Settings", link: "/Settings", Icon: AiOutlineEye },
+    ],
+  },
+  {
+    name: "Terms & Conditions", Icon: BiHelpCircle,
+    subLink: [
+     // { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View Terms", link: "/ViewTerms", Icon: AiOutlineEye },
+    ],
+  },
+
+  {
+    name: "Rules & Regulations", Icon: BiHelpCircle,
+    subLink: [
+     // { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View Rules", link: "/ViewRules", Icon: AiOutlineEye },
+    ],
+  },
 ];

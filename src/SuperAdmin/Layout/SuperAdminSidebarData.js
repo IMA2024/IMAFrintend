@@ -67,4 +67,28 @@ export const SuperAdminSideBarData = [
       { name: "View FAQs", link: "/ViewFaqs", Icon: AiOutlineEye },
     ],
   },
+
+  {
+    name: "Terms & Conditions", Icon: BiHelpCircle,
+    subLink: [
+     // { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View Terms", link: "/ViewTerms", Icon: AiOutlineEye },
+    ],
+  },
+
+  {
+    name: "Rules & Regulations", Icon: BiHelpCircle,
+    subLink: [
+     // { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View Rules", link: "/ViewRules", Icon: AiOutlineEye },
+    ],
+  },
+
+  {
+    name: "Our Team", Icon: BiHelpCircle,
+    subLink: [
+     // { name: "Add FAQ", link: "/FaqForm", Icon: AiOutlineUserAdd },
+      { name: "View Team", link: "/OurTeam", Icon: AiOutlineEye },
+    ],
+  },
 ];
