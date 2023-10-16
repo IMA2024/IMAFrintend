@@ -43,7 +43,7 @@ export default function ConfigureAgents() {
     validateInputOnChange: true,
     validate: {
       business: isNotEmpty('Please Select Business Name'),
-      name: (value) => (/^[a-zA-Z]{3,20}$/.test(value) ? null : 'Agent Name Must Contain 3 to 20 Alphabets'),
+      name: isNotEmpty('Please Select Agent Name'),
       voice: isNotEmpty('Please Select Agent Voice'),
     },
   });
@@ -98,7 +98,12 @@ export default function ConfigureAgents() {
          />
         </Box>
       <Box mt="sm"  className={classes.responsiveContainer}>
-        <TextInput withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Enter Agent Name: Amna" {...form.getInputProps('name')} />
+        <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Select Agent Name" {...form.getInputProps('name')}
+          data={[
+            { value: 'Jennifer', label: 'Jennifer' },
+            { value: 'Ali', label: 'Ali' },
+          ]}
+         />
         <Select withAsterisk size='sm' className={classes.inputField} label="Agent Voice" placeholder="Select Agent Voice" {...form.getInputProps('voice')}
             data={[
                 { value: 'Male', label: 'Male' },
