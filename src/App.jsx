@@ -118,6 +118,7 @@ import ConfigureAgentsMA from "./MarketingAgent.jsx/pages/Agents/ConfigureAgents
 import ConfigureCrawlerMA from './MarketingAgent.jsx/pages/ConfigureCrawler/ConfigureCrawlerMA'
 import EditAgentsMA from "./MarketingAgent.jsx/pages/Agents/EditAgentsMA";
 import DashboardMA from "./MarketingAgent.jsx/pages/Dashboard/DashboardMA";
+import AutoDialer from "./MarketingAgent.jsx/pages/AutoDialer/AutoDialer";
   {/* The routes for Marketung Agent Panel end here*/}
 
 import { useState, useEffect } from 'react';
@@ -271,6 +272,7 @@ export default function Demo() {
       <Route path="ConfigureCrawlerMA" element={<ConfigureCrawlerMA />} />
       <Route path="EditAgentsMA" element={<EditAgentsMA />} />
       <Route path="DashboardMA" element={<DashboardMA />} />
+      <Route path="AutoDialer" element={<AutoDialer />} />
   {/* The routes for Marketung Agent Panel end here*/}
       
       </Route>
