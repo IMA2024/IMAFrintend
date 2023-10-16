@@ -125,6 +125,8 @@ const QuestionnaireTableMA = () => {
       const allQuestionnaires = response?.data?.questionnaires;
       console.log(allQuestionnaires)
       setQuestionnaires(allQuestionnaires);
+      console.log("asdadasdasd");
+      console.log(questionnaires);
       setFilteredQuestionnaires(allQuestionnaires);
     } catch (error) {
       console.log(error);
