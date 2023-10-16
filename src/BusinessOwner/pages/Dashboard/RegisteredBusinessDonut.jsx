@@ -6,6 +6,7 @@ const RegisteredBusinessDonutBO = () => {
   const [state, setState] = useState({
     series: [70, 15 ,15],
     options: {
+      labels: ['Total Businesses', 'Subscribed Businesses', 'Unsubscribed Businesses'],
       chart: {
         type: 'donut',
       },

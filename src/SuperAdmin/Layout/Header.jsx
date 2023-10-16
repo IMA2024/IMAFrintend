@@ -87,6 +87,7 @@ const HeaderTop = () => {
 
   const { classes } = useStyles();
   const { user , setUser } = useContext(UserContext)
+  let role = user?.role;
   const navigate = useNavigate();
 
 
@@ -156,7 +157,143 @@ const HeaderTop = () => {
             onTrigger: () => navigate("/ViewPayment"),
           },
         ]
+
+        const BusinessOwnerActions =
   
+        [
+           {
+             title: 'Dashboard',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessPanelDashboard"),
+             //closeOnTrigger: false,
+           },
+           {
+             title: 'Add Business',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessAdd"),
+           },
+           {
+             title: 'View Business',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessView"),
+           },
+           {
+            title: 'Add Questionnnaire',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/AddQuestionnaire"),
+          },
+          {
+            title: 'View Questionnnaire',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/ViewQuestionnaire"),
+          },
+           {
+             title: 'Configure Agents',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/ConfigureAgents"),
+           },
+           {
+             title: 'View Agents',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/AgentsView"),
+           },
+           {
+            title: 'Buy Subscription',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/BuySubscription"),
+          },
+          {
+            title: 'View Subscription',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/ViewBusinessSubscription"),
+          },
+           {
+             title: 'Add Revenue',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessPanelAddRevenue"),
+           },
+           {
+             title: 'View Revenue',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessPanelViewRevenue"),
+           },
+           {
+             title: 'Add Expense',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessPanelAddExpense"),
+           },
+           {
+             title: 'View Expense',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessPanelViewExpense"),
+           },
+           {
+            title: 'View Profit',
+            description: 'Click this action to reveal secret actions',
+            onTrigger: () => navigate("/BusinessPanelViewProfit"),
+          },
+           {
+             title: 'View Payments',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/BusinessPanelViewPayment"),
+           },
+         ]
+         const MarketingAgentActions =
+  
+         [
+            {
+              title: 'Dashboard',
+              description: 'Click this action to reveal secret actions',
+              onTrigger: () => navigate("/DashboardMA"),
+              //closeOnTrigger: false,
+            },
+            
+            {
+             title: 'Add Questionnnaire',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/AddQuestionnaireMA"),
+           },
+           {
+             title: 'View Questionnnaire',
+             description: 'Click this action to reveal secret actions',
+             onTrigger: () => navigate("/ViewQuestionnaireMA"),
+           },
+            {
+              title: 'Configure Agents',
+              description: 'Click this action to reveal secret actions',
+              onTrigger: () => navigate("/ConfigureAgentsMA"),
+            },
+            {
+              title: 'View Agents',
+              description: 'Click this action to reveal secret actions',
+              onTrigger: () => navigate("/ViewAgentsMA"),
+            },
+         
+            {
+              title: 'Configure Crawler',
+              description: 'Click this action to reveal secret actions',
+              onTrigger: () => navigate("/ConfigureCrawlerMA"),
+            },
+
+            {
+              title: 'Execute Dialer',
+              description: 'Click this action to reveal secret actions',
+              onTrigger: () => navigate("/ExecuteDialer"),
+            },
+
+            {
+              title: 'Auto Dialer',
+              description: 'Click this action to reveal secret actions',
+              onTrigger: () => navigate("/AutoDialer"),
+            },
+
+            {
+              title: 'Call Analytics',
+              description: 'Click this action to reveal secret actions',
+              onTrigger: () => navigate("/ViewCallPriority"),
+            },
+          ]
+   
 
   const handleEdit = () => {
     navigate("/Settings");
@@ -181,7 +318,8 @@ const HeaderTop = () => {
 
   return (
     <SpotlightProvider
-    actions={SuperAdminActions}
+    //actions={SuperAdminActions}
+    actions={role === "Super Admin" ? SuperAdminActions : role === "Business Owner" ? BusinessOwnerActions:  role === "Marketing Agent" ? MarketingAgentActions: SuperAdminActions}
     query={query}
     onQueryChange={setQuery}
     searchIcon={<IconSearch size="1.2rem" />}
