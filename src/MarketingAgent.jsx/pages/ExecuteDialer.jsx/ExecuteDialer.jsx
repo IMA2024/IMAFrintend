@@ -31,7 +31,7 @@ export default function ExecuteDialer() {
         </Stepper.Step>
   */}
         <Stepper.Completed>
-          Completed, click back button to get to previous step
+          Dialer Executed
         </Stepper.Completed>
       </Stepper>
 

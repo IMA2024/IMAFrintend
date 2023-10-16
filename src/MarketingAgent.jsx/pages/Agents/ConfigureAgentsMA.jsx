@@ -93,7 +93,7 @@ export default function ConfigureAgentsMA() {
       <Box mt="sm"  className={classes.responsiveContainer}>
         <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Select Agent Name" {...form.getInputProps('name')}
           data={[
-            { value: 'Amna', label: 'Amna' },
+            { value: 'Jennifer', label: 'Jennifer' },
             { value: 'Ali', label: 'Ali' },
           ]}
          />

@@ -102,10 +102,7 @@ const handleSubmit = async (values) => {
       <Box mt="sm"  className={classes.responsiveContainer}>
         <Select withAsterisk size='sm' className={classes.inputField} label="Agent Name" placeholder="Enter Agent Name: Amna" {...form.getInputProps('name')} 
          data={[
-          { value: 'Amna', label: 'Amna' },
-          { value: 'Laraib', label: 'Laraib' },
-          { value: 'Abdullah', label: 'Abdullah' },
-          { value: 'Afnan', label: 'Afnan' },
+          { value: 'Jennifer', label: 'Jennifer' },
           { value: 'Ali', label: 'Ali' },
         ]}
         />
