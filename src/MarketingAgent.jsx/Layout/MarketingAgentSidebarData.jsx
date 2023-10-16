@@ -45,6 +45,12 @@ export const MarketingAgentSideBarData = [
     ],
   },
   {
+    name: "Auto Dialer", Icon: BiSolidBusiness,
+    subLink: [
+      { name: "Execute AutoDialer", link: "/AutoDialer", Icon: AiOutlineEye },
+    ],
+  },
+  {
     name: "Call Analytics", Icon: BiSolidBusiness,
     subLink: [
       { name: "View Call Analytics", link: "/ViewCallPriority", Icon: AiOutlineEye },
