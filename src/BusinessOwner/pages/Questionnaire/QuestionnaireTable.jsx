@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import axios from 'axios';
-import { Button, TextInput, Box, createStyles, Menu, Text, Modal, Badge, Image } from '@mantine/core';
+import { Button, TextInput, Box, createStyles, Menu, Text, Modal, Badge, Image, Select } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconEye, IconTrash, IconEdit } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
 import { notifications } from '@mantine/notifications';
 import { deleteQuestionnaire } from '../../../api/businessOwner/questionnaire';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -37,6 +38,7 @@ const useStyles = createStyles((theme) => ({
 
   responsiveAddUserBtn: {
     marginTop: '20px',
+    marginRight:'25px',
 
     [theme.fn.smallerThan('sm')]: {
       //display: 'none'
@@ -98,6 +100,7 @@ const QuestionnaireTable = () => {
   const [specificStatus, setSpecificStatus] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
@@ -137,6 +140,9 @@ const QuestionnaireTable = () => {
       setFilteredQuestionnaires(userQuestionnaires);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setDataLoaded(true);
     }
   };
 
@@ -240,6 +246,7 @@ const QuestionnaireTable = () => {
         fontFamily: 'Poppins'
       }}
     >
+         {dataLoaded ? (  
       <DataTable columns={columns} data={filteredQuestionnaires}
         pagination
         fixedHeader
@@ -291,41 +298,10 @@ const QuestionnaireTable = () => {
                 className={classes.responsiveSearch}
               />
 
-              {/*
-        <Select
-         size='md'
-        onSearchChange={setRegion}
-        searchValue={region}
-        searchable
-        placeholder="Select User Type"
-        data={[
-        { value: 'americas', label: 'americas' },
-        { value: 'africa', label: 'africa' },
-        { value: 'europe', label: 'europe' },
-        { value: 'asia', label: 'asia' },
-      ]}
-      className={classes.responsiveUserType}
-    />
-         <Select
-         size='md' 
-        searchable
-        placeholder="Active/Block"
-        data={[
-        { value: 'Active', label: 'Active' },
-        { value: 'Block', label: 'Block' },
-      ]}
-      className={classes.responsiveActiveBlock}
-    />
-    <Button 
-    size='md'
-    className={classes.responsiveAddUserBtn}
-    onClick={() => navigate('/AddExpense')}
-    >
-    Add Expense
-    </Button>
-    */}
-            </Box>
-            {/*
+              
+   
+   
+        </Box>
         <Button 
         size='md'
         className={classes.responsiveAddUserBtn}
@@ -333,12 +309,25 @@ const QuestionnaireTable = () => {
         >
         Add Questionnaire
        </Button>
-*/}
           </Box>
 
         }
         responsive
       />
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
       <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Business Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image height={200} width={400} radius="md"  src={specificPicture} alt="Random image" /></Box>

@@ -7,6 +7,7 @@ import { IconFilter, IconEye, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteQuestionnaire } from '../../../api/marketingAgent/questionnaire';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -95,6 +96,8 @@ const QuestionnaireTableMA = () => {
   const [specificStatus, setSpecificStatus] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const navigate = useNavigate();
 
   const handleClear = () => {
@@ -130,6 +133,9 @@ const QuestionnaireTableMA = () => {
       setFilteredQuestionnaires(allQuestionnaires);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setDataLoaded(true);
     }
   };
 
@@ -231,6 +237,7 @@ const QuestionnaireTableMA = () => {
         fontFamily: 'Poppins'
       }}
     >
+      {dataLoaded ? (  
       <DataTable columns={columns} data={filteredQuestionnaires}
         pagination
         fixedHeader
@@ -330,6 +337,20 @@ const QuestionnaireTableMA = () => {
         }
         responsive
       />
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
       <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Business Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image height={200} width={400} radius="md"  src={specificPicture} alt="Random image" /></Box>

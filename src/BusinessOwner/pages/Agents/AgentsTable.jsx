@@ -9,6 +9,7 @@ import { notifications } from '@mantine/notifications';
 import { deleteAgent } from '../../../api/businessOwner/agent';
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -132,10 +133,12 @@ const TableAgents = () => {
   const [specificAgentVoice, setSpecificAgentVoice] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
-    navigate('/BusinessPanel/BusinessEdit', { state: { rowData: row } });
+    //navigate('/BusinessPanel/BusinessEdit', { state: { rowData: row } });
   };
 
   const handleClear = () => {
@@ -171,6 +174,9 @@ const TableAgents = () => {
         setFilteredAgents(myAgents);
       } catch (error) {
         console.log(error);
+      }
+      finally {
+        setDataLoaded(true);
       }
     }
 
@@ -221,17 +227,28 @@ const TableAgents = () => {
 
   useEffect(() => {
     const result = agents.filter(agent => {
+      console.log('Agent:', agent);
       const matchesSearch = (
         agent?.name.toLowerCase().includes(search.toLowerCase()) ||
         agent?.business?.name.toLowerCase().includes(search.toLowerCase())
       );
-       const matchesVoice = voice === '' || agent?.voice.toLowerCase().includes(voice.toLowerCase());
+  
+  
+      const matchesVoice = voice === '' || agent?.voice.toLowerCase().includes(voice.toLowerCase());
+  
+      console.log('Search Match:', matchesSearch);
+      console.log('Voice Match:', matchesVoice);
   
       return matchesSearch && matchesVoice;
     });
   
+    console.log('Search:', search);
+    console.log('Voice:', voice);
+    console.log('Filtered Agents:', result);
+  
     setFilteredAgents(result);
   }, [search, voice, agents]);
+  
 
   useEffect(() => {
     getAgents().then((data) => {
@@ -247,6 +264,7 @@ const TableAgents = () => {
       fontFamily:'Poppins'
     }}
     >
+       {dataLoaded ? (  
       <DataTable columns={columns} data={filteredAgents}
         pagination
         fixedHeader
@@ -312,8 +330,8 @@ const TableAgents = () => {
               searchable
               placeholder="Agent Voice"
                       data={[
-                        { value: 'Male', label: 'Male' },
-                        { value: 'Female', label: 'Female' },
+                        { value: 'male', label: 'male' },
+                        { value: 'female', label: 'female' },
               ]}
               className={classes.responsiveUserType}
             />
@@ -330,6 +348,20 @@ const TableAgents = () => {
         }
         responsive
       />
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
  <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Agent Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image maw={800} radius="md" src='https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2F%2012.jpg6f277ed5-4232-4ee0-aae1-f585fa6346b8?alt=media&token=b3fd74f5-5695-4d90-9e52-8ea8239b7bf1' alt="Random image" /></Box>

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { deleteSubscription, deleteSubscriptionRecord } from '../../../api/admin/subscriptions';
 import { notifications } from '@mantine/notifications';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -109,6 +110,9 @@ const SubscriptionTable = () => {
   const [specificPrice, setSpecificPrice] = useState('');
   const [specificLimit, setSpecificLimit] = useState('');
   const [specificDescription, setSpecificDescription] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [dataLoadedAdminSubscriptions, setDataLoadedAdminSubscriptions] = useState(false);
+
   const navigate = useNavigate();
 
   const handleClear = () => {
@@ -161,6 +165,9 @@ const SubscriptionTable = () => {
     } catch (error) {
       console.log(error);
     }
+    finally {
+      setDataLoaded(true); 
+    }
   }
 
   const getSubscriptions = async () => {
@@ -171,6 +178,9 @@ const SubscriptionTable = () => {
       setFilteredSubscriptions(response?.data?.subscriptions);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setDataLoadedAdminSubscriptions(true);
     }
   }
 
@@ -349,6 +359,23 @@ const SubscriptionTable = () => {
       setFilteredSubscriptions(subscriptionsData);
     });
   }, []);
+{/*
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      getSubscriptionsRecord; // Call your API function to get data
+      setDataLoaded(true); // Set dataLoaded to true when data is loaded
+    }, 2000); // Simulate a 2-second delay (adjust as needed)
+  }, []);
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      getSubscriptions; // Call your API function to get data
+      setDataLoadedAdminSubscriptions(true); // Set dataLoaded to true when data is loaded
+    }, 2000); // Simulate a 2-second delay (adjust as needed)
+  }, []);
+*/}
 
   return (
     <Box
@@ -362,6 +389,7 @@ const SubscriptionTable = () => {
           <Tabs.Tab value="Subscriptions" icon={<AiOutlineShoppingCart size="0.8rem" />}>Subscriptions</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="businessOwnerSubscriptions" pt="xs">
+        {dataLoaded ? (  
           <DataTable columns={columnsBusinessOwnerSubscriptions} data={filteredSubscriptionsRecord}
             pagination
             fixedHeader
@@ -418,6 +446,20 @@ const SubscriptionTable = () => {
             }
             responsive
           />
+          ) : (
+            // Render the loading spinner when data is not yet loaded
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+              <Hourglass
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={['#0096FF', '	#FF5F1F']}
+            />
+            </div>
+          )}
           <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription Details</Text>} radius={'md'} opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} size={'md'}  >
             <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
               <Box mah={800}><Image maw={800} radius="md" src={`https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2FDon't%20Be%20Late.jpg?alt=media&token=484d01be-6f5d-40cd-906c-6e6e2e762d27`} alt="Random image" /></Box>
@@ -441,6 +483,7 @@ const SubscriptionTable = () => {
         </Modal>
         </Tabs.Panel>
         <Tabs.Panel value="Subscriptions" pt="xs">
+        {dataLoadedAdminSubscriptions ? (  
           <DataTable columns={columnsSuperAdminSubscriptions} data={filteredSubscriptions}
             pagination
             fixedHeader
@@ -503,6 +546,20 @@ const SubscriptionTable = () => {
             }
             responsive
           />
+          ) : (
+            // Render the loading spinner when data is not yet loaded
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+              <Hourglass
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={['#0096FF', '	#FF5F1F']}
+            />
+            </div>
+          )}
           <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
             <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
               <Box mah={800}><Image maw={800} radius="md" src={`https://www.5startoolboxstore.com/wp-content/uploads/2021/02/130073453-subscription-label-subscription-red-band-sign-subscription.jpg`} alt="Random image" /></Box>

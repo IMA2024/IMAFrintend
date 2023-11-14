@@ -7,7 +7,7 @@ import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail
 import { useNavigate } from 'react-router-dom';
 import { deleteUser } from '../../../api/admin/users';
 import { notifications } from '@mantine/notifications';
-
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -22,7 +22,6 @@ const useStyles = createStyles((theme) => ({
       display:'flex',
       flexDirection: 'row-reverse',
       gap:'20px',
-      //justifyContent:'space-between',
       marginLeft:'-5px',
       paddingTop: '20px',
       paddingBottom: '20px',
@@ -33,10 +32,7 @@ const useStyles = createStyles((theme) => ({
       },
 
       [theme.fn.smallerThan('lg')]: {
-        //justifyContent: 'space-between',
-        //gap:'40px',
-        //width:'100%',
-        //marginLeft:'0px',
+
       },
 
     },
@@ -143,7 +139,9 @@ const [specificLastName, setSpecificLastName] =  useState('');
 const [specificEmail, setSpecificEmail] =  useState('');
 const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
 const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
-  const [modalDeletion, SetModalDeletion] = useState('');
+const [modalDeletion, SetModalDeletion] = useState('');
+const [dataLoaded, setDataLoaded] = useState(false);
+
 const navigate = useNavigate();
 
   
@@ -189,6 +187,9 @@ const getUsers = async () => {
   } catch (error) {
     console.log(error);
   }
+  finally {
+    setDataLoaded(true);
+  }
 };
 
 
@@ -217,8 +218,6 @@ const columns = [
     selector: (row, index) => index + 1, // Generate serial numbers dynamically
     sortable: true,
     width: '60px', // Set the width of the serial number column
-    //allowOverflow: 'yes',
-    
 
   },
   {
@@ -233,7 +232,6 @@ const columns = [
     <img width={150} height={150} src={row.profilePic} />
     </HoverCard.Dropdown>
   </HoverCard>
-     //<img width={50} height={50} src={row.profilePic} />,
   },
     {
         name: <strong >Role</strong>,
@@ -243,14 +241,12 @@ const columns = [
     },
     {
         name: <strong>First Name</strong>,
-        //width: '110px',
         selector: (row) => row.firstName,
         sortable: true,
         allowOverflow: 'yes',
     },
     {
         name: <strong>Last Name</strong>,
-        //width: '110px',
         selector: (row) => row.lastName,
         sortable: true,
         allowOverflow: 'yes',
@@ -259,13 +255,10 @@ const columns = [
         name: <strong>Email</strong>,
         selector: (row) => row.email,
         sortable: true,
-        //allowOverflow: 'yes',
-        //width: '130px',
     },
     {
         name: <strong>Phone No</strong>,
         selector: (row) => row.phoneNumber,
-        //width: '130px',
         sortable: true,
         allowOverflow: 'yes',
         style: {
@@ -298,14 +291,10 @@ const columns = [
           </Badge>
         )
       ),
-     // width: '130px',
       sortable: true,
-     // allowOverflow: 'yes',
     },
     {
         name: <strong>Action</strong>,
-        //width: '150px',
-        //allowOverflow: 'yes',
         cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)}/></Box>
     },
 ]
@@ -336,8 +325,11 @@ useEffect(() => {
     const usersData = data.map((user) => ({ ...user, status: 'Active' }));
     setUsers(usersData);
     setFilteredUsers(usersData);
+    
   });
 }, []);
+
+
 
   return (
     <Box 
@@ -345,6 +337,7 @@ useEffect(() => {
       fontFamily:'Poppins'
     }}
     >
+        {dataLoaded ? (  
     <DataTable columns={columns} data={filteredUsers}
     pagination
     fixedHeader
@@ -454,19 +447,21 @@ useEffect(() => {
     }
     responsive
      />
-     {/*
-      <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close}  size={800}  >
-  <Box mb={30}  style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-    <Box mah={350}><Image  width={'200'} height={'200'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
-    <Box  mah={350}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" fullWidth>{specificRole}</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text ml={5}>{specificFirstName}</Text><Text ml={5}>{specificLastName}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
-    </Box>
-  </Box>
-      </Modal>
-  */}
+     ) : (
+      // Render the loading spinner when data is not yet loaded
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+        <Hourglass
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="hourglass-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        colors={['#0096FF', '	#FF5F1F']}
+      />
+      </div>
+    )}
+
    <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
   <Box className={classes.modalContainer} mb={30}  p={10}  style={{}}>
     <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="50%"  src={specificPicture} alt="Random image" /></Box>
