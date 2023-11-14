@@ -9,6 +9,7 @@ import { deleteSubscriptionRecord } from '../../../api/businessOwner/subscriptio
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
 import { notifications } from '@mantine/notifications';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -99,8 +100,9 @@ const [specificAmount, setSpecificAmount] =  useState('');
 const [specificMethod, setSpecificMethod] =  useState('');
 const [specificDate, setSpecificDate] =  useState('');
 const [modalDeletion, SetModalDeletion] = useState('');
-const navigate = useNavigate();
+const [dataLoaded, setDataLoaded] = useState(false);
 
+const navigate = useNavigate();
 
 const handleClear = () => {
   setSearch('');
@@ -134,6 +136,9 @@ const getSubscriptions = async () => {
     setFilteredSubscriptions(mySubscriptions);
   } catch (error) {
     console.log(error);
+  }
+  finally {
+    setDataLoaded(true);
   }
 }
 
@@ -227,6 +232,7 @@ useEffect(() => {
       fontFamily:'Poppins'
     }}
     >
+      {dataLoaded ? (  
     <DataTable columns={columns} data={filteredSubscriptions}
     pagination
     fixedHeader
@@ -284,6 +290,20 @@ useEffect(() => {
     }
     responsive
      />
+     ) : (
+      // Render the loading spinner when data is not yet loaded
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+        <Hourglass
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="hourglass-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        colors={['#0096FF', '	#FF5F1F']}
+      />
+      </div>
+    )}
     <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Subscription Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
     <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>

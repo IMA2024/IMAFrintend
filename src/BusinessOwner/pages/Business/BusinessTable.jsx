@@ -9,8 +9,16 @@ import { notifications } from '@mantine/notifications';
 import { deleteBusiness } from '../../../api/businessOwner/businesses';
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
+
+  responsiveSearchContainer: {
+    width:'100%',
+    display: 'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+  },
 
   responsiveSearchRow: {
     display: 'flex',
@@ -28,6 +36,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   responsiveAddUserBtn: {
+    marginTop:'20px',
+    marginRight:'25px',
     [theme.fn.smallerThan('sm')]: {
     },
 
@@ -125,6 +135,8 @@ const TableBusiness = () => {
   const [specificAddress, setSpecificAddress] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -168,6 +180,9 @@ const TableBusiness = () => {
         setFilteredBusinesses(userBusinesses);
       } catch (error) {
         console.log(error);
+      }
+      finally {
+        setDataLoaded(true);
       }
     };
     
@@ -218,31 +233,6 @@ const TableBusiness = () => {
     </HoverCard>
        //<img width={50} height={50} src={row.profilePic} />,
     },
-   /*
-    {
-      name: 'Profile Picture',
-      width: '110px',
-      selector: (row) => <img
-         //width={50} height={50} 
-         src={row.profilePic}
-      style={{
-        transition: 'transform 0.3s ease-in-out',
-        width: '50px', // Initial width
-        height: '50px', // Initial height
-      }}
-      onMouseEnter={(event) => {
-        event.currentTarget.style.transform = 'scale(1.1)';
-        event.currentTarget.style.width = '110px'; // Increase width on hover
-        event.currentTarget.style.height = '110px'; // Increase height on hover
-      }}
-      onMouseLeave={(event) => {
-        event.currentTarget.style.transform = 'scale(1)';
-            event.currentTarget.style.width = '50px'; // Reset width
-            event.currentTarget.style.height = '50px'; // Reset height
-      }}
-        />,
-    },
-    */
     {
       name: <strong>Business Type</strong>,
       selector: (row) => row?.type,
@@ -344,6 +334,7 @@ const TableBusiness = () => {
       fontFamily:'Poppins'
     }}
     >
+       {dataLoaded ? (  
       <DataTable columns={columns} data={filteredBusinesses}
         pagination
         fixedHeader
@@ -353,6 +344,7 @@ const TableBusiness = () => {
         highlightOnHover
         subHeader
         subHeaderComponent={
+          <Box className={classes.responsiveSearchContainer}>
           <Box className={classes.responsiveSearchRow}>
             <Box className={classes.responsiveFilterIcon} >
               <Menu shadow="" width={200} closeOnItemClick={false} >
@@ -466,6 +458,7 @@ const TableBusiness = () => {
               ]}
               className={classes.responsiveActiveBlock}
             />
+            </Box>
             <Button
               size='md'
               className={classes.responsiveAddUserBtn}
@@ -473,40 +466,25 @@ const TableBusiness = () => {
             >
               Add Business
             </Button>
-          </Box>
+            </Box>
+          
         }
         responsive
       />
-      {/*
-      <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close} size={800}  >
-        <Box mb={30} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Box mah={350}><Image maw={300} radius="md" src={specificPicture} alt="Random image" /></Box>
-          <Box mah={350} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-            <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
-          </Box>
-        </Box>
-      </Modal>
-      */}
-      {/*
-      <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
-  <Box className={classes.modalContainer} mb={30}  p={20}  style={{}}>
-    <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="lg"  src={specificPicture} alt="Random image" /></Box>
-    <Box className={classes.modalDetails} style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
-    </Box>
-  </Box>
-      </Modal>
-    */}
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
       
           <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Business Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>

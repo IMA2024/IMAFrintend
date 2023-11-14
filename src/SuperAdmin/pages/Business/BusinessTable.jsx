@@ -7,6 +7,7 @@ import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteBusiness } from '../../../api/admin/businesses';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -135,6 +136,8 @@ const BusinessTable = () => {
   const [specificAddress, setSpecificAddress] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
@@ -173,6 +176,9 @@ const BusinessTable = () => {
       setFilteredBusinesses(response?.data?.businesses);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setDataLoaded(true);
     }
   }
 
@@ -325,12 +331,14 @@ const BusinessTable = () => {
     });
   }, []);
 
+
   return (
     <Box 
     sx={{
       fontFamily:'Poppins'
     }}
     >
+       {dataLoaded ? (  
       <DataTable columns={columns} data={filteredBusinesses}
         pagination
         fixedHeader
@@ -467,38 +475,20 @@ const BusinessTable = () => {
         }
         responsive
       />
-      {/*
-      <Modal p={'sm'} radius={'md'} centered opened={opened} onClose={close} size={800}  >
-        <Box mb={30} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Box mah={350}><Image maw={300} radius="md" src={specificPicture} alt="Random image" /></Box>
-          <Box mah={350} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-            <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
-          </Box>
-        </Box>
-      </Modal>
-      */}
-      {/*
-      <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
-        <Box className={classes.modalContainer} mb={30} p={20} style={{}}>
-          <Box className={classes.modalImage}><Image width={'200'} height={'200'} radius="lg" src={specificPicture} alt="Random image" /></Box>
-          <Box className={classes.modalDetails} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-            <Box ><Badge variant="filled" fullWidth>{specificType}</Badge></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificSubscribed}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconBuilding size={20} color="green" /><Text ml={5}>{specificName}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificOwner}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconMail size={20} color="green" /><Text ml={5}>{specificEmail}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconPhone size={20} color="green" /><Text ml={5}>{specificPhoneNumber}</Text></Box>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconHome size={20} color="green" /><Text ml={5}>{specificAddress}</Text></Box>
-          </Box>
-        </Box>
-      </Modal>
-    */}
-      
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
         <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Business Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
     <Box  mah={380}><Image height={200} width={400} radius="md" src={specificPicture} alt="Random image" /></Box>

@@ -8,6 +8,7 @@ import { notifications } from '@mantine/notifications';
 import { deletePayment } from '../../../api/businessOwner/payment';
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -93,6 +94,8 @@ const BusinessPanelPaymentTable = () => {
   const [specificMethod, setSpecificMethod] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const { user } = useContext(UserContext);
 
   const handleClear = () => {
@@ -126,6 +129,9 @@ const BusinessPanelPaymentTable = () => {
       setFilteredPayments(myPayments);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setDataLoaded(true);
     }
   }
 
@@ -219,6 +225,7 @@ const BusinessPanelPaymentTable = () => {
       fontFamily:'Poppins'
     }}
     >
+       {dataLoaded ? (  
       <DataTable columns={columns} data={filteredPayments}
         pagination
         fixedHeader
@@ -269,6 +276,20 @@ const BusinessPanelPaymentTable = () => {
         }
         responsive
       />
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
       <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Payment Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image maw={800} radius="md" src={'https://www.digitaloutlook.com.au/wp-content/uploads/2017/09/future_payment_methods-compressor-1.jpg'} alt="Random image" /></Box>

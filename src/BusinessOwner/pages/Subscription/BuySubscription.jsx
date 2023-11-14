@@ -5,6 +5,7 @@ import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -38,6 +39,8 @@ export default function BuySubscription() {
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [noTransitionOpened, setNoTransitionOpened] = useState(false);
   const [subscribed, setSubscribed] = useState(undefined);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const { user } = useContext(UserContext);
 
   const form = useForm({
@@ -59,6 +62,9 @@ export default function BuySubscription() {
       console.log(response?.data?.subscriptions);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setDataLoaded(true);
     }
   }
 
@@ -110,7 +116,8 @@ export default function BuySubscription() {
 
   return (
     <Container my="md">
-      <Grid gutter={'xs'}>
+     {dataLoaded ? ( 
+      <Grid gutter={'xs'}> 
         {subscriptions.map((subscription, index) => (
           <Grid.Col xs={6} sm={4} md={4} radius="md" >
             <Card radius="md">
@@ -148,6 +155,20 @@ export default function BuySubscription() {
           </Grid.Col>
         ))}
       </Grid>
+       ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
       <Box>
     
         <Modal opened={slowTransitionOpened} onClose={() => setSlowTransitionOpened(false)} title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Select the business for subscription</Text>} transitionProps={{ transition: 'rotate-left' }}>

@@ -76,6 +76,10 @@ const useStyles = createStyles((theme) => ({
   },
 
   LogoWithSearch : {
+    display:'flex',
+    flexDirection:'row',
+    paddingLeft: 10,
+    justifyContent:'space-between',
     [theme.fn.smallerThan('md')]: {
         display:'none',
       },
@@ -329,7 +333,7 @@ const HeaderTop = () => {
     >
     <Box className={classes.responsiveContainer}>
     <Box  className={classes.responsiveContainerChild1} >
-    <Box className={classes.LogoWithSearch}><Image onClick={() => GoToLandingPage()} width={150} height={55} fit="contain" src={Logo} /></Box>
+   <Box className={classes.LogoWithSearch} > <Box className={classes.Name} ><Text  fw={'bold'}  size={35} mt={5} onClick={() => GoToLandingPage()}>IMA</Text></Box><Image onClick={() => GoToLandingPage()} width={75} height={55} fit="contain" src={Logo} /></Box>
     <Box className={classes.searchWithLogo}><IconSearch onClick={handleIconSearchClick} color="gray" /></Box>
     </Box>
     <Box className={classes.responsiveContainerChild2} >

@@ -7,6 +7,7 @@ import { IconFilter, IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteAgent } from '../../../api/businessOwner/agent';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -126,6 +127,8 @@ const AgentsTableMA = () => {
   const [specificAgentVoice, setSpecificAgentVoice] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const navigate = useNavigate();
 
   const handleEdit = (row) => {
@@ -164,6 +167,9 @@ const AgentsTableMA = () => {
         setFilteredAgents(allAgents);
       } catch (error) {
         console.log(error);
+      }
+      finally {
+        setDataLoaded(true);
       }
     }
 
@@ -240,6 +246,7 @@ const AgentsTableMA = () => {
       fontFamily:'Poppins'
     }}
     >
+     {dataLoaded ? (  
       <DataTable columns={columns} data={filteredAgents}
         pagination
         fixedHeader
@@ -323,6 +330,20 @@ const AgentsTableMA = () => {
         }
         responsive
       />
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
  <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Agent Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image maw={800} radius="md" src='https://firebasestorage.googleapis.com/v0/b/intelligentmarketingagen-a3e0b.appspot.com/o/images%2F%2012.jpg6f277ed5-4232-4ee0-aae1-f585fa6346b8?alt=media&token=b3fd74f5-5695-4d90-9e52-8ea8239b7bf1' alt="Random image" /></Box>

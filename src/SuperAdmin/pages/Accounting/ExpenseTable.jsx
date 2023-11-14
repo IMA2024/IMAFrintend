@@ -3,10 +3,11 @@ import DataTable from 'react-data-table-component'
 import axios from 'axios';
 import { Button, TextInput, Select, Box, createStyles, Menu, Text, Modal, Badge, Image, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconFilter, IconEye, IconTrash, IconUser } from '@tabler/icons-react';
+import { IconFilter, IconEye, IconTrash, IconUser, IconEdit } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { deleteExpense } from '../../../api/admin/accounting';
+import {  Hourglass } from 'react-loader-spinner';
 
 const useStyles = createStyles((theme) => ({
 
@@ -94,8 +95,14 @@ const ExpenseTable = () => {
   const [specificAmount, setSpecificAmount] = useState('');
   const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
   const [modalDeletion, SetModalDeletion] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleEdit = (row) => {
+    navigate('/EditExpense', { state: { rowData: row } });
+  };
+
 
   const handleClear = () => {
     setSearch('');
@@ -126,6 +133,9 @@ const ExpenseTable = () => {
       setFilteredExpenses(response?.data?.expenses);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setDataLoaded(true);
     }
   }
 
@@ -180,7 +190,7 @@ const ExpenseTable = () => {
     {
       name: <strong>Action</strong>,
       width: '120px',
-      cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>
+      cell: (row) => <Box><IconEye color='gray' onClick={() => handleViewSpecific(row)} /><IconEdit color='gray' onClick={() => handleEdit(row)} /><IconTrash color='gray' onClick={() => deletionConfirmation(row._id)} /></Box>
     },
   ]
 
@@ -205,12 +215,14 @@ const ExpenseTable = () => {
     });
   }, []);
 
+  
   return (
     <Box 
     sx={{
       fontFamily:'Poppins'
     }}
     >
+          {dataLoaded ? (  
       <DataTable columns={columns} data={filteredExpenses}
         pagination
         fixedHeader
@@ -268,6 +280,20 @@ const ExpenseTable = () => {
         }
         responsive
       />
+      ) : (
+        // Render the loading spinner when data is not yet loaded
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <Hourglass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={['#0096FF', '	#FF5F1F']}
+        />
+        </div>
+      )}
       <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Expense Details</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}  >
         <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
           <Box mah={800}><Image maw={800} radius="md" src={specificPicture} alt="Random image" /></Box>
