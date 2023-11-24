@@ -270,15 +270,15 @@ useEffect(() => {
     </Button>
     */}
         </Box>
-        {/*
+        
         <Button 
         size='md'
         className={classes.responsiveAddUserBtn}
-        onClick={() => navigate('/AddQuestionnaire')}
+        //onClick={() => navigate('/AddQuestionnaire')}
         >
-        Add Questionnaire
+        Generate Leads
        </Button>
-*/}
+
         </Box>
         
     }

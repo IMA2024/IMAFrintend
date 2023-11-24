@@ -51,9 +51,9 @@ export const MarketingAgentSideBarData = [
     ],
   },
   {
-    name: "Call Analytics", Icon: BiSolidBusiness,
+    name: "Lead Generation", Icon: BiSolidBusiness,
     subLink: [
-      { name: "View Call Analytics", link: "/ViewCallPriority", Icon: AiOutlineEye },
+      { name: "View Generated Leads", link: "/ViewCallPriority", Icon: AiOutlineEye },
     ],
   },
   {

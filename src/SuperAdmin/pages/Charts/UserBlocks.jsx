@@ -147,25 +147,25 @@ export default function StatsGrid() {
     }, []);
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title} >
+      <Paper withBorder p="md" radius="md" key={stat.title} bg={'orange'} >
         <Group position="apart">
-          <Text size="xs" color="dimmed" className={classes.title}>
+          <Text size="xs" color='white' className={classes.title} >
             TOTAL USERS
           </Text>
         
-          <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
+          <Icon color='grey'  className={classes.icon} size="1.4rem" stroke={1.5} />
     
         </Group>
 
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{users}</Text>
-          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+          <Text className={classes.value} >{users}</Text>
+          <Text color={stat.diff > 0 ? 'black' : 'grey'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz="xs" c="dimmed" mt={7}>
+        <Text fz="xs"  mt={7} color='white' >
           Compared to previous month
         </Text>
       </Paper>
@@ -176,24 +176,24 @@ export default function StatsGrid() {
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title} >
+      <Paper withBorder p="md" radius="md" key={stat.title} bg={'red'}>
         <Group position="apart">
-          <Text size="xs" color="dimmed" className={classes.title}>
+          <Text size="xs" color='white' className={classes.title}>
           MARKETING AGENTS
           </Text>
         
-          <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
+          <Icon color='grey' className={classes.icon} size="1.4rem" stroke={1.5} />
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.value}>{marketingAgents}</Text>
-          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+          <Text color={stat.diff > 0 ? 'black' : 'grey'}  fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz="xs" c="dimmed" mt={7}>
+        <Text fz="xs" color='white' mt={7}>
           Compared to previous month
         </Text>
       </Paper>
@@ -204,9 +204,9 @@ export default function StatsGrid() {
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title} >
+      <Paper withBorder p="md" radius="md" key={stat.title} bg={'green'}>
         <Group position="apart">
-          <Text size="xs" color="dimmed" className={classes.title}>
+          <Text size="xs" color='white' className={classes.title}>
           BUSINESS OWNERS
                     </Text>
         
@@ -215,13 +215,13 @@ export default function StatsGrid() {
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.value}>{owners}</Text>
-          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+          <Text color={stat.diff > 0 ? 'black' : 'grey'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz="xs" c="dimmed" mt={7}>
+        <Text fz="xs" color='white' mt={7}>
           Compared to previous month
         </Text>
       </Paper>
@@ -232,9 +232,9 @@ export default function StatsGrid() {
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title} >
+      <Paper withBorder p="md" radius="md" key={stat.title} bg={'purple'}>
         <Group position="apart">
-          <Text size="xs" color="dimmed" className={classes.title}>
+          <Text size="xs" color='white' className={classes.title}>
           CUSTOMERS          
           </Text>
         
@@ -243,13 +243,13 @@ export default function StatsGrid() {
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.value}>{customers}</Text>
-          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+          <Text color={stat.diff > 0 ? 'black' : 'grey'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz="xs" c="dimmed" mt={7}>
+        <Text fz="xs" color='white' mt={7}>
           Compared to previous month
         </Text>
       </Paper>
