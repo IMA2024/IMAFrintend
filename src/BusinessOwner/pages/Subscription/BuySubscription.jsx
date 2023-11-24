@@ -57,7 +57,7 @@ export default function BuySubscription() {
 
   const getSubscriptions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/businessowner/viewSubscriptions');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessowner/viewSubscriptions');
       setSubscriptions(response?.data?.subscriptions);
       console.log(response?.data?.subscriptions);
     } catch (error) {
@@ -70,7 +70,7 @@ export default function BuySubscription() {
 
   useEffect(() =>{
     const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/admin/businessesList');
+      const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/businessesList');
       const newData =  await response.json();
       console.log(newData);
 
@@ -97,7 +97,7 @@ export default function BuySubscription() {
     const headers = {
       "Content-Type": "application/json"
     }
-    const response = await fetch("http://localhost:5000/businessOwner/makePayment", {
+    const response = await fetch("https://imaa-2585bbde653a.herokuapp.com/businessOwner/makePayment", {
       method: "POST",
       headers: headers,
       body: JSON.stringify({ businessId, subscribed })

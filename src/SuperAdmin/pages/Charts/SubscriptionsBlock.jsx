@@ -104,7 +104,7 @@ export default function SubscriptionsBlock() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalSubscriptions');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalSubscriptions');
         const newData = await response.json();
         console.log(response);
         setTotalSubscriptions(newData);
@@ -119,7 +119,7 @@ export default function SubscriptionsBlock() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalRevenue');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalRevenue');
         const newData = await response.json();
         console.log(response);
         setTotalRevenue(newData);

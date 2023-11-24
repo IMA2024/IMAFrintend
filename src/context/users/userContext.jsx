@@ -18,7 +18,7 @@ export function UserProvider({ children }) {
   
     const fetchMyProfile = async (token) => {
       try {
-        const response = await fetch('http://localhost:5000/myProfile', {
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/myProfile', {
           headers: {
             authorization: token,
           },

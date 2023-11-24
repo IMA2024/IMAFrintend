@@ -58,7 +58,7 @@ export default function BusinessOwnerViewFaqs() {
 
   const getFAQs = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/businessOwner/viewAllFAQs');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessOwner/viewAllFAQs');
       setFAQs(response?.data?.FAQs);
       setFilteredFAQs(response?.data?.FAQs);
       console.log(response?.data?.FAQs);

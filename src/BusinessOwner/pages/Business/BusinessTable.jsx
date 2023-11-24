@@ -170,7 +170,7 @@ const TableBusiness = () => {
 
     const getBusinesses = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/businessOwner/viewAllBusinesses');
+        const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessOwner/viewAllBusinesses');
         console.log(response?.data?.businesses);
     
         // Filter businesses based on the logged-in user's _id

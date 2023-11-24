@@ -100,7 +100,7 @@ export default function BusinessBlocksBO() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/businessOwner/totalBusinesses');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalBusinesses');
         const newData = await response.json();
         console.log(response);
         setTotalBusinesses(newData);
@@ -115,7 +115,7 @@ export default function BusinessBlocksBO() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/businessOwner/subscribedBusinesses');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/subscribedBusinesses');
         const newData = await response.json();
         console.log(response);
         setSubscribed(newData);
@@ -130,7 +130,7 @@ export default function BusinessBlocksBO() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/businessOwner/unsubscribedBusinesses');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/unsubscribedBusinesses');
         const newData = await response.json();
         console.log(response);
         setUnsubscribed(newData);

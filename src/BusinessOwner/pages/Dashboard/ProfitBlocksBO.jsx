@@ -89,7 +89,7 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/businessOwner/totalRevenue');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalRevenue');
           const newData = await response.json();
           console.log(response);
           setRevenue(newData);
@@ -104,7 +104,7 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/businessOwner/totalExpense');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalExpense');
           const newData = await response.json();
           console.log(response);
           setExpense(newData);
@@ -119,7 +119,7 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/businessOwner/totalProfit');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalProfit');
           const newData = await response.json();
           console.log(response);
           setProfit(newData);
@@ -134,7 +134,7 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/businessOwner/totalPayments');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalPayments');
           const newData = await response.json();
           console.log(response);
           setPayments(newData);

@@ -50,7 +50,7 @@ export default function ConfigureAgents() {
 
   useEffect(() =>{
     const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/admin/businessesList');
+      const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/businessesList');
       const newData =  await response.json();
       const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
       setCountries(filteredBusinesses);

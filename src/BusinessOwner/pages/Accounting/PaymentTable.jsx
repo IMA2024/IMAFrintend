@@ -122,7 +122,7 @@ const BusinessPanelPaymentTable = () => {
 
   const getPayments = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/businessOwner/viewAllPayments');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessOwner/viewAllPayments');
       const allPayments = response?.data?.payments;
       const myPayments = allPayments?.filter((payment) => payment?.business?.businessOwner?._id === user?._id);
       setPayments(myPayments);

@@ -89,7 +89,7 @@ export default function StatsGrid() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalUsers');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalUsers');
           const newData = await response.json();
           console.log(response);
           setUsers(newData);
@@ -104,7 +104,7 @@ export default function StatsGrid() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalMarketingAgents');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalMarketingAgents');
           const newData = await response.json();
           console.log(response);
           setMarketingAgents(newData);
@@ -119,7 +119,7 @@ export default function StatsGrid() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalBusinessOwners');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalBusinessOwners');
           const newData = await response.json();
           console.log(response);
           setOwners(newData);
@@ -134,7 +134,7 @@ export default function StatsGrid() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/admin/totalCustomers');
+          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalCustomers');
           const newData = await response.json();
           console.log(response);
           setCustomers(newData);

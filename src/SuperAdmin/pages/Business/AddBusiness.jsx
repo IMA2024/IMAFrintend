@@ -63,7 +63,7 @@ export default function AddBusiness() {
 
   useEffect(() =>{
     const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/admin/businessOwnersList');
+      const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/businessOwnersList');
       const newData =  await response.json();
       console.log(newData);
       setCountries(newData);

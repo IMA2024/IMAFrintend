@@ -131,7 +131,7 @@ const QuestionnaireTable = () => {
 
   const getQuestionnaires = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/businessOwner/viewAllQuestionnaires');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessOwner/viewAllQuestionnaires');
       console.log(response?.data?.questionnaires);
 
       const userQuestionnaires = response?.data?.questionnaires.filter((questionnaire) => questionnaire?.business?.businessOwner?._id === user?._id);

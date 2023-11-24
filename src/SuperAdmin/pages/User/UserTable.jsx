@@ -175,7 +175,7 @@ const deletionConfirmation = (id) => {
 
 const getUsers = async () => {
   try {
-    const response = await Axios.get('http://localhost:5000/admin/viewAllUsers');
+    const response = await Axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewAllUsers');
     const allUsers = response.data.users;
 
     // Filter out the super admin based on a condition (for example, role === 'superAdmin')

@@ -129,7 +129,7 @@ const deletionConfirmation = (id) => {
 
 const getSubscriptions = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/businessOwner/viewSubscriptionRecord');
+    const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessOwner/viewSubscriptionRecord');
     const allSubscriptions = response?.data?.subscriptions;
     const mySubscriptions = allSubscriptions?.filter((subscription) => subscription?.business?.businessOwner === user?._id);
     setSubscriptions(mySubscriptions);
