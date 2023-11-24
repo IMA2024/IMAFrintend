@@ -56,7 +56,7 @@ export default function EditSubscription() {
 
   const getCountries = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewSubscriptions');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewSubscriptions');
       setCountries(response?.data?.subscriptions);
       console.log(response?.data?.subscriptions);
     } catch (error) {

@@ -166,7 +166,7 @@ const TableAgents = () => {
 
     const getAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/businessOwner/viewAllAgents');
+        const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessOwner/viewAllAgents');
         const allAgents = response?.data?.agents;
         console.log(allAgents);
         const myAgents = allAgents?.filter((agent) => agent?.business?.businessOwner?._id === user?._id);

@@ -51,7 +51,7 @@ export default function ChooseBusiness({nextStep, prevStep}) {
 
   useEffect(() =>{
     const getBusinesses = async () => {
-      const response = await axios.get('http://localhost:5000/marketingAgent/viewAllSubscribedBusinesses');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/marketingAgent/viewAllSubscribedBusinesses');
       const businesses = response?.data?.businesses;
       console.log(businesses)
       setBusinesses(businesses);

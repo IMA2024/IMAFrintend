@@ -125,7 +125,7 @@ const PaymentTable = () => {
 
   const getPayments = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllPayments');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewAllPayments');
       const allPayments = response?.data?.payments;
       setPayments(allPayments);
       setFilteredPayments(allPayments);

@@ -128,7 +128,7 @@ const ExpenseTable = () => {
 
   const getExpenses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllExpenses');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewAllExpenses');
       setExpenses(response?.data?.expenses);
       setFilteredExpenses(response?.data?.expenses);
     } catch (error) {

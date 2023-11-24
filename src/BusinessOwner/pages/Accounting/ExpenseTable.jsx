@@ -127,7 +127,7 @@ const BusinessPanelExpenseTable = () => {
 
   const getExpenses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllExpenses');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewAllExpenses');
       const allExpenses = response?.data?.expenses;
   
       const myExpenses = allExpenses?.filter((expense) => expense?.business?.businessOwner === user?._id);

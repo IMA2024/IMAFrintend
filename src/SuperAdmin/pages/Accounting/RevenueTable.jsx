@@ -125,7 +125,7 @@ const RevenueTable = () => {
 
   const getRevenues = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewAllRevenues');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewAllRevenues');
       setRevenues(response?.data?.revenues);
       setfilteredRevenues(response?.data?.revenues);
     } catch (error) {

@@ -158,7 +158,7 @@ const SubscriptionTable = () => {
 
   const getSubscriptionsRecord = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewSubscriptionRecord');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewSubscriptionRecord');
       setSubscriptionsRecord(response?.data?.subscriptionsRecord);
       console.log(response?.data?.subscriptionsRecord);
       setFilteredSubscriptionsRecord(response?.data?.subscriptionsRecord);
@@ -172,7 +172,7 @@ const SubscriptionTable = () => {
 
   const getSubscriptions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/viewSubscriptions');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewSubscriptions');
       setSubscriptions(response?.data?.subscriptions);
       console.log(response?.data?.subscriptions);
       setFilteredSubscriptions(response?.data?.subscriptions);

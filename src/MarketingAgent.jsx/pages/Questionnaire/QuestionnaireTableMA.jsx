@@ -124,7 +124,7 @@ const QuestionnaireTableMA = () => {
 
   const getQuestionnaires = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/marketingAgent/viewAllQuestionnaires');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/marketingAgent/viewAllQuestionnaires');
       const allQuestionnaires = response?.data?.questionnaires;
       console.log(allQuestionnaires)
       setQuestionnaires(allQuestionnaires);

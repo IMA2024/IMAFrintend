@@ -105,7 +105,7 @@ export default function StatsGroup() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalSubscriptions');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalSubscriptions');
         const newData = await response.json();
         console.log(response);
         setTotalSubscriptions(newData);
@@ -120,7 +120,7 @@ export default function StatsGroup() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalRevenue');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalRevenue');
         const newData = await response.json();
         console.log(response);
         setTotalRevenue(newData);
@@ -135,7 +135,7 @@ export default function StatsGroup() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/totalBusinesses');
+        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/totalBusinesses');
         const newData = await response.json();
         console.log(response);
         setTotalBusinesses(newData);

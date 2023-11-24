@@ -160,7 +160,7 @@ const AgentsTableMA = () => {
 
     const getAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/marketingAgent/viewAllAgents');
+        const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/marketingAgent/viewAllAgents');
         const allAgents = response?.data?.agents;
         console.log(allAgents)
         setAgents(allAgents);
