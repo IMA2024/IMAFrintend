@@ -12,9 +12,10 @@ import { MarketingAgentSideBarData } from '../../MarketingAgent.jsx/Layout/Marke
 import { UserContext } from '../../context/users/userContext';
 
 export default function GeneralLayout() {
-  let auth = { token: true };
+  //let auth = { token: false };
   const { user } = useContext(UserContext);
   let role = user?.role;
+  //let auth = (role === "") ? false : true;
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const navigate = useNavigate();
@@ -27,6 +28,8 @@ export default function GeneralLayout() {
         navigate('/HeaderMegaMenu/SignIn');
       }
     };
+
+    
 
     window.addEventListener('storage', handleTokenChange);
 
@@ -54,7 +57,7 @@ export default function GeneralLayout() {
   
 
   return (
-    auth.token ? (
+    role ? (
       <AppShell
         styles={{
           main: {
@@ -111,6 +114,6 @@ export default function GeneralLayout() {
         <Box>
           <Outlet />
         </Box>
-      </AppShell>) : <Navigate to='/HeaderMegaMenu' />
+      </AppShell>) : <Navigate to='/LandingPage' />
   );
 }
