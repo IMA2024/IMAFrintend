@@ -170,7 +170,7 @@ const BusinessTable = () => {
 
   const getBusinesses = async () => {
     try {
-      const response = await axios.get('hhttps://imaa-2585bbde653a.herokuapp.com/admin/viewAllBusinesses');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewAllBusinesses');
       console.log(response.data);
       setBusinesses(response?.data?.businesses);
       setFilteredBusinesses(response?.data?.businesses);

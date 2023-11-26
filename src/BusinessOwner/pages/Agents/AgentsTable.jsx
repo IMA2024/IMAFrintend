@@ -169,7 +169,7 @@ const TableAgents = () => {
         const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/businessOwner/viewAllAgents');
         const allAgents = response?.data?.agents;
         console.log(allAgents);
-        const myAgents = allAgents?.filter((agent) => agent?.business?.businessOwner?._id === user?._id);
+        const myAgents = allAgents?.filter((agent) => agent?.business?.businessOwner?._id === user._id);
         setAgents(myAgents);
         setFilteredAgents(myAgents);
       } catch (error) {
