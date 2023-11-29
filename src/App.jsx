@@ -114,6 +114,7 @@ import SubscriptionPaymentChartBO from "./BusinessOwner/pages/Dashboard/Subscrip
 import RegisteredBusinessDonutBO from "./BusinessOwner/pages/Dashboard/RegisteredBusinessDonut";
 import ServicesBO from "./BusinessOwner/pages/Services/ServicesBO";
 import SettingsBO from "./BusinessOwner/pages/Settings/SettingsBO";
+import BusinessOwnerChatMessages from "./BusinessOwner/pages/Chat/BusinessOwnerChatMessages.jsx";
 {
   /* The routes for Business Panel end here*/
 }
@@ -139,6 +140,12 @@ import EditAgentsMA from "./MarketingAgent.jsx/pages/Agents/EditAgentsMA";
 import DashboardMA from "./MarketingAgent.jsx/pages/Dashboard/DashboardMA";
 import AutoDialer from "./MarketingAgent.jsx/pages/AutoDialer/AutoDialer";
 import SettingsMA from "./MarketingAgent.jsx/pages/Settings/SettingsMA";
+import ChatMA from "./MarketingAgent.jsx/pages/Chat/ChatMA.jsx";
+import ChatHeaderMA from "./MarketingAgent.jsx/pages/Chat/ChatHeaderMA.jsx";
+import ChatInputMA from "./MarketingAgent.jsx/pages/Chat/ChatInputMA.jsx";
+import ChatNavbarContentMA from "./MarketingAgent.jsx/pages/Chat/ChatNavbarContentMA.jsx";
+import ChatMessagesMA from "./MarketingAgent.jsx/pages/Chat/ChatMessagesMA.jsx";
+import ChatSearchMA from "./MarketingAgent.jsx/pages/Chat/ChatSearchMA.jsx";
 {
   /* The routes for Marketung Agent Panel end here*/
 }
@@ -375,6 +382,7 @@ export default function Demo() {
                   />
                   <Route path="ServicesBO" element={<ServicesBO />} />
                   <Route path="SettingsBO" element={<SettingsBO />} />
+                  <Route path="SettingsBO" element={<BusinessOwnerChatMessages />} />
                   {/* The routes for Business Panel end here*/}
 
                   {/* These are the routes for Marketung Agent Panel */}
@@ -429,6 +437,12 @@ export default function Demo() {
                   <Route path="DashboardMA" element={<DashboardMA />} />
                   <Route path="AutoDialer" element={<AutoDialer />} />
                   <Route path="SettingsMA" element={<SettingsMA />} />
+                  <Route path="ChatMA" element={<ChatMA />} />
+                  <Route path="ChatHeaderMA" element={<ChatHeaderMA />} />
+                  <Route path="ChatInputMA" element={<ChatInputMA />} />
+                  <Route path="ChatMessagesMA" element={<ChatMessagesMA />} />
+                  <Route path="ChatNavbarContentMA" element={<ChatNavbarContentMA />} />
+                  <Route path="ChatSearchMA" element={<ChatSearchMA />} />
                   {/* The routes for Marketung Agent Panel end here*/}
                 </Route>
               </Routes>

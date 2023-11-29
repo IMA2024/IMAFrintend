@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Box, Image, Text } from '@mantine/core';
 
-const BusinessOwnerChatHeader = ({ selectedContact }) => {
+const ChatHeaderMA = ({ selectedContact }) => {
   return (
     <Box mt={12} ml={20} style={{ display: 'flex', flexDirection: 'row' }}>
       {selectedContact && (
@@ -20,4 +19,4 @@ const BusinessOwnerChatHeader = ({ selectedContact }) => {
   );
 };
 
-export default BusinessOwnerChatHeader;
+export default ChatHeaderMA;

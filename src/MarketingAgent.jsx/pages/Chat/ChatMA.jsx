@@ -5,11 +5,11 @@ import { Image, TextInput, Button, Box, createStyles, Paper, Title, Divider, Sel
 // import ChatHeader from './ChatHeader';
 // import ChatInput from './ChatInput';
 // import ChatMessages from './ChatMessages';
-import BusinessOwnerChatNavbarContent from './BusinessOwnerChatNavbar';
-import BusinessOwnerChatSearch from './BusinessOnwnerChatSearch';
-import BusinessOwnerChatHeader from './BusinessOwnerChatHeader';
-import BusinessOwnerChatInput from './BusinessOwnerChatInput';
-import BusinessOwnerChatMessages from './BusinessOwnerChatMessages';
+import ChatNavbarContentMA from './ChatNavbarContentMA';
+import ChatSearchMA from './ChatSearchMA';
+import ChatHeaderMA from './ChatHeaderMA';
+import ChatInputMA from './ChatInputMA';
+import ChatMessagesMA from './ChatMessagesMA';
 
 const useStyles = createStyles((theme) => ({
 
@@ -47,7 +47,7 @@ const useStyles = createStyles((theme) => ({
 
   responsiveChatHeader: {
     height:'15%',
-    backgroundColor:'#5F3DC4',
+    backgroundColor:'#862E9C',
 
   },
 
@@ -58,14 +58,14 @@ const useStyles = createStyles((theme) => ({
 
   responsiveChatInput: {
     height:'15%',
-    backgroundColor:'#5F3DC4',
+    backgroundColor:'#862E9C',
   },
   
 
 
 }));
 
-const ChatBusinessOwner = () => {
+const ChatMA = () => {
   const { classes } = useStyles();
   const [messages, setMessages] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
@@ -85,18 +85,18 @@ const ChatBusinessOwner = () => {
     </Title>
     <Box className={classes.responsiveContainer}>
       <Box className={classes.responsiveChatSidebar}>
-        <BusinessOwnerChatSearch />
-        <BusinessOwnerChatNavbarContent onContactSelect={handleContactSelect} />
+        <ChatSearchMA />
+        <ChatNavbarContentMA onContactSelect={handleContactSelect} />
       </Box>
       <Box className={classes.responsiveChatScreen}>
         <Box className={classes.responsiveChatHeader}>
-          <BusinessOwnerChatHeader selectedContact={selectedContact} />
+          <ChatHeaderMA selectedContact={selectedContact} />
         </Box>
         <Box className={classes.responsiveChats}>
-          <BusinessOwnerChatMessages messages={messages} />
+          <ChatMessagesMA messages={messages} />
         </Box>
         <Box p={'md'} className={classes.responsiveChatInput}>
-          <BusinessOwnerChatInput onMessageSubmit={addMessage} />
+          <ChatInputMA onMessageSubmit={addMessage} />
         </Box>
       </Box>
     </Box>
@@ -105,4 +105,4 @@ const ChatBusinessOwner = () => {
 };
 
 
-export default ChatBusinessOwner
+export default ChatMA

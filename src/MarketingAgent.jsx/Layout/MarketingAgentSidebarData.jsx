@@ -59,7 +59,7 @@ export const MarketingAgentSideBarData = [
   {
     name: "Chat", Icon: AiFillWechat,
     subLink: [
-      { name: "View Chats", link: "/Chat", Icon: AiOutlineEye },
+      { name: "View Chats", link: "/ChatMA", Icon: AiOutlineEye },
     ],
   },
   {
