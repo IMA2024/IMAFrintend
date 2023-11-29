@@ -12,7 +12,7 @@ import { MarketingAgentSideBarData } from '../../MarketingAgent.jsx/Layout/Marke
 import { UserContext } from '../../context/users/userContext';
 
 export default function GeneralLayout() {
-  //let auth = { token: false };
+  let auth = { token: false };
   const { user } = useContext(UserContext);
   let role = user?.role;
   //let auth = (role === "") ? false : true;
@@ -57,7 +57,7 @@ export default function GeneralLayout() {
   
 
   return (
-    role ? (
+    auth ? (
       <AppShell
         styles={{
           main: {
@@ -93,7 +93,10 @@ export default function GeneralLayout() {
           </Navbar>
         }
         header={
-          <Header bg={'#E9ECEF'} height={{ base: 70, md: 70 }}  >
+          <Header
+           //bg={'#E9ECEF'} 
+           bg={'#FFF'} 
+           height={{ base: 70, md: 70 }}  >
             <div style={{ display: 'flex', height: '100%' }}>
               <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                 <Burger

@@ -3,7 +3,7 @@ import {  IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRig
 import ActionToggle from "../../components/ColorMode";
 import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../assets/Images/IMALogo.jpg';
+import Logo from '../../assets/Images/IMALogo.jpeg';
 import { UserContext } from '../../context/users/userContext';
 import { SpotlightProvider, spotlight } from '@mantine/spotlight';
 import { useState, useEffect } from 'react';
@@ -14,7 +14,8 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor:'#E9ECEF',
+    //backgroundColor:'#E9ECEF',
+    backgroundColor: '#FFF',
     justifyContent:'space-between',
     paddingTop:'0.5rem',
     paddingBottom:'0.5rem',
@@ -342,7 +343,8 @@ const HeaderTop = () => {
     <Text align="center">Welcome Back {user?.firstName} {user?.lastName}</Text>
     </Box>
     <Box className={classes.centerLogo}>
-    <Image width={150} height={55} fit="contain" src={Logo} />
+    {/*<Image width={150} height={55} fit="contain" src={Logo} />*/}
+    <Text  fw={'bold'}  size={35} mt={5} onClick={() => GoToLandingPage()}>IMA</Text>
     </Box>
     </Box>
     <Box className={classes.responsiveContainerChild3}>

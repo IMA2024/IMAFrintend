@@ -1,25 +1,34 @@
-import { Kbd, TextInput, Flex } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { useState } from 'react';
+import { TextInput, Flex } from '@mantine/core';
+import { IconSend } from '@tabler/icons-react';
 
+export default function ChatInput({ onMessageSubmit }) {
+  const [inputValue, setInputValue] = useState('');
 
-export default function ChatInput() {
-    {/*
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSendClick = () => {
+    if (inputValue.trim() !== '') {
+      onMessageSubmit({ text: inputValue, sender: 'me', timestamp: new Date().toLocaleTimeString() });
+      setInputValue('');
+    }
+  };
+
   const rightSection = (
     <Flex align="center">
-      <Kbd mr={5}>Ctrl</Kbd>
-      <span>+</span>
-      <Kbd ml={5}>K</Kbd>
+      <IconSend onClick={handleSendClick} color="green" size="1.5rem" />
     </Flex>
   );
-  */}
 
   return (
     <TextInput
       placeholder="Type Message"
-      //icon={<IconSearch size="1rem" />}
-     // rightSectionWidth={90}
-      //rightSection={rightSection}
-      //styles={{ rightSection: { pointerEvents: 'none' } }}
+      value={inputValue}
+      onChange={handleChange}
+      rightSectionWidth={90}
+      rightSection={rightSection}
     />
   );
 }
