@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Image, TextInput, Button, Box, createStyles, Paper, Title, Divider, Select, Textarea, Text } from '@mantine/core';
 import ChatNavbarContent from './ChatNavbarContent';
 import ChatSearch from './ChatSearch';
 import ChatHeader from './ChatHeader';
 import ChatInput from './ChatInput';
+import ChatMessages from './ChatMessages';
 
 const useStyles = createStyles((theme) => ({
 
@@ -47,6 +48,7 @@ const useStyles = createStyles((theme) => ({
 
   responsiveChats: {
     height:'70%',
+    margin:'20px',
   },
 
   responsiveChatInput: {
@@ -60,34 +62,42 @@ const useStyles = createStyles((theme) => ({
 
 const Chat = () => {
   const { classes } = useStyles();
+  const [messages, setMessages] = useState([]);
+  const [selectedContact, setSelectedContact] = useState(null);
+
+  const addMessage = (message) => {
+    setMessages([...messages, message]);
+  };
+
+  const handleContactSelect = (contact) => {
+    setSelectedContact(contact);
+  };
 
   return (
     <Box>
-         <Title
-        order={2}
-        align="center"
-        sx={{ fontWeight: 550 }}
-        mb={5}
-      >
-        Chat
-      </Title>
+    <Title order={2} align="center" sx={{ fontWeight: 550 }} mb={5}>
+      Chat
+    </Title>
     <Box className={classes.responsiveContainer}>
       <Box className={classes.responsiveChatSidebar}>
         <ChatSearch />
-      <ChatNavbarContent />
+        <ChatNavbarContent onContactSelect={handleContactSelect} />
       </Box>
       <Box className={classes.responsiveChatScreen}>
-      <Box className={classes.responsiveChatHeader}>
-       <ChatHeader />
-      </Box>
-        <Box className={classes.responsiveChats}></Box>
+        <Box className={classes.responsiveChatHeader}>
+          <ChatHeader selectedContact={selectedContact} />
+        </Box>
+        <Box className={classes.responsiveChats}>
+          <ChatMessages messages={messages} />
+        </Box>
         <Box p={'md'} className={classes.responsiveChatInput}>
-          <ChatInput />
+          <ChatInput onMessageSubmit={addMessage} />
         </Box>
       </Box>
     </Box>
-    </Box>
-  )
-}
+  </Box>
+);
+};
+
 
 export default Chat
