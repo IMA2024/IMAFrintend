@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { TextInput, Flex } from '@mantine/core';
 import { IconSend } from '@tabler/icons-react';
 
-export default function BusinessOwnerChatInput({ onMessageSubmit }) {
+export default function ChatInputMA({ onMessageSubmit }) {
   const [inputValue, setInputValue] = useState('');
 
   const handleChange = (event) => {
@@ -18,7 +18,7 @@ export default function BusinessOwnerChatInput({ onMessageSubmit }) {
 
   const rightSection = (
     <Flex align="center">
-      <IconSend onClick={handleSendClick} color="#5F3DC4" size="1.5rem" />
+      <IconSend onClick={handleSendClick} color="#862E9C" size="1.5rem" />
     </Flex>
   );
 
@@ -32,4 +32,3 @@ export default function BusinessOwnerChatInput({ onMessageSubmit }) {
     />
   );
 }
-

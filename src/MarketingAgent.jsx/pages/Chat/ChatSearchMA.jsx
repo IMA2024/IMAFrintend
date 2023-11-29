@@ -2,15 +2,10 @@ import { Kbd, TextInput, Flex } from '@mantine/core';
 import { IconSearch, IconPlus } from '@tabler/icons-react';
 
 
-export default function BusinessOwnerChatSearch() {
+export default function ChatSearchMA() {
   const rightSection = (
     <Flex align="center">
-      {/*
-      <Kbd mr={5}>Ctrl</Kbd>
-      <span>+</span>
-      <Kbd ml={5}>K</Kbd>
-  */}
-  <IconPlus onClick={console.log('add me')} color='#5F3DC4' size="1.5rem" />
+  <IconPlus onClick={console.log('add me')} color='#862E9C' size="1.5rem" />
     </Flex>
   );
 
@@ -18,9 +13,7 @@ export default function BusinessOwnerChatSearch() {
     <TextInput
       placeholder="Search Chat"
       icon={<IconSearch size="1rem" />}
-      //rightSectionWidth={90}
       rightSection={rightSection}
-      //styles={{ rightSection: { pointerEvents: 'none' } }}
     />
   );
 }

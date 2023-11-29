@@ -21,7 +21,7 @@ const data = [
   { imageSrc: 'https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80',icon: IconActivity, label: 'Mahnoor', description: 'Item with description', rightSection: <Text  c="dimmed" >11:45</Text> },
 ];
 
-export default function BusinessOwnerChatNavbarContent({ onContactSelect }) {
+export default function ChatNavbarContentMA({ onContactSelect }) {
   const [active, setActive] = useState(0);
 
   const handleNavLinkClick = (index) => {
@@ -38,7 +38,7 @@ export default function BusinessOwnerChatNavbarContent({ onContactSelect }) {
       rightSection={item.rightSection}
       icon={<Image radius="50%" src={item.imageSrc} width={40} height={40} />}
       onClick={() => handleNavLinkClick(index)}
-      color="violet.9"
+      color="grape.9"
     />
   ));
 
