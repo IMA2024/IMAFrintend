@@ -437,12 +437,7 @@ export default function Demo() {
                   <Route path="DashboardMA" element={<DashboardMA />} />
                   <Route path="AutoDialer" element={<AutoDialer />} />
                   <Route path="SettingsMA" element={<SettingsMA />} />
-                  <Route path="ChatMA" element={<ChatMA />} />
-                  <Route path="ChatHeaderMA" element={<ChatHeaderMA />} />
-                  <Route path="ChatInputMA" element={<ChatInputMA />} />
-                  <Route path="ChatMessagesMA" element={<ChatMessagesMA />} />
-                  <Route path="ChatNavbarContentMA" element={<ChatNavbarContentMA />} />
-                  <Route path="ChatSearchMA" element={<ChatSearchMA />} />
+                  <Route path="ChatMA" element={<Chat />} />
                   {/* The routes for Marketung Agent Panel end here*/}
                 </Route>
               </Routes>

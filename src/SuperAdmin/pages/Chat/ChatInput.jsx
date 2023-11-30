@@ -11,7 +11,7 @@ export default function ChatInput({ onMessageSubmit }) {
 
   const handleSendClick = () => {
     if (inputValue.trim() !== '') {
-      onMessageSubmit({ text: inputValue, sender: 'me', timestamp: new Date().toLocaleTimeString() });
+      onMessageSubmit({ message: inputValue, status: 'send', createdAt: new Date().toLocaleTimeString() });
       setInputValue('');
     }
   };

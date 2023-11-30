@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import socket from './../../socket/socket'
 export const UserContext = createContext(null);
 
 export function UserProvider({ children }) {
