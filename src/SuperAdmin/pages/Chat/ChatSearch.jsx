@@ -9,8 +9,9 @@ export default function ChatSearch() {
   const [opened, { open, close }] = useDisclosure(false);
   const [users, setUsers] =  useState([]);
   const [filteredUsers, setFilteredUsers] =  useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleViewSpecific = (row) => {
+  const handleView = () => {
     open();
   };
 
@@ -30,26 +31,19 @@ export default function ChatSearch() {
     }
   };
 
-
-  
-  const SelectItem = forwardRef(
-    ({ role, firstName, lastName, ...others }, ref) => (
-      React.createElement('div', { ref, ...others },
-        React.createElement(Group, { noWrap: true },
-         // React.createElement(Avatar, { src: image }),
-          React.createElement('div', null,
-             React.createElement(Text, { size: "sm" }, `${firstName} ${lastName}`),
-            React.createElement(Text, { size: "xs", opacity: 0.65 }, role)
-          )
-        )
-      )
-    )
-  );
-  
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    const filteredResults = users.filter(
+      (user) =>
+        user.firstName.toLowerCase().includes(query.toLowerCase()) ||
+        user.lastName.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredUsers(filteredResults);
+  };
 
   const rightSection = (
     <Flex align="center">
-  <IconPlus onClick={() => handleViewSpecific()}color='green' size="1.5rem" />
+  <IconPlus onClick={() => handleView()}color='green' size="1.5rem" />
     </Flex>
   );
 
@@ -59,38 +53,43 @@ export default function ChatSearch() {
 
   return (
     <Box>
-    <TextInput
-      placeholder="Search Chat"
-      icon={<IconSearch size="1rem" />}
-      rightSection={rightSection}
-    />
-     <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Start Chat</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
-      <ScrollArea h={380} type='never'>
-  <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
-    <Box style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Select
-      label="Choose user to chat"
-      placeholder="Pick one"
-      itemComponent={SelectItem}
-      data={filteredUsers}
-      searchable
-      maxDropdownHeight={400} 
-      nothingFound="Nobody here"
-      filter={(value, item) => {
-        console.log('value:', value);
-        return (
-        item.firstName.toLowerCase().includes(value.toLowerCase().trim()) ||
-        item.lastName.toLowerCase().includes(value.toLowerCase().trim())
-        );
-        
-      }}
-      
-     // style={{ minHeight: '380px' }} 
-    />
-    </Box>
+    <TextInput placeholder="Search Chat" icon={<IconSearch size="1rem" />} rightSection={rightSection} />
+    <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Start Chat</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}>
+      <ScrollArea h={380} type="never">
+        <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
+        <Box mb={20}>
+          <TextInput
+            placeholder="Search in Chat"
+            icon={<IconSearch size="1rem" />}
+            value={searchQuery}
+            onChange={(event) => handleSearch(event.currentTarget.value)}
+          />
+        </Box>
+          <Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+            {filteredUsers.map((user) => (
+              <Box
+                key={user._id}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '10px',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s',
+                  ':hover': {
+                    backgroundColor: '#E9ECEF',
+                  },
+                }}
+                //onClick={() => handleViewSpecific(user)}
+              >
+                <Avatar radius="xl" src={user.profilePic} alt={`${user.firstName} ${user.lastName}`} />
+                <Text ml={10}>{`${user.firstName} ${user.lastName}`}</Text>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      </ScrollArea>
+    </Modal>
   </Box>
-  </ScrollArea>
-      </Modal>
-    </Box>
-  );
+);
 }

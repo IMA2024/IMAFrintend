@@ -73,6 +73,7 @@ export default function AboutImaCarousel() {
     <Carousel
       //maw={450}
      // mx="auto"
+      loop
       withIndicators
       height={350}
       plugins={[autoplay.current]}

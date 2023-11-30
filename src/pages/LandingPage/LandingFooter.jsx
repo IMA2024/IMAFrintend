@@ -190,16 +190,17 @@ export default function LandingFooter() {
         <div className={classes.logo}>
          {/*<MantineLogo size={30} />*/}
          {/*<Image width={150} height={55} size={30} fit="contain" src={Logo} />*/}
-         <Text fs={'italic'} fw={'bold'} ff={'cursive'} size={25}>IMA</Text>
+         {/*<Text fs={'italic'} fw={'bold'} ff={'cursive'} size={25}>IMA</Text>*/}
+         <Text  fw={'bold'}  size={35} mt={5} >IMA</Text>
           <Text size="xs" color="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
+          Innovative solutions for modern marketing.
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>
       </Container>
       <Container className={classes.afterFooter}>
         <Text color="dimmed" size="sm">
-          © 2020 mantine.dev. All rights reserved.
+          © 2023 IMA.com. All rights reserved.
         </Text>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>

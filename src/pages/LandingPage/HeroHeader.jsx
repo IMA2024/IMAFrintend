@@ -112,6 +112,7 @@ export default function HeroHeader() {
 
   return (
     <Carousel
+    loop
     plugins={[autoplay.current]}
     onMouseEnter={autoplay.current.stop}
     onMouseLeave={autoplay.current.reset}
