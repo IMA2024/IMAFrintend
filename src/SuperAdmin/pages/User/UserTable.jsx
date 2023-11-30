@@ -337,7 +337,7 @@ useEffect(() => {
       fontFamily:'Poppins'
     }}
     >
-        {dataLoaded ? (  
+    {dataLoaded ? (  
     <DataTable columns={columns} data={filteredUsers}
     pagination
     fixedHeader
