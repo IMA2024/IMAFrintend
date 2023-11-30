@@ -109,37 +109,37 @@ function Card({ image, title, category }) {
 const data = [
   {
     image:
-      sirTRA,
+    'https://avatars.githubusercontent.com/u/62651855?v=4',
     title: ' "The call analytics and scripts make my job efficient, and the lead generation process is seamless. I recommend IMA to fellow agents."',
     category: 'Mr Tehseen Riaz Abbasi:',
   },
   {
     image:
-      Afnan,
+      'https://avatars.githubusercontent.com/u/57043401?v=4',
     title: '"As a marketing agent, I rely on IMA is a powerful tools to connect with business owners and customers. "',
     category: 'Afnan Malik:',
   },
   {
     image:
-      Abdullah,
+      'https://avatars.githubusercontent.com/u/56994371?v=4',
     title: '"IMA web scrapper is a game-changer. It saved me hours of manual work in gathering contacts." ',
     category: 'Abdullah:',
   },
   {
     image:
-      Laraib,
+      'https://avatars.githubusercontent.com/u/50776279?v=4',
       title: ' "The call analytics and scripts make my job efficient, and the lead generation process is seamless. I recommend IMA to fellow agents."',
     category: 'Laraib Saghir:',
   },
   {
     image:
-    Afnan,
+    'https://avatars.githubusercontent.com/u/106748944?v=4',
       title: '"As a marketing agent, I rely on IMA is a powerful tools to connect with business owners and customers. "',
     category: 'Afnan Malik:',
   },
   {
     image:
-      Abdullah,
+      'https://avatars.githubusercontent.com/u/73490563?v=4',
       title: '"IMA web scrapper is a game-changer. It saved me hours of manual work in gathering contacts." ',
     category: 'Abdullah:',
   },
@@ -187,7 +187,7 @@ export default function Reviews() {
       // slideGap="xl"
       // align="start"
       // slidesToScroll={mobile ? 1 : 2}
-  
+  loop
   slideSize="50%"
   breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: rem(2) }]}
   slideGap="xl"

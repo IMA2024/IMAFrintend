@@ -13,7 +13,7 @@ import {
   Stack,
   Box,
   ThemeIcon,
-  
+  Paper
 } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram, IconAt, IconPhone, IconMapPin, IconSun } from '@tabler/icons-react';
 
@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: 400,
     boxSizing: 'border-box',
-    backgroundColor:'#E9ECEF',
+    //backgroundColor:'#E9ECEF',
     /*
     backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
       theme.colors[theme.primaryColor][7]
@@ -181,7 +181,11 @@ export default function ContactUs() {
 
   return (
     
-    <div className={classes.wrapper} >
+    <div className={classes.wrapper} 
+    style={{
+      borderBottom: '1px solid #A9A9A9',
+    }}
+    >
       <SimpleGrid cols={2} spacing={50} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <div>
           <Title className={classes.title}>Contact us</Title>
@@ -193,6 +197,14 @@ export default function ContactUs() {
 
           <Group mt="xl">{icons}</Group>
         </div>
+        <Paper
+        withBorder
+        style={{
+          // Custom border style, width, color, and radius
+          border: '1px solid #A9A9A9', // Replace with your desired color
+          //borderRadius: '10px', // Adjust the border radius as needed
+        }}
+        >
         <form onSubmit={form.onSubmit((values) => console.log(values))} >
         <div className={classes.form}>
           <TextInput
@@ -224,6 +236,7 @@ export default function ContactUs() {
           </Group>
         </div>
         </form>
+        </Paper>
       </SimpleGrid>
     </div>
   );

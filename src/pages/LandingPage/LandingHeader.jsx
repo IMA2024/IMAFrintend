@@ -187,7 +187,8 @@ export default function LandingHeader() {
       <Container className={classes.header} >
          {/*<MantineLogo size={30} />*/}
          {/*<Image width={120} height={45} size={30} fit="contain" src={Logo} />*/}
-         <Text fs={'italic'} fw={'bold'} ff={'cursive'} size={25}>IMA</Text>
+         {/*<Text fs={'italic'} fw={'bold'} ff={'cursive'} size={25}>IMA</Text>*/}
+         <Text  fw={'bold'}  size={35} mt={5} >IMA</Text>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

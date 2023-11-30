@@ -52,6 +52,12 @@ export const SuperAdminSideBarData = [
     ],
   },
   {
+    name: "Chatbot", Icon: AiFillWechat,
+    subLink: [
+      { name: "View Chats", link: "/Chatbot", Icon: AiOutlineEye },
+    ],
+  },
+  {
     name: "Settings", Icon: AiOutlineSetting,
     subLink: [
       { name: "Settings", link: "/Settings", Icon: AiOutlineEye },

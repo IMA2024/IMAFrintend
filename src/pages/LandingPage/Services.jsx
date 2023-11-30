@@ -79,11 +79,16 @@ export default  function Services() {
   const navigate = useNavigate();
 
   const items = features.map((feature, index) => (
-    <Paper shadow="md" pl={30} pr={30} withBorder pt={70} pb={70}
+    <Paper shadow="xl" pl={30} pr={30} withBorder pt={70} pb={70}
     onMouseEnter={() => setHoveredCard(index)}
     onMouseLeave={() => setHoveredCard(null)}
     bg={hoveredCard === index ? '#E9ECEF' : 'initial'}
     className={`${classes.paper} ${hoveredCard === index ? 'hovered' : ''}`}
+    style={{
+      // Custom border style, width, color, and radius
+      border: '1px solid #A9A9A9', // Replace with your desired color
+      //borderRadius: '10px', // Adjust the border radius as needed
+    }}
     >
     <div key={feature.title}>
       <ThemeIcon
