@@ -128,8 +128,7 @@ const QuestionnaireTableMA = () => {
       const allQuestionnaires = response?.data?.questionnaires;
       console.log(allQuestionnaires)
       setQuestionnaires(allQuestionnaires);
-      console.log("asdadasdasd");
-      console.log(questionnaires);
+      console.log(questionnaires)
       setFilteredQuestionnaires(allQuestionnaires);
     } catch (error) {
       console.log(error);
@@ -228,8 +227,20 @@ const QuestionnaireTableMA = () => {
   }, []);
 
   const ExpandedComponent = ({ data }) => (
-    <pre>{JSON.stringify(data?.questionnaire, null, 2)}</pre>
+    <div>
+      {data?.questionnaire.map((question, questionIndex) => (
+        <div key={questionIndex}>
+          <p>{`${questionIndex + 1} .  ${question.question}`}</p>
+          <ul>
+            {question.options.map((option, optionIndex) => (
+              <li key={optionIndex}>{option}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
+  
 
   return (
     <Box
