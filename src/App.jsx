@@ -278,7 +278,7 @@ export default function Demo() {
                   <Route path="ViewRules" element={<ViewRules />} />
                   <Route path="OurTeam" element={<OurTeam />} />
                   <Route path="ChatMessages" element={<ChatMessages />} />
-              {/*  <Route path="Chatbot" element={<Chatbot />} />*/}
+               {/*<Route path="Chatbot" element={<Chatbot />} />*/}
 
                   {/* These are the routes for Business Panel */}
                   <Route path="/BusinessAdd" element={<BusinessAdd />} />
