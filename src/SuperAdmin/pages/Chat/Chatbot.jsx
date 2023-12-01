@@ -1,4 +1,4 @@
-{/*
+
 import React, { useState } from 'react';
 import { TextInput, Button, Box, Group, Image, Grid, Col, } from '@mantine/core';
 import axios from 'axios';
@@ -81,4 +81,3 @@ function Chatbot() {
 }
 
 export default Chatbot;
-*/}
