@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { IconGauge, IconFingerprint, IconActivity, IconChevronRight } from '@tabler/icons-react';
 import { Box, NavLink, Image, Text } from '@mantine/core';
 import { UserContext } from '../../../context/users/userContext';
-import {getContactsHistory} from '../../../api/chat/chat'
+
 import socket from '../../../socket/socket';
 
 const data = [
@@ -24,42 +24,8 @@ const data = [
   { imageSrc: 'https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80',icon: IconActivity, label: 'Mahnoor', description: 'Item with description', rightSection: <Text  c="dimmed" >11:45</Text> },
 ];
 
-export default function ChatNavbarContent({ onContactSelect }) {
-  const [contacts, setContacts] = useState([])
+export default function ChatNavbarContent({ contacts, onContactSelect }) {
   const { user } = useContext(UserContext);
-
-  useEffect(()=>{
-    // {
-    //   imageSrc: 'https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80',
-    //   icon: IconFingerprint,
-    //   label: 'Security',
-    //   description: 'Item with description',
-    //   //rightSection: <IconChevronRight size="1rem" stroke={1.5} />,
-    //   rightSection: <Text  c="dimmed" >11:45</Text>,
-    // },
-    getContactsHistory(user._id).then((res)=>{
-      let contactsHistory = res.data.contactsHistory.map((contact)=>{
-        let newData = {};
-        newData.id = contact.user._id;
-        newData.icon = IconFingerprint
-        newData.label = contact.user.firstName + " " + contact.user.lastName;
-        newData.description = contact.latestMessage.message;
-        newData.rightSection = (<Text  c="dimmed" >{contact.latestMessage.createdAt.split('T')[1].slice(0,5)}</Text>);
-        newData.imageSrc = contact.user.profilePic;
-        return newData;
-      })
-
-      setContacts(contactsHistory);
-    })
-    console.log(user);
-    // socket.auth = {id: user._id};
-    // try{
-    //   socket.connect()
-    // }
-    // catch(error){
-    //   console.log("error:", error);
-    // }
-  },[])
 
   const [active, setActive] = useState(0);
   

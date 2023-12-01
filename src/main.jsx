@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, Box } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { SpotlightProvider, spotlight } from "@mantine/spotlight";
 import {
@@ -15,9 +15,9 @@ import { useNavigate } from "react-router-dom";
 import CustomFonts from "./GlobalFonts.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <Box>
     <Notifications />
     <CustomFonts />
     <App />
-  </React.StrictMode>
+  </Box>
 );
