@@ -84,6 +84,7 @@ useEffect(() =>{
       const response = await addQuestionnaire( businessId , questionnaire );
       if (response.status === 201) {
         form.reset();
+        setQuestionnaire([]);
         notifications.show({ message: `Questionnaire Added Successfully`, color: 'green' });
       }
 

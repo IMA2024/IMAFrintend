@@ -354,7 +354,7 @@ export default function Demo() {
                   />
                   <Route
                     path="ChatBusinessOwner"
-                    element={<ChatBusinessOwner />}
+                    element={<Chat />}
                   />
                   <Route
                     path="BusinessBlocksBO"

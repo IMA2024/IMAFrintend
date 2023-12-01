@@ -221,8 +221,18 @@ const MarketingAgentQuestionTable = () => {
   }, []);
 
   const ExpandedComponent = ({ data }) => (
-    <pre>{JSON.stringify(data?.questionnaire, null, 2)}</pre>
-    //<Box bg={'pink'}>{data.name}</Box>
+    <div>
+      {data?.questionnaire.map((question, questionIndex) => (
+        <div key={questionIndex}>
+          <p>{`${questionIndex + 1} .  ${question.question}`}</p>
+          <ul>
+            {question.options.map((option, optionIndex) => (
+              <li key={optionIndex}>{option}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 
   return (
