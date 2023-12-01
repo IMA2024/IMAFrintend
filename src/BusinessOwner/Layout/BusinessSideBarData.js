@@ -58,6 +58,12 @@ export const BusinessSideBarData = [
     ],
   },
   {
+    name: "ChatBot", Icon: AiFillWechat,
+    subLink: [
+      { name: "Ask Questions", link: "/Chatbot", Icon: AiOutlineEye },
+    ],
+  },
+  {
     name: "FAQs", Icon: BiHelpCircle,
     subLink: [
       { name: "View FAQs", link: "/BusinessOwnerViewFaqs", Icon: AiOutlineEye },

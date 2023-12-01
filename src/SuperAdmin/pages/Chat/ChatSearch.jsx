@@ -1,49 +1,77 @@
-import React, { useEffect, useState, forwardRef } from 'react'
-import { Kbd, TextInput, Flex, Modal, Box, Text, Badge, Image, Group, Avatar, Select, ScrollArea  } from '@mantine/core';
+import React, { useEffect, useState, forwardRef } from 'react';
+import {
+  TextInput,
+  Flex,
+  Modal,
+  Box,
+  Text,
+  Select,
+  ScrollArea,
+  Avatar,
+  Group,
+} from '@mantine/core';
 import { IconSearch, IconPlus } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { IconFilter, IconEdit, IconEye, IconTrash, IconUser, IconPhone, IconMail, IconHome, IconBuilding } from '@tabler/icons-react';
+
+import { IconFingerprint} from '@tabler/icons-react';
 import Axios from 'axios';
 
-export default function ChatSearch() {
+export default function ChatSearch({ contacts, setContactsList, setSelectedContact }) {
   const [opened, { open, close }] = useDisclosure(false);
-  const [users, setUsers] =  useState([]);
-  const [filteredUsers, setFilteredUsers] =  useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  const handleView = () => {
+  const handleViewSpecific = (row) => {
     open();
   };
 
   const getUsers = async () => {
     try {
-      const response = await Axios.get('https://imaa-2585bbde653a.herokuapp.com/admin/viewAllUsers');
+      const response = await Axios.get(
+        'https://imaa-2585bbde653a.herokuapp.com/admin/viewAllUsers'
+      );
       const allUsers = response.data.users;
-  
+
       // Filter out the super admin based on a condition (for example, role === 'superAdmin')
-      const filteredUsers = allUsers.filter((user) => user.role !== 'Super Admin');
-  
+      const filteredUsers = allUsers.filter(
+        (user) => user.role !== 'Super Admin'
+      );
+
+      const users = filteredUsers.map(({ _id: value, firstName, lastName, role }) => ({ value, firstName, lastName, role }))
+
       // Update the state with the filtered users
-      setUsers(filteredUsers);
-      setFilteredUsers(filteredUsers);
+      setUsers(allUsers);
+      setFilteredUsers(users);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    const filteredResults = users.filter(
-      (user) =>
-        user.firstName.toLowerCase().includes(query.toLowerCase()) ||
-        user.lastName.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredUsers(filteredResults);
-  };
+  const SelectItem = forwardRef(
+    ({ role, firstName, lastName, ...others }, ref) => (
+      <div ref={ref} {...others}>
+        <Group noWrap>
+          {/* Uncomment the line below if you have an image property in your user object */}
+          {/* <Avatar src={image} /> */}
+          <div>
+            <Text size="sm">{`${firstName} ${lastName}`}</Text>
+            <Text size="xs" opacity={0.65}>
+              {role}
+            </Text>
+          </div>
+        </Group>
+      </div>
+    )
+  );
 
   const rightSection = (
     <Flex align="center">
-  <IconPlus onClick={() => handleView()}color='green' size="1.5rem" />
+      <IconPlus
+        onClick={() => handleViewSpecific()}
+        color="green"
+        size="1.5rem"
+      />
     </Flex>
   );
 
@@ -53,43 +81,67 @@ export default function ChatSearch() {
 
   return (
     <Box>
-    <TextInput placeholder="Search Chat" icon={<IconSearch size="1rem" />} rightSection={rightSection} />
-    <Modal title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Start Chat</Text>} radius={'md'} opened={opened} onClose={close} size={'md'}>
-      <ScrollArea h={380} type="never">
-        <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
-        <Box mb={20}>
-          <TextInput
-            placeholder="Search in Chat"
-            icon={<IconSearch size="1rem" />}
-            value={searchQuery}
-            onChange={(event) => handleSearch(event.currentTarget.value)}
-          />
-        </Box>
-          <Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-            {filteredUsers.map((user) => (
-              <Box
-                key={user._id}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '10px',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  transition: 'background-color 0.3s',
-                  ':hover': {
-                    backgroundColor: '#E9ECEF',
-                  },
+      <TextInput
+        placeholder="Search Chat"
+        icon={<IconSearch size="1rem" />}
+        rightSection={rightSection}
+        onClick={() => handleViewSpecific()}
+      />
+      <Modal
+        title={<Text style={{ fontWeight: 'bold', fontSize: '20px' }}>Start Chat</Text>}
+        radius={'md'}
+        opened={opened}
+        // onClose={() => {
+        //   // Reset selected user when closing the modal
+        //   setSelectedUser(null);
+        //   close();
+        // }}
+        onClose={close} 
+        size={'md'}
+      >
+        <ScrollArea h={380} type="never">
+          <Box mb={30} style={{ display: 'flex', flexDirection: 'column' }}>
+            <Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+              <Select
+                value={selectedUser}
+                label="Choose user to chat"
+                placeholder="Pick one"
+                itemComponent={SelectItem}
+                data={filteredUsers}
+                searchable
+                maxDropdownHeight={400}
+                nothingFound="Nobody here"
+                filter={(value, item) => (
+                  item.firstName?.toLowerCase().includes(value?.toLowerCase().trim()) ||
+                  item.lastName?.toLowerCase().includes(value?.toLowerCase().trim())
+                )}
+                onChange={(selected) => {
+                  let presentContact = contacts.filter((user)=>{return user.id == selected})
+                  if(presentContact.length > 0){
+                    setSelectedContact(presentContact[0]);
+                  }
+                  else{
+                    let contact = users.filter((user)=>{return user._id == selected})[0];
+                  
+                    console.log(contact);
+                    let newData = {}
+                    newData.id = contact._id;
+                    newData.icon = IconFingerprint
+                    newData.label = contact.firstName + " " + contact.lastName;
+                    newData.description = "";
+                    newData.rightSection = "";
+                    newData.imageSrc = contact.profilePic;
+                    setSelectedUser(newData);
+                    setSelectedContact(newData);
+                    setContactsList((oldValues => [...oldValues, newData]))
+                  }
+                  close();
                 }}
-                //onClick={() => handleViewSpecific(user)}
-              >
-                <Avatar radius="xl" src={user.profilePic} alt={`${user.firstName} ${user.lastName}`} />
-                <Text ml={10}>{`${user.firstName} ${user.lastName}`}</Text>
-              </Box>
-            ))}
+              />
+            </Box>
           </Box>
-        </Box>
-      </ScrollArea>
-    </Modal>
-  </Box>
-);
+        </ScrollArea>
+      </Modal>
+    </Box>
+  );
 }
