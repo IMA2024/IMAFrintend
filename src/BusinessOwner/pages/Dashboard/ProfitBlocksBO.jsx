@@ -89,62 +89,33 @@ export default function ProfitBlocksBO() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalRevenue');
-          const newData = await response.json();
-          console.log(response);
-          setRevenue(newData);
+          // Fetch total revenue
+          const revenueResponse = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalRevenue');
+          const revenueData = await revenueResponse.json();
+          setRevenue(revenueData);
+    
+          // Fetch total expense
+          const expenseResponse = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalExpense');
+          const expenseData = await expenseResponse.json();
+          setExpense(expenseData);
+    
+          // Fetch total profit
+          const profitResponse = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalProfit');
+          const profitData = await profitResponse.json();
+          setProfit(profitData);
+    
+          // Fetch total payments
+          const paymentsResponse = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalPayments');
+          const paymentsData = await paymentsResponse.json();
+          setPayments(paymentsData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
       };
-  
-      fetchData();
-    }, []);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalExpense');
-          const newData = await response.json();
-          console.log(response);
-          setExpense(newData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-
-      fetchData();
-    }, []);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalProfit');
-          const newData = await response.json();
-          console.log(response);
-          setProfit(newData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
+    
       fetchData();
     }, []);
     
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalPayments');
-          const newData = await response.json();
-          console.log(response);
-          setPayments(newData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-    }, []);
 
     return (
       <Paper withBorder p="md" radius="md" key={stat.title} mt={20} bg={'orange'}>

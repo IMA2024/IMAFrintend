@@ -227,25 +227,15 @@ const TableAgents = () => {
 
   useEffect(() => {
     const result = agents.filter(agent => {
-      console.log('Agent:', agent);
       const matchesSearch = (
         agent?.name.toLowerCase().includes(search.toLowerCase()) ||
         agent?.business?.name.toLowerCase().includes(search.toLowerCase())
       );
   
   
-      const matchesVoice = voice === '' || agent?.voice.toLowerCase().includes(voice.toLowerCase());
-  
-      console.log('Search Match:', matchesSearch);
-      console.log('Voice Match:', matchesVoice);
-  
+      const matchesVoice = voice === '' || agent?.voice.toLowerCase().includes(voice.toLowerCase());  
       return matchesSearch && matchesVoice;
-    });
-  
-    console.log('Search:', search);
-    console.log('Voice:', voice);
-    console.log('Filtered Agents:', result);
-  
+    });  
     setFilteredAgents(result);
   }, [search, voice, agents]);
   
@@ -330,8 +320,8 @@ const TableAgents = () => {
               searchable
               placeholder="Agent Voice"
                       data={[
-                        { value: 'male', label: 'male' },
-                        { value: 'female', label: 'female' },
+                        { value: 'Male', label: 'Male' },
+                        { value: 'Female', label: 'Female' },
               ]}
               className={classes.responsiveUserType}
             />

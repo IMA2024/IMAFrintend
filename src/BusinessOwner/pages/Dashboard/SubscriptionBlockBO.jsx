@@ -104,32 +104,23 @@ export default function SubscriptionsBlockBO() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalSubscriptions');
-        const newData = await response.json();
-        console.log(response);
-        setTotalSubscriptions(newData);
+        // Fetch total subscriptions
+        const subscriptionsResponse = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalSubscriptions');
+        const subscriptionsData = await subscriptionsResponse.json();
+        setTotalSubscriptions(subscriptionsData);
+  
+        // Fetch total revenue
+        const revenueResponse = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalRevenue');
+        const revenueData = await revenueResponse.json();
+        setTotalRevenue(revenueData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalRevenue');
-        const newData = await response.json();
-        console.log(response);
-        setTotalRevenue(newData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  
  
   const subsData = SubscriptionData.map((stat) => (
     <div key={stat.title} className={classes.stat}>

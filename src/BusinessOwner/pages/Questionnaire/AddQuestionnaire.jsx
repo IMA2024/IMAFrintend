@@ -1,6 +1,6 @@
-import { isNotEmpty , useForm } from '@mantine/form';
-import { TextInput, Button, Box , createStyles, Paper, Title, Select, MultiSelect } from '@mantine/core';
-import { useEffect , useState } from 'react';
+import { isNotEmpty, useForm } from '@mantine/form';
+import { TextInput, Button, Box, createStyles, Paper, Title, Select, MultiSelect } from '@mantine/core';
+import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
 import React, { useContext } from "react";
 import { UserContext } from '../../../context/users/userContext';
@@ -10,93 +10,100 @@ import { useNavigate } from 'react-router-dom';
 const useStyles = createStyles((theme) => ({
 
   responsiveContainer: {
-   width: '100%',
-   display: 'flex',
-   flexDirection: 'row',
-   gap: '16px',
-   //backgroundColor:'pink',
- 
-   [theme.fn.smallerThan('sm')]: {
-     flexDirection: 'column'
-   },
- 
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '16px',
+    //backgroundColor:'pink',
+
+    [theme.fn.smallerThan('sm')]: {
+      flexDirection: 'column'
+    },
+
   },
- 
+
   inputField: {
-   width: '50%',
-   [theme.fn.smallerThan('sm')]: {
-     width: '100%'
-   },
+    width: '50%',
+    [theme.fn.smallerThan('sm')]: {
+      width: '100%'
+    },
   }
-   
- }));
+
+}));
 
 export default function AddQuestionnaire() {
 
   const [businesses, setBusinesses] = useState([]);
   const [questionnaire, setQuestionnaire] = useState([]);
+  const [minimumQuestionsError, setMinimumQuestionsError] = useState(false);
   const { user } = useContext(UserContext);
-  const {classes} = useStyles();
+  const { classes } = useStyles();
   const navigate = useNavigate();
 
 
-const form = useForm({
-  initialValues: {
-    businessId: '',
-    // Initialize question and answer fields dynamically based on the initial state
-    ...questionnaire.reduce(
-      (acc, _, index) => ({
-        ...acc,
-        [`question${index + 1}`]: '',
-        [`answer${index + 1}`]: '',
-      }),
-      {}
-    ),
-  },
- 
-  validate: {
-    businessId: isNotEmpty('Please Select Business Name'),
-    // Add validation for dynamically generated question and answer fields
-    
-    // Additionally, add a general validation for answers using a custom function
-    
-  },
-  
-});
+  const form = useForm({
+    initialValues: {
+      businessId: '',
+      ...questionnaire.reduce(
+        (acc, _, index) => ({
+          ...acc,
+          [`question${index + 1}`]: '',
+          [`answer${index + 1}`]: '',
+        }),
+        {}
+      ),
+    },
 
-useEffect(() =>{
-  const fetchData = async () => {
-    const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/businessesList');
-    const newData =  await response.json();
-    console.log(newData);
+    validate: {
+      businessId: isNotEmpty('Please Select Business Name'),
+    },
 
-    const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
+  });
 
-    // Update the state with the filtered businesses
-    setBusinesses(filteredBusinesses);
-  };
-  fetchData();
-}, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/businessesList');
+      const newData = await response.json();
+      console.log(newData);
+      const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
+      setBusinesses(filteredBusinesses);
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = async (values) => {
-    const { businessId } = values; 
-    try {
-      const response = await addQuestionnaire( businessId , questionnaire );
-      if (response.status === 201) {
-        form.reset();
-        setQuestionnaire([]);
-        notifications.show({ message: `Questionnaire Added Successfully`, color: 'green' });
-      }
+    const { businessId } = values;
 
-    } catch (error) {
-      notifications.show({ message: error.response.data.message, color: 'red', });
+    const hasEmptyQuestion = questionnaire.some((item) => !item.question.trim());
+
+  if (hasEmptyQuestion) {
+    return notifications.show({ message: 'All questions must be filled out', color: 'red' });
+  }
+
+  const hasQuestionWithoutOptions = questionnaire.some((item) => !item.options.length);
+
+  if (hasQuestionWithoutOptions) {
+    return notifications.show({ message: 'All Options must have options', color: 'red' });
+  }
+
+  if (questionnaire.length < 5) {
+    return notifications.show({ message: 'Add Atleast 5 Questions', color: 'red' });
+  }
+
+  try {
+    const response = await addQuestionnaire(businessId, questionnaire);
+    if (response.status === 201) {
+      form.reset();
+      setQuestionnaire([]);
+      notifications.show({ message: 'Questionnaire Added Successfully', color: 'green' });
     }
-  };
+  } catch (error) {
+    notifications.show({ message: error.response.data.message, color: 'red' });
+  }
+};
 
   const handleAddQuestion = () => {
-    // Check if the maximum number of questions (10) has been reached before adding a new question
     if (questionnaire.length < 10) {
-      // Add a new question and answer field to the state
       setQuestionnaire([...questionnaire, { question: '', options: [] }]);
     } else {
       notifications.show({
@@ -111,25 +118,21 @@ useEffect(() =>{
   };
 
   return (
-    <Paper withBorder shadow="md" p={35}  radius="md">
-       <Title
-        order={2}
-        align="center"
-        sx={{ fontWeight: 550 }}
-        >
-          Add Questionnaire
-        </Title>
- 
-      <form onSubmit={form.onSubmit((values) => handleSubmit(values))} >
-      <Box>
-        <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessId')}
-        data={businesses.map((business) => ({
-          value: `${business?._id}`,
-          label: `${business?.name}`,
-        }))}
-         />
+    <Paper withBorder shadow="md" p={35} radius="md">
+      <Title order={2} align="center" sx={{ fontWeight: 550 }}>
+        Add Questionnaire
+      </Title>
+
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <Box>
+          <Select withAsterisk size='sm' label="Business Name" placeholder="Select Business Name" {...form.getInputProps('businessId')}
+            data={businesses.map((business) => ({
+              value: `${business?._id}`,
+              label: `${business?.name}`,
+            }))}
+          />
         </Box>
-     {questionnaire.map((item, index) => (
+        {questionnaire.map((item, index) => (
           <div key={index}>
             <Box mt="sm" className={classes.responsiveContainer}>
               <TextInput
@@ -139,7 +142,7 @@ useEffect(() =>{
                 size="sm"
                 label={`Question ${index + 1}`}
                 placeholder="Enter Question"
-                onChange={(event)=>{
+                onChange={(event) => {
                   let newQuestionare = [...questionnaire];
                   let currentQuestion = newQuestionare[index];
                   currentQuestion.question = event.currentTarget.value;
@@ -155,7 +158,7 @@ useEffect(() =>{
                 label={`Answer ${index + 1}`}
                 placeholder="Enter Answer"
                 value={item.options}
-                onChange={(options)=>{
+                onChange={(options) => {
                   let newQuestionare = [...questionnaire];
                   let currentQuestion = newQuestionare[index];
                   currentQuestion.options = options;
@@ -164,37 +167,36 @@ useEffect(() =>{
                   console.log(newQuestionare);
                 }}
                 // {...form.getInputProps(`answer${index + 1}`)}
-                data = {
+                data={
                   [
-                  { value: 'Yes', label: 'Yes' },
-                  { value: 'G', label: 'G' },
-                  { value: 'Han', label: 'Han' },
-                  { value: 'Han g', label: 'Han g' },
-                  { value: 'No', label: 'No' },
-                  { value: 'Nahi', label: 'Nahi' },
-                  { value: 'Nopes', label: 'Nopes' },
+                    { value: 'Yes', label: 'Yes' },
+                    { value: 'G', label: 'G' },
+                    { value: 'Han', label: 'Han' },
+                    { value: 'Han g', label: 'Han g' },
+                    { value: 'No', label: 'No' },
+                    { value: 'Nahi', label: 'Nahi' },
+                    { value: 'Nopes', label: 'Nopes' },
                   ]
-              }
+                }
               />
             </Box>
           </div>
         ))}
-        
-        <Box style={{display:'flex', justifyContent:'left', gap:'20px'}} onClick={handleAddQuestion}>
-        <Button  mt="sm"  size='sm' variant="outline"> 
-          + Add Question
-        </Button>
+        <Box style={{ display: 'flex', justifyContent: 'left', gap: '20px' }} onClick={handleAddQuestion}>
+          <Button mt="sm" size="sm" variant="outline">
+            + Add Question
+          </Button>
         </Box>
-      
-         <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="sm"  size='sm' color='red.8'  onClick={() => handleCancel()} >
-          Cancel
-        </Button>
-        <Button type="submit" mt="sm"  size='sm' color='green.9' >
-          Submit
-        </Button>
+
+        <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
+          <Button mt="sm" size="sm" color="red.8" onClick={() => handleCancel()}>
+            Cancel
+          </Button>
+          <Button type="submit" mt="sm" size="sm" color="green.9" disabled={minimumQuestionsError}>
+            Submit
+          </Button>
         </Box>
       </form>
     </Paper>
   );
-}
+};
