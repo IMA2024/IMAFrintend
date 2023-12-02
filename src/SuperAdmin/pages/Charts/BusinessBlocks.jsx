@@ -170,6 +170,6 @@ export default function BusinessBlocks() {
     </div>
   ));
   return ( 
-<div className={classes.root}>{subsData} {payData} {businessData}</div>
+<div className={classes.root}>{businessData} {subsData} {payData} </div>
   ) 
 }

@@ -49,28 +49,21 @@ const icons = {
 const UserData = [
     {
       "icon": "user",
-      "diff": 7
+      "diff": 23
     },
   ]
 
   const ExpenseData = [
     {
      "icon": "user",
-      "diff": 3
+      "diff": 41
     },
   ] 
 
   const ProfitData = [ 
     {
      "icon": "user",
-      "diff": 2
-    },
-  ] 
-
-  const CustomerData = [
-    {
-      "icon": "user",
-      "diff": 1
+      "diff": 64
     },
   ] 
 
@@ -79,7 +72,6 @@ export default function CallsBlock() {
   const [revenue, setRevenue] = useState();
   const [expense, setExpense] = useState(); 
   const [profit, setProfit] = useState();
-  const [customers, setCustomers] = useState();  
   const { classes } = useStyles();
 
   const statsUser = UserData.map((stat) => {

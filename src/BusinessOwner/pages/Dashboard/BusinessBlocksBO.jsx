@@ -1,5 +1,7 @@
 import React, { useState , useEffect} from 'react';
 import { createStyles, Text, rem, Box } from '@mantine/core';
+import { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -76,13 +78,6 @@ const SubscriptionData = [
 
   ];
 
-  const RevenueData = [
-    {
-      "stats": "30",
-    },
-  
-  ];
-
   const BusinessData = [
     {
       "stats": "10",
@@ -95,58 +90,40 @@ export default function BusinessBlocksBO() {
   const [totalBusinesses, setTotalBusinesses] = useState(); 
   const [subscribed, setSubscribed] = useState();
   const [unsubscribed, setUnsubscribed] = useState(); 
+  const { user } = useContext(UserContext);
   const { classes } = useStyles();
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalBusinesses');
-        const newData = await response.json();
-        console.log(response);
-        setTotalBusinesses(newData);
+        // Fetch total businesses
+        const totalResponse = await fetch(`https://imaa-2585bbde653a.herokuapp.com/businessOwner/totalBusinesses/${user?._id}`);
+        const totalBusinessesData = await totalResponse.json();
+        setTotalBusinesses(totalBusinessesData);
+  
+        // Fetch subscribed businesses
+        const subscribedResponse = await fetch(`https://imaa-2585bbde653a.herokuapp.com/businessOwner/subscribedBusinesses/${user?._id}`);
+        const subscribedData = await subscribedResponse.json();
+        setSubscribed(subscribedData);
+  
+        // Fetch unsubscribed businesses
+        const unsubscribedResponse = await fetch(`https://imaa-2585bbde653a.herokuapp.com/businessOwner/unsubscribedBusinesses/${user?._id}`);
+        const unsubscribedData = await unsubscribedResponse.json();
+        setUnsubscribed(unsubscribedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/subscribedBusinesses');
-        const newData = await response.json();
-        console.log(response);
-        setSubscribed(newData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/businessOwner/unsubscribedBusinesses');
-        const newData = await response.json();
-        console.log(response);
-        setUnsubscribed(newData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  }, [user]);
+  
  
-  const subsData = SubscriptionData.map((stat) => (
+  const businessData = BusinessData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{subscribed}</Text>
-      <Text className={classes.title}>Subscribed Businesses</Text>
-      <Text className={classes.description}>24% more than in the same month last year, 33% more than two yuserBears ago</Text>
+      <Text className={classes.count}>{totalBusinesses}</Text>
+      <Text className={classes.title}>Total Businesses</Text>
+      <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
     </div>
   ));
   const payData = PaymentData.map((stat) => (
@@ -157,14 +134,14 @@ export default function BusinessBlocksBO() {
     </div>
   ));
 
-  const businessData = BusinessData.map((stat) => (
+  const subsData = SubscriptionData.map((stat) => (
     <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{totalBusinesses}</Text>
-      <Text className={classes.title}>Total Businesses</Text>
-      <Text className={classes.description}>1994 orders were completed this month, 97% satisfaction rate</Text>
+      <Text className={classes.count}>{subscribed}</Text>
+      <Text className={classes.title}>Subscribed Businesses</Text>
+      <Text className={classes.description}>24% more than in the same month last year, 33% more than two yuserBears ago</Text>
     </div>
   ));
   return ( 
-<div className={classes.root}>{subsData} {payData} {businessData}</div>
+<div className={classes.root}>{businessData}{subsData} {payData} </div>
   ) 
 }
