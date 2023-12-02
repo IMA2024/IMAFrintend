@@ -74,7 +74,7 @@ export default function GeneralLayout() {
           sx={{
             fontFamily: 'Poppins'
           }}
-          bg={role === "Super Admin" ? '#5C940D' : role === "Business Owner" ? '#5F3DC4' : role === "Marketing Agent" ? '#862E9C' : '#66A80F'}
+          bg={role === "Super Admin" ? '#5C940D' : role === "Business Owner" ? '#5F3DC4' : role === "Marketing Agent" ? '#862E9C' : '#5C940D'}
           hiddenBreakpoint="md"
            hidden={!opened} width={{ sm: 300, lg: 300 }} mt={-1} >
             <ScrollArea type='never' >

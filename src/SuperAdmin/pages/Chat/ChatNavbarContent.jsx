@@ -43,7 +43,7 @@ export default function ChatNavbarContent({ contacts, onContactSelect }) {
       rightSection={item.rightSection}
       icon={<Image radius="50%" src={item.imageSrc} width={40} height={40} />}
       onClick={() => handleNavLinkClick(index)}
-      color="lime.9"
+      //color="lime.9"
     />
   ));
 

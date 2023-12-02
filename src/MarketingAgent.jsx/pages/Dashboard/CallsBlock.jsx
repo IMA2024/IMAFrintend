@@ -147,25 +147,25 @@ export default function CallsBlock() {
     }, []);
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title} mt={20}>
+      <Paper withBorder p="md" radius="md" key={stat.title} mt={20} bg={'orange'}>
         <Group position="apart">
-          <Text size="xs" color="dimmed" className={classes.title}>
+          <Text size="xs" color='white' className={classes.title}>
             SUCCESFUL CALLS
           </Text>
         
-          <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
+          <Icon  color='grey' className={classes.icon} size="1.4rem" stroke={1.5} />
     
         </Group>
 
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.value}>{revenue}</Text>
-          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+          <Text color={stat.diff > 0 ? 'black' : 'grey'}  fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz="xs" c="dimmed" mt={7}>
+        <Text fz="xs" color='white'  mt={7}>
           Compared to previous month
         </Text>
       </Paper>
@@ -176,24 +176,24 @@ export default function CallsBlock() {
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title}  mt={20}>
+      <Paper withBorder p="md" radius="md" key={stat.title}  mt={20}  bg={'red'}>
         <Group position="apart">
-          <Text size="xs" color="dimmed" className={classes.title}>
+          <Text size="xs" color='white' className={classes.title}>
           REJECTED CALLS
           </Text>
         
-          <Icon className={classes.icon} size="1.4rem" stroke={1.5} />
+          <Icon color='grey' className={classes.icon} size="1.4rem" stroke={1.5} />
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.value}>{expense}</Text>
-          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+          <Text color={stat.diff > 0 ? 'black' : 'grey'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz="xs" c="dimmed" mt={7}>
+        <Text fz="xs" color='white' mt={7}>
           Compared to previous month
         </Text>
       </Paper>
@@ -204,9 +204,9 @@ export default function CallsBlock() {
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title}  mt={20}>
+      <Paper withBorder p="md" radius="md" key={stat.title}  mt={20}  bg={'green'}>
         <Group position="apart">
-          <Text size="xs" color="dimmed" className={classes.title}>
+          <Text size="xs" color='white'className={classes.title}>
           TOTAL CALLS
         </Text>
         
@@ -215,13 +215,13 @@ export default function CallsBlock() {
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.value}>{profit}</Text>
-          <Text color={stat.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+          <Text color={stat.diff > 0 ? 'black' : 'grey'}  fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz="xs" c="dimmed" mt={7}>
+        <Text fz="xs" color='white' mt={7}>
           Compared to previous month
         </Text>
       </Paper>

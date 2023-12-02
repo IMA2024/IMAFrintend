@@ -18,7 +18,7 @@ export default function ChatInput({ onMessageSubmit }) {
 
   const rightSection = (
     <Flex align="center">
-      <IconSend onClick={handleSendClick} color="green" size="1.5rem" />
+      <IconSend onClick={handleSendClick} color="#228BE6" size="1.5rem" />
     </Flex>
   );
 

@@ -101,6 +101,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data= [
+  /*
     {
       "title": "About",
       "links": [
@@ -122,24 +123,25 @@ const data= [
         }
       ]
     },
+    */
     {
-      "title": "Project",
+      "title": "Navigations",
       "links": [
         {
-          "label": "Contribute",
-          "link": "#"
+          "label": "About",
+          "link": "/AboutUsPage"
         },
         {
-          "label": "Media assets",
-          "link": "#"
+          "label": "Services",
+          "link": "/ServicesPage"
         },
         {
-          "label": "Changelog",
-          "link": "#"
+          "label": "Contact Us",
+          "link": "/ContactUsPage"
         },
         {
           "label": "Releases",
-          "link": "#"
+          "link": "LandingPage"
         }
       ]
     },
@@ -148,19 +150,19 @@ const data= [
       "links": [
         {
           "label": "Join Discord",
-          "link": "#"
+          "link": "LandingPage"
         },
         {
           "label": "Follow on Twitter",
-          "link": "#"
+          "link": "LandingPage"
         },
         {
           "label": "Email newsletter",
-          "link": "#"
+          "link": "LandingPage"
         },
         {
           "label": "GitHub discussions",
-          "link": "#"
+          "link": "LandingPage"
         }
       ]
     }
@@ -169,9 +171,17 @@ const data= [
 export default function LandingFooter() {
   const { classes } = useStyles();
 
+  const handleLinkClick = (link) => {
+    window.location.href = link; // Use window.location.href for navigation
+  };
+
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
-      <Text>
+      <Text
+      key={index}
+      className={classes.link}
+      onClick={() => handleLinkClick(link.link)}
+      >
         {link.label}
       </Text>
     ));
@@ -193,7 +203,7 @@ export default function LandingFooter() {
          {/*<Text fs={'italic'} fw={'bold'} ff={'cursive'} size={25}>IMA</Text>*/}
          <Text  fw={'bold'}  size={35} mt={5} >IMA</Text>
           <Text size="xs" color="dimmed" className={classes.description}>
-          Innovative solutions for modern marketing.
+          From social media marketing to email marketing, IMA is all in one marketing product – It provides a comprehensive solution for all your marketing needs..
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>

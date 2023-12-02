@@ -69,7 +69,7 @@ export default function ChatSearch({ contacts, setContactsList, setSelectedConta
     <Flex align="center">
       <IconPlus
         onClick={() => handleViewSpecific()}
-        color="green"
+        color="#228BE6"
         size="1.5rem"
       />
     </Flex>
