@@ -57,12 +57,14 @@ export const BusinessSideBarData = [
       { name: "Start Chats", link: "/ChatBusinessOwner", Icon: AiOutlineEye },
     ],
   },
+  /*
   {
     name: "ChatBot", Icon: AiFillWechat,
     subLink: [
       { name: "Ask Questions", link: "/Chatbot", Icon: AiOutlineEye },
     ],
   },
+  */
   {
     name: "FAQs", Icon: BiHelpCircle,
     subLink: [

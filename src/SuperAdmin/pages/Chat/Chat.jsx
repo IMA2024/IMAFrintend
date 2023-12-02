@@ -48,7 +48,7 @@ const useStyles = createStyles((theme) => ({
 
   responsiveChatHeader: {
     height:'15%',
-    backgroundColor:'#5C940D',
+    backgroundColor:'#228be6',
 
   },
 
@@ -59,7 +59,7 @@ const useStyles = createStyles((theme) => ({
 
   responsiveChatInput: {
     height:'15%',
-    backgroundColor:'#5C940D',
+    backgroundColor:'#228be6',
   },
   
 

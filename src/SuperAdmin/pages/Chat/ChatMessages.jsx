@@ -24,7 +24,7 @@ export default function ChatMessages({ messages }) {
               }}
             >
               <Text
-                bg={message.status === 'send' ? 'lime.9' : 'lime.1'}
+                bg={message.status === 'send' ? 'blue.6' : 'blue.1'}
                 style={{ textAlign: 'justify' }}
                 p={10}
               >

@@ -113,7 +113,7 @@ import CarouselProfiling from './CarouselProfiling';
           case 'Marketing Agent':
             localStorage.setItem('token', response?.data?.token);
             localStorage.setItem('role', response?.data?.role);
-            navigate('/Dashboard');
+            navigate('/DashboardMA');
             break;
           case 'Business Owner':
             localStorage.setItem('token', response?.data?.token);

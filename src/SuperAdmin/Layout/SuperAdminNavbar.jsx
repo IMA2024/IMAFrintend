@@ -85,7 +85,7 @@ const SuperAdminNavbar = ({SuperAdminSideBarData}) => {
                   onMouseLeave={() => setHoveredLink(null)}
                   style={{
                     ...navLinkStyles,
-                    backgroundColor: hoveredLink === obj.name ? '#C92A2A' : 'initial', // Change background color on hover
+                    backgroundColor: hoveredLink === obj.name ? '#F76707' : 'initial', // Change background color on hover
                   }}
                   activeStyle={{ fontWeight: 'bold' }}
                   onClick={() => handleToggleVisibility1(obj.name)}
@@ -113,7 +113,7 @@ const SuperAdminNavbar = ({SuperAdminSideBarData}) => {
                             //style={SubnavLinkStyles}
                             style={{
                               ...SubnavLinkStyles,
-                              backgroundColor: subHoveredLink === subObj.name ? '#FF6B6B' : 'initial', // Change background color on hover
+                              backgroundColor: subHoveredLink === subObj.name ? '#F59F00' : 'initial', // Change background color on hover
                             }}
                             activeStyle={{ fontWeight: 'bold' }}
                           >

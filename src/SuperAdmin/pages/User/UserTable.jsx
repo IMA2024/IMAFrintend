@@ -461,7 +461,7 @@ useEffect(() => {
       />
       </div>
     )}
-
+{/*
    <Modal radius={'md'} centered opened={opened} onClose={close} size={'735px'}  >
   <Box className={classes.modalContainer} mb={30}  p={10}  style={{}}>
     <Box className={classes.modalImage}><Image  width={'200'} height={'200'} radius="50%"  src={specificPicture} alt="Random image" /></Box>
@@ -470,6 +470,21 @@ useEffect(() => {
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconUser size={20} color="green" /><Text >{specificFirstName}</Text><Text ml={5}>{specificLastName}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconMail size={20} color="green" /><Text >{specificEmail}</Text></Box>
     <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><IconPhone size={20} color="green" /><Text >{specificPhoneNumber}</Text></Box>
+    </Box>
+  </Box>
+      </Modal>
+     */}
+       <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>User Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
+  <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
+    <Box  mah={380}><Image height={200} width={400} radius="md" src={specificPicture} alt="Random image" /></Box>
+    <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
+    <Box ><Badge variant="filled" >{specificRole}</Badge></Box>
+   {/* <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}><IconUser size={20} color="green" /><Text ml={5}>{specificSubscribed}</Text></Box>*/}
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Name:</Text><Text fw={'bold'} ml={5}>{specificFirstName}</Text><Text fw={'bold'}  ml={5}>{specificLastName}</Text></Box>
+   {/* <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Business Owner Name:</Text><Text fw={'bold'} ml={5}>{specificOwner}</Text></Box>*/}
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Email:</Text><Text fw={'bold'} ml={5}>{specificEmail}</Text></Box>
+    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Phone Number:</Text><Text fw={'bold'} ml={5}>{specificPhoneNumber}</Text></Box>
+     {/*  <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Amount:</Text><Text fw={'bold'} ml={5}>{specificAddress}</Text></Box>*/}
     </Box>
   </Box>
       </Modal>
