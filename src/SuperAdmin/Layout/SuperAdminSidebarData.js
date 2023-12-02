@@ -55,6 +55,7 @@ export const SuperAdminSideBarData = [
     name: "Settings", Icon: AiOutlineSetting,
     subLink: [
       { name: "Settings", link: "/Settings", Icon: AiOutlineEye },
+      { name: "Change Password", link: "/ChangePassword", Icon: AiOutlineEye },
     ],
   },
   

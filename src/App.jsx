@@ -58,6 +58,7 @@ import ViewFaqs from "./SuperAdmin/pages/Faqs/ViewFaqs";
 import FaqForm from "./SuperAdmin/pages/Faqs/AddFaqs";
 import EditFaqs from "./SuperAdmin/pages/Faqs/EditFaqs";
 import Radio from "./SuperAdmin/pages/Accounting/ViewProfit/RevenueAndExpenses";
+import ChangePassword from "./SuperAdmin/pages/Settings/ChangePassword.jsx";
 {
   /* These are the routes for Landing Page */
 }
@@ -279,6 +280,7 @@ export default function Demo() {
                   <Route path="OurTeam" element={<OurTeam />} />
                   <Route path="ChatMessages" element={<ChatMessages />} />
                {/*<Route path="Chatbot" element={<Chatbot />} />*/}
+               <Route path="ChangePassword" element={<ChangePassword />} />
 
                   {/* These are the routes for Business Panel */}
                   <Route path="/BusinessAdd" element={<BusinessAdd />} />
