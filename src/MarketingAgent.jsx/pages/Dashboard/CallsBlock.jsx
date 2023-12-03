@@ -49,21 +49,24 @@ const icons = {
 const UserData = [
     {
       "icon": "user",
-      "diff": 23
+      "diff": 23,
+      "call": 50,
     },
   ]
 
   const ExpenseData = [
     {
      "icon": "user",
-      "diff": 41
+      "diff": 41,
+      "call": 40,
     },
   ] 
 
   const ProfitData = [ 
     {
      "icon": "user",
-      "diff": 64
+      "diff": 64,
+      "call": 90,
     },
   ] 
 
@@ -150,7 +153,7 @@ export default function CallsBlock() {
         </Group>
 
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{revenue}</Text>
+          <Text className={classes.value}>{stat.call}</Text>
           <Text color={stat.diff > 0 ? 'black' : 'grey'}  fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -178,7 +181,7 @@ export default function CallsBlock() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{expense}</Text>
+          <Text className={classes.value}>{stat.call}</Text>
           <Text color={stat.diff > 0 ? 'black' : 'grey'} fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />
@@ -206,7 +209,7 @@ export default function CallsBlock() {
     
         </Group>
         <Group align="flex-end" spacing="xs" mt={25}>
-          <Text className={classes.value}>{profit}</Text>
+          <Text className={classes.value}>{stat.call}</Text>
           <Text color={stat.diff > 0 ? 'black' : 'grey'}  fz="sm" fw={500} className={classes.diff}>
             <span>{stat.diff}%</span>
             <DiffIcon size="1rem" stroke={1.5} />

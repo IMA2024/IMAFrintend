@@ -1,90 +1,3 @@
-{/*
-import React, { useState } from 'react'
-import ReactApexChart from "react-apexcharts";
-import { Box, Title, Paper, createStyles, Select  } from '@mantine/core';
-
-const useStyles = createStyles((theme) => ({
-
-  responsiveContainer: {
-   width: '100%',
-   display: 'flex',
-   flexDirection: 'row',
-   gap: '50%',
-   marginBottom: '2%',
-   //backgroundColor:'green',
-   
-   [theme.fn.smallerThan('sm')]: {
-     flexDirection: 'column'
-   },
- 
-  },
- 
-  inputField: {
-   width: '50%',
-   [theme.fn.smallerThan('sm')]: {
-     width: '40%'
-   },
-  }
-   
- }));
-
- //SplineAreaCharts
-const ProfitChartBO = () => {
-  const {classes} = useStyles()
-    const [state, setState] =  useState({
-        series: [{
-            name: 'series1',
-            data: [110, 60, 48, 71, 62, 129, 120]
-          }, {
-            name: 'series2',
-            data: [41, 110, 65, 52, 54, 72, 61]
-          }],
-          options: {
-            chart: {
-              height: 350,
-              type: 'area'
-            },
-            dataLabels: {
-              enabled: false
-            },
-            stroke: {
-              curve: 'smooth'
-            },
-            xaxis: {
-              type: 'datetime',
-              categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-            },
-            tooltip: {
-              x: {
-                format: 'dd/MM/yy HH:mm'
-              },
-            },
-          },
-    });
-
-  
-  return (
-    <Paper mt={20} shadow="xs" p="md">
-      <Box className={classes.responsiveContainer}>
-    <Title className={classes.inputField} order={4}>Profit</Title>
-      <Select
-      className={classes.inputField}
-      defaultValue={'Weekly'}
-      searchable
-      data={['Weekly', 'Monthly', 'Yearly']}
-    />
-    </Box>
-    <Box p={20} style={{ border: '1px dotted gray' }}>
-    <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
-    </Box>
-    </Paper>
- 
-
-  )
-}
-
-export default ProfitChartBO
-*/}
 import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Box, Title, Paper, createStyles, Select } from '@mantine/core';
@@ -161,51 +74,52 @@ const ProfitChartBO = () => {
         return [
           {
             name: 'expense',
-            data: [110, 60, 48, 71, 62, 129, 120],
+            data: [50, 120, 75, 62, 64, 82, 71], // Adjusted weekly data
           },
           {
             name: 'revenue',
-            data: [41, 110, 65, 52, 54, 72, 61],
+            data: [90, 170, 90, 80, 78, 119, 110], // Adjusted weekly data
           },
           {
             name: 'profit',
-            data: [20, 50, 17, 19, 12, 57, 59],
+            data: [30, 70, 37, 41, 32, 63, 59], // Adjusted weekly data
           },
         ];
       case 'Monthly':
         return [
           {
             name: 'expense',
-            data: [400, 300, 250, 400, 350, 600, 550],
+            data: [200, 380, 330, 180, 230, 430, 480], // Adjusted weekly data
           },
           {
             name: 'revenue',
-            data: [150, 350, 300, 250, 300, 500, 450],
+            data: [380, 480, 430, 380, 330, 580, 530], // Adjusted monthly data
           },
           {
             name: 'profit',
-            data: [250, 50, 100, 150, 50, 100, 100],
+            data: [150, 100, 100, 150, 50, 100, 100], // Adjusted monthly data
           },
         ];
       case 'Yearly':
         return [
           {
             name: 'expense',
-            data: [2500, 2200, 2000, 2800, 2700, 3000, 2900],
+            data: [1200, 2100, 1800, 2400, 2300, 2600, 2500], // Adjusted yearly data
           },
           {
             name: 'revenue',
-            data: [1000, 1900, 1600, 2200, 2100, 2400, 2300],
+            data: [2400, 2200, 1900, 2600, 2500, 2800, 2700], // Adjusted yearly data
           },
           {
             name: 'profit',
-            data: [1500, 300, 400, 600, 600, 600, 600],
+            data: [1500, 300, 400, 600, 600, 600, 600], // Adjusted yearly data
           },
         ];
       default:
         return [];
     }
   }
+  
 
   function getOptions(interval) {
     return {
@@ -222,18 +136,18 @@ const ProfitChartBO = () => {
       xaxis: {
         type: 'datetime',
         categories: [
-          '2023-09-19T00:00:00.000Z',
-          '2023-09-19T01:30:00.000Z',
-          '2023-09-19T02:30:00.000Z',
-          '2023-09-19T03:30:00.000Z',
-          '2023-09-19T04:30:00.000Z',
-          '2023-09-19T05:30:00.000Z',
-          '2023-09-19T06:30:00.000Z',
+          '2023-06-3',
+          '2023-07-8',
+          '2023-08-1',
+          '2023-09-5',
+          '2023-10-9',
+          '2023-11-10',
+          '2023-12-11',
         ],
       },
       tooltip: {
         x: {
-          format: 'dd/MM/yy HH:mm',
+          format: 'dd/MM/yy',
         },
       },
     };
