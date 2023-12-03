@@ -4,7 +4,7 @@ import { Box } from '@mantine/core';
 
 const RegisteredBusinessDonutBO = () => {
   const [state, setState] = useState({
-    series: [70, 15 ,15],
+    series: [5, 3 , 2],
     options: {
       labels: ['Total Businesses', 'Subscribed Businesses', 'Unsubscribed Businesses'],
       chart: {
@@ -27,7 +27,7 @@ const RegisteredBusinessDonutBO = () => {
   });
 
   return (
-    <Box mt={20} maw={500}>
+    <Box mt={20} w={480}>
       <div id="chart">
         <ReactApexChart options={state.options} series={state.series} type="donut" />
       </div>

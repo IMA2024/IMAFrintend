@@ -1,113 +1,3 @@
-{/*
-import React, { useState } from 'react'
-import ReactApexChart from "react-apexcharts";
-import { Box, Title, Paper, createStyles, Select  } from '@mantine/core';
-import RegisteredBusinessDonutSA from './RegisteredBusinessDonutSA';
-
-const useStyles = createStyles((theme) => ({
-
-  responsiveContainer: {
-   width: '100%',
-   display: 'flex',
-   flexDirection: 'row',
-   gap: '50%',
-   marginBottom: '2%',
-   //backgroundColor:'green',
-   
-   [theme.fn.smallerThan('sm')]: {
-     flexDirection: 'column'
-   },
- 
-  },
- 
-  inputField: {
-   width: '50%',
-   [theme.fn.smallerThan('sm')]: {
-     width: '40%'
-   },
-  },
-
-  responsiveContainerChart: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-
-    [theme.fn.smallerThan('sm')]: {
-        flexDirection: 'column'
-      },
-  },
-
-  inputFieldChart: {
-    width: '50%',
-    [theme.fn.smallerThan('sm')]: {
-      width: '100%'
-    },
-   },
-   
- }));
-
- //SplineAreaCharts
-const RegisteredBusinessChart = () => {
-  const {classes} = useStyles()
-    const [state, setState] =  useState({
-        series: [{
-            name: 'series1',
-            data: [110, 60, 48, 71, 62, 129, 120]
-          }, {
-            name: 'series2',
-            data: [41, 110, 65, 52, 54, 72, 61]
-          }],
-          options: {
-            chart: {
-              height: 350,
-              type: 'area'
-            },
-            dataLabels: {
-              enabled: false
-            },
-            stroke: {
-              curve: 'smooth'
-            },
-            xaxis: {
-              type: 'datetime',
-              categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-            },
-            tooltip: {
-              x: {
-                format: 'dd/MM/yy HH:mm'
-              },
-            },
-          },
-    });
-
-  
-  return (
-    <Paper mt={20} shadow="xs" p="md">
-      <Box className={classes.responsiveContainer}>
-    <Title className={classes.inputField} order={4}>Businesses Registered</Title>
-      <Select
-      className={classes.inputField}
-      defaultValue={'Weekly'}
-      searchable
-      data={['Weekly', 'Monthly', 'Yearly']}
-    />
-    </Box>
-    <Box p={20} style={{ border: '1px dotted gray' }} className={classes.responsiveContainerChart}>
-        <Box className={classes.inputFieldChart}>
-    <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
-    </Box>
-    <Box className={classes.inputFieldChart}>
-    <RegisteredBusinessDonutSA />
-    </Box>
-    </Box>
-    </Paper>
- 
-
-  )
-}
-
-export default RegisteredBusinessChart
-*/}
 import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Box, Title, Paper, createStyles, Select } from '@mantine/core';
@@ -166,17 +56,17 @@ const RegisteredBusinessChart = () => {
         type: 'monthyear',
         categories: [
           '2023-09-19',
-          '2023-09-19',
-          '2023-09-19',
-          '2023-09-19',
-          '2023-09-19',
-          '2023-09-19',
-          '2023-09-19',
+          '2023-08-17',
+          '2023-08-9',
+          '2023-08-1',
+          '2023-09-27',
+          '2023-08-27',
+          '2023-08-11',
         ],
       },
       tooltip: {
         x: {
-          format: 'dd/MM/yy HH:mm',
+          format: 'dd/MM/yy',
         },
       },
     },
@@ -198,33 +88,33 @@ const RegisteredBusinessChart = () => {
         return [
           {
             name: 'Subscribed Businesses',
-            data: [110, 60, 48, 71, 62, 129, 120],
+            data: [3, 2, 2, 3, 3, 5, 4], // Adjusted weekly data
           },
           {
             name: 'Unsubscribed Businesses',
-            data: [41, 110, 65, 52, 54, 72, 61],
+            data: [1, 3, 2, 2, 2, 3, 2], // Adjusted weekly data
           },
         ];
       case 'Monthly':
         return [
           {
             name: 'Subscribed Businesses',
-            data: [400, 300, 250, 400, 350, 600, 550],
+            data: [7, 6, 5, 8, 7, 10, 9], // Adjusted monthly data
           },
           {
             name: 'Unsubscribed Businesses',
-            data: [150, 350, 300, 250, 300, 500, 450],
+            data: [3, 7, 6, 5, 6, 8, 7], // Adjusted monthly data
           },
         ];
       case 'Yearly':
         return [
           {
             name: 'Subscribed Businesses',
-            data: [2500, 2200, 2000, 2800, 2700, 3000, 2900],
+            data: [12, 11, 10, 14, 13, 15, 17], // Adjusted yearly data
           },
           {
             name: 'Unsubscribed Businesses',
-            data: [1000, 1900, 1600, 2200, 2100, 2400, 2300],
+            data: [5, 9, 8, 11, 10, 12, 11], // Adjusted yearly data
           },
         ];
       default:
@@ -247,18 +137,18 @@ const RegisteredBusinessChart = () => {
       xaxis: {
         type: 'datetime',
         categories: [
-          '2023-09-19T00:00:00.000Z',
-          '2023-09-19T01:30:00.000Z',
-          '2023-09-19T02:30:00.000Z',
-          '2023-09-19T03:30:00.000Z',
-          '2023-09-19T04:30:00.000Z',
-          '2023-09-19T05:30:00.000Z',
-          '2023-09-19T06:30:00.000Z',
+          '2023-06-11',
+          '2023-07-03',
+          '2023-08-03',
+          '2023-09-15',
+          '2023-10-16',
+          '2023-11-19',
+          '2023-12-27',
         ],
       },
       tooltip: {
         x: {
-          format: 'dd/MM/yy HH:mm',
+          format: 'dd/MM/yy',
         },
       },
     };

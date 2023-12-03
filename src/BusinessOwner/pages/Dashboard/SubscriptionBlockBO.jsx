@@ -10,7 +10,7 @@ const useStyles = createStyles((theme) => ({
       theme.colors[theme.primaryColor][7]
     } 100%)`,
     */
-    backgroundImage: theme.fn.gradient({ from: 'teal.9', to: 'lime.7', deg: 100 }),
+    backgroundImage: theme.fn.gradient({ from: 'violet.8', to: 'red.4', deg: 100 }),
     padding: `calc(${theme.spacing.xl} * 1.5)`,
     borderRadius: theme.radius.md,
 
