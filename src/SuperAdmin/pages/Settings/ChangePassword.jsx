@@ -1,9 +1,10 @@
-import React from 'react';
 import { useForm } from '@mantine/form';
 import { Button, Container, createStyles, Paper, Textarea, Title, Divider, Box, TextInput, PasswordInput } from '@mantine/core';
-import { addFAQ } from '../../../api/admin/faq';
 import { notifications } from '@mantine/notifications';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
+import { changePassword } from '../../../api/profiling/changePassword';
+import React, { useContext } from "react";
+import { UserContext } from '../../../context/users/userContext';
 
 const useStyles = createStyles((theme) => ({
 
@@ -31,10 +32,11 @@ const useStyles = createStyles((theme) => ({
 
 export default function ChangePassword() {
   const { classes } = useStyles();
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const form = useForm({
-    initialValues: { currentPassword: '', newPassword: '' , confirmPassword: ''},
+    initialValues: {  currentPassword: '', newPassword: '' , confirmPassword: ''},
     validateInputOnChange: true,
     validate: {
         currentPassword: (value) => (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value) ? null : 'Current Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character'),
@@ -44,20 +46,17 @@ export default function ChangePassword() {
   });
 
   const handleSubmit = async (values) => {
-    /*
-    const { question, answer } = values;
-
+    const { currentPassword, newPassword } = values;
     try {
-      const response = await addFAQ(question, answer);
+      const response = await changePassword( user?._id, currentPassword, newPassword );
       if (response.status === 201 || response.status === 200) {
         form.reset();
-        notifications.show({ message: `FAQ Added Successfully`, color: 'green' });
+        notifications.show({ message: `Password Changed Successfully`, color: 'green' });
       }
 
     } catch (error) {
-      notifications.show({ message: error.response.data.message, color: 'red', });
+      notifications.show({ message: error?.response?.data?.message, color: 'red', });
     }
-    */
   };
 
   const handleCancel = () => {
