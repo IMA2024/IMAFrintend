@@ -105,7 +105,7 @@ const [selectedRowData, setSelectedRowData] = useState(null);
 // ---------------- Leads Flask Response--------------------
  const generateLeads = async () => {
     try {
-      const response = await axios.get('http://52.172.253.225:5000/analyze_audio');
+      const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/analyze_audio');
       // Extract information from the response and set state variables
       const { audio_file_name, status, date } = response.data[0];
       setAudioFilename(audio_file_name);
@@ -118,7 +118,7 @@ const [selectedRowData, setSelectedRowData] = useState(null);
 // ------------------- End Leads Flask Response-------------
 const getLeadData = async () => {
   try {
-    const response = await axios.get('http://52.172.253.225:5000/get_leads');
+    const response = await axios.get('https://imaa-2585bbde653a.herokuapp.com/get_leads');
     setLeads(response.data);
   } catch (error) {
     console.error('Error getting lead data:', error);
