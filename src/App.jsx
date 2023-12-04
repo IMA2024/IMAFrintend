@@ -117,6 +117,7 @@ import RegisteredBusinessDonutBO from "./BusinessOwner/pages/Dashboard/Registere
 import ServicesBO from "./BusinessOwner/pages/Services/ServicesBO";
 import SettingsBO from "./BusinessOwner/pages/Settings/SettingsBO";
 import BusinessOwnerChatMessages from "./BusinessOwner/pages/Chat/BusinessOwnerChatMessages.jsx";
+import ChangePasswordBO from "./BusinessOwner/pages/Settings/ChangePasswordBO.jsx";
 {
   /* The routes for Business Panel end here*/
 }
@@ -148,6 +149,7 @@ import ChatInputMA from "./MarketingAgent.jsx/pages/Chat/ChatInputMA.jsx";
 import ChatNavbarContentMA from "./MarketingAgent.jsx/pages/Chat/ChatNavbarContentMA.jsx";
 import ChatMessagesMA from "./MarketingAgent.jsx/pages/Chat/ChatMessagesMA.jsx";
 import ChatSearchMA from "./MarketingAgent.jsx/pages/Chat/ChatSearchMA.jsx";
+import ChangePasswordMA from "./MarketingAgent.jsx/pages/Settings/ChangePasswordMA.jsx";
 {
   /* The routes for Marketung Agent Panel end here*/
 }
@@ -387,6 +389,7 @@ export default function Demo() {
                   <Route path="ServicesBO" element={<ServicesBO />} />
                   <Route path="SettingsBO" element={<SettingsBO />} />
                   <Route path="SettingsBO" element={<BusinessOwnerChatMessages />} />
+                  <Route path="ChangePasswordBO" element={<ChangePasswordBO />} />
                   {/* The routes for Business Panel end here*/}
 
                   {/* These are the routes for Marketung Agent Panel */}
@@ -442,6 +445,7 @@ export default function Demo() {
                   <Route path="AutoDialer" element={<AutoDialer />} />
                   <Route path="SettingsMA" element={<SettingsMA />} />
                   <Route path="ChatMA" element={<Chat />} />
+                  <Route path="ChangePasswordMA" element={<ChangePasswordMA />} />
                   {/* The routes for Marketung Agent Panel end here*/}
                 </Route>
               </Routes>

@@ -66,6 +66,7 @@ export const MarketingAgentSideBarData = [
     name: "Settings", Icon: AiOutlineSetting,
     subLink: [
       { name: "Settings", link: "/SettingsMA", Icon: AiOutlineEye },
+      { name: "Change Password", link: "/ChangePasswordMA", Icon: AiOutlineEye },
     ],
   },
   {
