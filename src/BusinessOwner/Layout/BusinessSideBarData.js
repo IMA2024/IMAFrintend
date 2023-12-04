@@ -80,6 +80,7 @@ export const BusinessSideBarData = [
     name: "Settings", Icon: AiOutlineSetting,
     subLink: [
       { name: "View Settings", link: "/SettingsBO", Icon: AiOutlineEye },
+      { name: "Change Password", link: "/ChangePasswordBO", Icon: AiOutlineEye },
     ],
   },
 
