@@ -57,7 +57,7 @@ export default function AutoDialer() {
 
   useEffect(() =>{
     const fetchData = async () => {
-      const response = await fetch('http://localhost:3000/admin/businessesList');
+      const response = await fetch('https://imaa-2585bbde653a.herokuapp.com/admin/businessesList');
       const newData =  await response.json();
       const filteredBusinesses = newData.filter((business) => business?.businessOwner === user?._id);
       setCountries(filteredBusinesses);
@@ -85,7 +85,7 @@ const handleUploadImage = async () => {
     formData.append('extension', form.values.extension);
     formData.append('file', imageUpload[0]);
 
-    const response = await axios.post('http://127.0.0.1:5000/execute_dialer', formData, {
+    const response = await axios.post('https://imaa-2585bbde653a.herokuapp.com/execute_dialer', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
