@@ -84,6 +84,7 @@ const useStyles = createStyles((theme) => ({
 const CallPriorityTable = () => {
 
 const { classes } = useStyles();
+const [leads, setLeads] = useState([]);
 const [countries, setCountries] =  useState([]);
 const [search, setSearch] =  useState('');
 const [region, setRegion] =  useState('');
@@ -97,6 +98,54 @@ const [specificEmail, setSpecificEmail] =  useState('');
 const [specificPhoneNumber, setSpecificPhoneNumber] =  useState('');
 const [specificAddress, setSpecificAddress] =  useState('');
 const navigate = useNavigate();
+const [audioFilename, setAudioFilename] = useState('');
+const [status, setStatus] = useState('');
+const [date, setDate] = useState('');
+const [selectedRowData, setSelectedRowData] = useState(null);
+// ---------------- Leads Flask Response--------------------
+ const generateLeads = async () => {
+    try {
+      const response = await axios.get('http://52.172.253.225:5000/analyze_audio');
+      // Extract information from the response and set state variables
+      const { audio_file_name, status, date } = response.data[0];
+      setAudioFilename(audio_file_name);
+      setStatus(status);
+      setDate(date);
+    } catch (error) {
+      console.error('Error generating leads:', error);
+    }
+  };
+// ------------------- End Leads Flask Response-------------
+const getLeadData = async () => {
+  try {
+    const response = await axios.get('http://52.172.253.225:5000/get_leads');
+    setLeads(response.data);
+  } catch (error) {
+    console.error('Error getting lead data:', error);
+  }
+};
+
+useEffect(() => {
+  getLeadData();
+}, []);
+//-------------------- End Respoonse From DB
+
+// ------------COLOR FUNCTION FOR STATUS BOX PRIORITIES 
+
+const getStatusColor = (status) => {
+  switch (status.toLowerCase()) {
+    case 'low priority':
+      return '#E48F45';
+    case 'medium priority':
+      return 'blue';
+    case 'high priority':
+      return 'green';
+    default:
+      return 'gray';
+  }
+};
+// -------------------ENDDDSSSSSSSSSSSSS------------
+
 
 const getCountries = async () => {
 try {
@@ -111,8 +160,9 @@ console.log(error);
 
 const handleViewSpecific = (row) => {
   open();
-  setSpecificRole(row.name);
-  setSpecificPicture(row.flag);
+  setSelectedRowData(row);
+  // setSpecificRole(row.name);
+  // setSpecificPicture(row.flag);
 };
 
 const columns = [
@@ -122,39 +172,56 @@ const columns = [
     sortable: true,
     width: '60px', // Set the width of the serial number column
 },
-{
-        name: <strong>Customer Name</strong>,
-        selector: (row) => row.name,
-        sortable: true,
-},
+// {
+//         name: <strong>Customer Name</strong>,
+//         selector: (row) => row.PhoneNumber,
+//         sortable: true,
+// },
 {
         name: <strong>Phone Number</strong>,
-        selector: (row) => row.capital,
+        selector: (row) => row.PhoneNumber.replace(/\.wav$/, ''),
         //width: '170px',
         sortable: true,
 },
 {
         name: <strong>Date</strong>,
         //width: '150px',
-        selector: (row) => row.name,
+        selector: (row) => row.Date,
         sortable: true,
 },
 {
         name: <strong>Status</strong>,
        // width: '180px',
-        selector: (row) => row.region,
+        // selector: (row) => row.Status,
+        selector: (row) => (
+          <Box 
+            style={{
+              color: '#fff',
+              backgroundColor: getStatusColor(row.Status),
+              borderRadius: '5px',
+              padding: '5px 10px',
+            }}
+          >
+            {row.Status}
+          </Box>
+        ),
+        
         sortable: true,
 },
 {
         name: <strong>Action</strong>,
        // width: '150px',
-        cell: (row) => <Box><IconEye onClick={() => handleViewSpecific(row)}  color='gray' /><IconTrash color='gray' /></Box>,
+        cell: (row) => <Box><IconEye onClick={() => handleViewSpecific(row)}  color='gray' /></Box>,
 },
 ]
 
 useEffect(() => {
 getCountries();
 }, []);
+
+const handleClear = () => {
+  setRegion('');
+};
 
 useEffect(() => {
 const result = countries.filter(country => {
@@ -181,12 +248,13 @@ useEffect(() => {
     }, []);
 
   return (
+    <>
     <Box 
     sx={{
       fontFamily:'Poppins'
     }}
     >
-    <DataTable columns={columns} data={filteredCountries}
+    <DataTable columns={columns} data={leads}
     pagination
     fixedHeader
     fixedHeaderScrollHeight='650px'
@@ -214,7 +282,7 @@ useEffect(() => {
          />
          </Menu.Item>
     <Menu.Item>
-    <Button variant="outline" miw={165}>
+    <Button variant="outline" miw={165} onClick={() => handleClear()}>
             Clear
         </Button>
     </Menu.Item>
@@ -222,81 +290,69 @@ useEffect(() => {
           </Menu>
         </Box>
       
-        <Button variant="outline" size='md' className={classes.responsiveClear}>
+        <Button variant="outline" size='md' className={classes.responsiveClear} onClick={() => handleClear()}>
             Clear
         </Button>
-      {/*
-        <Box style={{display:'flex', flexDirection:'row-reverse', width:'800px', justifyContent:'space-between'}}></Box>
-    */}
-        <TextInput
-        size='md'
-        placeholder='Search'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className={classes.responsiveSearch}
-         />
-       
-         {/*
         <Select
          size='md'
         onSearchChange={setRegion}
         searchValue={region}
         searchable
-        placeholder="Select User Type"
+        placeholder="Call Priority"
         data={[
-        { value: 'americas', label: 'americas' },
-        { value: 'africa', label: 'africa' },
-        { value: 'europe', label: 'europe' },
-        { value: 'asia', label: 'asia' },
-      ]}
+          { value: 'Low Priority', label: 'Low Priority' },
+          { value: 'Medium Priority', label: 'Medium Priority' },
+          { value: 'High Priority', label: 'High Priority' },
+        ]}
       className={classes.responsiveUserType}
     />
-         <Select
-         size='md' 
-        searchable
-        placeholder="Active/Block"
-        data={[
-        { value: 'Active', label: 'Active' },
-        { value: 'Block', label: 'Block' },
-      ]}
-      className={classes.responsiveActiveBlock}
-    />
-    <Button 
-    size='md'
-    className={classes.responsiveAddUserBtn}
-    onClick={() => navigate('/AddExpense')}
-    >
-    Add Expense
-    </Button>
-    */}
         </Box>
-        
         <Button 
         size='md'
         className={classes.responsiveAddUserBtn}
-        //onClick={() => navigate('/AddQuestionnaire')}
+        onClick={generateLeads}
         >
         Generate Leads
        </Button>
 
         </Box>
-        
     }
     responsive
      />
     <Modal title={<Text style={{fontWeight:'bold', fontSize:'20px'}}>Call Priority Details</Text>} radius={'md'}  opened={opened} onClose={close}  size={'md'}  >
   <Box mb={30}  style={{display:'flex', flexDirection:'column'}}>
-    <Box  mah={800}><Image maw={800}radius="md" src={'https://img.freepik.com/premium-vector/happy-business-colleagues-team-portrait_179970-1271.jpg?w=2000'} alt="Random image" /></Box>
+    <Box  mah={800}><Image maw={800}radius="md" src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrm_hB7kp5Fg-3McAOx26oCZn0VhygjEdFShTEwOK9w-mzaW07iiBw3ucjHYZlAPSYUPs&usqp=CAU'} alt="Random image" /></Box>
     <Box  mah={380} miw={250}  style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-    <Box ><Badge variant="filled" >Business Questionnnaire</Badge></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Customer Name:</Text><Text fw={'bold'} ml={5}>Ahmed</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Phone Number:</Text><Text fw={'bold'} ml={5}>0333 1234567</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Date:</Text><Text fw={'bold'} ml={5}>10-3-23</Text></Box>
-    <Box style={{display:'flex', flexDirection:'row', justifyContent:'left'}}><Text ml={5}>Status:</Text><Text fw={'bold'} ml={5}>High Priority</Text></Box>
+    <Box ><Badge variant="filled" >Lead Status</Badge></Box>
+    {/* MODAL CHANGES HERE --------------------- */}
+    {selectedRowData && (
+              <>
+                <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
+                  <Text ml={5}>Phone Number:</Text>
+                  <Text fw={'bold'} ml={5}>
+                    {selectedRowData.PhoneNumber.replace(/\.wav$/, '')}
+                  </Text>
+                </Box>
+                <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
+                  <Text ml={5}>Date:</Text>
+                  <Text fw={'bold'} ml={5}>
+                    {selectedRowData.Date}
+                  </Text>
+                </Box>
+                <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
+                  <Text ml={5}>Status:</Text>
+                  <Text fw={'bold'} ml={5}>
+                    {selectedRowData.Status}
+                  </Text>
+                </Box>
+              </>
+            )}
+            {/* MODAL CHANGES---------------- */}
     </Box>
   </Box>
       </Modal>
      </Box>
+     </>
   )
 }
 export default CallPriorityTable

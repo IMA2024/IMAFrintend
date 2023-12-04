@@ -5,6 +5,7 @@ import { addAgent } from '../../../api/marketingAgent/agent';
 import { notifications } from '@mantine/notifications';
 import axios from 'axios';
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyles = createStyles((theme) => ({
@@ -35,6 +36,8 @@ export default function ConfigureAgentsMA() {
 
   const [countries, setCountries] = useState([]);
   const {classes} = useStyles();
+  const navigate = useNavigate();
+
 
   const form = useForm({
     initialValues: { business: '', name: '', voice: '' },
@@ -68,6 +71,10 @@ export default function ConfigureAgentsMA() {
     } catch (error) {
       notifications.show({ message: error.response.data.message, color: 'red', });
     }
+  };
+  
+  const handleCancel = () => {
+    navigate('/DashboardMA');
   };
 
   return (
@@ -105,7 +112,7 @@ export default function ConfigureAgentsMA() {
          />
         </Box>
          <Box style={{display:'flex', justifyContent:'right', gap:'20px'}}>
-         <Button  mt="lg"  size='sm' color='red.8' >
+         <Button  mt="lg"  size='sm' color='red.8' onClick={() => handleCancel()} >
           Cancel
         </Button>
         <Button type="submit" mt="lg"  size='sm' color='green.9' >
