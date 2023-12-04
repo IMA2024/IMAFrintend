@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
 import axios from 'axios';
 import React from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { updateAgent } from '../../../api/marketingAgent/agent';
 
 const useStyles = createStyles((theme) => ({
@@ -34,6 +34,7 @@ const useStyles = createStyles((theme) => ({
 export default function EditAgentsMA() {
   const location = useLocation();
   const rowData = location.state.rowData;
+  const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
   const { classes } = useStyles();
 
@@ -71,6 +72,10 @@ export default function EditAgentsMA() {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/DashboardMA');
+  };
+
   return (
     <Paper withBorder shadow="md" p={35} radius="md">
       <Title
@@ -106,7 +111,7 @@ export default function EditAgentsMA() {
           />
         </Box>
         <Box style={{ display: 'flex', justifyContent: 'right', gap: '20px' }}>
-          <Button mt="lg" size='sm' color='red.8' >
+          <Button mt="lg" size='sm' color='red.8' onClick={() => handleCancel()} >
             Cancel
           </Button>
           <Button type="submit" mt="lg" size='sm' color='green.9' >

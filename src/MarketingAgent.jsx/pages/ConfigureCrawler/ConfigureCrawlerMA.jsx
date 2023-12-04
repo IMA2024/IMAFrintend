@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { UserContext } from "../../../context/users/userContext";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   responsiveContainer: {
@@ -32,6 +33,7 @@ const useStyles = createStyles((theme) => ({
 export default function ConfigureCrawler() {
   const [countries, setCountries] = useState([]);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const { classes } = useStyles();
 
   const form = useForm({
@@ -76,6 +78,10 @@ export default function ConfigureCrawler() {
       });
     }
   };
+  
+  const handleCancel = () => {
+    navigate('/DashboardMA');
+  };
 
   return (
     <Paper withBorder shadow="md" p={35} radius="md">
@@ -112,7 +118,7 @@ export default function ConfigureCrawler() {
           />
         </Box>
         <Box style={{ display: "flex", justifyContent: "right", gap: "20px" }}>
-          <Button mt="lg" size="sm" color="red.8">
+          <Button mt="lg" size="sm" color="red.8" onClick={() => handleCancel()} >
             Cancel
           </Button>
           <Button type="submit" mt="lg" size="sm" color="green.9">
